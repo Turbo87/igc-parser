@@ -12,7 +12,8 @@ let result = analyzeFlight(flight, task);
 
 let json = taskToGeoJSON(task);
 json.features.push(turf.lineString(flight, { color: 'red', opacity: 0.85 }));
-json.features.push(...result.starts.map(it => it.point));
+json.features.push(result.start.point);
+json.features.push(result.finish.point);
 
 if (process.argv.indexOf('--view') !== -1) {
   viewGeoJSON(json);

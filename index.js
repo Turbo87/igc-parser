@@ -1,34 +1,8 @@
+const readTask = require('./src/read-task');
+const taskToGeoJSON = require('./src/task-to-geojson');
 const viewGeoJSON = require('./src/view-geojson');
 
-let json = {
-  "type": "FeatureCollection",
-  "features": [
-    {
-      "type": "Feature",
-      "properties": {
-        "stroke": "#5c1f14",
-        "stroke-width": 2,
-        "stroke-opacity": 1
-      },
-      "geometry": {
-        "type": "LineString",
-        "coordinates": [
-          [
-            61.17187499999999,
-            55.97379820507658
-          ],
-          [
-            27.0703125,
-            31.353636941500987
-          ],
-          [
-            45,
-            26.43122806450644
-          ]
-        ]
-      }
-    }
-  ]
-};
+let task = readTask(`${__dirname}/fixtures/2017-07-15-lev/task.tsk`);
+let json = taskToGeoJSON(task);
 
 viewGeoJSON(json);

@@ -19,6 +19,19 @@ class Line {
 
     this.coordinates = [p1.geometry.coordinates, p2.geometry.coordinates];
   }
+
+  checkEnter(c1, c2) {
+    let intersection = turf.lineIntersect(turf.lineString(this.coordinates), turf.lineString([c1, c2]));
+    if (intersection.features.length === 0)
+      return;
+
+    let bearing = turf.bearing(c1, c2);
+    let bearingDiff = turf.bearingToAngle(this.bearing - bearing);
+    if (bearingDiff > 90 && bearingDiff < 270)
+      return;
+
+    return intersection.features[0];
+  }
 }
 
 module.exports = { Cylinder, Line };

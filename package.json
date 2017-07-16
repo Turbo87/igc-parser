@@ -5,5 +5,9 @@
   "main": "index.js",
   "repository": "https://github.com/Turbo87/aeroscore",
   "author": "Tobias Bieniek <tobias.bieniek@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "opn": "^5.1.0",
+    "temp-write": "^3.3.0"
+  }
 }

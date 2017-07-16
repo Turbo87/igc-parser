@@ -5,7 +5,7 @@ function analyzeFlight(flight, task) {
 
   let start = task.points[0].location;
 
-  let start_bearing = turf.bearing(start, task.points[1].location);
+  let start_bearing = task.points[0].observationZone.bearing;
 
   let start_p1 = turf.destination(start, 10, start_bearing + 90);
   let start_p2 = turf.destination(start, 10, start_bearing - 90);

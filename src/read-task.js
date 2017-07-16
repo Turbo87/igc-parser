@@ -1,5 +1,6 @@
 const fs = require('fs');
 const xml2js = require('xml-js').xml2js;
+const turf = require('@turf/turf');
 
 const oz = require('./oz');
 const Turnpoint = require('./turnpoint');
@@ -7,7 +8,32 @@ const Turnpoint = require('./turnpoint');
 function readTask(path) {
   let file = fs.readFileSync(path, 'utf8');
   let xml = xml2js(file);
-  return convertTask(xml.elements.find(it => it.name === 'Task'));
+  let task = convertTask(xml.elements.find(it => it.name === 'Task'));
+
+  task.points.forEach((tp, i) => {
+    let bearing;
+    if (i === 0) {
+      let locNext = task.points[i + 1].location;
+      bearing = turf.bearing(tp.location, locNext);
+
+    } else if (i === task.points.length - 1) {
+      let locPrev = task.points[i - 1].location;
+      bearing = turf.bearing(locPrev, tp.location);
+
+    } else {
+      let locPrev = task.points[i - 1].location;
+      let locNext = task.points[i + 1].location;
+
+      let bearingFromPrev = turf.bearing(locPrev, tp.location);
+      let bearingToNext = turf.bearing(tp.location, locNext);
+
+      bearing = turf.bearingToAngle((bearingToNext + bearingFromPrev) / 2);
+    }
+
+    tp.observationZone.bearing = bearing;
+  });
+
+  return task;
 }
 
 function convertTask(xml) {

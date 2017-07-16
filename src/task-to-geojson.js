@@ -9,21 +9,8 @@ function taskToGeoJSON(task) {
     let loc = pt.location;
 
     if (pt.observationZone instanceof oz.Line) {
-      let bearing;
-      if (i === 0) {
-        let loc2 = task.points[i + 1].waypoint.location;
-        bearing = turf.bearing(loc, loc2);
-
-      } else if (i === task.points.length - 1) {
-        let loc2 = task.points[i - 1].waypoint.location;
-        bearing = turf.bearing(loc2, loc);
-
-      } else {
-        return;
-      }
-
-      let p1 = turf.destination(loc, pt.observationZone.length / 2000, bearing + 90);
-      let p2 = turf.destination(loc, pt.observationZone.length / 2000, bearing - 90);
+      let p1 = turf.destination(loc, pt.observationZone.length / 2000, pt.observationZone.bearing + 90);
+      let p2 = turf.destination(loc, pt.observationZone.length / 2000, pt.observationZone.bearing - 90);
 
       return turf.lineString([p1.geometry.coordinates, p2.geometry.coordinates]);
 

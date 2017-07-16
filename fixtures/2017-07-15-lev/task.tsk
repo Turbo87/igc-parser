@@ -1,0 +1,39 @@
+<Task type="AAT" task_scored="0" aat_min_time="10800" start_max_speed="60" start_max_height="0" start_max_height_ref="MSL" finish_min_height="0" finish_min_height_ref="AGL" fai_finish="0" min_points="2" max_points="13" homogeneous_tps="0" is_closed="0">
+  <Point type="Start">
+    <Waypoint name="Langenfeld-Wiescheid" id="0" comment="" altitude="86.0">
+      <Location longitude="6.9852833" latitude="51.1413833"/>
+    </Waypoint>
+    <ObservationZone type="Line" length="20000.0"/>
+  </Point>
+  <Point type="Area">
+    <Waypoint name="Aachen Merzbrück" id="0" comment="" altitude="190.0">
+      <Location longitude="6.18695" latitude="50.8241667"/>
+    </Waypoint>
+    <ObservationZone type="Cylinder" radius="10000.0"/>
+  </Point>
+  <Point type="Area">
+    <Waypoint name="Bad Neuenahr" id="0" comment="" altitude="205.0">
+      <Location longitude="7.1375" latitude="50.5597167"/>
+    </Waypoint>
+    <ObservationZone type="Cylinder" radius="30000.0"/>
+  </Point>
+  <Point type="Area">
+    <Waypoint name="058Hambach Süd" id="0" comment="" altitude="7.0">
+      <Location longitude="6.4916667" latitude="50.8888833"/>
+    </Waypoint>
+    <ObservationZone type="Cylinder" radius="10000.0"/>
+  </Point>
+  <Point type="Area">
+    <Waypoint name="110Remscheid Bhf" id="0" comment="" altitude="200.0">
+      <Location longitude="7.2" latitude="51.17695"/>
+    </Waypoint>
+    <ObservationZone type="Cylinder" radius="10000.0"/>
+  </Point>
+  <Point type="Finish">
+    <Waypoint name="002Zielkreis" id="0" comment="" altitude="130.0">
+      <Location longitude="7.03695" latitude="51.0977833"/>
+    </Waypoint>
+    <ObservationZone type="Line" length="1000.0"/>
+  </Point>
+</Task>
+

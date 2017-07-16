@@ -3,10 +3,10 @@ const turf = require('@turf/turf');
 const oz = require('./oz');
 
 function taskToGeoJSON(task) {
-  let legs = turf.lineString(task.points.map(pt => pt.waypoint.location));
+  let legs = turf.lineString(task.points.map(pt => pt.location));
 
   let ozs = task.points.map((pt, i) => {
-    let loc = pt.waypoint.location;
+    let loc = pt.location;
 
     if (pt.observationZone instanceof oz.Line) {
       let bearing;

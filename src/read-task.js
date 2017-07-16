@@ -2,6 +2,7 @@ const fs = require('fs');
 const xml2js = require('xml-js').xml2js;
 
 const oz = require('./oz');
+const Turnpoint = require('./turnpoint');
 
 function readTask(path) {
   let file = fs.readFileSync(path, 'utf8');
@@ -21,11 +22,7 @@ function convertPoint(xml) {
   let waypoint = convertWaypoint(xml.elements.find(it => it.name === 'Waypoint'));
   let observationZone = convertObservationZone(xml.elements.find(it => it.name === 'ObservationZone'), waypoint.location);
 
-  return {
-    type: xml.attributes.type,
-    waypoint,
-    observationZone,
-  };
+  return new Turnpoint(waypoint.name, waypoint.altitude, waypoint.location, observationZone);
 }
 
 function convertWaypoint(xml) {

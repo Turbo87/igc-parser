@@ -11,7 +11,7 @@ let flight = readFlight(`${__dirname}/fixtures/2017-07-15-lev/SW_77flqgg1.igc`);
 let result = analyzeFlight(flight, task);
 
 let json = taskToGeoJSON(task);
-json.features.push(turf.lineString(flight, { color: 'red', opacity: 0.85 }));
+json.features.push(turf.lineString(flight.map(it => it.coordinate), { color: 'red', opacity: 0.85 }));
 json.features.push(result.start.point);
 json.features.push(result.finish.point);
 

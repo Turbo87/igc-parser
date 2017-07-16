@@ -6,14 +6,14 @@ function analyzeFlight(flight, task) {
   let start, finish;
 
   for (let i = 0; i < flight.length - 1; i++) {
-    let fix1 = flight[i];
-    let fix2 = flight[i + 1];
+    let fix1 = flight[i].coordinate;
+    let fix2 = flight[i + 1].coordinate;
 
     if (nextTP < 2) {
       let point = task.points[0].observationZone.checkEnter(fix1, fix2);
       if (point) {
         nextTP = 1;
-        start = {point, i};
+        start = { point, i, secOfDay: flight[i].secOfDay };
       }
     }
 
@@ -21,7 +21,7 @@ function analyzeFlight(flight, task) {
       let point = task.points[nextTP].observationZone.checkEnter(fix1, fix2);
       if (point) {
         nextTP += 1;
-        finish = {point, i};
+        finish = { point, i, secOfDay: flight[i].secOfDay };
         break;
       }
     }

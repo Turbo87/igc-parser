@@ -1,0 +1,9 @@
+{
+  "name": "aeroscore",
+  "version": "0.0.0",
+  "description": "Gliding Competition Scoring",
+  "main": "index.js",
+  "repository": "https://github.com/Turbo87/aeroscore",
+  "author": "Tobias Bieniek <tobias.bieniek@gmail.com>",
+  "license": "MIT"
+}

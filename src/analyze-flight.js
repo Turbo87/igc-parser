@@ -3,14 +3,8 @@ const turf = require('@turf/turf');
 function analyzeFlight(flight, task) {
   let starts = [];
 
-  let start = task.points[0].location;
-
   let start_bearing = task.points[0].observationZone.bearing;
-
-  let start_p1 = turf.destination(start, 10, start_bearing + 90);
-  let start_p2 = turf.destination(start, 10, start_bearing - 90);
-
-  let start_line = turf.lineString([start_p1.geometry.coordinates, start_p2.geometry.coordinates]);
+  let start_line = turf.lineString(task.points[0].observationZone.coordinates);
 
   for (let i = 0; i < flight.length - 1; i++) {
     let fix1 = flight[i];

@@ -31,6 +31,10 @@ function readTask(path) {
     }
 
     tp.observationZone.bearing = bearing;
+
+    if (tp.observationZone.update) {
+      tp.observationZone.update();
+    }
   });
 
   return task;

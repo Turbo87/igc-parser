@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`readTask() reads "2017-07-15-lev" task correctly 1`] = `
+Object {
+  "aatMinTime": 10800,
+  "points": Array [
+    Object {
+      "observationZone": Object {
+        "length": 20000,
+        "type": "Line",
+      },
+      "type": "Start",
+      "waypoint": Object {
+        "altitude": 86,
+        "location": Array [
+          6.9852833,
+          51.1413833,
+        ],
+        "name": "Langenfeld-Wiescheid",
+      },
+    },
+    Object {
+      "observationZone": Object {
+        "radius": 10000,
+        "type": "Cylinder",
+      },
+      "type": "Area",
+      "waypoint": Object {
+        "altitude": 190,
+        "location": Array [
+          6.18695,
+          50.8241667,
+        ],
+        "name": "Aachen Merzbrück",
+      },
+    },
+    Object {
+      "observationZone": Object {
+        "radius": 30000,
+        "type": "Cylinder",
+      },
+      "type": "Area",
+      "waypoint": Object {
+        "altitude": 205,
+        "location": Array [
+          7.1375,
+          50.5597167,
+        ],
+        "name": "Bad Neuenahr",
+      },
+    },
+    Object {
+      "observationZone": Object {
+        "radius": 10000,
+        "type": "Cylinder",
+      },
+      "type": "Area",
+      "waypoint": Object {
+        "altitude": 7,
+        "location": Array [
+          6.4916667,
+          50.8888833,
+        ],
+        "name": "058Hambach Süd",
+      },
+    },
+    Object {
+      "observationZone": Object {
+        "radius": 10000,
+        "type": "Cylinder",
+      },
+      "type": "Area",
+      "waypoint": Object {
+        "altitude": 200,
+        "location": Array [
+          7.2,
+          51.17695,
+        ],
+        "name": "110Remscheid Bhf",
+      },
+    },
+    Object {
+      "observationZone": Object {
+        "length": 1000,
+        "type": "Line",
+      },
+      "type": "Finish",
+      "waypoint": Object {
+        "altitude": 130,
+        "location": Array [
+          7.03695,
+          51.0977833,
+        ],
+        "name": "002Zielkreis",
+      },
+    },
+  ],
+  "type": "AAT",
+}
+`;

@@ -32,7 +32,9 @@ function analyzeFlight(flight, task) {
     }
   }
 
-  return { start, finish };
+  let totalTime = finish.secOfDay - start.secOfDay;
+
+  return { start, finish, totalTime };
 }
 
 module.exports = analyzeFlight;

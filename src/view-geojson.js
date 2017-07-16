@@ -1,7 +1,7 @@
 const tempWrite = require('temp-write');
 const opn = require('opn');
 
-function viewGeoJSON(json) {
+function viewGeoJSON(json, bbox) {
   let html = `<html>
 <head>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"/>
@@ -19,8 +19,8 @@ function viewGeoJSON(json) {
   var bbox = turf.bbox(json);
   
   var map = L.map('map').fitBounds([
-    [bbox[0], bbox[1]],
-    [bbox[2], bbox[3]],
+    [bbox[1], bbox[0]],
+    [bbox[3], bbox[2]],
   ]);
   
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

@@ -1,6 +1,8 @@
 const fs = require('fs');
 const xml2js = require('xml-js').xml2js;
 
+const oz = require('./oz');
+
 function readTask(path) {
   let file = fs.readFileSync(path, 'utf8');
   let xml = xml2js(file);
@@ -16,10 +18,13 @@ function convertTask(xml) {
 }
 
 function convertPoint(xml) {
+  let waypoint = convertWaypoint(xml.elements.find(it => it.name === 'Waypoint'));
+  let observationZone = convertObservationZone(xml.elements.find(it => it.name === 'ObservationZone'), waypoint.location);
+
   return {
     type: xml.attributes.type,
-    waypoint: convertWaypoint(xml.elements.find(it => it.name === 'Waypoint')),
-    observationZone: convertObservationZone(xml.elements.find(it => it.name === 'ObservationZone')),
+    waypoint,
+    observationZone,
   };
 }
 
@@ -35,16 +40,16 @@ function convertLocation(xml) {
   return [parseFloat(xml.attributes.longitude), parseFloat(xml.attributes.latitude)];
 }
 
-function convertObservationZone(xml) {
+function convertObservationZone(xml, location) {
   let type = xml.attributes.type;
 
   if (type === 'Line') {
     let length = parseFloat(xml.attributes.length);
-    return { type, length };
+    return new oz.Line(location, length);
 
   } else if (type === 'Cylinder') {
     let radius = parseFloat(xml.attributes.radius);
-    return { type, radius };
+    return new oz.Cylinder(location, radius);
   }
 }
 

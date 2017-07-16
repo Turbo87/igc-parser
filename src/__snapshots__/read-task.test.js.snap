@@ -5,9 +5,12 @@ Object {
   "aatMinTime": 10800,
   "points": Array [
     Object {
-      "observationZone": Object {
+      "observationZone": Line {
+        "center": Array [
+          6.9852833,
+          51.1413833,
+        ],
         "length": 20000,
-        "type": "Line",
       },
       "type": "Start",
       "waypoint": Object {
@@ -20,9 +23,12 @@ Object {
       },
     },
     Object {
-      "observationZone": Object {
+      "observationZone": Cylinder {
+        "center": Array [
+          6.18695,
+          50.8241667,
+        ],
         "radius": 10000,
-        "type": "Cylinder",
       },
       "type": "Area",
       "waypoint": Object {
@@ -35,9 +41,12 @@ Object {
       },
     },
     Object {
-      "observationZone": Object {
+      "observationZone": Cylinder {
+        "center": Array [
+          7.1375,
+          50.5597167,
+        ],
         "radius": 30000,
-        "type": "Cylinder",
       },
       "type": "Area",
       "waypoint": Object {
@@ -50,9 +59,12 @@ Object {
       },
     },
     Object {
-      "observationZone": Object {
+      "observationZone": Cylinder {
+        "center": Array [
+          6.4916667,
+          50.8888833,
+        ],
         "radius": 10000,
-        "type": "Cylinder",
       },
       "type": "Area",
       "waypoint": Object {
@@ -65,9 +77,12 @@ Object {
       },
     },
     Object {
-      "observationZone": Object {
+      "observationZone": Cylinder {
+        "center": Array [
+          7.2,
+          51.17695,
+        ],
         "radius": 10000,
-        "type": "Cylinder",
       },
       "type": "Area",
       "waypoint": Object {
@@ -80,9 +95,12 @@ Object {
       },
     },
     Object {
-      "observationZone": Object {
+      "observationZone": Line {
+        "center": Array [
+          7.03695,
+          51.0977833,
+        ],
         "length": 1000,
-        "type": "Line",
       },
       "type": "Finish",
       "waypoint": Object {

@@ -1,12 +1,14 @@
 const turf = require('@turf/turf');
 
+const oz = require('./oz');
+
 function taskToGeoJSON(task) {
   let legs = turf.lineString(task.points.map(pt => pt.waypoint.location));
 
   let ozs = task.points.map((pt, i) => {
     let loc = pt.waypoint.location;
 
-    if (pt.observationZone.type === 'Line') {
+    if (pt.observationZone instanceof oz.Line) {
       let bearing;
       if (i === 0) {
         let loc2 = task.points[i + 1].waypoint.location;
@@ -25,8 +27,8 @@ function taskToGeoJSON(task) {
 
       return turf.lineString([p1.geometry.coordinates, p2.geometry.coordinates]);
 
-    } else if (pt.observationZone.type === 'Cylinder') {
-      return turf.circle(loc, pt.observationZone.radius / 1000);
+    } else if (pt.observationZone instanceof oz.Cylinder) {
+      return turf.circle(pt.observationZone.center, pt.observationZone.radius / 1000);
     }
   }).filter(Boolean);
 

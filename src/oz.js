@@ -7,17 +7,17 @@ class Cylinder {
   }
 
   checkEnter(c1, c2) {
-    let distance2 = turf.distance(c2, this.center);
-    if (distance2 > this.radius / 1000)
-      return;
-
-    let distance1 = turf.distance(c1, this.center);
-    if (distance1 < this.radius / 1000)
+    if (!this.isInside(c2) || this.isInside(c1))
       return;
 
     let intersection = turf.lineIntersect(turf.circle(this.center, this.radius / 1000), turf.lineString([c1, c2]));
 
     return intersection.features[0];
+  }
+
+  isInside(coordinate) {
+    let distance = turf.distance(coordinate, this.center);
+    return distance <= this.radius / 1000;
   }
 }
 

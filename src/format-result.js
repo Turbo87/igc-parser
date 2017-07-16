@@ -1,5 +1,8 @@
 function formatResult(result) {
-  return `Start: ${formatTime(result.start.secOfDay)}\nTime: ${formatTime(result.totalTime)}`;
+  return `Start: ${formatTime(result.start.secOfDay)}\n` +
+    `Time: ${formatTime(result.totalTime)}\n` +
+    `Distance: ${(result.distance)} km\n` +
+    `Speed: ${(result.speed)} km/h\n`;
 }
 
 function formatTime(secOfDay) {

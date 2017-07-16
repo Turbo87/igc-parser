@@ -3,7 +3,6 @@ const turf = require('@turf/turf');
 function analyzeFlight(flight, task) {
   let nextTP = 0;
 
-  let start, finish;
   let aatPoints = [];
 
   for (let i = 0; i < flight.length - 1; i++) {
@@ -13,16 +12,15 @@ function analyzeFlight(flight, task) {
     if (nextTP < 2) {
       let point = task.points[0].observationZone.checkEnter(fix1, fix2);
       if (point) {
+        aatPoints[0] = { coordinate: point.geometry.coordinates, i, secOfDay: flight[i].secOfDay};
         nextTP = 1;
-        start = { point, i, secOfDay: flight[i].secOfDay };
       }
     }
 
     if (nextTP === task.points.length - 1) {
       let point = task.points[nextTP].observationZone.checkEnter(fix1, fix2);
       if (point) {
-        nextTP += 1;
-        finish = { point, i, secOfDay: flight[i].secOfDay };
+        aatPoints[nextTP] = { coordinate: point.geometry.coordinates, i, secOfDay: flight[i].secOfDay};
         break;
       }
     }
@@ -44,9 +42,18 @@ function analyzeFlight(flight, task) {
     }
   }
 
+  let start = aatPoints[0];
+  let finish = aatPoints[aatPoints.length - 1];
   let totalTime = finish.secOfDay - start.secOfDay;
 
-  return { start, finish, totalTime, aatPoints };
+  let distance = 0;
+  for (let i = 0; i < aatPoints.length - 1; i++) {
+    distance += turf.distance(aatPoints[i].coordinate, aatPoints[i + 1].coordinate);
+  }
+
+  let speed = distance / (totalTime / 3600);
+
+  return { start, finish, totalTime, aatPoints, distance, speed };
 }
 
 module.exports = analyzeFlight;

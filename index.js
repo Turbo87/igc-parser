@@ -17,8 +17,6 @@ console.log(formatResult(result));
 let json = taskToGeoJSON(task);
 json.features.push(turf.lineString(flight.map(it => it.coordinate), { color: 'red', opacity: 0.85 }));
 json.features.push(turf.lineString(flight2.map(it => it.coordinate), { color: 'green', opacity: 0.85 }));
-json.features.push(result.start.point);
-json.features.push(result.finish.point);
 json.features.push(...result.aatPoints.filter(Boolean).map(it => turf.point(it.coordinate)));
 
 if (process.argv.indexOf('--view') !== -1) {

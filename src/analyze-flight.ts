@@ -3,12 +3,14 @@ import * as turf from "@turf/turf";
 import {Fix} from "./read-flight";
 import {Task} from "./read-task";
 import {Cylinder} from "./oz";
+import {TakeoffDetector} from "./takeoff-detector";
 
 class FlightAnalyzer {
   task: Task;
   _lastFix: Fix | undefined;
   _nextTP = 0;
   _aatPoints: any[] = [];
+  private _takeoffDetector = new TakeoffDetector();
 
   constructor(task: Task) {
     this.task = task;
@@ -18,6 +20,8 @@ class FlightAnalyzer {
   }
 
   update(fix: Fix) {
+    this._takeoffDetector.update(fix);
+
     if (!this._lastFix) {
       this._lastFix = fix;
       return;

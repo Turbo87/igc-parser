@@ -75,11 +75,11 @@ class FlightAnalyzer {
       return;
     }
 
-    if (this._nextTP >= this.task.points.length) {
+    if (this.taskFinished) {
       return;
     }
 
-    if (this._nextTP < 2) {
+    if (!this.reachedFirstTurnpoint) {
       let point = this.startPoint.checkStart(this._lastFix.coordinate, fix.coordinate);
       if (point) {
         this._aatPoints[0] = { coordinate: point.geometry.coordinates, secOfDay: fix.secOfDay};
@@ -87,7 +87,7 @@ class FlightAnalyzer {
       }
     }
 
-    if (this._nextTP === this.task.points.length - 1) {
+    if (this.onFinalLeg) {
       let point = this.finishPoint.checkFinish(this._lastFix.coordinate, fix.coordinate);
       if (point) {
         this._aatPoints[this._nextTP] = { coordinate: point.geometry.coordinates, secOfDay: fix.secOfDay};
@@ -113,6 +113,18 @@ class FlightAnalyzer {
     }
 
     this._lastFix = fix;
+  }
+
+  get reachedFirstTurnpoint(): boolean {
+    return this._nextTP >= 2;
+  }
+
+  get onFinalLeg(): boolean {
+    return this._nextTP === this.task.points.length - 1;
+  }
+
+  get taskFinished(): boolean {
+    return this._nextTP >= this.task.points.length;
   }
 
   get result() {

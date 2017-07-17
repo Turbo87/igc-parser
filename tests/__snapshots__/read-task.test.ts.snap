@@ -3,6 +3,7 @@
 exports[`readTask() reads "2017-07-15-lev" task correctly 1`] = `
 Object {
   "aatMinTime": 10800,
+  "isAAT": true,
   "points": Array [
     Turnpoint {
       "altitude": 86,
@@ -117,6 +118,5 @@ Object {
       },
     },
   ],
-  "type": "AAT",
 }
 `;

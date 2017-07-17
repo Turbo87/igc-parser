@@ -101,14 +101,14 @@ class FlightAnalyzer {
       this._nextTP += 1;
     }
 
-    if (this._nextTP > 1 && (this.task.points[this._nextTP - 1].observationZone as Cylinder).isInside(this._lastFix.coordinate)) {
+    if (this._nextTP > 1 && (this.task.points[this._nextTP - 1].observationZone as Cylinder).isInside(fix.coordinate)) {
       let _score =
-        turf.distance(this._lastFix.coordinate, this.task.points[this._nextTP - 2].location) +
-        turf.distance(this._lastFix.coordinate, this.task.points[this._nextTP].location);
+        turf.distance(fix.coordinate, this.task.points[this._nextTP - 2].observationZone.center) +
+        turf.distance(fix.coordinate, this.task.points[this._nextTP].observationZone.center);
 
       let _lastScore = (this._aatPoints[this._nextTP - 1] && this._aatPoints[this._nextTP - 1]._score) || 0;
       if (_score > _lastScore) {
-        this._aatPoints[this._nextTP - 1] = {_score, coordinate: this._lastFix.coordinate, time: fix.time};
+        this._aatPoints[this._nextTP - 1] = {_score, coordinate: fix.coordinate, time: fix.time};
       }
     }
 

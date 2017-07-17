@@ -20,9 +20,25 @@ class StartPoint {
   }
 }
 
+class FinishPoint {
+  oz: ObservationZone;
+
+  constructor(oz: ObservationZone) {
+    this.oz = oz;
+  }
+
+  checkFinish(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined {
+    if (this.oz instanceof Line) {
+      return this.oz.checkEnter(c1, c2);
+    }
+    // TODO support finish areas too
+  }
+}
+
 class FlightAnalyzer {
   task: Task;
   startPoint: StartPoint;
+  finishPoint: FinishPoint;
   _lastFix: Fix | undefined;
   _nextTP = 0;
   _aatPoints: any[] = [];
@@ -31,6 +47,7 @@ class FlightAnalyzer {
   constructor(task: Task) {
     this.task = task;
     this.startPoint = new StartPoint(task.points[0].observationZone);
+    this.finishPoint = new FinishPoint(task.points[task.points.length - 1].observationZone);
     this._lastFix = undefined;
     this._nextTP = 0;
     this._aatPoints = [];
@@ -57,7 +74,7 @@ class FlightAnalyzer {
     }
 
     if (this._nextTP === this.task.points.length - 1) {
-      let point = this.task.points[this._nextTP].observationZone.checkEnter(this._lastFix.coordinate, fix.coordinate);
+      let point = this.finishPoint.checkFinish(this._lastFix.coordinate, fix.coordinate);
       if (point) {
         this._aatPoints[this._nextTP] = { coordinate: point.geometry.coordinates, secOfDay: fix.secOfDay};
         this._nextTP += 1;

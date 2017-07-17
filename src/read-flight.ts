@@ -1,5 +1,7 @@
 import * as fs from "fs";
 
+const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])/;
+
 export interface Fix {
   secOfDay: number,
   coordinate: GeoJSON.Position,
@@ -14,7 +16,7 @@ export function readFlight(path): Fix[] {
 }
 
 function convertLine(line: string): Fix | undefined {
-  let match = line.match(/^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])/);
+  let match = line.match(RE_B);
   if (!match) return;
 
   let secOfDay = parseInt(match[1]) * 3600 + parseInt(match[2]) * 60 + parseInt(match[3]);

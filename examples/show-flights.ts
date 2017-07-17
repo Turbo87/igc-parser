@@ -5,7 +5,7 @@ import {taskToGeoJSON} from "../src/task-to-geojson";
 import {readFlight} from "../src/read-flight";
 import {analyzeFlight} from "../src/analyze-flight";
 import {formatResult} from "../src/format-result";
-import {viewGeoJSON} from "../src/view-geojson";
+import {viewGeoJSON} from "./utils/view-geojson";
 
 let task = readTask(`${__dirname}/../fixtures/2017-07-15-lev/task.tsk`);
 let flight = readFlight(`${__dirname}/../fixtures/2017-07-15-lev/sq_2017-07-15-fla-3jv-01.igc`);

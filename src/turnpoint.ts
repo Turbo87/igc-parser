@@ -3,7 +3,7 @@ import {ObservationZone} from "./oz";
 export class Turnpoint {
     name: string;
     altitude: number;
-    location: any;
+    location: GeoJSON.Position;
     observationZone: ObservationZone;
 
     constructor(name: string, altitude: number, location, observationZone) {

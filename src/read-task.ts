@@ -4,8 +4,15 @@ import {xml2js} from "xml-js";
 
 import * as oz from "./oz";
 import {Turnpoint} from "./turnpoint";
+import {ObservationZone} from "./oz";
 
-export function readTask(path) {
+export interface Task {
+  type: string,
+  aatMinTime: number,
+  points: Turnpoint[],
+}
+
+export function readTask(path): Task {
   let file = fs.readFileSync(path, 'utf8');
   let xml = xml2js(file);
   let task = convertTask(xml.elements.find(it => it.name === 'Task'));
@@ -30,9 +37,8 @@ export function readTask(path) {
       bearing = turf.bearingToAngle((bearingToNext + bearingFromPrev) / 2);
     }
 
-    tp.observationZone.bearing = bearing;
-
-    if (tp.observationZone.update) {
+    if (tp.observationZone instanceof oz.Line) {
+      tp.observationZone.bearing = bearing;
       tp.observationZone.update();
     }
   });
@@ -40,7 +46,7 @@ export function readTask(path) {
   return task;
 }
 
-function convertTask(xml) {
+function convertTask(xml): Task {
   return {
     type: xml.attributes.type,
     aatMinTime: parseInt(xml.attributes.aat_min_time),
@@ -48,7 +54,7 @@ function convertTask(xml) {
   };
 }
 
-function convertPoint(xml) {
+function convertPoint(xml): Turnpoint {
   let waypoint = convertWaypoint(xml.elements.find(it => it.name === 'Waypoint'));
   let observationZone = convertObservationZone(xml.elements.find(it => it.name === 'ObservationZone'), waypoint.location);
 
@@ -63,11 +69,11 @@ function convertWaypoint(xml) {
   };
 }
 
-function convertLocation(xml) {
+function convertLocation(xml): GeoJSON.Position {
   return [parseFloat(xml.attributes.longitude), parseFloat(xml.attributes.latitude)];
 }
 
-function convertObservationZone(xml, location) {
+function convertObservationZone(xml, location): ObservationZone | undefined {
   let type = xml.attributes.type;
 
   if (type === 'Line') {

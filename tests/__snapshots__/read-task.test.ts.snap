@@ -38,7 +38,6 @@ Object {
       ],
       "name": "Aachen Merzbrück",
       "observationZone": Cylinder {
-        "bearing": 355.6966840687328,
         "center": Array [
           6.18695,
           50.8241667,
@@ -54,7 +53,6 @@ Object {
       ],
       "name": "Bad Neuenahr",
       "observationZone": Cylinder {
-        "bearing": 31.214380506067794,
         "center": Array [
           7.1375,
           50.5597167,
@@ -70,7 +68,6 @@ Object {
       ],
       "name": "058Hambach Süd",
       "observationZone": Cylinder {
-        "bearing": 2.9612250819657575,
         "center": Array [
           6.4916667,
           50.8888833,
@@ -86,7 +83,6 @@ Object {
       ],
       "name": "110Remscheid Bhf",
       "observationZone": Cylinder {
-        "bearing": 324.58252455229973,
         "center": Array [
           7.2,
           51.17695,

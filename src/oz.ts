@@ -1,7 +1,13 @@
 import * as turf from "@turf/turf";
 
-export class Cylinder {
-  center: any;
+export interface ObservationZone {
+  center: GeoJSON.Position;
+
+  checkEnter(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined;
+}
+
+export class Cylinder implements ObservationZone {
+  center: GeoJSON.Position;
   radius: number;
 
   constructor(center, radius) {
@@ -9,7 +15,7 @@ export class Cylinder {
     this.radius = radius;
   }
 
-  checkEnter(c1, c2) {
+  checkEnter(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined {
     let intersection = turf.lineIntersect(turf.circle(this.center, this.radius / 1000), turf.lineString([c1, c2]));
     if (intersection.features.length === 0)
       return;
@@ -24,8 +30,8 @@ export class Cylinder {
   }
 }
 
-export class Line {
-  center: any;
+export class Line implements ObservationZone {
+  center: GeoJSON.Position;
   length: number;
   coordinates: GeoJSON.Position[];
   bearing: number;
@@ -42,7 +48,7 @@ export class Line {
     this.coordinates = [p1.geometry.coordinates, p2.geometry.coordinates];
   }
 
-  checkEnter(c1, c2) {
+  checkEnter(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined {
     let intersection = turf.lineIntersect(turf.lineString(this.coordinates), turf.lineString([c1, c2]));
     if (intersection.features.length === 0)
       return;

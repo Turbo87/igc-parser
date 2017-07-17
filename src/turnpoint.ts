@@ -1,8 +1,10 @@
+import {ObservationZone} from "./oz";
+
 export class Turnpoint {
     name: string;
     altitude: number;
     location: any;
-    observationZone: any;
+    observationZone: ObservationZone;
 
     constructor(name: string, altitude: number, location, observationZone) {
     this.name = name;

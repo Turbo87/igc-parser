@@ -1,0 +1,32 @@
+<Task type="RT" task_scored="0" aat_min_time="10800" start_max_speed="60" start_max_height="0" start_max_height_ref="MSL" finish_min_height="0" finish_min_height_ref="AGL" fai_finish="0" min_points="2" max_points="13" homogeneous_tps="0" is_closed="0">
+  <Point type="Start">
+    <Waypoint name="095Monheim AB Dreieck" id="0" comment="" altitude="50.0">
+      <Location longitude="6.9322167" latitude="51.08195"/>
+    </Waypoint>
+    <ObservationZone type="Line" length="20000.0"/>
+  </Point>
+  <Point type="Turn">
+    <Waypoint name="084Linnich Kontrollpunkt" id="0" comment="" altitude="100.0">
+      <Location longitude="6.2772167" latitude="50.9991667"/>
+    </Waypoint>
+    <ObservationZone type="Keyhole"/>
+  </Point>
+  <Point type="Turn">
+    <Waypoint name="113Ritzeroder Duenen" id="0" comment="" altitude="86.0">
+      <Location longitude="6.1922167" latitude="51.1766667"/>
+    </Waypoint>
+    <ObservationZone type="Keyhole"/>
+  </Point>
+  <Point type="Turn">
+    <Waypoint name="021Bergheim" id="0" comment="" altitude="70.0">
+      <Location longitude="6.6077833" latitude="50.965"/>
+    </Waypoint>
+    <ObservationZone type="Keyhole"/>
+  </Point>
+  <Point type="Finish">
+    <Waypoint name="002Zielkreis" id="0" comment="" altitude="130.0">
+      <Location longitude="7.03695" latitude="51.0977833"/>
+    </Waypoint>
+    <ObservationZone type="Cylinder" radius="2000.0"/>
+  </Point>
+</Task>

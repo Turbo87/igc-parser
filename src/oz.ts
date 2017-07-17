@@ -10,7 +10,7 @@ export class Cylinder implements ObservationZone {
   center: GeoJSON.Position;
   radius: number;
 
-  constructor(center, radius) {
+  constructor(center: GeoJSON.Position, radius: number) {
     this.center = center;
     this.radius = radius;
   }
@@ -24,7 +24,7 @@ export class Cylinder implements ObservationZone {
       return intersection.features[0];
   }
 
-  isInside(coordinate) {
+  isInside(coordinate: GeoJSON.Position) {
     let distance = turf.distance(coordinate, this.center);
     return distance <= this.radius / 1000;
   }
@@ -36,7 +36,7 @@ export class Line implements ObservationZone {
   coordinates: GeoJSON.Position[];
   bearing: number;
 
-  constructor(center, length) {
+  constructor(center: GeoJSON.Position, length: number) {
     this.center = center;
     this.length = length;
   }

@@ -73,7 +73,7 @@ function convertLocation(xml): GeoJSON.Position {
   return [parseFloat(xml.attributes.longitude), parseFloat(xml.attributes.latitude)];
 }
 
-function convertObservationZone(xml, location): ObservationZone | undefined {
+function convertObservationZone(xml, location: GeoJSON.Position): ObservationZone | undefined {
   let type = xml.attributes.type;
 
   if (type === 'Line') {

@@ -31,17 +31,16 @@ export class Cylinder implements ObservationZone {
 }
 
 export class Line implements ObservationZone {
-  center: GeoJSON.Position;
-  length: number;
-  coordinates: GeoJSON.Position[];
-  direction: number; // direction in which the line is triggering transitions
+  readonly center: GeoJSON.Position;
+  readonly length: number;
+  readonly direction: number; // direction in which the line is triggering transitions
+  readonly coordinates: GeoJSON.Position[];
 
-  constructor(center: GeoJSON.Position, length: number) {
+  constructor(center: GeoJSON.Position, length: number, direction: number) {
     this.center = center;
     this.length = length;
-  }
+    this.direction = direction;
 
-  update() {
     let p1 = turf.destination(this.center, this.length / 2000, this.direction + 90);
     let p2 = turf.destination(this.center, this.length / 2000, this.direction - 90);
 

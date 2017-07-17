@@ -1,8 +1,10 @@
 import * as turf from "@turf/turf";
 
+import {Fix} from "./read-flight";
+
 class FlightAnalyzer {
   task: any;
-  _lastFix: any;
+  _lastFix: Fix | undefined;
   _nextTP = 0;
   _aatPoints: any[] = [];
 
@@ -13,7 +15,7 @@ class FlightAnalyzer {
     this._aatPoints = [];
   }
 
-  update(fix) {
+  update(fix: Fix) {
     if (!this._lastFix) {
       this._lastFix = fix;
       return;
@@ -75,7 +77,7 @@ class FlightAnalyzer {
   }
 }
 
-export function analyzeFlight(flight, task) {
+export function analyzeFlight(flight: Fix[], task) {
   let analyzer = new FlightAnalyzer(task);
 
   flight.forEach(fix => analyzer.update(fix));

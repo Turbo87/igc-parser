@@ -29,8 +29,9 @@ export class TakeoffDetector {
     if (!this._lastFix) return 0;
 
     let distance = turf.distance(this._lastFix.coordinate, fix.coordinate);
-    let seconds = fix.secOfDay - this._lastFix.secOfDay;
-    return distance / (seconds / 3600);
+    let milliseconds = fix.time - this._lastFix.time;
+    let hours = milliseconds / 3600000;
+    return distance / hours;
   }
 
   _isFlightSpeed(speed: number): boolean {

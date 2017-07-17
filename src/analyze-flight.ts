@@ -82,7 +82,7 @@ class FlightAnalyzer {
     if (!this.reachedFirstTurnpoint) {
       let point = this.startPoint.checkStart(this._lastFix.coordinate, fix.coordinate);
       if (point) {
-        this._aatPoints[0] = { coordinate: point.geometry.coordinates, secOfDay: fix.secOfDay};
+        this._aatPoints[0] = { coordinate: point.geometry.coordinates, time: fix.time};
         this._nextTP = 1;
       }
     }
@@ -90,7 +90,7 @@ class FlightAnalyzer {
     if (this.onFinalLeg) {
       let point = this.finishPoint.checkFinish(this._lastFix.coordinate, fix.coordinate);
       if (point) {
-        this._aatPoints[this._nextTP] = { coordinate: point.geometry.coordinates, secOfDay: fix.secOfDay};
+        this._aatPoints[this._nextTP] = { coordinate: point.geometry.coordinates, time: fix.time};
         this._nextTP += 1;
         return;
       }
@@ -108,7 +108,7 @@ class FlightAnalyzer {
 
       let _lastScore = (this._aatPoints[this._nextTP - 1] && this._aatPoints[this._nextTP - 1]._score) || 0;
       if (_score > _lastScore) {
-        this._aatPoints[this._nextTP - 1] = {_score, coordinate: this._lastFix.coordinate, secOfDay: fix.secOfDay};
+        this._aatPoints[this._nextTP - 1] = {_score, coordinate: this._lastFix.coordinate, time: fix.time};
       }
     }
 
@@ -130,7 +130,7 @@ class FlightAnalyzer {
   get result() {
     let start = this._aatPoints[0];
     let finish = this._aatPoints[this._aatPoints.length - 1];
-    let totalTime = finish.secOfDay - start.secOfDay;
+    let totalTime = finish.time - start.time;
 
     let distance = 0;
     for (let i = 0; i < this._aatPoints.length - 1; i++) {

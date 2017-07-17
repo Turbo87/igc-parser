@@ -16,5 +16,5 @@ fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`).filter(filename => (/\
 
   flight.forEach(fix => detector.update(fix));
 
-  console.log(`${callsign}: ${takeoff && formatTime(takeoff.secOfDay)} - ${landing && formatTime(landing.secOfDay)}`);
+  console.log(`${callsign}: ${takeoff && formatTime(takeoff.time)} - ${landing && formatTime(landing.time)}`);
 });

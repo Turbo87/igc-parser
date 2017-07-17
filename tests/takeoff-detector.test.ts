@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-import {readFlight} from "../src/read-flight";
+import {Fix, readFlight} from "../src/read-flight";
 import {TakeoffDetector} from "../src/takeoff-detector";
 import {formatTime} from "../src/format-result";
 
@@ -13,13 +13,13 @@ describe('TakeoffDetector', () => {
 
       let detector = new TakeoffDetector();
 
-      let takeoff, landing;
+      let takeoff: Fix, landing: Fix;
       detector.onTakeoff = fix => (takeoff = takeoff || fix);
       detector.onLanding = fix => (landing = fix);
 
       flight.forEach(fix => detector.update(fix));
 
-      expect(`${takeoff && formatTime(takeoff.secOfDay)} - ${landing && formatTime(landing.secOfDay)}`).toMatchSnapshot();
+      expect(`${takeoff && formatTime(takeoff.time)} - ${landing && formatTime(landing.time)}`).toMatchSnapshot();
     });
   });
 });

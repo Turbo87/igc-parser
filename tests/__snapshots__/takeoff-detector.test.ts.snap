@@ -1,47 +1,47 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TakeoffDetector detects takeoff and landing for "1" 1`] = `"8:38:0 - 14:52:48"`;
+exports[`TakeoffDetector detects takeoff and landing for "1" 1`] = `"2017-07-15T08:38:00.000Z - 2017-07-15T14:52:48.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "1G" 1`] = `"10:18:50 - 14:38:34"`;
+exports[`TakeoffDetector detects takeoff and landing for "1G" 1`] = `"2017-07-15T10:18:50.000Z - 2017-07-15T14:38:34.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "1R" 1`] = `"10:11:24 - 14:58:3"`;
+exports[`TakeoffDetector detects takeoff and landing for "1R" 1`] = `"2017-07-15T10:11:24.000Z - 2017-07-15T14:58:03.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "33" 1`] = `"9:43:50 - 14:37:32"`;
+exports[`TakeoffDetector detects takeoff and landing for "33" 1`] = `"2017-07-15T09:43:50.000Z - 2017-07-15T14:37:32.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "999" 1`] = `"10:23:3 - 15:11:31"`;
+exports[`TakeoffDetector detects takeoff and landing for "999" 1`] = `"2017-07-15T10:23:03.000Z - 2017-07-15T15:11:31.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "E1" 1`] = `"10:16:3 - 14:39:3"`;
+exports[`TakeoffDetector detects takeoff and landing for "E1" 1`] = `"2017-07-15T10:16:03.000Z - 2017-07-15T14:39:03.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "EI" 1`] = `"10:12:41 - 14:51:29"`;
+exports[`TakeoffDetector detects takeoff and landing for "EI" 1`] = `"2017-07-15T10:12:41.000Z - 2017-07-15T14:51:29.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "FR" 1`] = `"10:9:31 - 14:34:19"`;
+exports[`TakeoffDetector detects takeoff and landing for "FR" 1`] = `"2017-07-15T10:09:31.000Z - 2017-07-15T14:34:19.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "H1" 1`] = `"10:7:9 - 12:4:25"`;
+exports[`TakeoffDetector detects takeoff and landing for "H1" 1`] = `"2017-07-15T10:07:09.000Z - 2017-07-15T12:04:25.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "IGP" 1`] = `"10:2:19 - 14:39:31"`;
+exports[`TakeoffDetector detects takeoff and landing for "IGP" 1`] = `"2017-07-15T10:02:19.000Z - 2017-07-15T14:39:31.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "JM" 1`] = `"10:3:32 - 14:57:36"`;
+exports[`TakeoffDetector detects takeoff and landing for "JM" 1`] = `"2017-07-15T10:03:32.000Z - 2017-07-15T14:57:36.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "LC" 1`] = `"9:58:2 - 15:14:26"`;
+exports[`TakeoffDetector detects takeoff and landing for "LC" 1`] = `"2017-07-15T09:58:02.000Z - 2017-07-15T15:14:26.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "MI" 1`] = `"10:0:20 - 14:31:41"`;
+exports[`TakeoffDetector detects takeoff and landing for "MI" 1`] = `"2017-07-15T10:00:20.000Z - 2017-07-15T14:31:41.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "MS" 1`] = `"9:52:44 - 15:0:8"`;
+exports[`TakeoffDetector detects takeoff and landing for "MS" 1`] = `"2017-07-15T09:52:44.000Z - 2017-07-15T15:00:08.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "P9" 1`] = `"9:53:38 - 14:44:10"`;
+exports[`TakeoffDetector detects takeoff and landing for "P9" 1`] = `"2017-07-15T09:53:38.000Z - 2017-07-15T14:44:10.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "SW" 1`] = `"9:50:10 - 14:33:47"`;
+exports[`TakeoffDetector detects takeoff and landing for "SW" 1`] = `"2017-07-15T09:50:10.000Z - 2017-07-15T14:33:47.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "T" 1`] = `"9:42:34 - 14:35:41"`;
+exports[`TakeoffDetector detects takeoff and landing for "T" 1`] = `"2017-07-15T09:42:34.000Z - 2017-07-15T14:35:41.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "T1" 1`] = `"9:46:15 - 12:23:23"`;
+exports[`TakeoffDetector detects takeoff and landing for "T1" 1`] = `"2017-07-15T09:46:15.000Z - 2017-07-15T12:23:23.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "TA" 1`] = `"9:40:37 - 14:27:15"`;
+exports[`TakeoffDetector detects takeoff and landing for "TA" 1`] = `"2017-07-15T09:40:37.000Z - 2017-07-15T14:27:15.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "WJ" 1`] = `"9:38:28 - 14:36:51"`;
+exports[`TakeoffDetector detects takeoff and landing for "WJ" 1`] = `"2017-07-15T09:38:28.000Z - 2017-07-15T14:36:51.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "XN" 1`] = `"9:37:49 - 12:43:12"`;
+exports[`TakeoffDetector detects takeoff and landing for "XN" 1`] = `"2017-07-15T09:37:49.000Z - 2017-07-15T12:43:12.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "ZG" 1`] = `"9:56:33 - 12:10:14"`;
+exports[`TakeoffDetector detects takeoff and landing for "ZG" 1`] = `"2017-07-15T09:56:33.000Z - 2017-07-15T12:10:14.000Z"`;
 
-exports[`TakeoffDetector detects takeoff and landing for "sq" 1`] = `"9:48:9 - 12:32:5"`;
+exports[`TakeoffDetector detects takeoff and landing for "sq" 1`] = `"2017-07-15T09:48:09.000Z - 2017-07-15T12:32:05.000Z"`;

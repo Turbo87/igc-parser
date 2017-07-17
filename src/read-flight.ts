@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-function readFlight(path) {
+export function readFlight(path) {
   return fs.readFileSync(path, 'utf8')
     .split('\n')
     .filter(line => line[0] === 'B')
@@ -14,5 +14,3 @@ function readFlight(path) {
       return { secOfDay, coordinate };
     });
 }
-
-export = readFlight;

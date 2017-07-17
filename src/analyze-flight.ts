@@ -75,12 +75,10 @@ class FlightAnalyzer {
   }
 }
 
-function analyzeFlight(flight, task) {
+export function analyzeFlight(flight, task) {
   let analyzer = new FlightAnalyzer(task);
 
   flight.forEach(fix => analyzer.update(fix));
 
   return analyzer.result;
 }
-
-export = analyzeFlight;

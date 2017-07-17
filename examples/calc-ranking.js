@@ -1,9 +1,9 @@
 const fs = require('fs');
 const turf = require('@turf/turf');
 
-const readTask = require('../src/read-task');
-const readFlight = require('../src/read-flight');
-const analyzeFlight = require('../src/analyze-flight');
+const readTask = require('../src/read-task').readTask;
+const readFlight = require('../src/read-flight').readFlight;
+const analyzeFlight = require('../src/analyze-flight').analyzeFlight;
 
 let task = readTask(`${__dirname}/../fixtures/2017-07-15-lev/task.tsk`);
 

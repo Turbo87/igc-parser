@@ -1,4 +1,4 @@
-class Turnpoint {
+export class Turnpoint {
     name: string;
     altitude: number;
     location: any;
@@ -11,5 +11,3 @@ class Turnpoint {
     this.observationZone = observationZone;
   }
 }
-
-export = Turnpoint;

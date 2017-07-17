@@ -1,6 +1,11 @@
 const turf = require('@turf/turf');
 
 class FlightAnalyzer {
+  task: any;
+  _lastFix: any;
+  _nextTP = 0;
+  _aatPoints: any[] = [];
+
   constructor(task) {
     this.task = task;
     this._lastFix = undefined;
@@ -78,4 +83,4 @@ function analyzeFlight(flight, task) {
   return analyzer.result;
 }
 
-module.exports = analyzeFlight;
+export = analyzeFlight;

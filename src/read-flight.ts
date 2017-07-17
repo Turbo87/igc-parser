@@ -15,4 +15,4 @@ function readFlight(path) {
     });
 }
 
-module.exports = readFlight;
+export = readFlight;

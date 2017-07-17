@@ -80,4 +80,4 @@ function convertObservationZone(xml, location) {
   }
 }
 
-module.exports = readTask;
+export = readTask;

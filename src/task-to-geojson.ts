@@ -16,4 +16,4 @@ function taskToGeoJSON(task) {
   return turf.featureCollection([legs, ...ozs]);
 }
 
-module.exports = taskToGeoJSON;
+export = taskToGeoJSON;

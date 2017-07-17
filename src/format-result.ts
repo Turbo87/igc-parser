@@ -12,4 +12,4 @@ function formatTime(secOfDay) {
   return `${hour}:${min}:${sec}`;
 }
 
-module.exports = formatResult;
+export = formatResult;

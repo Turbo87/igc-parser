@@ -44,4 +44,4 @@ function viewGeoJSON(json, bbox) {
   opn(path, { wait: false });
 }
 
-module.exports = viewGeoJSON;
+export = viewGeoJSON;

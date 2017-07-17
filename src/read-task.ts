@@ -1,10 +1,10 @@
 import * as fs from "fs";
 import * as turf from "@turf/turf";
-import {xml2js} from "xml-js";
 
 import * as oz from "./oz";
 import {Turnpoint} from "./turnpoint";
-import {ObservationZone} from "./oz";
+import {Cylinder, Line, ObservationZone} from "./oz";
+import {read, XCSoarLocation, XCSoarObservationZone} from "./xcsoar/task-reader";
 
 export interface Task {
   type: string,
@@ -14,74 +14,56 @@ export interface Task {
 
 export function readTask(path): Task {
   let file = fs.readFileSync(path, 'utf8');
-  let xml = xml2js(file);
-  let task = convertTask(xml.elements.find(it => it.name === 'Task'));
+  let task = read(file);
 
-  task.points.forEach((tp, i) => {
-    let bearing;
-    if (i === 0) {
-      let locNext = task.points[i + 1].location;
-      bearing = turf.bearing(tp.location, locNext);
-
-    } else if (i === task.points.length - 1) {
-      let locPrev = task.points[i - 1].location;
-      bearing = turf.bearing(locPrev, tp.location);
-
-    } else {
-      let locPrev = task.points[i - 1].location;
-      let locNext = task.points[i + 1].location;
-
-      let bearingFromPrev = turf.bearing(locPrev, tp.location);
-      let bearingToNext = turf.bearing(tp.location, locNext);
-
-      bearing = turf.bearingToAngle((bearingToNext + bearingFromPrev) / 2);
-    }
-
-    if (tp.observationZone instanceof oz.Line) {
-      tp.observationZone.bearing = bearing;
-      tp.observationZone.update();
-    }
-  });
-
-  return task;
-}
-
-function convertTask(xml): Task {
   return {
-    type: xml.attributes.type,
-    aatMinTime: parseInt(xml.attributes.aat_min_time),
-    points: xml.elements.map(convertPoint),
+    type: task.type,
+    aatMinTime: task.aat_min_time,
+    points: task.points.map((point, i) => {
+      let name = point.waypoint.name;
+      let altitude = point.waypoint.altitude;
+      let location = convertLocation(point.waypoint.location);
+      let observationZone = convertOZ(point.observation_zone, location);
+
+      let bearing;
+      if (i === 0) {
+        let locNext = convertLocation(task.points[i + 1].waypoint.location);
+        bearing = turf.bearing(location, locNext);
+
+      } else if (i === task.points.length - 1) {
+        let locPrev = convertLocation(task.points[i - 1].waypoint.location);
+        bearing = turf.bearing(locPrev, location);
+
+      } else {
+        let locPrev = convertLocation(task.points[i - 1].waypoint.location);
+        let locNext = convertLocation(task.points[i + 1].waypoint.location);
+
+        let bearingFromPrev = turf.bearing(locPrev, location);
+        let bearingToNext = turf.bearing(location, locNext);
+
+        bearing = turf.bearingToAngle((bearingToNext + bearingFromPrev) / 2);
+      }
+
+      if (observationZone instanceof oz.Line) {
+        observationZone.bearing = bearing;
+        observationZone.update();
+      }
+
+      return new Turnpoint(name, altitude, location, observationZone);
+    }),
   };
 }
 
-function convertPoint(xml): Turnpoint {
-  let waypoint = convertWaypoint(xml.elements.find(it => it.name === 'Waypoint'));
-  let observationZone = convertObservationZone(xml.elements.find(it => it.name === 'ObservationZone'), waypoint.location);
-
-  return new Turnpoint(waypoint.name, waypoint.altitude, waypoint.location, observationZone);
+function convertLocation(loc: XCSoarLocation): GeoJSON.Position {
+  return [loc.longitude, loc.latitude];
 }
 
-function convertWaypoint(xml) {
-  return {
-    name: xml.attributes.name,
-    altitude: parseFloat(xml.attributes.altitude),
-    location: convertLocation(xml.elements.find(it => it.name === 'Location')),
-  };
-}
-
-function convertLocation(xml): GeoJSON.Position {
-  return [parseFloat(xml.attributes.longitude), parseFloat(xml.attributes.latitude)];
-}
-
-function convertObservationZone(xml, location: GeoJSON.Position): ObservationZone | undefined {
-  let type = xml.attributes.type;
-
-  if (type === 'Line') {
-    let length = parseFloat(xml.attributes.length);
-    return new oz.Line(location, length);
-
-  } else if (type === 'Cylinder') {
-    let radius = parseFloat(xml.attributes.radius);
-    return new oz.Cylinder(location, radius);
+function convertOZ(oz: XCSoarObservationZone, loc: GeoJSON.Position): ObservationZone {
+  if (oz.type === 'Line') {
+    return new Line(loc, oz.length!);
+  } else if (oz.type === 'Cylinder') {
+    return new Cylinder(loc, oz.radius!);
+  } else {
+    throw new Error(`Unknown zone type: ${oz.type}`);
   }
 }

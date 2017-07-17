@@ -2,11 +2,27 @@ import * as turf from "@turf/turf";
 
 import {Fix} from "./read-flight";
 import {Task} from "./read-task";
-import {Cylinder} from "./oz";
+import {Cylinder, Line, ObservationZone} from "./oz";
 import {TakeoffDetector} from "./takeoff-detector";
+
+class StartPoint {
+  oz: ObservationZone;
+
+  constructor(oz: ObservationZone) {
+    this.oz = oz;
+  }
+
+  checkStart(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined {
+    if (this.oz instanceof Line) {
+      return this.oz.checkEnter(c1, c2);
+    }
+    // TODO support start areas too
+  }
+}
 
 class FlightAnalyzer {
   task: Task;
+  startPoint: StartPoint;
   _lastFix: Fix | undefined;
   _nextTP = 0;
   _aatPoints: any[] = [];
@@ -14,6 +30,7 @@ class FlightAnalyzer {
 
   constructor(task: Task) {
     this.task = task;
+    this.startPoint = new StartPoint(task.points[0].observationZone);
     this._lastFix = undefined;
     this._nextTP = 0;
     this._aatPoints = [];
@@ -32,7 +49,7 @@ class FlightAnalyzer {
     }
 
     if (this._nextTP < 2) {
-      let point = this.task.points[0].observationZone.checkEnter(this._lastFix.coordinate, fix.coordinate);
+      let point = this.startPoint.checkStart(this._lastFix.coordinate, fix.coordinate);
       if (point) {
         this._aatPoints[0] = { coordinate: point.geometry.coordinates, secOfDay: fix.secOfDay};
         this._nextTP = 1;

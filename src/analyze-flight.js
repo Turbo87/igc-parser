@@ -1,59 +1,81 @@
 const turf = require('@turf/turf');
 
-function analyzeFlight(flight, task) {
-  let nextTP = 0;
+class FlightAnalyzer {
+  constructor(task) {
+    this.task = task;
+    this._lastFix = undefined;
+    this._nextTP = 0;
+    this._aatPoints = [];
+  }
 
-  let aatPoints = [];
+  update(fix) {
+    if (!this._lastFix) {
+      this._lastFix = fix;
+      return;
+    }
 
-  for (let i = 0; i < flight.length - 1; i++) {
-    let fix1 = flight[i].coordinate;
-    let fix2 = flight[i + 1].coordinate;
+    if (this._nextTP >= this.task.points.length) {
+      return;
+    }
 
-    if (nextTP < 2) {
-      let point = task.points[0].observationZone.checkEnter(fix1, fix2);
+    if (this._nextTP < 2) {
+      let point = this.task.points[0].observationZone.checkEnter(this._lastFix.coordinate, fix.coordinate);
       if (point) {
-        aatPoints[0] = { coordinate: point.geometry.coordinates, i, secOfDay: flight[i].secOfDay};
-        nextTP = 1;
+        this._aatPoints[0] = { coordinate: point.geometry.coordinates, secOfDay: fix.secOfDay};
+        this._nextTP = 1;
       }
     }
 
-    if (nextTP === task.points.length - 1) {
-      let point = task.points[nextTP].observationZone.checkEnter(fix1, fix2);
+    if (this._nextTP === this.task.points.length - 1) {
+      let point = this.task.points[this._nextTP].observationZone.checkEnter(this._lastFix.coordinate, fix.coordinate);
       if (point) {
-        aatPoints[nextTP] = { coordinate: point.geometry.coordinates, i, secOfDay: flight[i].secOfDay};
-        break;
+        this._aatPoints[this._nextTP] = { coordinate: point.geometry.coordinates, secOfDay: fix.secOfDay};
+        this._nextTP += 1;
+        return;
       }
     }
 
-    let point = task.points[nextTP].observationZone.checkEnter(fix1, fix2);
+    let point = this.task.points[this._nextTP].observationZone.checkEnter(this._lastFix.coordinate, fix.coordinate);
     if (point) {
-      nextTP += 1;
+      this._nextTP += 1;
     }
 
-    if (nextTP > 1 && task.points[nextTP - 1].observationZone.isInside(fix1)) {
+    if (this._nextTP > 1 && this.task.points[this._nextTP - 1].observationZone.isInside(this._lastFix.coordinate)) {
       let _score =
-        turf.distance(fix1, task.points[nextTP - 2].location) +
-        turf.distance(fix1, task.points[nextTP].location);
+        turf.distance(this._lastFix.coordinate, this.task.points[this._nextTP - 2].location) +
+        turf.distance(this._lastFix.coordinate, this.task.points[this._nextTP].location);
 
-      let _lastScore = (aatPoints[nextTP - 1] && aatPoints[nextTP - 1]._score) || 0;
+      let _lastScore = (this._aatPoints[this._nextTP - 1] && this._aatPoints[this._nextTP - 1]._score) || 0;
       if (_score > _lastScore) {
-        aatPoints[nextTP - 1] = {_score, coordinate: fix1, i, secOfDay: flight[i].secOfDay};
+        this._aatPoints[this._nextTP - 1] = {_score, coordinate: this._lastFix.coordinate, secOfDay: fix.secOfDay};
       }
     }
+
+    this._lastFix = fix;
   }
 
-  let start = aatPoints[0];
-  let finish = aatPoints[aatPoints.length - 1];
-  let totalTime = finish.secOfDay - start.secOfDay;
+  get result() {
+    let start = this._aatPoints[0];
+    let finish = this._aatPoints[this._aatPoints.length - 1];
+    let totalTime = finish.secOfDay - start.secOfDay;
 
-  let distance = 0;
-  for (let i = 0; i < aatPoints.length - 1; i++) {
-    distance += turf.distance(aatPoints[i].coordinate, aatPoints[i + 1].coordinate);
+    let distance = 0;
+    for (let i = 0; i < this._aatPoints.length - 1; i++) {
+      distance += turf.distance(this._aatPoints[i].coordinate, this._aatPoints[i + 1].coordinate);
+    }
+
+    let speed = distance / (totalTime / 3600);
+
+    return { start, finish, totalTime, aatPoints: this._aatPoints, distance, speed };
   }
+}
 
-  let speed = distance / (totalTime / 3600);
+function analyzeFlight(flight, task) {
+  let analyzer = new FlightAnalyzer(task);
 
-  return { start, finish, totalTime, aatPoints, distance, speed };
+  flight.forEach(fix => analyzer.update(fix));
+
+  return analyzer.result;
 }
 
 module.exports = analyzeFlight;

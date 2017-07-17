@@ -1,12 +1,11 @@
-const fs = require('fs');
-const turf = require('@turf/turf');
+import * as turf from "@turf/turf";
 
-const readTask = require('../src/read-task');
-const taskToGeoJSON = require('../src/task-to-geojson');
-const readFlight = require('../src/read-flight');
-const analyzeFlight = require('../src/analyze-flight');
-const formatResult = require('../src/format-result');
-const viewGeoJSON = require('../src/view-geojson');
+import {readTask} from "../src/read-task";
+import {taskToGeoJSON} from "../src/task-to-geojson";
+import {readFlight} from "../src/read-flight";
+import {analyzeFlight} from "../src/analyze-flight";
+import {formatResult} from "../src/format-result";
+import {viewGeoJSON} from "../src/view-geojson";
 
 let task = readTask(`${__dirname}/../fixtures/2017-07-15-lev/task.tsk`);
 let flight = readFlight(`${__dirname}/../fixtures/2017-07-15-lev/sq_2017-07-15-fla-3jv-01.igc`);
@@ -21,5 +20,5 @@ json.features.push(turf.lineString(flight2.map(it => it.coordinate), { color: 'g
 json.features.push(...result.aatPoints.filter(Boolean).map(it => turf.point(it.coordinate)));
 
 if (process.argv.indexOf('--view') !== -1) {
-  viewGeoJSON(json);
+  viewGeoJSON(json, null);
 }

@@ -1,8 +1,8 @@
-const turf = require('@turf/turf');
+import * as turf from "@turf/turf";
 
-const oz = require('./oz');
+import * as oz from "./oz";
 
-function taskToGeoJSON(task) {
+export function taskToGeoJSON(task) {
   let legs = turf.lineString(task.points.map(pt => pt.location));
 
   let ozs = task.points.map((pt, i) => {
@@ -15,5 +15,3 @@ function taskToGeoJSON(task) {
 
   return turf.featureCollection([legs, ...ozs]);
 }
-
-module.exports = taskToGeoJSON;

@@ -1,11 +1,11 @@
-const fs = require('fs');
-const xml2js = require('xml-js').xml2js;
-const turf = require('@turf/turf');
+import * as fs from "fs";
+import * as turf from "@turf/turf";
+import {xml2js} from "xml-js";
 
-const oz = require('./oz');
-const Turnpoint = require('./turnpoint');
+import * as oz from "./oz";
+import {Turnpoint} from "./turnpoint";
 
-function readTask(path) {
+export function readTask(path) {
   let file = fs.readFileSync(path, 'utf8');
   let xml = xml2js(file);
   let task = convertTask(xml.elements.find(it => it.name === 'Task'));
@@ -79,5 +79,3 @@ function convertObservationZone(xml, location) {
     return new oz.Cylinder(location, radius);
   }
 }
-
-module.exports = readTask;

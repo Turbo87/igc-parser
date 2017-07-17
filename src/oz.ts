@@ -1,6 +1,9 @@
-const turf = require('@turf/turf');
+import * as turf from "@turf/turf";
 
-class Cylinder {
+export class Cylinder {
+  center: any;
+  radius: number;
+
   constructor(center, radius) {
     this.center = center;
     this.radius = radius;
@@ -21,7 +24,12 @@ class Cylinder {
   }
 }
 
-class Line {
+export class Line {
+  center: any;
+  length: number;
+  coordinates: GeoJSON.Position[];
+  bearing: number;
+
   constructor(center, length) {
     this.center = center;
     this.length = length;
@@ -47,5 +55,3 @@ class Line {
     return intersection.features[0];
   }
 }
-
-module.exports = { Cylinder, Line };

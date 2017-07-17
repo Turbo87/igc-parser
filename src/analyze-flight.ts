@@ -1,6 +1,11 @@
-const turf = require('@turf/turf');
+import * as turf from "@turf/turf";
 
 class FlightAnalyzer {
+  task: any;
+  _lastFix: any;
+  _nextTP = 0;
+  _aatPoints: any[] = [];
+
   constructor(task) {
     this.task = task;
     this._lastFix = undefined;
@@ -70,12 +75,10 @@ class FlightAnalyzer {
   }
 }
 
-function analyzeFlight(flight, task) {
+export function analyzeFlight(flight, task) {
   let analyzer = new FlightAnalyzer(task);
 
   flight.forEach(fix => analyzer.update(fix));
 
   return analyzer.result;
 }
-
-module.exports = analyzeFlight;

@@ -45,7 +45,7 @@ export function readTask(path): Task {
       }
 
       if (observationZone instanceof oz.Line) {
-        observationZone.bearing = bearing;
+        observationZone.direction = bearing;
         observationZone.update();
       }
 

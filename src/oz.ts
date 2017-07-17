@@ -34,7 +34,7 @@ export class Line implements ObservationZone {
   center: GeoJSON.Position;
   length: number;
   coordinates: GeoJSON.Position[];
-  bearing: number;
+  direction: number; // direction in which the line is triggering transitions
 
   constructor(center: GeoJSON.Position, length: number) {
     this.center = center;
@@ -42,8 +42,8 @@ export class Line implements ObservationZone {
   }
 
   update() {
-    let p1 = turf.destination(this.center, this.length / 2000, this.bearing + 90);
-    let p2 = turf.destination(this.center, this.length / 2000, this.bearing - 90);
+    let p1 = turf.destination(this.center, this.length / 2000, this.direction + 90);
+    let p2 = turf.destination(this.center, this.length / 2000, this.direction - 90);
 
     this.coordinates = [p1.geometry.coordinates, p2.geometry.coordinates];
   }
@@ -54,7 +54,7 @@ export class Line implements ObservationZone {
       return;
 
     let bearing = turf.bearing(c1, c2);
-    let bearingDiff = turf.bearingToAngle(this.bearing - bearing);
+    let bearingDiff = turf.bearingToAngle(this.direction - bearing);
     if (bearingDiff > 90 && bearingDiff < 270)
       return;
 

@@ -12,7 +12,6 @@ Object {
       ],
       "name": "Langenfeld-Wiescheid",
       "observationZone": Line {
-        "bearing": -121.94784479982403,
         "center": Array [
           6.9852833,
           51.1413833,
@@ -27,6 +26,7 @@ Object {
             51.0650726380352,
           ],
         ],
+        "direction": -121.94784479982403,
         "length": 20000,
       },
     },
@@ -98,7 +98,6 @@ Object {
       ],
       "name": "002Zielkreis",
       "observationZone": Line {
-        "bearing": -127.66985298448614,
         "center": Array [
           7.03695,
           51.0977833,
@@ -113,6 +112,7 @@ Object {
             51.07999050345367,
           ],
         ],
+        "direction": -127.66985298448614,
         "length": 5000,
       },
     },

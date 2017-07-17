@@ -1,4 +1,4 @@
-const turf = require('@turf/turf');
+import * as turf from "@turf/turf";
 
 export class Cylinder {
   center: any;

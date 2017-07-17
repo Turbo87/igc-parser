@@ -1,4 +1,4 @@
-const turf = require('@turf/turf');
+import * as turf from "@turf/turf";
 
 class FlightAnalyzer {
   task: any;

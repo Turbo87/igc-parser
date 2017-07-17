@@ -1,4 +1,4 @@
-const readTask = require('../src/read-task').readTask;
+import {readTask} from "../src/read-task";
 
 describe('readTask()', () => {
   it('reads "2017-07-15-lev" task correctly', () => {

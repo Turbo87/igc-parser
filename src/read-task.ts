@@ -1,9 +1,9 @@
-const fs = require('fs');
-const xml2js = require('xml-js').xml2js;
-const turf = require('@turf/turf');
+import * as fs from "fs";
+import * as turf from "@turf/turf";
+import {xml2js} from "xml-js";
 
-const oz = require('./oz');
-const Turnpoint = require('./turnpoint').Turnpoint;
+import * as oz from "./oz";
+import {Turnpoint} from "./turnpoint";
 
 export function readTask(path) {
   let file = fs.readFileSync(path, 'utf8');

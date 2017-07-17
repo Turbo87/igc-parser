@@ -1,5 +1,4 @@
-const fs = require('fs');
-const readFlight = require('../src/read-flight').readFlight;
+import {readFlight} from "../src/read-flight";
 
 describe('readFlight()', () => {
   it(`reads "SW_77flqgg1" flight log correctly`, () => {

@@ -1,14 +1,16 @@
 import * as turf from "@turf/turf";
 
 import {Fix} from "./read-flight";
+import {Task} from "./read-task";
+import {Cylinder} from "./oz";
 
 class FlightAnalyzer {
-  task: any;
+  task: Task;
   _lastFix: Fix | undefined;
   _nextTP = 0;
   _aatPoints: any[] = [];
 
-  constructor(task) {
+  constructor(task: Task) {
     this.task = task;
     this._lastFix = undefined;
     this._nextTP = 0;
@@ -47,7 +49,7 @@ class FlightAnalyzer {
       this._nextTP += 1;
     }
 
-    if (this._nextTP > 1 && this.task.points[this._nextTP - 1].observationZone.isInside(this._lastFix.coordinate)) {
+    if (this._nextTP > 1 && (this.task.points[this._nextTP - 1].observationZone as Cylinder).isInside(this._lastFix.coordinate)) {
       let _score =
         turf.distance(this._lastFix.coordinate, this.task.points[this._nextTP - 2].location) +
         turf.distance(this._lastFix.coordinate, this.task.points[this._nextTP].location);

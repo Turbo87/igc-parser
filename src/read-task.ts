@@ -52,7 +52,7 @@ export function readTask(path): Task {
         throw new Error(`Unknown zone type: ${point.observation_zone.type}`);
       }
 
-      return new Turnpoint(name, altitude, location, observationZone);
+      return new Turnpoint(name, altitude, observationZone);
     }),
   };
 }

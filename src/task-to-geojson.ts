@@ -3,7 +3,7 @@ import * as turf from "@turf/turf";
 import * as oz from "./oz";
 
 export function taskToGeoJSON(task) {
-  let legs = turf.lineString(task.points.map(pt => pt.location));
+  let legs = turf.lineString(task.points.map(pt => pt.observationZone.center));
 
   let ozs = task.points.map((pt, i) => {
     if (pt.observationZone instanceof oz.Line) {

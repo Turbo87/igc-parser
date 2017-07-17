@@ -7,10 +7,6 @@ Object {
   "points": Array [
     Turnpoint {
       "altitude": 86,
-      "location": Array [
-        6.9852833,
-        51.1413833,
-      ],
       "name": "Langenfeld-Wiescheid",
       "observationZone": Line {
         "center": Array [
@@ -33,10 +29,6 @@ Object {
     },
     Turnpoint {
       "altitude": 190,
-      "location": Array [
-        6.18695,
-        50.8241667,
-      ],
       "name": "Aachen Merzbrück",
       "observationZone": Cylinder {
         "center": Array [
@@ -48,10 +40,6 @@ Object {
     },
     Turnpoint {
       "altitude": 205,
-      "location": Array [
-        7.1375,
-        50.5597167,
-      ],
       "name": "Bad Neuenahr",
       "observationZone": Cylinder {
         "center": Array [
@@ -63,10 +51,6 @@ Object {
     },
     Turnpoint {
       "altitude": 7,
-      "location": Array [
-        6.4916667,
-        50.8888833,
-      ],
       "name": "058Hambach Süd",
       "observationZone": Cylinder {
         "center": Array [
@@ -78,10 +62,6 @@ Object {
     },
     Turnpoint {
       "altitude": 200,
-      "location": Array [
-        7.2,
-        51.17695,
-      ],
       "name": "110Remscheid Bhf",
       "observationZone": Cylinder {
         "center": Array [
@@ -93,10 +73,6 @@ Object {
     },
     Turnpoint {
       "altitude": 130,
-      "location": Array [
-        7.03695,
-        51.0977833,
-      ],
       "name": "002Zielkreis",
       "observationZone": Line {
         "center": Array [

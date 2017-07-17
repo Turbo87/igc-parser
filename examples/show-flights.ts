@@ -20,5 +20,5 @@ json.features.push(turf.lineString(flight2.map(it => it.coordinate), { color: 'g
 json.features.push(...result.aatPoints.filter(Boolean).map(it => turf.point(it.coordinate)));
 
 if (process.argv.indexOf('--view') !== -1) {
-  viewGeoJSON(json, null);
+  viewGeoJSON(json);
 }

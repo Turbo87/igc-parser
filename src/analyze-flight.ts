@@ -35,10 +35,23 @@ class FinishPoint {
   }
 }
 
+class TaskPoint {
+  oz: ObservationZone;
+
+  constructor(oz: ObservationZone) {
+    this.oz = oz;
+  }
+
+  checkTransition(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined {
+    return this.oz.checkEnter(c1, c2);
+  }
+}
+
 class FlightAnalyzer {
   task: Task;
   startPoint: StartPoint;
   finishPoint: FinishPoint;
+  taskPoints: TaskPoint[];
   _lastFix: Fix | undefined;
   _nextTP = 0;
   _aatPoints: any[] = [];
@@ -46,8 +59,9 @@ class FlightAnalyzer {
 
   constructor(task: Task) {
     this.task = task;
-    this.startPoint = new StartPoint(task.points[0].observationZone);
-    this.finishPoint = new FinishPoint(task.points[task.points.length - 1].observationZone);
+    this.startPoint = new StartPoint(task.points.shift()!.observationZone);
+    this.finishPoint = new FinishPoint(task.points.pop()!.observationZone);
+    this.taskPoints = task.points.map(point => new TaskPoint(point.observationZone));
     this._lastFix = undefined;
     this._nextTP = 0;
     this._aatPoints = [];
@@ -82,7 +96,7 @@ class FlightAnalyzer {
       }
     }
 
-    let point = this.task.points[this._nextTP].observationZone.checkEnter(this._lastFix.coordinate, fix.coordinate);
+    let point = this.taskPoints[this._nextTP - 1].checkTransition(this._lastFix.coordinate, fix.coordinate);
     if (point) {
       this._nextTP += 1;
     }

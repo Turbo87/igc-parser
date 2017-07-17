@@ -19,8 +19,6 @@ export function readTask(path): Task {
     isAAT: task.type === 'AAT',
     aatMinTime: task.aat_min_time,
     points: task.points.map((point, i) => {
-      let name = point.waypoint.name;
-      let altitude = point.waypoint.altitude;
       let location = convertLocation(point.waypoint.location);
 
       let observationZone;
@@ -52,7 +50,7 @@ export function readTask(path): Task {
         throw new Error(`Unknown zone type: ${point.observation_zone.type}`);
       }
 
-      return new Turnpoint(name, altitude, observationZone);
+      return new Turnpoint(observationZone);
     }),
   };
 }

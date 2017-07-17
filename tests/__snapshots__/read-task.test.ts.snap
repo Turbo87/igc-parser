@@ -6,8 +6,6 @@ Object {
   "isAAT": true,
   "points": Array [
     Turnpoint {
-      "altitude": 86,
-      "name": "Langenfeld-Wiescheid",
       "observationZone": Line {
         "center": Array [
           6.9852833,
@@ -28,8 +26,6 @@ Object {
       },
     },
     Turnpoint {
-      "altitude": 190,
-      "name": "Aachen Merzbrück",
       "observationZone": Cylinder {
         "center": Array [
           6.18695,
@@ -39,8 +35,6 @@ Object {
       },
     },
     Turnpoint {
-      "altitude": 205,
-      "name": "Bad Neuenahr",
       "observationZone": Cylinder {
         "center": Array [
           7.1375,
@@ -50,8 +44,6 @@ Object {
       },
     },
     Turnpoint {
-      "altitude": 7,
-      "name": "058Hambach Süd",
       "observationZone": Cylinder {
         "center": Array [
           6.4916667,
@@ -61,8 +53,6 @@ Object {
       },
     },
     Turnpoint {
-      "altitude": 200,
-      "name": "110Remscheid Bhf",
       "observationZone": Cylinder {
         "center": Array [
           7.2,
@@ -72,8 +62,6 @@ Object {
       },
     },
     Turnpoint {
-      "altitude": 130,
-      "name": "002Zielkreis",
       "observationZone": Line {
         "center": Array [
           7.03695,

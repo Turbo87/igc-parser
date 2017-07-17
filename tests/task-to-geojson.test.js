@@ -1,5 +1,5 @@
-const readTask = require('./read-task');
-const taskToGeoJSON = require('./task-to-geojson');
+const readTask = require('../src/read-task');
+const taskToGeoJSON = require('../src/task-to-geojson');
 
 describe('taskToGeoJSON()', () => {
   it('converts "2017-07-15-lev" task correctly', () => {

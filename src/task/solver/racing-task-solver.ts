@@ -117,6 +117,7 @@ export default class RacingTaskSolver {
       turns: this.turns,
       finish: this.finish,
       completed: this.completed,
+      time: this.time,
       distance: this.distance,
     }
   }
@@ -126,9 +127,23 @@ export default class RacingTaskSolver {
     //
     // The task is completed when the competitor makes a valid Start, achieves
     // each Turn Point in the designated sequence, and makes a valid Finish.
+
     return this.validStarts.length > 0 &&
       this.turns.length === this.task.points.length - 2 &&
       this.finish !== undefined;
+  }
+
+  get time(): number | undefined {
+    // SC3a §6.3.1d (iv)
+    //
+    // For finishers, the Marking Time is the time elapsed between the most
+    // favorable valid Start Time and the Finish Time. For non-finishers the
+    // Marking Time is undefined.
+
+    if (this.completed) {
+      let lastStart = this.validStarts[this.validStarts.length - 1];
+      return Math.round((this.finish!.time - lastStart.time) / 1000);
+    }
   }
 
   on(event: string, handler: Function) {

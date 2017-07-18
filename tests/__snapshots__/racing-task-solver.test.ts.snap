@@ -28,6 +28,7 @@ Object {
       "time": 1500308465000,
     },
   ],
+  "time": undefined,
   "turns": Array [
     Object {
       "point": Array [
@@ -297,6 +298,7 @@ Object {
       "time": 1500309551000,
     },
   ],
+  "time": 6492,
   "turns": Array [
     Object {
       "point": Array [

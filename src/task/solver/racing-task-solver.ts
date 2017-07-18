@@ -1,8 +1,14 @@
 import {Fix} from "../../read-flight";
 import Task from "../task";
 import {Cylinder, Keyhole} from "../shapes";
+import Point from "../../geo/point";
 
 const Emitter = require('tiny-emitter');
+
+interface TaskFix {
+  time: number;
+  point: Point;
+}
 
 export default class RacingTaskSolver {
   task: Task;
@@ -10,7 +16,7 @@ export default class RacingTaskSolver {
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
 
-  private readonly _points: Fix[] = [];
+  private readonly _points: TaskFix[] = [];
   private readonly _emitter = new Emitter();
 
   constructor(task: Task) {
@@ -48,7 +54,7 @@ export default class RacingTaskSolver {
     if (!this.reachedFirstTurnpoint) {
       let point = this.task.start.checkStart(lastFix.coordinate, fix.coordinate);
       if (point) {
-        this._points[0] = fix;
+        this._points[0] = { time: fix.time, point: this.task.start.shape.center };
         this._nextTP = 1;
         this._emitter.emit('start', fix);
       }
@@ -57,7 +63,7 @@ export default class RacingTaskSolver {
     if (this.onFinalLeg) {
       let point = this.task.finish.checkFinish(lastFix.coordinate, fix.coordinate);
       if (point) {
-        this._points[this._nextTP] = fix;
+        this._points.push({ time: fix.time, point: this.task.finish.shape.center });
         this._nextTP += 1;
         this._emitter.emit('finish', fix);
         return;
@@ -73,7 +79,7 @@ export default class RacingTaskSolver {
     }
 
     if (entered) {
-      this._points[this._nextTP] = fix;
+      this._points.push({ time: fix.time, point: shape.center });
       this._nextTP += 1;
       this._emitter.emit('turn', fix, this._nextTP - 1);
     }

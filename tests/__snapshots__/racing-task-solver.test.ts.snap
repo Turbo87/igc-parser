@@ -4,27 +4,24 @@ exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" can handle outlandings 
 Object {
   "points": Array [
     Object {
-      "coordinate": Array [
-        6.930366666666667,
-        51.08711666666667,
+      "point": Array [
+        6.9322167,
+        51.08195,
       ],
-      "secOfDay": 53683,
       "time": 1500303283000,
     },
     Object {
-      "coordinate": Array [
-        6.28125,
-        50.989016666666664,
+      "point": Array [
+        6.2772167,
+        50.9991667,
       ],
-      "secOfDay": 56580,
       "time": 1500306180000,
     },
     Object {
-      "coordinate": Array [
-        6.1937500000000005,
-        51.1723,
+      "point": Array [
+        6.1922167,
+        51.1766667,
       ],
-      "secOfDay": 58865,
       "time": 1500308465000,
     },
   ],
@@ -123,43 +120,38 @@ exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" returns a result 1`] = 
 Object {
   "points": Array [
     Object {
-      "coordinate": Array [
-        6.930316666666667,
-        51.08435,
+      "point": Array [
+        6.9322167,
+        51.08195,
       ],
-      "secOfDay": 53459,
       "time": 1500303059000,
     },
     Object {
-      "coordinate": Array [
-        6.2829,
-        50.996633333333335,
+      "point": Array [
+        6.2772167,
+        50.9991667,
       ],
-      "secOfDay": 55467,
       "time": 1500305067000,
     },
     Object {
-      "coordinate": Array [
-        6.194816666666667,
-        51.173249999999996,
+      "point": Array [
+        6.1922167,
+        51.1766667,
       ],
-      "secOfDay": 57115,
       "time": 1500306715000,
     },
     Object {
-      "coordinate": Array [
-        6.6080499999999995,
-        50.96866666666667,
+      "point": Array [
+        6.6077833,
+        50.965,
       ],
-      "secOfDay": 58807,
       "time": 1500308407000,
     },
     Object {
-      "coordinate": Array [
-        7.008533333333333,
-        51.09851666666667,
+      "point": Array [
+        7.03695,
+        51.0977833,
       ],
-      "secOfDay": 59951,
       "time": 1500309551000,
     },
   ],

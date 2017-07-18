@@ -5,9 +5,14 @@ import {Turnpoint} from "./turnpoint";
 import {Cylinder, Line} from "./oz";
 import {read, XCSoarLocation} from "./xcsoar";
 
-export interface Task {
-  points: Turnpoint[],
-  options: TaskOptions,
+export class Task {
+  points: Turnpoint[];
+  options: TaskOptions;
+
+  constructor(points: Turnpoint[], options: TaskOptions) {
+    this.points = points;
+    this.options = options;
+  }
 }
 
 export interface TaskOptions {
@@ -19,46 +24,45 @@ export function readTask(path: string): Task {
   let file = fs.readFileSync(path, 'utf8');
   let task = read(file);
 
-  return {
-    options: {
-      isAAT: task.type === 'AAT',
-      aatMinTime: task.aat_min_time,
-    },
-    points: task.points.map((point, i) => {
-      let location = convertLocation(point.waypoint.location);
+  let points = task.points.map((point, i) => {
+    let location = convertLocation(point.waypoint.location);
 
-      let observationZone;
-      if (point.observation_zone.type === 'Line') {
-        let direction;
-        if (i === 0) {
-          let locNext = convertLocation(task.points[i + 1].waypoint.location);
-          direction = turf.bearing(location, locNext);
+    let observationZone;
+    if (point.observation_zone.type === 'Line') {
+      let direction;
+      if (i === 0) {
+        let locNext = convertLocation(task.points[i + 1].waypoint.location);
+        direction = turf.bearing(location, locNext);
 
-        } else if (i === task.points.length - 1) {
-          let locPrev = convertLocation(task.points[i - 1].waypoint.location);
-          direction = turf.bearing(locPrev, location);
+      } else if (i === task.points.length - 1) {
+        let locPrev = convertLocation(task.points[i - 1].waypoint.location);
+        direction = turf.bearing(locPrev, location);
 
-        } else {
-          let locPrev = convertLocation(task.points[i - 1].waypoint.location);
-          let locNext = convertLocation(task.points[i + 1].waypoint.location);
-
-          let bearingFromPrev = turf.bearing(locPrev, location);
-          let bearingToNext = turf.bearing(location, locNext);
-
-          direction = turf.bearingToAngle((bearingToNext + bearingFromPrev) / 2);
-        }
-
-        observationZone = new Line(location, point.observation_zone.length!, direction);
-
-      } else if (point.observation_zone.type === 'Cylinder') {
-        observationZone = new Cylinder(location, point.observation_zone.radius!);
       } else {
-        throw new Error(`Unknown zone type: ${point.observation_zone.type}`);
+        let locPrev = convertLocation(task.points[i - 1].waypoint.location);
+        let locNext = convertLocation(task.points[i + 1].waypoint.location);
+
+        let bearingFromPrev = turf.bearing(locPrev, location);
+        let bearingToNext = turf.bearing(location, locNext);
+
+        direction = turf.bearingToAngle((bearingToNext + bearingFromPrev) / 2);
       }
 
-      return new Turnpoint(observationZone);
-    }),
-  };
+      observationZone = new Line(location, point.observation_zone.length!, direction);
+
+    } else if (point.observation_zone.type === 'Cylinder') {
+      observationZone = new Cylinder(location, point.observation_zone.radius!);
+    } else {
+      throw new Error(`Unknown zone type: ${point.observation_zone.type}`);
+    }
+
+    return new Turnpoint(observationZone);
+  });
+
+  return new Task(points, {
+    isAAT: task.type === 'AAT',
+    aatMinTime: task.aat_min_time,
+  });
 }
 
 function convertLocation(loc: XCSoarLocation): GeoJSON.Position {

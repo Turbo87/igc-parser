@@ -5,8 +5,6 @@ import Point from "./point";
 
 export interface ObservationZone {
   center: Point;
-
-  checkEnter(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined;
 }
 
 export class Cylinder implements ObservationZone {

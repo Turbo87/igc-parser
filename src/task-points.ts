@@ -1,5 +1,5 @@
 import Point from "./point";
-import {Line, ObservationZone} from "./oz";
+import {Cylinder, Line, ObservationZone} from "./oz";
 
 export class StartPoint {
   oz: ObservationZone;
@@ -39,6 +39,11 @@ export class TaskPoint {
   }
 
   checkTransition(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    return this.oz.checkEnter(c1, c2);
+    if (this.oz instanceof Line) {
+      return this.oz.checkEnter(c1, c2);
+    } else if (this.oz instanceof Cylinder) {
+      return this.oz.checkEnter(c1, c2);
+    }
+    // TODO support other turn areas
   }
 }

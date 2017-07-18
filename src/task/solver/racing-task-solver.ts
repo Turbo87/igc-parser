@@ -1,3 +1,5 @@
+import * as turf from "@turf/turf";
+
 import {Fix} from "../../read-flight";
 import Task from "../task";
 import Point from "../../geo/point";
@@ -17,11 +19,10 @@ export default class RacingTaskSolver {
   turns: TaskFix[] = [];
   finish: TaskFix | undefined;
 
-  // the "Marking Distance" according to SC3a §6.3.1 (meters)
-  distance = 0;
-
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
+  private _legDistance = 0;
+  private _legFix: TaskFix | undefined;
 
   private readonly _emitter = new Emitter();
 
@@ -62,6 +63,7 @@ export default class RacingTaskSolver {
       if (point) {
         this._nextTP = 1;
         this.validStarts.push({ time: fix.time, point: fix.coordinate }); // TODO interpolate between fixes
+        this._legDistance = 0;
         this._emitter.emit('start', fix);
       }
     }
@@ -71,13 +73,6 @@ export default class RacingTaskSolver {
       if (point) {
         this._nextTP += 1;
         this.finish = { time: fix.time, point: fix.coordinate }; // TODO interpolate between fixes
-
-        // SC3a §6.3.1d (i)
-        //
-        // For a completed task, the Marking Distance is the Task Distance.
-
-        this.distance = this.task.distance;
-
         this._emitter.emit('finish', fix);
         return;
       }
@@ -96,7 +91,18 @@ export default class RacingTaskSolver {
     if (entered) {
       this._nextTP += 1;
       this.turns.push({ time: fix.time, point: fix.coordinate });
+      this._legDistance = 0;
       this._emitter.emit('turn', fix, this._nextTP - 1);
+    }
+
+    let nextTP = this.task.points[this._nextTP];
+    let lastTP = this.task.points[this._nextTP - 1];
+    if (nextTP && lastTP) {
+      let legDistance = turf.distance(lastTP.shape.center, nextTP.shape.center) - turf.distance(fix.coordinate, nextTP.shape.center);
+      if (legDistance > this._legDistance) {
+        this._legDistance = legDistance;
+        this._legFix = { time: fix.time, point: fix.coordinate };
+      }
     }
   }
 
@@ -133,6 +139,22 @@ export default class RacingTaskSolver {
       let lastStart = this.validStarts[this.validStarts.length - 1];
       return Math.round((this.finish!.time - lastStart.time) / 1000);
     }
+  }
+
+  // the "Marking Distance" according to SC3a §6.3.1 (meters)
+  get distance(): number | undefined {
+
+    // SC3a §6.3.1d (i)
+    //
+    // For a completed task, the Marking Distance is the Task Distance.
+
+    if (this.completed) {
+      return this.task.distance;
+    }
+
+    let reachedPoints = this.task.points.slice(0, this.turns.length + 1);
+    let reachedPointsDistance = turf.lineDistance(turf.lineString(reachedPoints.map(point => point.shape.center)));
+    return (reachedPointsDistance + this._legDistance) * 1000;
   }
 
   on(event: string, handler: Function) {

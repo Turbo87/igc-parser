@@ -11,8 +11,9 @@ client.on('ready', () => {
   console.log('Connected');
 });
 
-client.on('record', (line: string) => {
-  console.log(line);
+client.on('record', (record: any) => {
+  console.log(record);
+  console.log();
 });
 
 client.on('close', () => {

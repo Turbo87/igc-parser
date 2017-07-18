@@ -1,6 +1,8 @@
 import {Socket} from "net";
 import * as readline from "readline";
 
+const aprs = require('aprs-parser');
+
 export default class OGNClient {
   readonly host = 'aprs.glidernet.org';
   readonly port = 10152;
@@ -14,6 +16,7 @@ export default class OGNClient {
 
   private readonly socket = new Socket();
   private readonly reader = readline.createInterface({ input: this.socket as NodeJS.ReadableStream });
+  private readonly parser = new aprs.APRSParser();
 
   constructor(senders: string[]) {
     this.senders = senders;
@@ -30,7 +33,8 @@ export default class OGNClient {
   handleLine(line: string) {
     let knownSender = this.senders.some(sender => line.indexOf(sender) !== -1);
     if (knownSender) {
-      this.socket.emit('record', line);
+      let record = this.parser.parse(line);
+      this.socket.emit('record', record);
     }
   }
 

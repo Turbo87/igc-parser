@@ -28,9 +28,80 @@ export class Cylinder implements ObservationZone {
       return intersection.features[0];
   }
 
-  isInside(coordinate: Point) {
+  isInside(coordinate: Point): boolean {
     let distance = this._ruler.distance(coordinate, this.center);
     return distance <= this.radius / 1000;
+  }
+}
+
+export class Sector implements ObservationZone {
+  readonly direction: number; // direction in which the sector is pointing
+  readonly angle: number; // "width" of the sector in degrees
+
+  private readonly _cylinder: Cylinder;
+  private readonly _ruler: cheapRuler.CheapRuler;
+
+  constructor(center: Point, radius: number, angle: number, direction: number) {
+    this.angle = angle;
+    this.direction = direction;
+
+    this._cylinder = new Cylinder(center, radius);
+    this._ruler = cheapRuler(center[1]);
+  }
+
+  get center(): Point {
+    return this._cylinder.center;
+  }
+
+  get radius(): number {
+    return this._cylinder.radius;
+  }
+
+  isInside(coordinate: Point): boolean {
+    if (!this._cylinder.isInside(coordinate))
+      return false;
+
+    let bearing = this._ruler.bearing(this.center, coordinate);
+    let bearingDiff = Math.abs(turf.bearingToAngle(this.direction - bearing)) * 2;
+    return bearingDiff <= this.angle;
+  }
+}
+
+export class Keyhole implements ObservationZone {
+  private readonly _cylinder: Cylinder;
+  private readonly _sector: Sector;
+
+  constructor(center: Point, direction: number) {
+    let innerRadius = 500;
+    let outerRadius = 10000;
+    let outerAngle = 90;
+
+    this._cylinder = new Cylinder(center, innerRadius);
+    this._sector = new Sector(center, outerRadius, outerAngle, direction);
+  }
+
+  get center(): Point {
+    return this._cylinder.center;
+  }
+
+  get direction(): number {
+    return this._sector.direction;
+  }
+
+  get innerRadius(): number {
+    return this._cylinder.radius;
+  }
+
+  get outerRadius(): number {
+    return this._sector.radius;
+  }
+
+  get outerAngle(): number {
+    return this._sector.angle;
+  }
+
+  isInside(coordinate: Point): boolean {
+    return this._cylinder.isInside(coordinate) || this._sector.isInside(coordinate);
   }
 }
 

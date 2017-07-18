@@ -11,8 +11,8 @@ fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`).filter(filename => (/\
   let detector = new TakeoffDetector();
 
   let takeoff: Fix | undefined, landing: Fix | undefined;
-  detector.onTakeoff = fix => (takeoff = takeoff || fix);
-  detector.onLanding = fix => (landing = fix);
+  detector.on('takeoff', (fix: Fix) => (takeoff = takeoff || fix));
+  detector.on('landing', (fix: Fix) => (landing = fix));
 
   flight.forEach(fix => detector.update(fix));
 

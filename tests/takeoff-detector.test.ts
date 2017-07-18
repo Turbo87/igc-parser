@@ -14,8 +14,8 @@ describe('TakeoffDetector', () => {
       let detector = new TakeoffDetector();
 
       let takeoff: Fix, landing: Fix;
-      detector.onTakeoff = fix => (takeoff = takeoff || fix);
-      detector.onLanding = fix => (landing = fix);
+      detector.on('takeoff', fix => (takeoff = takeoff || fix));
+      detector.on('landing', fix => (landing = fix));
 
       flight.forEach(fix => detector.update(fix));
 

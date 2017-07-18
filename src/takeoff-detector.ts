@@ -2,23 +2,24 @@ import * as turf from '@turf/turf';
 
 import {Fix} from "./read-flight";
 
+const Emitter = require('tiny-emitter');
+
 export class TakeoffDetector {
   private _lastFix: Fix | undefined = undefined;
 
-  onTakeoff: (fix: Fix) => void;
-  onLanding: (fix: Fix) => void;
-
   flying: boolean = false;
+
+  private readonly _emitter = new Emitter();
 
   update(fix: Fix) {
     let speed = this._currentSpeed(fix);
     let flying = this._isFlightSpeed(speed);
 
-    if (flying && !this.flying && this.onTakeoff) {
-      this.onTakeoff(fix);
+    if (flying && !this.flying) {
+      this._emitter.emit('takeoff', fix)
     }
-    if (!flying && this.flying && this.onLanding) {
-      this.onLanding(fix);
+    if (!flying && this.flying) {
+      this._emitter.emit('landing', fix)
     }
 
     this.flying = flying;
@@ -36,5 +37,9 @@ export class TakeoffDetector {
 
   _isFlightSpeed(speed: number): boolean {
     return speed > 50;
+  }
+
+  on(event: string, handler: Function) {
+    return this._emitter.on(event, handler);
   }
 }

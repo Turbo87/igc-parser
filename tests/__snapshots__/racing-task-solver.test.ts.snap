@@ -25,6 +25,22 @@ Object {
       "time": 1500308465000,
     },
   ],
+  "turns": Array [
+    Object {
+      "point": Array [
+        6.28125,
+        50.989016666666664,
+      ],
+      "time": 1500306180000,
+    },
+    Object {
+      "point": Array [
+        6.1937500000000005,
+        51.1723,
+      ],
+      "time": 1500308465000,
+    },
+  ],
   "validStarts": Array [
     Object {
       "point": Array [
@@ -267,6 +283,29 @@ Object {
         51.0977833,
       ],
       "time": 1500309551000,
+    },
+  ],
+  "turns": Array [
+    Object {
+      "point": Array [
+        6.2829,
+        50.996633333333335,
+      ],
+      "time": 1500305067000,
+    },
+    Object {
+      "point": Array [
+        6.194816666666667,
+        51.173249999999996,
+      ],
+      "time": 1500306715000,
+    },
+    Object {
+      "point": Array [
+        6.6080499999999995,
+        50.96866666666667,
+      ],
+      "time": 1500308407000,
     },
   ],
   "validStarts": Array [

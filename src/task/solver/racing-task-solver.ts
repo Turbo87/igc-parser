@@ -14,6 +14,7 @@ export default class RacingTaskSolver {
   task: Task;
 
   readonly validStarts: TaskFix[] = [];
+  readonly turns: TaskFix[] = [];
 
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
@@ -88,6 +89,7 @@ export default class RacingTaskSolver {
     if (entered) {
       this._points.push({ time: fix.time, point: shape.center });
       this._nextTP += 1;
+      this.turns.push({ time: fix.time, point: fix.coordinate });
       this._emitter.emit('turn', fix, this._nextTP - 1);
     }
   }
@@ -96,6 +98,7 @@ export default class RacingTaskSolver {
     return {
       points: this._points,
       validStarts: this.validStarts,
+      turns: this.turns,
     }
   }
 

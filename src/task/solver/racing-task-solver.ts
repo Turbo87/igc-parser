@@ -13,8 +13,9 @@ interface TaskFix {
 export default class RacingTaskSolver {
   task: Task;
 
-  readonly validStarts: TaskFix[] = [];
-  readonly turns: TaskFix[] = [];
+  validStarts: TaskFix[] = [];
+  turns: TaskFix[] = [];
+  finish: TaskFix | undefined;
 
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
@@ -73,6 +74,7 @@ export default class RacingTaskSolver {
         this._points.push({ time: fix.time, point: this.task.finish.shape.center });
         this._nextTP += 1;
         this._finishTime = fix.time; // TODO interpolate between fixes
+        this.finish = { time: fix.time, point: fix.coordinate };
         this._emitter.emit('finish', fix);
         return;
       }
@@ -99,6 +101,7 @@ export default class RacingTaskSolver {
       points: this._points,
       validStarts: this.validStarts,
       turns: this.turns,
+      finish: this.finish,
     }
   }
 

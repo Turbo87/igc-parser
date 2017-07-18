@@ -26,15 +26,27 @@ export default class Task {
     let center = turf.center(turf.multiPoint(points.map(point => point.shape.center)));
     this._ruler = cheapRuler(center.geometry.coordinates[1]);
 
-    this.distance = this._ruler.lineDistance(points.map(point => point.shape.center)) * 1000;
+    this.distance = this._calcDistance();
+  }
+
+  private _calcDistance() {
+    // SC3a §6.3.1c
+    //
+    // The Task Distance is the distance from the Start Point to the Finish Point via
+    // all assigned Turn Points, less the radius of the Start Ring (if used) and less
+    // the radius of the Finish Ring (if used).
+
+    let distance = this._ruler.lineDistance(this.points.map(point => point.shape.center)) * 1000;
 
     if (this.start.shape instanceof Cylinder) {
-      this.distance -= this.start.shape.radius;
+      distance -= this.start.shape.radius;
     }
 
     if (this.finish.shape instanceof Cylinder) {
-      this.distance -= this.finish.shape.radius;
+      distance -= this.finish.shape.radius;
     }
+
+    return distance;
   }
 }
 

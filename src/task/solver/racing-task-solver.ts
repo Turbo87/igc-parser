@@ -112,7 +112,6 @@ export default class RacingTaskSolver {
 
   get result(): any {
     return {
-      points: this._points,
       validStarts: this.validStarts,
       turns: this.turns,
       finish: this.finish,

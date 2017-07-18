@@ -5,29 +5,6 @@ Object {
   "completed": false,
   "distance": 0,
   "finish": undefined,
-  "points": Array [
-    Object {
-      "point": Array [
-        6.9322167,
-        51.08195,
-      ],
-      "time": 1500303283000,
-    },
-    Object {
-      "point": Array [
-        6.2772167,
-        50.9991667,
-      ],
-      "time": 1500306180000,
-    },
-    Object {
-      "point": Array [
-        6.1922167,
-        51.1766667,
-      ],
-      "time": 1500308465000,
-    },
-  ],
   "time": undefined,
   "turns": Array [
     Object {
@@ -261,43 +238,6 @@ Object {
     ],
     "time": 1500309551000,
   },
-  "points": Array [
-    Object {
-      "point": Array [
-        6.9322167,
-        51.08195,
-      ],
-      "time": 1500303059000,
-    },
-    Object {
-      "point": Array [
-        6.2772167,
-        50.9991667,
-      ],
-      "time": 1500305067000,
-    },
-    Object {
-      "point": Array [
-        6.1922167,
-        51.1766667,
-      ],
-      "time": 1500306715000,
-    },
-    Object {
-      "point": Array [
-        6.6077833,
-        50.965,
-      ],
-      "time": 1500308407000,
-    },
-    Object {
-      "point": Array [
-        7.03695,
-        51.0977833,
-      ],
-      "time": 1500309551000,
-    },
-  ],
   "time": 6492,
   "turns": Array [
     Object {

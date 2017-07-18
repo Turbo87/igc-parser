@@ -2,51 +2,10 @@ import * as turf from "@turf/turf";
 
 import {Fix} from "./read-flight";
 import Task from "./task";
-import {Cylinder, Line, ObservationZone} from "./oz";
+import {Cylinder} from "./oz";
 import {TakeoffDetector} from "./takeoff-detector";
-import Point from "./point";
+import {FinishPoint, StartPoint, TaskPoint} from "./task-points";
 
-class StartPoint {
-  oz: ObservationZone;
-
-  constructor(oz: ObservationZone) {
-    this.oz = oz;
-  }
-
-  checkStart(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    if (this.oz instanceof Line) {
-      return this.oz.checkEnter(c1, c2);
-    }
-    // TODO support start areas too
-  }
-}
-
-class FinishPoint {
-  oz: ObservationZone;
-
-  constructor(oz: ObservationZone) {
-    this.oz = oz;
-  }
-
-  checkFinish(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    if (this.oz instanceof Line) {
-      return this.oz.checkEnter(c1, c2);
-    }
-    // TODO support finish areas too
-  }
-}
-
-class TaskPoint {
-  oz: ObservationZone;
-
-  constructor(oz: ObservationZone) {
-    this.oz = oz;
-  }
-
-  checkTransition(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    return this.oz.checkEnter(c1, c2);
-  }
-}
 
 class FlightAnalyzer {
   task: Task;

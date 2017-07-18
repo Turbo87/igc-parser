@@ -6,9 +6,13 @@ import {Cylinder, Line} from "./oz";
 import {read, XCSoarLocation} from "./xcsoar";
 
 export interface Task {
+  points: Turnpoint[],
+  options: TaskOptions,
+}
+
+export interface TaskOptions {
   isAAT: boolean,
   aatMinTime: number,
-  points: Turnpoint[],
 }
 
 export function readTask(path: string): Task {
@@ -16,8 +20,10 @@ export function readTask(path: string): Task {
   let task = read(file);
 
   return {
-    isAAT: task.type === 'AAT',
-    aatMinTime: task.aat_min_time,
+    options: {
+      isAAT: task.type === 'AAT',
+      aatMinTime: task.aat_min_time,
+    },
     points: task.points.map((point, i) => {
       let location = convertLocation(point.waypoint.location);
 

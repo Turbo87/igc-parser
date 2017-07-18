@@ -40,5 +40,11 @@ describe('RacingTaskSolver', () => {
       flight.forEach(fix => solver.update(fix));
       expect(solver.result).toMatchSnapshot();
     });
+
+    it('can handle outlandings', () => {
+      flight = readFlight(`${__dirname}/../fixtures/2017-07-17-lev/ZG_77hv6ci1.igc`);
+      flight.forEach(fix => solver.update(fix));
+      expect(solver.result).toMatchSnapshot();
+    })
   });
 });

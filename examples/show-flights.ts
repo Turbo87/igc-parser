@@ -8,7 +8,7 @@ import {formatResult} from "../src/format-result";
 import {viewGeoJSON} from "./utils/view-geojson";
 
 let task = readTask(`${__dirname}/../fixtures/2017-07-15-lev/task.tsk`);
-let flight = readFlight(`${__dirname}/../fixtures/2017-07-15-lev/sq_2017-07-15-fla-3jv-01.igc`);
+let flight = readFlight(`${__dirname}/../fixtures/2017-07-15-lev/SW_77flqgg1.IGC`);
 let flight2 = readFlight(`${__dirname}/../fixtures/2017-07-15-lev/IGP_77fg7sd1.igc`);
 let result = analyzeFlight(flight, task);
 

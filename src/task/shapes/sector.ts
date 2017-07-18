@@ -3,9 +3,9 @@ import * as cheapRuler from "cheap-ruler";
 
 import Cylinder from "./cylinder";
 import Point from "../../geo/point";
-import Shape from "./base";
+import AreaShape from "./area";
 
-export default class Sector implements Shape {
+export default class Sector extends AreaShape {
   readonly direction: number; // direction in which the sector is pointing
   readonly angle: number; // "width" of the sector in degrees
 
@@ -13,6 +13,8 @@ export default class Sector implements Shape {
   private readonly _ruler: cheapRuler.CheapRuler;
 
   constructor(center: Point, radius: number, angle: number, direction: number) {
+    super();
+
     this.angle = angle;
     this.direction = direction;
 

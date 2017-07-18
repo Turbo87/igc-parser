@@ -2,15 +2,17 @@ import * as turf from "@turf/turf";
 import * as cheapRuler from "cheap-ruler";
 
 import Point from "../../geo/point";
-import Shape from "./base";
+import AreaShape from "./area";
 
-export default class Cylinder implements Shape {
+export default class Cylinder extends AreaShape {
   center: Point;
   radius: number;
 
   private readonly _ruler: cheapRuler.CheapRuler;
 
   constructor(center: Point, radius: number) {
+    super();
+
     this.center = center;
     this.radius = radius;
     this._ruler = cheapRuler(center[1]);

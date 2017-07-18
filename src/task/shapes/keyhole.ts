@@ -1,13 +1,15 @@
 import Cylinder from "./cylinder";
 import Sector from "./sector";
 import Point from "../../geo/point";
-import Shape from "./base";
+import AreaShape from "./area";
 
-export default class Keyhole implements Shape {
+export default class Keyhole extends AreaShape {
   private readonly _cylinder: Cylinder;
   private readonly _sector: Sector;
 
   constructor(center: Point, direction: number) {
+    super();
+
     let innerRadius = 500;
     let outerRadius = 10000;
     let outerAngle = 90;

@@ -1,7 +1,7 @@
 import {Fix} from "../../read-flight";
 import Task from "../task";
-import {Cylinder, Keyhole} from "../shapes";
 import Point from "../../geo/point";
+import AreaShape from "../shapes/area";
 
 const Emitter = require('tiny-emitter');
 
@@ -89,9 +89,7 @@ export default class RacingTaskSolver {
 
     let entered = false;
     let { shape } = this.task.points[this._nextTP];
-    if (shape instanceof Cylinder && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {
-      entered = true;
-    } else if (shape instanceof Keyhole && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {
+    if (shape instanceof AreaShape && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {
       entered = true;
     }
 

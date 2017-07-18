@@ -15,6 +15,8 @@ export default class RacingTaskSolver {
 
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
+  private _startTime: number | undefined;
+  private _finishTime: number | undefined;
 
   private readonly _points: TaskFix[] = [];
   private readonly _emitter = new Emitter();
@@ -56,6 +58,7 @@ export default class RacingTaskSolver {
       if (point) {
         this._points[0] = { time: fix.time, point: this.task.start.shape.center };
         this._nextTP = 1;
+        this._startTime = fix.time; // TODO interpolate between fixes
         this._emitter.emit('start', fix);
       }
     }
@@ -65,6 +68,7 @@ export default class RacingTaskSolver {
       if (point) {
         this._points.push({ time: fix.time, point: this.task.finish.shape.center });
         this._nextTP += 1;
+        this._finishTime = fix.time; // TODO interpolate between fixes
         this._emitter.emit('finish', fix);
         return;
       }

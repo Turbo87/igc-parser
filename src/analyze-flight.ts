@@ -4,13 +4,11 @@ import {Fix} from "./read-flight";
 import Task from "./task";
 import {Cylinder} from "./oz";
 import {TakeoffDetector} from "./takeoff-detector";
-import {FinishPoint, StartPoint, TaskPoint} from "./task-points";
+import {TaskPoint} from "./task-points";
 
 
 class FlightAnalyzer {
   task: Task;
-  startPoint: StartPoint;
-  finishPoint: FinishPoint;
   taskPoints: TaskPoint[];
   _lastFix: Fix | undefined;
   _nextTP = 0;
@@ -19,8 +17,6 @@ class FlightAnalyzer {
 
   constructor(task: Task) {
     this.task = task;
-    this.startPoint = new StartPoint(task.points[0]!.observationZone);
-    this.finishPoint = new FinishPoint(task.points[task.points.length - 1]!.observationZone);
     this.taskPoints = task.points.map(point => new TaskPoint(point.observationZone));
     this._lastFix = undefined;
     this._nextTP = 0;
@@ -40,7 +36,7 @@ class FlightAnalyzer {
     }
 
     if (!this.reachedFirstTurnpoint) {
-      let point = this.startPoint.checkStart(this._lastFix.coordinate, fix.coordinate);
+      let point = this.task.start.checkStart(this._lastFix.coordinate, fix.coordinate);
       if (point) {
         this._aatPoints[0] = { coordinate: point.geometry.coordinates, time: fix.time};
         this._nextTP = 1;
@@ -48,7 +44,7 @@ class FlightAnalyzer {
     }
 
     if (this.onFinalLeg) {
-      let point = this.finishPoint.checkFinish(this._lastFix.coordinate, fix.coordinate);
+      let point = this.task.finish.checkFinish(this._lastFix.coordinate, fix.coordinate);
       if (point) {
         this._aatPoints[this._nextTP] = { coordinate: point.geometry.coordinates, time: fix.time};
         this._nextTP += 1;

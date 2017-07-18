@@ -105,8 +105,19 @@ export default class RacingTaskSolver {
       validStarts: this.validStarts,
       turns: this.turns,
       finish: this.finish,
+      completed: this.completed,
       distance: this.distance,
     }
+  }
+
+  get completed(): boolean {
+    // SC3a §6.3.1b
+    //
+    // The task is completed when the competitor makes a valid Start, achieves
+    // each Turn Point in the designated sequence, and makes a valid Finish.
+    return this.validStarts.length > 0 &&
+      this.turns.length === this.task.points.length - 2 &&
+      this.finish !== undefined;
   }
 
   on(event: string, handler: Function) {

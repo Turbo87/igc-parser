@@ -1,5 +1,5 @@
-import Point from "./geo/point";
-import {Cylinder, Line, Shape} from "./task/shapes";
+import Point from "../geo/point";
+import {Cylinder, Line, Shape} from "./shapes";
 
 export class StartPoint {
   shape: Shape;

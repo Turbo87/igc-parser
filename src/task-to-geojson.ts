@@ -1,6 +1,6 @@
 import * as turf from "@turf/turf";
 import {Cylinder, Keyhole, Line} from "./task/shapes";
-import Task from "./task";
+import Task from "./task/task";
 
 export function taskToGeoJSON(task: Task) {
   let legs = turf.lineString(task.points.map(pt => pt.shape.center));

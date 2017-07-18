@@ -1,11 +1,11 @@
 import * as turf from "@turf/turf";
 
 import {Fix} from "./read-flight";
-import Task from "./task";
+import Task from "./task/task";
 import {Cylinder} from "./task/shapes";
 import {TakeoffDetector} from "./takeoff-detector";
-import {TaskPoint} from "./task-points";
-import RacingTaskSolver from "./racing-task-solver";
+import {TaskPoint} from "./task/task-points";
+import RacingTaskSolver from "./task/solver/racing-task-solver";
 
 
 class FlightAnalyzer {

@@ -1,6 +1,6 @@
-import {Fix} from "./read-flight";
-import Task from "./task";
-import {Cylinder, Keyhole} from "./task/shapes";
+import {Fix} from "../../read-flight";
+import Task from "../task";
+import {Cylinder, Keyhole} from "../shapes";
 
 const Emitter = require('tiny-emitter');
 

@@ -4,7 +4,7 @@ import * as turf from "@turf/turf";
 import {Turnpoint} from "./turnpoint";
 import {Cylinder, Keyhole, Line} from "./task/shapes";
 import {read, XCSoarLocation} from "./xcsoar";
-import Task from "./task";
+import Task from "./task/task";
 import Point from "./geo/point";
 import {fraction} from "./utils/angles";
 

@@ -1,7 +1,7 @@
 import * as turf from '@turf/turf';
 import * as cheapRuler from "cheap-ruler";
 
-import {Turnpoint} from "./turnpoint";
+import {Turnpoint} from "../turnpoint";
 import {FinishPoint, StartPoint} from "./task-points";
 
 export default class Task {

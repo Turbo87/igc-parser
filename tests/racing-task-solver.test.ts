@@ -1,6 +1,6 @@
 import {readTask} from "../src/read-task";
-import RacingTaskSolver from "../src/racing-task-solver";
-import Task from "../src/task";
+import RacingTaskSolver from "../src/task/solver/racing-task-solver";
+import Task from "../src/task/task";
 import {Fix, readFlight} from "../src/read-flight";
 
 describe('RacingTaskSolver', () => {

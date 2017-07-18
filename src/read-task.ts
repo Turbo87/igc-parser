@@ -14,7 +14,6 @@ export function readTask(path: string): Task {
   let points = task.points.map((point, i) => {
     let location = convertLocation(point.waypoint.location);
 
-    let observationZone;
     if (point.observation_zone.type === 'Line') {
       let direction;
       if (i === 0) {
@@ -35,16 +34,14 @@ export function readTask(path: string): Task {
         direction = turf.bearingToAngle((bearingToNext + bearingFromPrev) / 2);
       }
 
-      observationZone = new Line(location, point.observation_zone.length!, direction);
+      return new Line(location, point.observation_zone.length!, direction);
 
     } else if (point.observation_zone.type === 'Cylinder') {
-      observationZone = new Cylinder(location, point.observation_zone.radius!);
+      return new Cylinder(location, point.observation_zone.radius!);
     } else {
       throw new Error(`Unknown zone type: ${point.observation_zone.type}`);
     }
-
-    return new Turnpoint(observationZone);
-  });
+  }).map(oz => new Turnpoint(oz));
 
   return new Task(points, {
     isAAT: task.type === 'AAT',

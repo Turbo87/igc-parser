@@ -1,6 +1,6 @@
 import {Fix} from "./read-flight";
 import Task from "./task";
-import {Cylinder, Keyhole, Line} from "./oz";
+import {Cylinder, Keyhole} from "./task/shapes";
 
 const Emitter = require('tiny-emitter');
 
@@ -65,12 +65,10 @@ export default class RacingTaskSolver {
     }
 
     let entered = false;
-    let oz = this.task.points[this._nextTP].observationZone;
-    if (oz instanceof Line && oz.checkEnter(lastFix.coordinate, fix.coordinate)) {
+    let { shape } = this.task.points[this._nextTP];
+    if (shape instanceof Cylinder && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {
       entered = true;
-    } else if (oz instanceof Cylinder && oz.checkEnter(lastFix.coordinate, fix.coordinate)) {
-      entered = true;
-    } else if (oz instanceof Keyhole && !oz.isInside(lastFix.coordinate) && oz.isInside(fix.coordinate)) {
+    } else if (shape instanceof Keyhole && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {
       entered = true;
     }
 

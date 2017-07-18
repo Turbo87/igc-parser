@@ -1,9 +1,9 @@
-import {ObservationZone} from "./oz";
+import {Shape} from "./task/shapes";
 
 export class Turnpoint {
-    observationZone: ObservationZone;
+    shape: Shape;
 
-    constructor(observationZone: ObservationZone) {
-    this.observationZone = observationZone;
+  constructor(shape: Shape) {
+    this.shape = shape;
   }
 }

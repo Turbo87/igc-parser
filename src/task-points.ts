@@ -1,50 +1,50 @@
-import Point from "./point";
-import {Cylinder, Keyhole, Line, ObservationZone} from "./oz";
+import Point from "./geo/point";
+import {Cylinder, Line, Shape} from "./task/shapes";
 
 export class StartPoint {
-  oz: ObservationZone;
+  shape: Shape;
 
-  constructor(oz: ObservationZone) {
-    this.oz = oz;
+  constructor(shape: Shape) {
+    this.shape = shape;
   }
 
   checkStart(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    if (this.oz instanceof Line) {
-      return this.oz.checkEnter(c1, c2);
+    if (this.shape instanceof Line) {
+      return this.shape.checkEnter(c1, c2);
     }
     // TODO support start areas too
   }
 }
 
 export class FinishPoint {
-  oz: ObservationZone;
+  shape: Shape;
 
-  constructor(oz: ObservationZone) {
-    this.oz = oz;
+  constructor(shape: Shape) {
+    this.shape = shape;
   }
 
   checkFinish(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    if (this.oz instanceof Line) {
-      return this.oz.checkEnter(c1, c2);
-    } else if (this.oz instanceof Cylinder) {
-      return this.oz.checkEnter(c1, c2);
+    if (this.shape instanceof Line) {
+      return this.shape.checkEnter(c1, c2);
+    } else if (this.shape instanceof Cylinder) {
+      return this.shape.checkEnter(c1, c2);
     }
     // TODO support finish areas too
   }
 }
 
 export class TaskPoint {
-  oz: ObservationZone;
+  shape: Shape;
 
-  constructor(oz: ObservationZone) {
-    this.oz = oz;
+  constructor(shape: Shape) {
+    this.shape = shape;
   }
 
   checkTransition(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    if (this.oz instanceof Line) {
-      return this.oz.checkEnter(c1, c2);
-    } else if (this.oz instanceof Cylinder) {
-      return this.oz.checkEnter(c1, c2);
+    if (this.shape instanceof Line) {
+      return this.shape.checkEnter(c1, c2);
+    } else if (this.shape instanceof Cylinder) {
+      return this.shape.checkEnter(c1, c2);
     }
     // TODO support other turn areas
   }

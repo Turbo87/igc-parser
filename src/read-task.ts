@@ -2,10 +2,10 @@ import * as fs from "fs";
 import * as turf from "@turf/turf";
 
 import {Turnpoint} from "./turnpoint";
-import {Cylinder, Keyhole, Line} from "./oz";
+import {Cylinder, Keyhole, Line} from "./task/shapes";
 import {read, XCSoarLocation} from "./xcsoar";
 import Task from "./task";
-import Point from "./point";
+import Point from "./geo/point";
 import {fraction} from "./utils/angles";
 
 export function readTask(path: string): Task {

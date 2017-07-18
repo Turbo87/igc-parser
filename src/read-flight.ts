@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-import Point from "./point";
+import Point from "./geo/point";
 
 const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])/;

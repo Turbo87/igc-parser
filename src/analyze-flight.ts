@@ -2,7 +2,7 @@ import * as turf from "@turf/turf";
 
 import {Fix} from "./read-flight";
 import Task from "./task";
-import {Cylinder} from "./oz";
+import {Cylinder} from "./task/shapes";
 import {TakeoffDetector} from "./takeoff-detector";
 import {TaskPoint} from "./task-points";
 import RacingTaskSolver from "./racing-task-solver";
@@ -18,7 +18,7 @@ class FlightAnalyzer {
 
   constructor(task: Task) {
     this.task = task;
-    this.taskPoints = task.points.map(point => new TaskPoint(point.observationZone));
+    this.taskPoints = task.points.map(point => new TaskPoint(point.shape));
     this._lastFix = undefined;
     this._nextTP = 0;
     this._aatPoints = [];
@@ -58,10 +58,10 @@ class FlightAnalyzer {
       this._nextTP += 1;
     }
 
-    if (this._nextTP > 1 && (this.task.points[this._nextTP - 1].observationZone as Cylinder).isInside(fix.coordinate)) {
+    if (this._nextTP > 1 && (this.task.points[this._nextTP - 1].shape as Cylinder).isInside(fix.coordinate)) {
       let _score =
-        turf.distance(fix.coordinate, this.task.points[this._nextTP - 2].observationZone.center) +
-        turf.distance(fix.coordinate, this.task.points[this._nextTP].observationZone.center);
+        turf.distance(fix.coordinate, this.task.points[this._nextTP - 2].shape.center) +
+        turf.distance(fix.coordinate, this.task.points[this._nextTP].shape.center);
 
       let _lastScore = (this._aatPoints[this._nextTP - 1] && this._aatPoints[this._nextTP - 1]._score) || 0;
       if (_score > _lastScore) {

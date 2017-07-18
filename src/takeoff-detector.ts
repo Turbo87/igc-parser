@@ -25,7 +25,7 @@ export class TakeoffDetector {
     this._lastFix = fix;
   }
 
-  _currentSpeed(fix): number {
+  _currentSpeed(fix: Fix): number {
     if (!this._lastFix) return 0;
 
     let distance = turf.distance(this._lastFix.coordinate, fix.coordinate);

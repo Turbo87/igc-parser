@@ -11,7 +11,7 @@ export interface Task {
   points: Turnpoint[],
 }
 
-export function readTask(path): Task {
+export function readTask(path: string): Task {
   let file = fs.readFileSync(path, 'utf8');
   let task = read(file);
 

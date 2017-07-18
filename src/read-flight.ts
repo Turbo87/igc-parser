@@ -9,7 +9,7 @@ export interface Fix {
   coordinate: GeoJSON.Position,
 }
 
-export function readFlight(path): Fix[] {
+export function readFlight(path: string): Fix[] {
   let lines = fs.readFileSync(path, 'utf8').split('\n');
 
   let date: number | undefined;

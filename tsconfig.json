@@ -3,7 +3,6 @@
     "outDir": "dist",
     "sourceMap": true,
     "strict": true,
-    "noImplicitAny": false,
     "target": "es5",
     "allowJs": true
   },

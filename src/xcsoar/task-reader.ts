@@ -31,38 +31,38 @@ export interface XCSoarObservationZone {
 
 export function read(xml: string): XCSoarTask {
   let root = xml2js(xml);
-  let taskElement = root.elements.find(it => it.name === 'Task');
+  let taskElement = root.elements.find((it: any) => it.name === 'Task');
   return convertTask(taskElement);
 }
 
-function convertTask(xml): XCSoarTask {
+function convertTask(xml: any): XCSoarTask {
   let type = xml.attributes.type;
   let aat_min_time = parseInt(xml.attributes.aat_min_time);
-  let points = xml.elements.filter(it => it.name === 'Point').map(convertPoint);
+  let points = xml.elements.filter((it: any) => it.name === 'Point').map(convertPoint);
   return { type, aat_min_time, points };
 }
 
-function convertPoint(xml): XCSoarPoint {
+function convertPoint(xml: any): XCSoarPoint {
   let type = xml.attributes.type;
-  let waypoint = convertWaypoint(xml.elements.find(it => it.name === 'Waypoint'));
-  let observation_zone = convertObservationZone(xml.elements.find(it => it.name === 'ObservationZone'));
+  let waypoint = convertWaypoint(xml.elements.find((it: any) => it.name === 'Waypoint'));
+  let observation_zone = convertObservationZone(xml.elements.find((it: any) => it.name === 'ObservationZone'));
   return { type, waypoint, observation_zone };
 }
 
-function convertWaypoint(xml): XCSoarWaypoint {
+function convertWaypoint(xml: any): XCSoarWaypoint {
   let name = xml.attributes.name;
   let altitude = parseFloat(xml.attributes.altitude);
-  let location = convertLocation(xml.elements.find(it => it.name === 'Location'));
+  let location = convertLocation(xml.elements.find((it: any) => it.name === 'Location'));
   return { name, altitude, location };
 }
 
-function convertLocation(xml): XCSoarLocation {
+function convertLocation(xml: any): XCSoarLocation {
   let longitude = parseFloat(xml.attributes.longitude);
   let latitude = parseFloat(xml.attributes.latitude);
   return { longitude, latitude };
 }
 
-function convertObservationZone(xml): XCSoarObservationZone {
+function convertObservationZone(xml: any): XCSoarObservationZone {
   let type = xml.attributes.type;
 
   if ('length' in xml.attributes) {

@@ -1,7 +1,7 @@
 const tempWrite = require('temp-write');
 const opn = require('opn');
 
-export function viewGeoJSON(json) {
+export function viewGeoJSON(json: any) {
   let html = `<html>
 <head>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css"/>

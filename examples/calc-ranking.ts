@@ -14,7 +14,7 @@ let flights = fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`).filter(f
   return { filename, result, callsign };
 }).sort(compareSpeed);
 
-function compareSpeed(a, b) {
+function compareSpeed(a: any, b: any) {
   return b.result.speed - a.result.speed;
 }
 

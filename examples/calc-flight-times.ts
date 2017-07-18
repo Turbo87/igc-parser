@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-import {readFlight} from "../src/read-flight";
+import {Fix, readFlight} from "../src/read-flight";
 import {TakeoffDetector} from "../src/takeoff-detector";
 import {formatTime} from "../src/format-result";
 
@@ -10,7 +10,7 @@ fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`).filter(filename => (/\
 
   let detector = new TakeoffDetector();
 
-  let takeoff, landing;
+  let takeoff: Fix | undefined, landing: Fix | undefined;
   detector.onTakeoff = fix => (takeoff = takeoff || fix);
   detector.onLanding = fix => (landing = fix);
 

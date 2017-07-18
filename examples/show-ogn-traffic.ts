@@ -2,7 +2,7 @@ import * as fs from 'fs';
 
 import OGNClient from '../src/ogn';
 
-let senders = readCSV();
+let senders = readCSV(`${__dirname}/../fixtures/2017-lev.csv`);
 
 console.log('Connecting');
 let client = new OGNClient(Object.keys(senders));
@@ -24,8 +24,8 @@ client.on('close', () => {
 
 client.connect();
 
-function readCSV() {
-  let lines = fs.readFileSync(`${__dirname}/../fixtures/2017-lev.csv`, 'utf8').split('\n');
+function readCSV(path: string) {
+  let lines = fs.readFileSync(path, 'utf8').split('\n');
   lines.shift();
 
   let senders = Object.create(null);

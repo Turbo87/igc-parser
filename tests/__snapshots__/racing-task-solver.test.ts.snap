@@ -2,6 +2,7 @@
 
 exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" can handle outlandings 1`] = `
 Object {
+  "distance": 0,
   "finish": undefined,
   "points": Array [
     Object {
@@ -249,6 +250,7 @@ Array [
 
 exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" returns a result 1`] = `
 Object {
+  "distance": 136420.85415876907,
   "finish": Object {
     "point": Array [
       7.008533333333333,

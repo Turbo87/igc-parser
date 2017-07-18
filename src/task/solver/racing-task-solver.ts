@@ -17,6 +17,8 @@ export default class RacingTaskSolver {
   turns: TaskFix[] = [];
   finish: TaskFix | undefined;
 
+  distance = 0;
+
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
   private _startTime: number | undefined;
@@ -75,6 +77,7 @@ export default class RacingTaskSolver {
         this._nextTP += 1;
         this._finishTime = fix.time; // TODO interpolate between fixes
         this.finish = { time: fix.time, point: fix.coordinate };
+        this.distance = this.task.distance;
         this._emitter.emit('finish', fix);
         return;
       }
@@ -102,6 +105,7 @@ export default class RacingTaskSolver {
       validStarts: this.validStarts,
       turns: this.turns,
       finish: this.finish,
+      distance: this.distance,
     }
   }
 

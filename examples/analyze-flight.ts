@@ -1,6 +1,6 @@
 import {readTask} from "../src/read-task";
 import {Fix, readFlight} from "../src/read-flight";
-import RacingTaskSolver from "./task/solver/racing-task-solver";
+import RacingTaskSolver from "../src/task/solver/racing-task-solver";
 import {formatTime} from "../src/format-result";
 
 if (process.argv.length < 4) {

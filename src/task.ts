@@ -1,6 +1,6 @@
 import {Turnpoint} from "./turnpoint";
 
-export class Task {
+export default class Task {
   points: Turnpoint[];
   options: TaskOptions;
 

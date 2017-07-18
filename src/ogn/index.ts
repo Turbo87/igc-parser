@@ -17,10 +17,18 @@ export default class OGNClient {
   private readonly socket = new Socket();
   private readonly reader = readline.createInterface({ input: this.socket as NodeJS.ReadableStream });
   private readonly parser = new aprs.APRSParser();
+  private _timer: any;
 
   constructor(senders: string[]) {
     this.senders = senders;
     this.reader.on('line', line => this.handleLine(line));
+
+    this.socket.on('close', () => {
+      if (this._timer) {
+        clearTimeout(this._timer);
+        this._timer = undefined;
+      }
+    });
   }
 
   connect() {
@@ -28,6 +36,8 @@ export default class OGNClient {
       this.socket.write(`user ${this.user} pass ${this.pass} vers ${this.appName} ${this.appVersion}\n`);
       this.socket.emit('ready');
     });
+
+    this._timer = setTimeout(() => this.sendKeepAlive(), 30000);
   }
 
   handleLine(line: string) {
@@ -36,6 +46,10 @@ export default class OGNClient {
       let record = this.parser.parse(line);
       this.socket.emit('record', record);
     }
+  }
+
+  sendKeepAlive() {
+    this.socket.write('# keep alive');
   }
 
   on(event: string, handler: Function) {

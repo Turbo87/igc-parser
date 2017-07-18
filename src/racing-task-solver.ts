@@ -29,6 +29,10 @@ export default class RacingTaskSolver {
     return this._nextTP >= this.task.points.length;
   }
 
+  consume(fixes: Fix[]) {
+    fixes.forEach(fix => this.update(fix));
+  }
+
   update(fix: Fix) {
     if (this._lastFix) {
       this._update(fix, this._lastFix);

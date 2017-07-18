@@ -103,7 +103,7 @@ class FlightAnalyzer {
 export function analyzeFlight(flight: Fix[], task: Task) {
   let analyzer = new RacingTaskSolver(task);
 
-  flight.forEach(fix => analyzer.update(fix));
+  analyzer.consume(flight);
 
   return analyzer.result;
 }

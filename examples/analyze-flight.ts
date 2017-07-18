@@ -25,4 +25,4 @@ solver.on('start', (fix: Fix) => console.log(`Start at ${formatTime(fix.time)}`)
 solver.on('turn', (fix: Fix, i: number) => console.log(`Reached TP${i} at ${formatTime(fix.time)}`));
 solver.on('finish', (fix: Fix) => console.log(`Finish at ${formatTime(fix.time)}`));
 
-flight.forEach(fix => solver.update(fix));
+solver.consume(flight);

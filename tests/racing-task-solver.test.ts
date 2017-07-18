@@ -18,32 +18,32 @@ describe('RacingTaskSolver', () => {
     it('emits multiple start events', () => {
       let fixes: Fix[] = [];
       solver.on('start', fix => fixes.push(fix));
-      flight.forEach(fix => solver.update(fix));
+      solver.consume(flight);
       expect(fixes).toMatchSnapshot();
     });
 
     it('emits multiple turn events', () => {
       let fixes = [];
       solver.on('turn', (fix, i) => fixes.push([fix, i]));
-      flight.forEach(fix => solver.update(fix));
+      solver.consume(flight);
       expect(fixes).toMatchSnapshot();
     });
 
     it('emits single finish event', () => {
       let fixes: Fix[] = [];
       solver.on('finish', fix => fixes.push(fix));
-      flight.forEach(fix => solver.update(fix));
+      solver.consume(flight);
       expect(fixes).toMatchSnapshot();
     });
 
     it('returns a result', () => {
-      flight.forEach(fix => solver.update(fix));
+      solver.consume(flight);
       expect(solver.result).toMatchSnapshot();
     });
 
     it('can handle outlandings', () => {
       flight = readFlight(`${__dirname}/../fixtures/2017-07-17-lev/ZG_77hv6ci1.igc`);
-      flight.forEach(fix => solver.update(fix));
+      solver.consume(flight);
       expect(solver.result).toMatchSnapshot();
     })
   });

@@ -6,6 +6,7 @@ import {Cylinder, Keyhole, Line} from "./oz";
 import {read, XCSoarLocation} from "./xcsoar";
 import Task from "./task";
 import Point from "./point";
+import {fraction} from "./utils/angles";
 
 export function readTask(path: string): Task {
   let file = fs.readFileSync(path, 'utf8');
@@ -31,10 +32,12 @@ export function readTask(path: string): Task {
       let locPrev = convertLocation(task.points[i - 1].waypoint.location);
       let locNext = convertLocation(task.points[i + 1].waypoint.location);
 
-      let bearingFromPrev = turf.bearing(locPrev, location);
+      let bearingtoPrev = turf.bearing(location, locPrev);
       let bearingToNext = turf.bearing(location, locNext);
 
-      direction = turf.bearingToAngle((bearingToNext + bearingFromPrev) / 2);
+      let bisector = fraction(bearingtoPrev, bearingToNext);
+
+      direction = bisector - 90;
     }
 
     if (point.observation_zone.type === 'Line') {

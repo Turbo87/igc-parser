@@ -4,21 +4,7 @@ import * as turf from "@turf/turf";
 import {Turnpoint} from "./turnpoint";
 import {Cylinder, Line} from "./oz";
 import {read, XCSoarLocation} from "./xcsoar";
-
-export class Task {
-  points: Turnpoint[];
-  options: TaskOptions;
-
-  constructor(points: Turnpoint[], options: TaskOptions) {
-    this.points = points;
-    this.options = options;
-  }
-}
-
-export interface TaskOptions {
-  isAAT: boolean,
-  aatMinTime: number,
-}
+import {Task} from "./task";
 
 export function readTask(path: string): Task {
   let file = fs.readFileSync(path, 'utf8');

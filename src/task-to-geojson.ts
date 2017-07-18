@@ -1,7 +1,7 @@
 import * as turf from "@turf/turf";
 
 import * as oz from "./oz";
-import {Task} from "./read-task";
+import {Task} from "./task";
 
 export function taskToGeoJSON(task: Task) {
   let legs = turf.lineString(task.points.map(pt => pt.observationZone.center));

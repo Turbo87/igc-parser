@@ -1,7 +1,7 @@
 import * as turf from "@turf/turf";
 
 import {Fix} from "./read-flight";
-import {Task} from "./read-task";
+import {Task} from "./task";
 import {Cylinder, Line, ObservationZone} from "./oz";
 import {TakeoffDetector} from "./takeoff-detector";
 

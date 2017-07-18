@@ -107,13 +107,19 @@ export default class RacingTaskSolver {
   }
 
   get result(): any {
+    let time = this.time;
+    let distance = this.distance;
+
+    let speed = (time !== undefined && distance !== undefined) ? (distance / 1000) / (time / 3600) : undefined;
+
     return {
       validStarts: this.validStarts,
       turns: this.turns,
       finish: this.finish,
       completed: this.completed,
-      time: this.time,
-      distance: this.distance,
+      time,
+      distance,
+      speed,
     }
   }
 

@@ -5,6 +5,7 @@ Object {
   "completed": false,
   "distance": 94199.64354856145,
   "finish": undefined,
+  "speed": undefined,
   "time": undefined,
   "turns": Array [
     Object {
@@ -238,6 +239,7 @@ Object {
     ],
     "time": 1500309551000,
   },
+  "speed": 75.64927217676659,
   "time": 6492,
   "turns": Array [
     Object {

@@ -22,10 +22,7 @@ export default class RacingTaskSolver {
 
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
-  private _startTime: number | undefined;
-  private _finishTime: number | undefined;
 
-  private readonly _points: TaskFix[] = [];
   private readonly _emitter = new Emitter();
 
   constructor(task: Task) {
@@ -63,10 +60,8 @@ export default class RacingTaskSolver {
     if (!this.reachedFirstTurnpoint) {
       let point = this.task.start.checkStart(lastFix.coordinate, fix.coordinate);
       if (point) {
-        this._points[0] = { time: fix.time, point: this.task.start.shape.center };
         this._nextTP = 1;
-        this._startTime = fix.time; // TODO interpolate between fixes
-        this.validStarts.push({ time: fix.time, point: fix.coordinate });
+        this.validStarts.push({ time: fix.time, point: fix.coordinate }); // TODO interpolate between fixes
         this._emitter.emit('start', fix);
       }
     }
@@ -74,10 +69,8 @@ export default class RacingTaskSolver {
     if (this.onFinalLeg) {
       let point = this.task.finish.checkFinish(lastFix.coordinate, fix.coordinate);
       if (point) {
-        this._points.push({ time: fix.time, point: this.task.finish.shape.center });
         this._nextTP += 1;
-        this._finishTime = fix.time; // TODO interpolate between fixes
-        this.finish = { time: fix.time, point: fix.coordinate };
+        this.finish = { time: fix.time, point: fix.coordinate }; // TODO interpolate between fixes
 
         // SC3a §6.3.1d (i)
         //
@@ -103,7 +96,6 @@ export default class RacingTaskSolver {
     }
 
     if (entered) {
-      this._points.push({ time: fix.time, point: shape.center });
       this._nextTP += 1;
       this.turns.push({ time: fix.time, point: fix.coordinate });
       this._emitter.emit('turn', fix, this._nextTP - 1);

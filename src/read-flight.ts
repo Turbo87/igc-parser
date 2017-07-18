@@ -1,12 +1,14 @@
 import * as fs from "fs";
 
+import Point from "./point";
+
 const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])/;
 
 export interface Fix {
   secOfDay: number,
   time: number,
-  coordinate: GeoJSON.Position,
+  coordinate: Point,
 }
 
 export function readFlight(path: string): Fix[] {
@@ -51,7 +53,7 @@ function convertLine(line: string, date: number): Fix | undefined {
 
   let lat = parseInt(match[4]) + parseInt(match[5]) / 60 + parseInt(match[6]) / 60000;
   let lon = parseInt(match[8]) + parseInt(match[9]) / 60 + parseInt(match[10]) / 60000;
-  let coordinate = [lon, lat];
+  let coordinate = [lon, lat] as Point;
 
   return { secOfDay, time, coordinate };
 }

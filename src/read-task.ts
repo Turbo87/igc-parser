@@ -5,6 +5,7 @@ import {Turnpoint} from "./turnpoint";
 import {Cylinder, Line} from "./oz";
 import {read, XCSoarLocation} from "./xcsoar";
 import {Task} from "./task";
+import Point from "./point";
 
 export function readTask(path: string): Task {
   let file = fs.readFileSync(path, 'utf8');
@@ -51,6 +52,6 @@ export function readTask(path: string): Task {
   });
 }
 
-function convertLocation(loc: XCSoarLocation): GeoJSON.Position {
+function convertLocation(loc: XCSoarLocation): Point {
   return [loc.longitude, loc.latitude];
 }

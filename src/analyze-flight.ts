@@ -4,6 +4,7 @@ import {Fix} from "./read-flight";
 import {Task} from "./task";
 import {Cylinder, Line, ObservationZone} from "./oz";
 import {TakeoffDetector} from "./takeoff-detector";
+import Point from "./point";
 
 class StartPoint {
   oz: ObservationZone;
@@ -12,7 +13,7 @@ class StartPoint {
     this.oz = oz;
   }
 
-  checkStart(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined {
+  checkStart(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
     if (this.oz instanceof Line) {
       return this.oz.checkEnter(c1, c2);
     }
@@ -27,7 +28,7 @@ class FinishPoint {
     this.oz = oz;
   }
 
-  checkFinish(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined {
+  checkFinish(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
     if (this.oz instanceof Line) {
       return this.oz.checkEnter(c1, c2);
     }
@@ -42,7 +43,7 @@ class TaskPoint {
     this.oz = oz;
   }
 
-  checkTransition(c1: GeoJSON.Position, c2: GeoJSON.Position): GeoJSON.Feature<GeoJSON.Point> | undefined {
+  checkTransition(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
     return this.oz.checkEnter(c1, c2);
   }
 }

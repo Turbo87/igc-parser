@@ -5,6 +5,7 @@ import Task from "./task";
 import {Cylinder} from "./oz";
 import {TakeoffDetector} from "./takeoff-detector";
 import {TaskPoint} from "./task-points";
+import RacingTaskSolver from "./racing-task-solver";
 
 
 class FlightAnalyzer {
@@ -100,7 +101,7 @@ class FlightAnalyzer {
 }
 
 export function analyzeFlight(flight: Fix[], task: Task) {
-  let analyzer = new FlightAnalyzer(task);
+  let analyzer = new RacingTaskSolver(task);
 
   flight.forEach(fix => analyzer.update(fix));
 

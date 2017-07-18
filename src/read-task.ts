@@ -3,7 +3,7 @@ import * as turf from "@turf/turf";
 
 import {Turnpoint} from "./turnpoint";
 import {Cylinder, Line} from "./oz";
-import {read, XCSoarLocation} from "./xcsoar/task-reader";
+import {read, XCSoarLocation} from "./xcsoar";
 
 export interface Task {
   isAAT: boolean,

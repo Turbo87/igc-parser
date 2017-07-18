@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-import {read} from "../../src/xcsoar/task-reader";
+import {read} from "../../src/xcsoar";
 
 describe('XCSoar - TaskReader - read()', () => {
   it('reads "2017-07-15-lev" task correctly', () => {

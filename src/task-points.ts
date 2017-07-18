@@ -1,5 +1,5 @@
 import Point from "./point";
-import {Cylinder, Line, ObservationZone} from "./oz";
+import {Cylinder, Keyhole, Line, ObservationZone} from "./oz";
 
 export class StartPoint {
   oz: ObservationZone;
@@ -25,6 +25,8 @@ export class FinishPoint {
 
   checkFinish(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
     if (this.oz instanceof Line) {
+      return this.oz.checkEnter(c1, c2);
+    } else if (this.oz instanceof Cylinder) {
       return this.oz.checkEnter(c1, c2);
     }
     // TODO support finish areas too

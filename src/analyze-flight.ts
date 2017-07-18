@@ -59,8 +59,8 @@ class FlightAnalyzer {
 
   constructor(task: Task) {
     this.task = task;
-    this.startPoint = new StartPoint(task.points.shift()!.observationZone);
-    this.finishPoint = new FinishPoint(task.points.pop()!.observationZone);
+    this.startPoint = new StartPoint(task.points[0]!.observationZone);
+    this.finishPoint = new FinishPoint(task.points[task.points.length - 1]!.observationZone);
     this.taskPoints = task.points.map(point => new TaskPoint(point.observationZone));
     this._lastFix = undefined;
     this._nextTP = 0;
@@ -96,7 +96,7 @@ class FlightAnalyzer {
       }
     }
 
-    let point = this.taskPoints[this._nextTP - 1].checkTransition(this._lastFix.coordinate, fix.coordinate);
+    let point = this.taskPoints[this._nextTP].checkTransition(this._lastFix.coordinate, fix.coordinate);
     if (point) {
       this._nextTP += 1;
     }
@@ -137,7 +137,7 @@ class FlightAnalyzer {
       distance += turf.distance(this._aatPoints[i].coordinate, this._aatPoints[i + 1].coordinate);
     }
 
-    let speed = distance / (totalTime / 3600);
+    let speed = distance / (totalTime / 3600000);
 
     return { start, finish, totalTime, aatPoints: this._aatPoints, distance, speed };
   }

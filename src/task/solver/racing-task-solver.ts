@@ -17,6 +17,7 @@ export default class RacingTaskSolver {
   turns: TaskFix[] = [];
   finish: TaskFix | undefined;
 
+  // the "Marking Distance" according to SC3a §6.3.1 (meters)
   distance = 0;
 
   private _lastFix: Fix | undefined = undefined;
@@ -77,11 +78,21 @@ export default class RacingTaskSolver {
         this._nextTP += 1;
         this._finishTime = fix.time; // TODO interpolate between fixes
         this.finish = { time: fix.time, point: fix.coordinate };
+
+        // SC3a §6.3.1d (i)
+        //
+        // For a completed task, the Marking Distance is the Task Distance.
+
         this.distance = this.task.distance;
+
         this._emitter.emit('finish', fix);
         return;
       }
     }
+
+    // SC3a §6.3.1b
+    //
+    // A Turn Point is achieved by entering that Turn Point's Observation Zone.
 
     let entered = false;
     let { shape } = this.task.points[this._nextTP];

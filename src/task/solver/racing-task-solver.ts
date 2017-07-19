@@ -120,8 +120,32 @@ export default class RacingTaskSolver {
   }
 
   get result(): any {
-    let time = this.time;
-    let distance = this.distance;
+    // SC3a §6.3.1b
+    //
+    // The task is completed when the competitor makes a valid Start, achieves
+    // each Turn Point in the designated sequence, and makes a valid Finish.
+
+    // FinishEvent is only added when last TP has been reached which simplifies the check here
+    let completed = this.events.some(event => event instanceof FinishEvent);
+
+    // SC3a §6.3.1d (i)
+    //
+    // For a completed task, the Marking Distance is the Task Distance.
+
+    let distance = completed ? this.task.distance : this._maxDistance;
+
+    // SC3a §6.3.1d (iv)
+    //
+    // For finishers, the Marking Time is the time elapsed between the most
+    // favorable valid Start Time and the Finish Time. For non-finishers the
+    // Marking Time is undefined.
+
+    let time;
+    if (completed) {
+      let lastStart = this.events.filter(event => event instanceof StartEvent).pop()!;
+      let finish = this.events.filter(event => event instanceof FinishEvent).pop()!;
+      time = Math.round((finish.time - lastStart.time) / 1000);
+    }
 
     // SC3a §6.3.1d (v)
     //
@@ -131,49 +155,11 @@ export default class RacingTaskSolver {
     let speed = (time !== undefined && distance !== undefined) ? (distance / 1000) / (time / 3600) : undefined;
 
     return {
-      completed: this.completed,
+      completed,
       time,
       distance,
       speed,
     }
-  }
-
-  get completed(): boolean {
-    // SC3a §6.3.1b
-    //
-    // The task is completed when the competitor makes a valid Start, achieves
-    // each Turn Point in the designated sequence, and makes a valid Finish.
-
-    // FinishEvent is only added when last TP has been reached which simplifies the check here
-    return this.events.some(event => event instanceof FinishEvent);
-  }
-
-  get time(): number | undefined {
-    // SC3a §6.3.1d (iv)
-    //
-    // For finishers, the Marking Time is the time elapsed between the most
-    // favorable valid Start Time and the Finish Time. For non-finishers the
-    // Marking Time is undefined.
-
-    if (this.completed) {
-      let lastStart = this.events.filter(event => event instanceof StartEvent).pop()!;
-      let finish = this.events.filter(event => event instanceof FinishEvent).pop()!;
-      return Math.round((finish.time - lastStart.time) / 1000);
-    }
-  }
-
-  // the "Marking Distance" according to SC3a §6.3.1 (meters)
-  get distance(): number | undefined {
-
-    // SC3a §6.3.1d (i)
-    //
-    // For a completed task, the Marking Distance is the Task Distance.
-
-    if (this.completed) {
-      return this.task.distance;
-    }
-
-    return this._maxDistance;
   }
 
   emitEvent(event: Event) {

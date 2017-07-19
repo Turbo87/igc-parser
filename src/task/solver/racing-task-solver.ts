@@ -174,6 +174,7 @@ export default class RacingTaskSolver {
     let speed = completed ? (distance as number / 1000) / (time as number / 3600) : 0;
 
     return {
+      path: path.path,
       completed,
       time,
       distance,

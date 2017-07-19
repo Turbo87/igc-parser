@@ -4,6 +4,34 @@ exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" can handle outlandings 
 Object {
   "completed": false,
   "distance": 94373.82458252949,
+  "path": Array [
+    StartEvent {
+      "point": Array [
+        6.91795,
+        51.127633333333335,
+      ],
+      "time": 1500300415000,
+      "type": "start",
+    },
+    TurnEvent {
+      "num": 1,
+      "point": Array [
+        6.28125,
+        50.989016666666664,
+      ],
+      "time": 1500306180000,
+      "type": "turn",
+    },
+    TurnEvent {
+      "num": 2,
+      "point": Array [
+        6.1937500000000005,
+        51.1723,
+      ],
+      "time": 1500308465000,
+      "type": "turn",
+    },
+  ],
   "speed": 0,
   "time": undefined,
 }
@@ -13,6 +41,51 @@ exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" returns a result 1`] = 
 Object {
   "completed": true,
   "distance": 136420.85415876907,
+  "path": Array [
+    StartEvent {
+      "point": Array [
+        6.930316666666667,
+        51.08435,
+      ],
+      "time": 1500303059000,
+      "type": "start",
+    },
+    TurnEvent {
+      "num": 1,
+      "point": Array [
+        6.2829,
+        50.996633333333335,
+      ],
+      "time": 1500305067000,
+      "type": "turn",
+    },
+    TurnEvent {
+      "num": 2,
+      "point": Array [
+        6.194816666666667,
+        51.173249999999996,
+      ],
+      "time": 1500306715000,
+      "type": "turn",
+    },
+    TurnEvent {
+      "num": 3,
+      "point": Array [
+        6.6080499999999995,
+        50.96866666666667,
+      ],
+      "time": 1500308407000,
+      "type": "turn",
+    },
+    FinishEvent {
+      "point": Array [
+        7.008533333333333,
+        51.09851666666667,
+      ],
+      "time": 1500309551000,
+      "type": "finish",
+    },
+  ],
   "speed": 75.64927217676659,
   "time": 6492,
 }

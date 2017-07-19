@@ -40,6 +40,7 @@ export default class Line implements Shape {
     if (bearingDiff > 90 && bearingDiff < 270)
       return;
 
+    // TODO interpolate between fixes
     return intersection.features[0];
   }
 }

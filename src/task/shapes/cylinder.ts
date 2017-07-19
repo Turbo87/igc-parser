@@ -24,6 +24,7 @@ export default class Cylinder extends AreaShape {
       return;
 
     if (this.isInside(c2))
+      // TODO interpolate between fixes
       return intersection.features[0];
   }
 

@@ -110,6 +110,11 @@ export default class RacingTaskSolver {
     let time = this.time;
     let distance = this.distance;
 
+    // SC3a §6.3.1d (v)
+    //
+    // For finishers, the Marking Speed is the Marking Distance divided by the
+    // Marking Time. For non-finishers the Marking Speed is zero.
+
     let speed = (time !== undefined && distance !== undefined) ? (distance / 1000) / (time / 3600) : undefined;
 
     return {

@@ -62,6 +62,10 @@ export default class RacingTaskSolver {
         (event => event instanceof TurnEvent && event.num === i - 1));
 
       if (prevTPReached) {
+        // SC3a §6.3.1b
+        //
+        // A Turn Point is achieved by entering that Turn Point's Observation Zone.
+
         let tp = this.task.points[i];
         if (tp.shape instanceof AreaShape && !tp.shape.isInside(lastFix.coordinate) && tp.shape.isInside(fix.coordinate)) {
           this.emitEvent(new TurnEvent(fix, i));
@@ -95,10 +99,6 @@ export default class RacingTaskSolver {
         return;
       }
     }
-
-    // SC3a §6.3.1b
-    //
-    // A Turn Point is achieved by entering that Turn Point's Observation Zone.
 
     let { shape } = this.task.points[this._nextTP];
     if (shape instanceof AreaShape && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {

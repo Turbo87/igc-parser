@@ -53,7 +53,7 @@ class FlightAnalyzer {
       }
     }
 
-    let point = this.taskPoints[this._nextTP].checkTransition(this._lastFix.coordinate, fix.coordinate);
+    let point = this.taskPoints[this._nextTP].checkTransition(this._lastFix, fix);
     if (point) {
       this._nextTP += 1;
     }

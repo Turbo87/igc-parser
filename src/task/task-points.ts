@@ -1,5 +1,5 @@
-import Point from "../geo/point";
 import {Cylinder, Line, Shape} from "./shapes";
+import {Fix} from "../read-flight";
 
 export class StartPoint {
   shape: Shape;
@@ -24,11 +24,11 @@ export class TaskPoint {
     this.shape = shape;
   }
 
-  checkTransition(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
+  checkTransition(fix1: Fix, fix2: Fix): GeoJSON.Feature<GeoJSON.Point> | undefined {
     if (this.shape instanceof Line) {
-      return this.shape.checkTransition(c1, c2);
+      return this.shape.checkTransition(fix1.coordinate, fix2.coordinate);
     } else if (this.shape instanceof Cylinder) {
-      return this.shape.checkEnter(c1, c2);
+      return this.shape.checkEnter(fix1.coordinate, fix2.coordinate);
     }
     // TODO support other turn areas
   }

@@ -49,7 +49,7 @@ export default class RacingTaskSolver {
   _update(fix: Fix, lastFix: Fix) {
     let start = this.task.checkStart(lastFix, fix);
     if (start) {
-      this.emitEvent(new StartEvent(fix));
+      this.events.push(new StartEvent(fix));
     }
 
     for (let i = 1; i < this.task.points.length - 1; i++) {
@@ -64,7 +64,7 @@ export default class RacingTaskSolver {
 
         let tp = this.task.points[i];
         if (tp.shape instanceof AreaShape && !tp.shape.isInside(lastFix.coordinate) && tp.shape.isInside(fix.coordinate)) {
-          this.emitEvent(new TurnEvent(fix, i));
+          this.events.push(new TurnEvent(fix, i));
         }
       }
     }
@@ -73,7 +73,7 @@ export default class RacingTaskSolver {
     if (lastTPReached) {
       let finish = this.task.checkFinish(lastFix, fix);
       if (finish) {
-        this.emitEvent(new FinishEvent(fix));
+        this.events.push(new FinishEvent(fix));
       }
     }
 
@@ -176,10 +176,6 @@ export default class RacingTaskSolver {
       distance,
       speed,
     }
-  }
-
-  emitEvent(event: Event) {
-    this.events.push(event);
   }
 }
 

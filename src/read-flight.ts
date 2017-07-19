@@ -6,7 +6,6 @@ const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])/;
 
 export interface Fix {
-  secOfDay: number,
   time: number,
   coordinate: Point,
 }
@@ -55,5 +54,5 @@ function convertLine(line: string, date: number): Fix | undefined {
   let lon = parseInt(match[8]) + parseInt(match[9]) / 60 + parseInt(match[10]) / 60000;
   let coordinate = [lon, lat] as Point;
 
-  return { secOfDay, time, coordinate };
+  return { time, coordinate };
 }

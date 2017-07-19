@@ -22,6 +22,10 @@ export default class RacingTaskSolver {
     this.task = task;
   }
 
+  get taskStarted(): boolean {
+    return this.events.some(event => event instanceof StartEvent);
+  }
+
   get taskFinished(): boolean {
     return this.events.some(event => event instanceof FinishEvent);
   }
@@ -68,7 +72,7 @@ export default class RacingTaskSolver {
       }
     }
 
-    if (this.taskFinished) {
+    if (this.taskFinished || !this.taskStarted) {
       return;
     }
 
@@ -84,35 +88,33 @@ export default class RacingTaskSolver {
       }
     }));
 
-    if (_nextTP > 0) {
-      let nextTP = this.task.points[_nextTP];
+    let nextTP = this.task.points[_nextTP];
 
-      // SC3a §6.3.1d (ii)
-      //
-      // If the competitor has outlanded on the last leg, the Marking Distance is
-      // the distance from the Start Point, less the radius of the Start Ring (if
-      // used), through each Turn Point to the Finish point, less the distance from
-      // the Outlanding Position to the Finish Point. If the achieved distance on
-      // the last leg is less than zero, it shall be taken as zero.
+    // SC3a §6.3.1d (ii)
+    //
+    // If the competitor has outlanded on the last leg, the Marking Distance is
+    // the distance from the Start Point, less the radius of the Start Ring (if
+    // used), through each Turn Point to the Finish point, less the distance from
+    // the Outlanding Position to the Finish Point. If the achieved distance on
+    // the last leg is less than zero, it shall be taken as zero.
 
-      // SC3a §6.3.1d (iii)
-      //
-      // If the competitor has outlanded on any other leg, the Marking Distance
-      // is the distance from the Start Point, less the radius of the Start Ring (if
-      // used), through each Turn Point achieved plus the distance achieved on
-      // the uncompleted leg. The achieved distance of the uncompleted leg is the
-      // length of that leg less the distance between the Outlanding Position and
-      // the next Turn Point. If the achieved distance of the uncompleted leg is
-      // less than zero, it shall be taken as zero.
+    // SC3a §6.3.1d (iii)
+    //
+    // If the competitor has outlanded on any other leg, the Marking Distance
+    // is the distance from the Start Point, less the radius of the Start Ring (if
+    // used), through each Turn Point achieved plus the distance achieved on
+    // the uncompleted leg. The achieved distance of the uncompleted leg is the
+    // length of that leg less the distance between the Outlanding Position and
+    // the next Turn Point. If the achieved distance of the uncompleted leg is
+    // less than zero, it shall be taken as zero.
 
-      let finishedLegs = this.task.legs.slice(0, _nextTP - 1);
-      let finishedLegsDistance = finishedLegs.reduce((sum, leg) => sum + leg.distance, 0);
-      let currentLegDistance = this.task.legs[_nextTP - 1].distance - this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
-      let maxDistance = finishedLegsDistance + currentLegDistance;
-      if (maxDistance > this._maxDistance) {
-        this._maxDistance = maxDistance;
-        this._maxDistanceFix = { time: fix.time, point: fix.coordinate };
-      }
+    let finishedLegs = this.task.legs.slice(0, _nextTP - 1);
+    let finishedLegsDistance = finishedLegs.reduce((sum, leg) => sum + leg.distance, 0);
+    let currentLegDistance = this.task.legs[_nextTP - 1].distance - this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
+    let maxDistance = finishedLegsDistance + currentLegDistance;
+    if (maxDistance > this._maxDistance) {
+      this._maxDistance = maxDistance;
+      this._maxDistanceFix = { time: fix.time, point: fix.coordinate };
     }
   }
 

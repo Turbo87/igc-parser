@@ -1,5 +1,3 @@
-import * as turf from "@turf/turf";
-
 import {Fix} from "../../read-flight";
 import Task from "../task";
 import Point from "../../geo/point";
@@ -112,7 +110,7 @@ export default class RacingTaskSolver {
 
       let finishedLegs = this.task.legs.slice(0, Math.max(...this.events.filter(event => event instanceof TurnEvent).map((event: TurnEvent) => event.num)));
       let finishedLegsDistance = finishedLegs.reduce((sum, leg) => sum + leg.distance, 0);
-      let currentLegDistance = this.task.legs[this._nextTP - 1].distance - turf.distance(fix.coordinate, nextTP.shape.center) * 1000;
+      let currentLegDistance = this.task.legs[this._nextTP - 1].distance - this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
       let maxDistance = finishedLegsDistance + currentLegDistance;
       if (maxDistance > this._maxDistance) {
         this._maxDistance = maxDistance;

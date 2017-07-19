@@ -60,6 +60,13 @@ export default class Task {
     // TODO support finish areas too
   }
 
+  /**
+   * Calculates the distance from `a` to `b` using the private `_ruler` instance.
+   */
+  measureDistance(a: Point, b: Point): number {
+    return this._ruler.distance(a, b);
+  }
+
   private _calcDistance() {
     // SC3a §6.3.1c
     //

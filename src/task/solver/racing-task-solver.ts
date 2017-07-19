@@ -23,8 +23,8 @@ export default class RacingTaskSolver {
 
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
-  private _legDistance = 0;
-  private _legFix: TaskFix | undefined;
+  private _maxDistance = 0;
+  private _maxDistanceFix: TaskFix | undefined;
 
   private readonly _emitter = new Emitter();
 
@@ -65,7 +65,6 @@ export default class RacingTaskSolver {
       if (point) {
         this._nextTP = 1;
         this.validStarts.push({ time: fix.time, point: fix.coordinate }); // TODO interpolate between fixes
-        this._legDistance = 0;
         this.emitEvent(new StartEvent(fix));
       }
     }
@@ -93,16 +92,19 @@ export default class RacingTaskSolver {
     if (entered) {
       this._nextTP += 1;
       this.turns.push({ time: fix.time, point: fix.coordinate });
-      this._legDistance = 0;
       this.emitEvent(new TurnEvent(fix, this._nextTP - 1));
     }
 
     if (this._nextTP > 0) {
       let nextTP = this.task.points[this._nextTP];
-      let legDistance = this.task.legs[this._nextTP - 1].distance / 1000 - turf.distance(fix.coordinate, nextTP.shape.center);
-      if (legDistance > this._legDistance) {
-        this._legDistance = legDistance;
-        this._legFix = { time: fix.time, point: fix.coordinate };
+
+      let finishedLegs = this.task.legs.slice(0, this.turns.length);
+      let finishedLegsDistance = finishedLegs.reduce((sum, leg) => sum + leg.distance, 0);
+      let currentLegDistance = this.task.legs[this._nextTP - 1].distance - turf.distance(fix.coordinate, nextTP.shape.center) * 1000;
+      let maxDistance = finishedLegsDistance + currentLegDistance;
+      if (maxDistance > this._maxDistance) {
+        this._maxDistance = maxDistance;
+        this._maxDistanceFix = { time: fix.time, point: fix.coordinate };
       }
     }
   }
@@ -164,9 +166,7 @@ export default class RacingTaskSolver {
       return this.task.distance;
     }
 
-    let reachedPoints = this.task.points.slice(0, this.turns.length + 1);
-    let reachedPointsDistance = turf.lineDistance(turf.lineString(reachedPoints.map(point => point.shape.center)));
-    return (reachedPointsDistance + this._legDistance) * 1000;
+    return this._maxDistance;
   }
 
   emitEvent(event: Event) {

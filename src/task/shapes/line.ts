@@ -12,6 +12,7 @@ export default class Line implements Shape {
   readonly coordinates: cheapRuler.Line;
 
   private readonly _ruler: cheapRuler.CheapRuler;
+  private readonly _lineString: GeoJSON.Feature<GeoJSON.LineString>;
 
   constructor(center: Point, length: number, direction: number) {
     this.center = center;
@@ -24,6 +25,7 @@ export default class Line implements Shape {
     let p2 = this._ruler.destination(this.center, this.length / 2000, this.direction - 90);
 
     this.coordinates = [p1, p2];
+    this._lineString = turf.lineString(this.coordinates);
   }
 
   /**
@@ -31,7 +33,7 @@ export default class Line implements Shape {
    * the interpolated fix of the line crossing or `undefined` otherwise.
    */
   checkTransition(fix1: Fix, fix2: Fix): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    let intersection = turf.lineIntersect(turf.lineString(this.coordinates), turf.lineString([fix1.coordinate, fix2.coordinate]));
+    let intersection = turf.lineIntersect(this._lineString, turf.lineString([fix1.coordinate, fix2.coordinate]));
     if (intersection.features.length === 0)
       return;
 

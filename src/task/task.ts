@@ -45,17 +45,21 @@ export default class Task {
   }
 
   checkStart(fix1: Fix, fix2: Fix): any | undefined {
-    if (this.start.shape instanceof Line) {
-      return this.start.shape.checkTransition(fix1.coordinate, fix2.coordinate);
+    let shape = this.start.shape;
+
+    if (shape instanceof Line) {
+      return shape.checkTransition(fix1.coordinate, fix2.coordinate);
     }
     // TODO support start areas too
   }
 
   checkFinish(fix1: Fix, fix2: Fix): any | undefined {
-    if (this.finish.shape instanceof Line) {
-      return this.finish.shape.checkTransition(fix1.coordinate, fix2.coordinate);
-    } else if (this.finish.shape instanceof Cylinder) {
-      return this.finish.shape.checkEnter(fix1.coordinate, fix2.coordinate);
+    let shape = this.finish.shape;
+
+    if (shape instanceof Line) {
+      return shape.checkTransition(fix1.coordinate, fix2.coordinate);
+    } else if (shape instanceof Cylinder) {
+      return shape.checkEnter(fix1.coordinate, fix2.coordinate);
     }
     // TODO support finish areas too
   }

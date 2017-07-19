@@ -1,4 +1,4 @@
-import {readFlight} from "../src/read-flight";
+import {readFlight} from "./read-flight";
 
 describe('readFlight()', () => {
   it(`reads "SW_77flqgg1" flight log correctly`, () => {

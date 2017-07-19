@@ -1,8 +1,8 @@
 import * as fs from "fs";
 
-import {Fix, readFlight} from "../src/read-flight";
-import {TakeoffDetector} from "../src/takeoff-detector";
-import {formatTime} from "../src/format-result";
+import {Fix, readFlight} from "./read-flight";
+import {TakeoffDetector} from "./takeoff-detector";
+import {formatTime} from "./format-result";
 
 describe('TakeoffDetector', () => {
   fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`).filter(filename => (/\.igc$/i).test(filename)).forEach(filename => {
@@ -13,9 +13,9 @@ describe('TakeoffDetector', () => {
 
       let detector = new TakeoffDetector();
 
-      let takeoff: Fix, landing: Fix;
-      detector.on('takeoff', fix => (takeoff = takeoff || fix));
-      detector.on('landing', fix => (landing = fix));
+      let takeoff: Fix | undefined, landing: Fix | undefined;
+      detector.on('takeoff', (fix: Fix) => (takeoff = takeoff || fix));
+      detector.on('landing', (fix: Fix) => (landing = fix));
 
       flight.forEach(fix => detector.update(fix));
 

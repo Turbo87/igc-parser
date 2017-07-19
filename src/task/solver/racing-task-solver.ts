@@ -4,56 +4,13 @@ import {Fix} from "../../read-flight";
 import Task from "../task";
 import Point from "../../geo/point";
 import AreaShape from "../shapes/area";
+import {Event, FinishEvent, StartEvent, TurnEvent} from "../events";
 
 const Emitter = require('tiny-emitter');
 
 interface TaskFix {
   time: number;
   point: Point;
-}
-
-export interface Event {
-  type: string;
-  time: number;
-  point: Point;
-}
-
-export class StartEvent implements Event {
-  type = 'start';
-
-  time: number;
-  point: Point;
-
-  constructor(fix: Fix) {
-    this.time = fix.time;
-    this.point = fix.coordinate;
-  }
-}
-
-export class FinishEvent implements Event {
-  type = 'finish';
-
-  time: number;
-  point: Point;
-
-  constructor(fix: Fix) {
-    this.time = fix.time;
-    this.point = fix.coordinate;
-  }
-}
-
-export class TurnEvent implements Event {
-  type = 'turn';
-
-  time: number;
-  point: Point;
-  num: number;
-
-  constructor(fix: Fix, num: number) {
-    this.time = fix.time;
-    this.point = fix.coordinate;
-    this.num = num;
-  }
 }
 
 export default class RacingTaskSolver {

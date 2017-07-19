@@ -1,7 +1,8 @@
 import {readTask} from "../src/read-task";
-import RacingTaskSolver, {Event} from "../src/task/solver/racing-task-solver";
+import RacingTaskSolver from "../src/task/solver/racing-task-solver";
 import Task from "../src/task/task";
 import {Fix, readFlight} from "../src/read-flight";
+import {Event} from "../src/task/events";
 
 describe('RacingTaskSolver', () => {
   describe('with task "2017-07-17-lev.tsk"', () => {

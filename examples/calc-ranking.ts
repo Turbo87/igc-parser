@@ -17,28 +17,33 @@ if (task.options.isAAT) {
   process.exit(1);
 }
 
+let handicaps = readCSV(`${__dirname}/../fixtures/2017-lev.csv`);
+
 let flightsPath = process.argv[3];
 let flights = fs.readdirSync(flightsPath)
   .filter(filename => (/\.igc$/i).test(filename))
   .map(filename => {
     let callsign = filename.match(/^(.{1,3})_/)![1];
+    let handicap = handicaps[callsign.toUpperCase()];
+    let handicapFactor = 100 / handicap;
+
     let flight = readFlight(`${flightsPath}/${filename}`);
     let result = analyzeFlight(flight, task);
 
-    return { result, callsign };
+    let { distance, speed } = result;
+    if (distance !== undefined) distance *= handicapFactor;
+    if (speed !== undefined) speed *= handicapFactor;
+
+    return { result, callsign, distance, speed, handicap };
   })
-  .sort(compareFlights);
+  .sort(compareResults);
 
 flights.forEach(flight => {
   let distance = flight.result.distance !== undefined ? `${(flight.result.distance / 1000).toFixed(1)} km` : '';
   let speed = flight.result.speed !== undefined ? `${(flight.result.speed).toFixed(2)} km/h` : '';
 
-  console.log(`${flight.callsign}\t${distance}\t${speed}`);
+  console.log(`${flight.callsign}\t${flight.handicap}\t${distance}\t${speed}`);
 });
-
-function compareFlights(a: any, b: any) {
-  return compareResults(a.result, b.result);
-}
 
 function compareResults(a: any, b: any) {
   if (a.speed !== undefined && b.speed !== undefined)
@@ -51,4 +56,17 @@ function compareResults(a: any, b: any) {
     return 1;
 
   return b.distance - a.distance;
+}
+
+function readCSV(path: string) {
+  let lines = fs.readFileSync(path, 'utf8').split('\n');
+  lines.shift();
+
+  let handicaps = Object.create(null);
+  lines.map(line => line.trim().split(',')).forEach(([id, _, cn, type, handicap]) => {
+    if (id) {
+      handicaps[cn] = parseInt(handicap);
+    }
+  });
+  return handicaps;
 }

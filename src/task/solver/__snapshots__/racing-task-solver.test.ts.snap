@@ -32,7 +32,7 @@ Object {
       "type": "turn",
     },
   ],
-  "speed": 0,
+  "speed": undefined,
   "time": undefined,
 }
 `;

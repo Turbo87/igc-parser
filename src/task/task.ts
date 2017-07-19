@@ -6,6 +6,7 @@ import {FinishPoint, StartPoint} from "./task-points";
 import Cylinder from "./shapes/cylinder";
 import Point from "../geo/point";
 import Line from "./shapes/line";
+import {Fix} from "../read-flight";
 
 export default class Task {
   points: Turnpoint[];
@@ -43,18 +44,18 @@ export default class Task {
     this.distance = this._calcDistance();
   }
 
-  checkStart(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
+  checkStart(fix1: Fix, fix2: Fix): GeoJSON.Feature<GeoJSON.Point> | undefined {
     if (this.start.shape instanceof Line) {
-      return this.start.shape.checkTransition(c1, c2);
+      return this.start.shape.checkTransition(fix1.coordinate, fix2.coordinate);
     }
     // TODO support start areas too
   }
 
-  checkFinish(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
+  checkFinish(fix1: Fix, fix2: Fix): GeoJSON.Feature<GeoJSON.Point> | undefined {
     if (this.finish.shape instanceof Line) {
-      return this.finish.shape.checkTransition(c1, c2);
+      return this.finish.shape.checkTransition(fix1.coordinate, fix2.coordinate);
     } else if (this.finish.shape instanceof Cylinder) {
-      return this.finish.shape.checkEnter(c1, c2);
+      return this.finish.shape.checkEnter(fix1.coordinate, fix2.coordinate);
     }
     // TODO support finish areas too
   }

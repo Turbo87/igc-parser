@@ -61,7 +61,7 @@ export default class RacingTaskSolver {
     }
 
     if (!this.reachedFirstTurnpoint) {
-      let point = this.task.checkStart(lastFix.coordinate, fix.coordinate);
+      let point = this.task.checkStart(lastFix, fix);
       if (point) {
         this._nextTP = 1;
         this.validStarts.push({ time: fix.time, point: fix.coordinate }); // TODO interpolate between fixes
@@ -70,7 +70,7 @@ export default class RacingTaskSolver {
     }
 
     if (this.onFinalLeg) {
-      let point = this.task.checkFinish(lastFix.coordinate, fix.coordinate);
+      let point = this.task.checkFinish(lastFix, fix);
       if (point) {
         this._nextTP += 1;
         this.finish = { time: fix.time, point: fix.coordinate }; // TODO interpolate between fixes

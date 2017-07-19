@@ -6,6 +6,8 @@ BRecord {
     7.01,
     51.01108333333333,
   ],
+  "gpsAltitude": 44,
+  "pressureAltitude": -35,
   "time": 1500111903000,
   "valid": true,
 }
@@ -17,6 +19,8 @@ BRecord {
     6.52835,
     50.866150000000005,
   ],
+  "gpsAltitude": 1168,
+  "pressureAltitude": 1082,
   "time": 1500118283000,
   "valid": true,
 }
@@ -28,6 +32,8 @@ BRecord {
     7.0655833333333335,
     51.09908333333333,
   ],
+  "gpsAltitude": 671,
+  "pressureAltitude": 591,
   "time": 1500128791000,
   "valid": true,
 }

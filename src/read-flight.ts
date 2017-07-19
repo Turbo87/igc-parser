@@ -3,7 +3,7 @@ import * as fs from "fs";
 import Point from "./geo/point";
 
 const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
-const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])/;
+const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 
 export interface Fix {
   time: number,
@@ -15,6 +15,8 @@ export class BRecord implements Fix {
   readonly time: number;
   readonly coordinate: Point;
   readonly valid: boolean;
+  readonly pressureAltitude: number | undefined;
+  readonly gpsAltitude: number | undefined;
 
   constructor(line: string, date: number) {
     let match = line.match(RE_B);
@@ -29,6 +31,9 @@ export class BRecord implements Fix {
     this.coordinate = [lon, lat] as Point;
 
     this.valid = match[12] === 'A';
+
+    this.pressureAltitude = match[13] === '00000' ? undefined : parseInt(match[13]);
+    this.gpsAltitude = match[14] === '00000' ? undefined : parseInt(match[14]);
   }
 }
 

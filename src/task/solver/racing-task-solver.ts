@@ -4,7 +4,7 @@ import Point from "../../geo/point";
 import AreaShape from "../shapes/area";
 import {Event, FinishEvent, StartEvent, TurnEvent} from "../events";
 
-interface TaskFix {
+export interface TaskFix {
   time: number;
   point: Point;
 }

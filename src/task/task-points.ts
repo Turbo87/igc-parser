@@ -24,9 +24,9 @@ export class TaskPoint {
     this.shape = shape;
   }
 
-  checkTransition(fix1: Fix, fix2: Fix): GeoJSON.Feature<GeoJSON.Point> | undefined {
+  checkTransition(fix1: Fix, fix2: Fix): any | undefined {
     if (this.shape instanceof Line) {
-      return this.shape.checkTransition(fix1, fix2);
+      return this.shape.checkTransition(fix1.coordinate, fix2.coordinate);
     } else if (this.shape instanceof Cylinder) {
       return this.shape.checkEnter(fix1.coordinate, fix2.coordinate);
     }

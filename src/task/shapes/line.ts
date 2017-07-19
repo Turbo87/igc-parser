@@ -29,20 +29,22 @@ export default class Line implements Shape {
   }
 
   /**
-   * Checks if the line was passed between `c1` and `c2` and returns
-   * the interpolated fix of the line crossing or `undefined` otherwise.
+   * Checks if the line was crossed between `c1` and `c2` and returns
+   * the fraction of distance covered from `c1` to `c2` until the line was
+   * crossed or `undefined` otherwise.
    */
-  checkTransition(fix1: Fix, fix2: Fix): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    let intersection = turf.lineIntersect(this._lineString, turf.lineString([fix1.coordinate, fix2.coordinate]));
-    if (intersection.features.length === 0)
+  checkTransition(p1: Point, p2: Point): number | undefined {
+    let split = turf.lineSplit(turf.lineString([p1, p2]), this._lineString);
+    if (split.features.length === 0)
       return;
 
-    let bearing = this._ruler.bearing(fix1.coordinate, fix2.coordinate);
+    let bearing = this._ruler.bearing(p1, p2);
     let bearingDiff = turf.bearingToAngle(this.direction - bearing);
     if (bearingDiff > 90 && bearingDiff < 270)
       return;
 
-    // TODO interpolate between fixes
-    return intersection.features[0];
+    let d1 = turf.lineDistance(split.features[0]);
+    let d2 = turf.lineDistance(split.features[1]);
+    return d1 / (d1 + d2);
   }
 }

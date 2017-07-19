@@ -133,9 +133,9 @@ export default class RacingTaskSolver {
       .filter(event => event instanceof StartEvent)
       .map(event => pathForStart(event, this.events))
       .sort(sortEventPaths)
-      .shift()!;
+      .shift();
 
-    let time = path.time;
+    let time = path && path.time;
 
     // SC3a §6.3.1d (v)
     //
@@ -145,7 +145,7 @@ export default class RacingTaskSolver {
     let speed = completed ? (distance as number / 1000) / (time as number / 3600) : undefined;
 
     return {
-      path: path.path,
+      path: path ? path.path : [],
       completed,
       time,
       distance,

@@ -22,6 +22,7 @@
     "@types/jest": "^20.0.3",
     "@types/node": "^6.0.83",
     "jest": "^20.0.4",
+    "log-update": "^2.0.0",
     "opn": "^5.1.0",
     "temp-write": "^3.3.0",
     "ts-jest": "^20.0.7",

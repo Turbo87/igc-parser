@@ -98,13 +98,8 @@ export default class RacingTaskSolver {
     //
     // A Turn Point is achieved by entering that Turn Point's Observation Zone.
 
-    let entered = false;
     let { shape } = this.task.points[this._nextTP];
     if (shape instanceof AreaShape && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {
-      entered = true;
-    }
-
-    if (entered) {
       this._nextTP += 1;
       this.turns.push({ time: fix.time, point: fix.coordinate });
     }

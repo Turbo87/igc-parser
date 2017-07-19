@@ -90,3 +90,85 @@ Object {
   "time": 6489.987758789062,
 }
 `;
+
+exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" returns an intermediate result 1`] = `
+Object {
+  "completed": false,
+  "distance": 52735.15992428783,
+  "path": Array [
+    StartEvent {
+      "point": Array [
+        6.914697870603156,
+        51.13792294956917,
+      ],
+      "time": 1500301029166.8423,
+      "type": "start",
+    },
+    TurnEvent {
+      "num": 1,
+      "point": Array [
+        6.2829,
+        50.996633333333335,
+      ],
+      "time": 1500305067000,
+      "type": "turn",
+    },
+  ],
+  "speed": undefined,
+  "time": undefined,
+}
+`;
+
+exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" returns an intermediate result 2`] = `
+Object {
+  "completed": true,
+  "distance": 136420.85415876907,
+  "path": Array [
+    StartEvent {
+      "point": Array [
+        6.931183547909382,
+        51.084669377299946,
+      ],
+      "time": 1500303057174.9868,
+      "type": "start",
+    },
+    TurnEvent {
+      "num": 1,
+      "point": Array [
+        6.2829,
+        50.996633333333335,
+      ],
+      "time": 1500305067000,
+      "type": "turn",
+    },
+    TurnEvent {
+      "num": 2,
+      "point": Array [
+        6.194816666666667,
+        51.173249999999996,
+      ],
+      "time": 1500306715000,
+      "type": "turn",
+    },
+    TurnEvent {
+      "num": 3,
+      "point": Array [
+        6.6080499999999995,
+        50.96866666666667,
+      ],
+      "time": 1500308407000,
+      "type": "turn",
+    },
+    FinishEvent {
+      "point": Array [
+        7.0059431866500335,
+        51.09842073530803,
+      ],
+      "time": 1500309547162.7456,
+      "type": "finish",
+    },
+  ],
+  "speed": 75.67272747263294,
+  "time": 6489.987758789062,
+}
+`;

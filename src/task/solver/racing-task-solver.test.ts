@@ -21,6 +21,16 @@ describe('RacingTaskSolver', () => {
       expect(solver.result).toMatchSnapshot();
     });
 
+    it('returns an intermediate result', () => {
+      let flight = readFlight(`${FIXTURES_PATH}/2017-07-17-lev/IGP_77hg7sd1.IGC`);
+      let part1 = flight.slice(0, 1500);
+      let part2 = flight.slice(1500);
+      solver.consume(part1);
+      expect(solver.result).toMatchSnapshot();
+      solver.consume(part2);
+      expect(solver.result).toMatchSnapshot();
+    });
+
     it('can handle outlandings', () => {
       let flight = readFlight(`${FIXTURES_PATH}/2017-07-17-lev/ZG_77hv6ci1.igc`);
       solver.consume(flight);

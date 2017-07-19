@@ -11,6 +11,27 @@ export interface Fix {
   valid: boolean,
 }
 
+export class BRecord implements Fix {
+  readonly time: number;
+  readonly coordinate: Point;
+  readonly valid: boolean;
+
+  constructor(line: string, date: number) {
+    let match = line.match(RE_B);
+    if (!match)
+      throw new Error(`Invalid B record: ${line}`);
+
+    let secOfDay = parseInt(match[1]) * 3600 + parseInt(match[2]) * 60 + parseInt(match[3]);
+    this.time = date + secOfDay * 1000;
+
+    let lat = parseInt(match[4]) + parseInt(match[5]) / 60 + parseInt(match[6]) / 60000;
+    let lon = parseInt(match[8]) + parseInt(match[9]) / 60 + parseInt(match[10]) / 60000;
+    this.coordinate = [lon, lat] as Point;
+
+    this.valid = match[12] === 'A';
+  }
+}
+
 export function readFlight(path: string): Fix[] {
   let lines = fs.readFileSync(path, 'utf8').split('\n');
 
@@ -23,8 +44,8 @@ export function readFlight(path: string): Fix[] {
     }
 
     // TODO handle UTC-midnight wraparound
-    if (date) {
-      let fix = convertLine(line, date);
+    if (date && line[0] === 'B') {
+      let fix = new BRecord(line, date);
       if (fix) {
         fixes.push(fix);
       }

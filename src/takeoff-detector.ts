@@ -1,4 +1,4 @@
-import * as turf from '@turf/turf';
+import * as cheapRuler from "cheap-ruler";
 
 import {Fix} from "./read-flight";
 
@@ -29,7 +29,7 @@ export class TakeoffDetector {
   _currentSpeed(fix: Fix): number {
     if (!this._lastFix) return 0;
 
-    let distance = turf.distance(this._lastFix.coordinate, fix.coordinate);
+    let distance = cheapRuler(fix.coordinate[1]).distance(this._lastFix.coordinate, fix.coordinate);
     let milliseconds = fix.time - this._lastFix.time;
     let hours = milliseconds / 3600000;
     return distance / hours;

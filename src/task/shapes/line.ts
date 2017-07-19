@@ -3,6 +3,7 @@ import * as cheapRuler from "cheap-ruler";
 
 import Point from "../../geo/point";
 import Shape from "./base";
+import {Fix} from "../../read-flight";
 
 export default class Line implements Shape {
   readonly center: Point;
@@ -29,12 +30,12 @@ export default class Line implements Shape {
    * Checks if the line was passed between `c1` and `c2` and returns
    * the interpolated fix of the line crossing or `undefined` otherwise.
    */
-  checkTransition(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    let intersection = turf.lineIntersect(turf.lineString(this.coordinates), turf.lineString([c1, c2]));
+  checkTransition(fix1: Fix, fix2: Fix): GeoJSON.Feature<GeoJSON.Point> | undefined {
+    let intersection = turf.lineIntersect(turf.lineString(this.coordinates), turf.lineString([fix1.coordinate, fix2.coordinate]));
     if (intersection.features.length === 0)
       return;
 
-    let bearing = this._ruler.bearing(c1, c2);
+    let bearing = this._ruler.bearing(fix1.coordinate, fix2.coordinate);
     let bearingDiff = turf.bearingToAngle(this.direction - bearing);
     if (bearingDiff > 90 && bearingDiff < 270)
       return;

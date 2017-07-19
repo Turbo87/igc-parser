@@ -14,6 +14,7 @@ export default class Task {
   start: StartPoint;
   finish: FinishPoint;
 
+  readonly legs: TaskLeg[];
   readonly distance: number;
 
   private readonly _ruler: cheapRuler.CheapRuler;
@@ -27,6 +28,17 @@ export default class Task {
 
     let center = turf.center(turf.multiPoint(points.map(point => point.shape.center)));
     this._ruler = cheapRuler(center.geometry.coordinates[1]);
+
+    this.legs = [];
+    for (let i = 1; i < points.length; i++) {
+      let last = points[i - 1].shape.center;
+      let current = points[i].shape.center;
+
+      let distance = this._ruler.distance(last, current) * 1000;
+      let bearing = this._ruler.bearing(last, current);
+
+      this.legs.push({ distance, bearing });
+    }
 
     this.distance = this._calcDistance();
   }
@@ -54,7 +66,7 @@ export default class Task {
     // all assigned Turn Points, less the radius of the Start Ring (if used) and less
     // the radius of the Finish Ring (if used).
 
-    let distance = this._ruler.lineDistance(this.points.map(point => point.shape.center)) * 1000;
+    let distance = this.legs.reduce((sum, leg) => sum + leg.distance, 0);
 
     if (this.start.shape instanceof Cylinder) {
       distance -= this.start.shape.radius;
@@ -71,4 +83,9 @@ export default class Task {
 export interface TaskOptions {
   isAAT: boolean,
   aatMinTime: number,
+}
+
+export interface TaskLeg {
+  readonly distance: number; // meters
+  readonly bearing: number;
 }

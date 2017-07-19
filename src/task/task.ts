@@ -4,6 +4,8 @@ import * as cheapRuler from "cheap-ruler";
 import {Turnpoint} from "../turnpoint";
 import {FinishPoint, StartPoint} from "./task-points";
 import Cylinder from "./shapes/cylinder";
+import Point from "../geo/point";
+import Line from "./shapes/line";
 
 export default class Task {
   points: Turnpoint[];
@@ -27,6 +29,22 @@ export default class Task {
     this._ruler = cheapRuler(center.geometry.coordinates[1]);
 
     this.distance = this._calcDistance();
+  }
+
+  checkStart(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
+    if (this.start.shape instanceof Line) {
+      return this.start.shape.checkEnter(c1, c2);
+    }
+    // TODO support start areas too
+  }
+
+  checkFinish(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
+    if (this.finish.shape instanceof Line) {
+      return this.finish.shape.checkEnter(c1, c2);
+    } else if (this.finish.shape instanceof Cylinder) {
+      return this.finish.shape.checkEnter(c1, c2);
+    }
+    // TODO support finish areas too
   }
 
   private _calcDistance() {

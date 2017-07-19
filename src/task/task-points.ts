@@ -7,13 +7,6 @@ export class StartPoint {
   constructor(shape: Shape) {
     this.shape = shape;
   }
-
-  checkStart(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    if (this.shape instanceof Line) {
-      return this.shape.checkEnter(c1, c2);
-    }
-    // TODO support start areas too
-  }
 }
 
 export class FinishPoint {
@@ -21,15 +14,6 @@ export class FinishPoint {
 
   constructor(shape: Shape) {
     this.shape = shape;
-  }
-
-  checkFinish(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    if (this.shape instanceof Line) {
-      return this.shape.checkEnter(c1, c2);
-    } else if (this.shape instanceof Cylinder) {
-      return this.shape.checkEnter(c1, c2);
-    }
-    // TODO support finish areas too
   }
 }
 

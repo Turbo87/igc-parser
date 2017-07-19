@@ -155,9 +155,8 @@ export default class RacingTaskSolver {
     // The task is completed when the competitor makes a valid Start, achieves
     // each Turn Point in the designated sequence, and makes a valid Finish.
 
-    return this.validStarts.length > 0 &&
-      this.turns.length === this.task.points.length - 2 &&
-      this.finish !== undefined;
+    // FinishEvent is only added when last TP has been reached which simplifies the check here
+    return this.events.some(event => event instanceof FinishEvent);
   }
 
   get time(): number | undefined {

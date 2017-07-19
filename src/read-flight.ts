@@ -69,19 +69,3 @@ function findDate(line: string): number | undefined {
     return Date.UTC(year, month, day);
   }
 }
-
-function convertLine(line: string, date: number): Fix | undefined {
-  let match = line.match(RE_B);
-  if (!match) return;
-
-  let secOfDay = parseInt(match[1]) * 3600 + parseInt(match[2]) * 60 + parseInt(match[3]);
-  let time = date + secOfDay * 1000;
-
-  let lat = parseInt(match[4]) + parseInt(match[5]) / 60 + parseInt(match[6]) / 60000;
-  let lon = parseInt(match[8]) + parseInt(match[9]) / 60 + parseInt(match[10]) / 60000;
-  let coordinate = [lon, lat] as Point;
-
-  let valid = match[12] === 'A';
-
-  return { time, coordinate, valid };
-}

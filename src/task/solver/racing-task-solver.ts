@@ -4,8 +4,6 @@ import Point from "../../geo/point";
 import AreaShape from "../shapes/area";
 import {Event, FinishEvent, StartEvent, TurnEvent} from "../events";
 
-const Emitter = require('tiny-emitter');
-
 interface TaskFix {
   time: number;
   point: Point;
@@ -20,8 +18,6 @@ export default class RacingTaskSolver {
   private _nextTP = 0;
   private _maxDistance = 0;
   private _maxDistanceFix: TaskFix | undefined;
-
-  private readonly _emitter = new Emitter();
 
   constructor(task: Task) {
     this.task = task;
@@ -184,11 +180,6 @@ export default class RacingTaskSolver {
 
   emitEvent(event: Event) {
     this.events.push(event);
-    this._emitter.emit(event.type, event);
-  }
-
-  on(event: string, handler: (event: Event) => any) {
-    return this._emitter.on(event, handler);
   }
 }
 

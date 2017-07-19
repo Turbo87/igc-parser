@@ -16,7 +16,6 @@ interface TaskFix {
 export default class RacingTaskSolver {
   task: Task;
 
-  finish: TaskFix | undefined;
   events: Event[] = [];
 
   private _lastFix: Fix | undefined = undefined;
@@ -95,7 +94,6 @@ export default class RacingTaskSolver {
       let point = this.task.checkFinish(lastFix, fix);
       if (point) {
         this._nextTP += 1;
-        this.finish = { time: fix.time, point: fix.coordinate };
         return;
       }
     }
@@ -135,7 +133,6 @@ export default class RacingTaskSolver {
     let speed = (time !== undefined && distance !== undefined) ? (distance / 1000) / (time / 3600) : undefined;
 
     return {
-      finish: this.finish,
       completed: this.completed,
       time,
       distance,
@@ -162,7 +159,8 @@ export default class RacingTaskSolver {
 
     if (this.completed) {
       let lastStart = this.events.filter(event => event instanceof StartEvent).pop()!;
-      return Math.round((this.finish!.time - lastStart.time) / 1000);
+      let finish = this.events.filter(event => event instanceof FinishEvent).pop()!;
+      return Math.round((finish.time - lastStart.time) / 1000);
     }
   }
 

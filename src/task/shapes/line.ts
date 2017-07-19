@@ -25,6 +25,10 @@ export default class Line implements Shape {
     this.coordinates = [p1, p2];
   }
 
+  /**
+   * Checks if the line was passed between `c1` and `c2` and returns
+   * the interpolated fix of the line crossing or `undefined` otherwise.
+   */
   checkTransition(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
     let intersection = turf.lineIntersect(turf.lineString(this.coordinates), turf.lineString([c1, c2]));
     if (intersection.features.length === 0)

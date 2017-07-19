@@ -43,8 +43,8 @@ export default class RacingTaskSolver {
 
   _update(fix: Fix, lastFix: Fix) {
     let start = this.task.checkStart(lastFix, fix);
-    if (start) {
-      this.events.push(new StartEvent(fix));
+    if (start !== undefined) {
+      this.events.push(new StartEvent(interpolate(lastFix, fix, start)));
     }
 
     for (let i = 1; i < this.task.points.length - 1; i++) {
@@ -67,8 +67,8 @@ export default class RacingTaskSolver {
     let lastTPReached = this.events.some(event => event instanceof TurnEvent && event.num === this.task.points.length - 2);
     if (lastTPReached) {
       let finish = this.task.checkFinish(lastFix, fix);
-      if (finish) {
-        this.events.push(new FinishEvent(fix));
+      if (finish !== undefined) {
+        this.events.push(new FinishEvent(interpolate(lastFix, fix, finish)));
       }
     }
 
@@ -187,4 +187,24 @@ function sortEventPaths(a: EventPath, b: EventPath) {
     return 1;
 
   return b.path.length - a.path.length;
+}
+
+function interpolate(fix1: Fix, fix2: Fix, fraction: number): Fix {
+  let fraction2 = 1 - fraction;
+
+  let time = fix1.time * fraction + fix2.time * fraction2;
+
+  let altitude;
+  if (fix1.altitude !== undefined && fix2.altitude !== undefined) {
+    altitude = fix1.altitude * fraction + fix2.altitude * fraction2;
+  }
+
+  let valid = fix1.valid && fix2.valid;
+
+  let coordinate = [
+    fix1.coordinate[0] * fraction + fix2.coordinate[0] * fraction2,
+    fix1.coordinate[1] * fraction + fix2.coordinate[1] * fraction2,
+  ] as Point;
+
+  return { time, coordinate, altitude, valid };
 }

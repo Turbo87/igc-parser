@@ -76,19 +76,9 @@ export default class RacingTaskSolver {
       return;
     }
 
-    let _nextTP = Math.max(0, ...this.events.map(event => {
-      if (event instanceof StartEvent) {
-        return 1;
-      } else if (event instanceof TurnEvent) {
-        return event.num + 1;
-      } else if (event instanceof FinishEvent) {
-        return this.task.points.length;
-      } else {
-        return 0;
-      }
-    }));
+    let legIndex = Math.max(0, ...this.events.map(event => (event instanceof TurnEvent) ? event.num : 0));
 
-    let nextTP = this.task.points[_nextTP];
+    let nextTP = this.task.points[legIndex + 1];
 
     // SC3a §6.3.1d (ii)
     //
@@ -108,9 +98,9 @@ export default class RacingTaskSolver {
     // the next Turn Point. If the achieved distance of the uncompleted leg is
     // less than zero, it shall be taken as zero.
 
-    let finishedLegs = this.task.legs.slice(0, _nextTP - 1);
+    let finishedLegs = this.task.legs.slice(0, legIndex);
     let finishedLegsDistance = finishedLegs.reduce((sum, leg) => sum + leg.distance, 0);
-    let currentLegDistance = this.task.legs[_nextTP - 1].distance - this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
+    let currentLegDistance = this.task.legs[legIndex].distance - this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
     let maxDistance = finishedLegsDistance + currentLegDistance;
     if (maxDistance > this._maxDistance) {
       this._maxDistance = maxDistance;

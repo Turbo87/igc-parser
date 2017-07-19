@@ -9,6 +9,7 @@ export interface Fix {
   time: number,
   coordinate: Point,
   valid: boolean,
+  altitude: number | undefined;
 }
 
 export class BRecord implements Fix {
@@ -34,6 +35,10 @@ export class BRecord implements Fix {
 
     this.pressureAltitude = match[13] === '00000' ? undefined : parseInt(match[13]);
     this.gpsAltitude = match[14] === '00000' ? undefined : parseInt(match[14]);
+  }
+
+  get altitude() {
+    return this.gpsAltitude;
   }
 }
 

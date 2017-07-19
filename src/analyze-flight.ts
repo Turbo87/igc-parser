@@ -39,7 +39,7 @@ class FlightAnalyzer {
     if (!this.reachedFirstTurnpoint) {
       let point = this.task.checkStart(this._lastFix, fix);
       if (point) {
-        this._aatPoints[0] = { coordinate: point.geometry.coordinates, time: fix.time};
+        this._aatPoints[0] = { coordinate: fix.coordinate, time: fix.time};
         this._nextTP = 1;
       }
     }
@@ -47,7 +47,7 @@ class FlightAnalyzer {
     if (this.onFinalLeg) {
       let point = this.task.checkFinish(this._lastFix, fix);
       if (point) {
-        this._aatPoints[this._nextTP] = { coordinate: point.geometry.coordinates, time: fix.time};
+        this._aatPoints[this._nextTP] = { coordinate: fix.coordinate, time: fix.time};
         this._nextTP += 1;
         return;
       }

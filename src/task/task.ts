@@ -44,7 +44,7 @@ export default class Task {
     this.distance = this._calcDistance();
   }
 
-  checkStart(fix1: Fix, fix2: Fix): any | undefined {
+  checkStart(fix1: Fix, fix2: Fix): number | undefined {
     let shape = this.start.shape;
 
     if (shape instanceof Line) {
@@ -53,7 +53,7 @@ export default class Task {
     // TODO support start areas too
   }
 
-  checkFinish(fix1: Fix, fix2: Fix): any | undefined {
+  checkFinish(fix1: Fix, fix2: Fix): number | undefined {
     let shape = this.finish.shape;
 
     if (shape instanceof Line) {

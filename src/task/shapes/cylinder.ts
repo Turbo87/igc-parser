@@ -1,4 +1,3 @@
-import * as turf from "@turf/turf";
 import * as cheapRuler from "cheap-ruler";
 
 import Point from "../../geo/point";
@@ -18,14 +17,12 @@ export default class Cylinder extends AreaShape {
     this._ruler = cheapRuler(center[1]);
   }
 
-  checkEnter(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
-    let intersection = turf.lineIntersect(turf.circle(this.center, this.radius / 1000), turf.lineString([c1, c2]));
-    if (intersection.features.length === 0)
-      return;
-
-    if (this.isInside(c2))
-      // TODO interpolate between fixes
-      return intersection.features[0];
+  checkEnter(p1: Point, p2: Point): number | undefined {
+    if (!this.isInside(p1) && this.isInside(p2)) {
+      let d1 = this._ruler.distance(this.center, p1);
+      let d2 = this._ruler.distance(this.center, p2);
+      return (d1 - this.radius / 1000) / (d1 - d2);
+    }
   }
 
   isInside(coordinate: Point): boolean {

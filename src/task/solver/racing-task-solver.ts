@@ -61,15 +61,24 @@ export default class RacingTaskSolver {
       this.emitEvent(new StartEvent(fix));
     }
 
-    let finish = this.task.checkFinish(lastFix, fix);
-    if (finish) {
-      this.emitEvent(new FinishEvent(fix));
+    for (let i = 1; i < this.task.points.length - 1; i++) {
+      let prevTPReached = this.events.some(i === 1 ?
+        (event => event instanceof StartEvent) :
+        (event => event instanceof TurnEvent && event.num === i - 1));
+
+      if (prevTPReached) {
+        let tp = this.task.points[i];
+        if (tp.shape instanceof AreaShape && !tp.shape.isInside(lastFix.coordinate) && tp.shape.isInside(fix.coordinate)) {
+          this.emitEvent(new TurnEvent(fix, i));
+        }
+      }
     }
 
-    for (let i = 1; i < this.task.points.length - 1; i++) {
-      let tp = this.task.points[i];
-      if (tp.shape instanceof AreaShape && !tp.shape.isInside(lastFix.coordinate) && tp.shape.isInside(fix.coordinate)) {
-        this.emitEvent(new TurnEvent(fix, this._nextTP - 1));
+    let lastTPReached = this.events.some(event => event instanceof TurnEvent && event.num === this.task.points.length - 2);
+    if (lastTPReached) {
+      let finish = this.task.checkFinish(lastFix, fix);
+      if (finish) {
+        this.emitEvent(new FinishEvent(fix));
       }
     }
 

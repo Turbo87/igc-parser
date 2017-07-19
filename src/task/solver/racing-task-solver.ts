@@ -16,7 +16,6 @@ interface TaskFix {
 export default class RacingTaskSolver {
   task: Task;
 
-  turns: TaskFix[] = [];
   finish: TaskFix | undefined;
   events: Event[] = [];
 
@@ -108,13 +107,12 @@ export default class RacingTaskSolver {
     let { shape } = this.task.points[this._nextTP];
     if (shape instanceof AreaShape && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {
       this._nextTP += 1;
-      this.turns.push({ time: fix.time, point: fix.coordinate });
     }
 
     if (this._nextTP > 0) {
       let nextTP = this.task.points[this._nextTP];
 
-      let finishedLegs = this.task.legs.slice(0, this.turns.length);
+      let finishedLegs = this.task.legs.slice(0, Math.max(...this.events.filter(event => event instanceof TurnEvent).map((event: TurnEvent) => event.num)));
       let finishedLegsDistance = finishedLegs.reduce((sum, leg) => sum + leg.distance, 0);
       let currentLegDistance = this.task.legs[this._nextTP - 1].distance - turf.distance(fix.coordinate, nextTP.shape.center) * 1000;
       let maxDistance = finishedLegsDistance + currentLegDistance;
@@ -137,7 +135,6 @@ export default class RacingTaskSolver {
     let speed = (time !== undefined && distance !== undefined) ? (distance / 1000) / (time / 3600) : undefined;
 
     return {
-      turns: this.turns,
       finish: this.finish,
       completed: this.completed,
       time,

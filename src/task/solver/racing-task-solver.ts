@@ -97,10 +97,9 @@ export default class RacingTaskSolver {
       this.emitEvent(new TurnEvent(fix, this._nextTP - 1));
     }
 
-    let nextTP = this.task.points[this._nextTP];
-    let lastTP = this.task.points[this._nextTP - 1];
-    if (nextTP && lastTP) {
-      let legDistance = turf.distance(lastTP.shape.center, nextTP.shape.center) - turf.distance(fix.coordinate, nextTP.shape.center);
+    if (this._nextTP > 0) {
+      let nextTP = this.task.points[this._nextTP];
+      let legDistance = this.task.legs[this._nextTP - 1].distance / 1000 - turf.distance(fix.coordinate, nextTP.shape.center);
       if (legDistance > this._legDistance) {
         this._legDistance = legDistance;
         this._legFix = { time: fix.time, point: fix.coordinate };

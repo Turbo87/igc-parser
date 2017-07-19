@@ -158,12 +158,13 @@ export default class RacingTaskSolver {
     // favorable valid Start Time and the Finish Time. For non-finishers the
     // Marking Time is undefined.
 
-    let time;
-    if (completed) {
-      let lastStart = this.events.filter(event => event instanceof StartEvent).pop()!;
-      let finish = this.events.filter(event => event instanceof FinishEvent).pop()!;
-      time = Math.round((finish.time - lastStart.time) / 1000);
-    }
+    let path = this.events
+      .filter(event => event instanceof StartEvent)
+      .map(event => pathForStart(event, this.events))
+      .sort(sortEventPaths)
+      .shift()!;
+
+    let time = path.time;
 
     // SC3a §6.3.1d (v)
     //
@@ -188,4 +189,39 @@ export default class RacingTaskSolver {
   on(event: string, handler: (event: Event) => any) {
     return this._emitter.on(event, handler);
   }
+}
+
+export function pathForStart(start: StartEvent, events: Event[]): EventPath {
+  let path: Event[] = [start];
+  let time;
+
+  for (let i = events.indexOf(start) + 1; i < events.length; i++) {
+    let event = events[i];
+    if (event instanceof TurnEvent && event.num === path.length) {
+      path.push(event);
+    } else if (event instanceof FinishEvent) {
+      path.push(event);
+      time = (event.time - start.time) / 1000;
+    }
+  }
+
+  return { path, time };
+}
+
+interface EventPath {
+  path: Event[];
+  time: number | undefined;
+}
+
+function sortEventPaths(a: EventPath, b: EventPath) {
+  if (a.time !== undefined && b.time !== undefined)
+    return a.time - b.time;
+
+  if (a.time !== undefined && b.time === undefined)
+    return -1;
+
+  if (a.time === undefined && b.time !== undefined)
+    return 1;
+
+  return b.path.length - a.path.length;
 }

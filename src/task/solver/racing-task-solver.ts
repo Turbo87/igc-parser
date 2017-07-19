@@ -15,7 +15,6 @@ export default class RacingTaskSolver {
   events: Event[] = [];
 
   private _lastFix: Fix | undefined = undefined;
-  private _nextTP = 0;
   private _maxDistance = 0;
   private _maxDistanceFix: TaskFix | undefined;
 
@@ -23,16 +22,8 @@ export default class RacingTaskSolver {
     this.task = task;
   }
 
-  get reachedFirstTurnpoint(): boolean {
-    return this._nextTP >= 2;
-  }
-
-  get onFinalLeg(): boolean {
-    return this._nextTP === this.task.points.length - 1;
-  }
-
   get taskFinished(): boolean {
-    return this._nextTP >= this.task.points.length;
+    return this.events.some(event => event instanceof FinishEvent);
   }
 
   consume(fixes: Fix[]) {
@@ -81,28 +72,20 @@ export default class RacingTaskSolver {
       return;
     }
 
-    if (!this.reachedFirstTurnpoint) {
-      let point = this.task.checkStart(lastFix, fix);
-      if (point) {
-        this._nextTP = 1;
+    let _nextTP = Math.max(0, ...this.events.map(event => {
+      if (event instanceof StartEvent) {
+        return 1;
+      } else if (event instanceof TurnEvent) {
+        return event.num + 1;
+      } else if (event instanceof FinishEvent) {
+        return this.task.points.length;
+      } else {
+        return 0;
       }
-    }
+    }));
 
-    if (this.onFinalLeg) {
-      let point = this.task.checkFinish(lastFix, fix);
-      if (point) {
-        this._nextTP += 1;
-        return;
-      }
-    }
-
-    let { shape } = this.task.points[this._nextTP];
-    if (shape instanceof AreaShape && !shape.isInside(lastFix.coordinate) && shape.isInside(fix.coordinate)) {
-      this._nextTP += 1;
-    }
-
-    if (this._nextTP > 0) {
-      let nextTP = this.task.points[this._nextTP];
+    if (_nextTP > 0) {
+      let nextTP = this.task.points[_nextTP];
 
       // SC3a §6.3.1d (ii)
       //
@@ -122,9 +105,9 @@ export default class RacingTaskSolver {
       // the next Turn Point. If the achieved distance of the uncompleted leg is
       // less than zero, it shall be taken as zero.
 
-      let finishedLegs = this.task.legs.slice(0, Math.max(...this.events.filter(event => event instanceof TurnEvent).map((event: TurnEvent) => event.num)));
+      let finishedLegs = this.task.legs.slice(0, _nextTP - 1);
       let finishedLegsDistance = finishedLegs.reduce((sum, leg) => sum + leg.distance, 0);
-      let currentLegDistance = this.task.legs[this._nextTP - 1].distance - this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
+      let currentLegDistance = this.task.legs[_nextTP - 1].distance - this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
       let maxDistance = finishedLegsDistance + currentLegDistance;
       if (maxDistance > this._maxDistance) {
         this._maxDistance = maxDistance;

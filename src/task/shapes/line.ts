@@ -25,7 +25,7 @@ export default class Line implements Shape {
     this.coordinates = [p1, p2];
   }
 
-  checkEnter(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
+  checkTransition(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
     let intersection = turf.lineIntersect(turf.lineString(this.coordinates), turf.lineString([c1, c2]));
     if (intersection.features.length === 0)
       return;

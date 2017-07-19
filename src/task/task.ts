@@ -45,14 +45,14 @@ export default class Task {
 
   checkStart(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
     if (this.start.shape instanceof Line) {
-      return this.start.shape.checkEnter(c1, c2);
+      return this.start.shape.checkTransition(c1, c2);
     }
     // TODO support start areas too
   }
 
   checkFinish(c1: Point, c2: Point): GeoJSON.Feature<GeoJSON.Point> | undefined {
     if (this.finish.shape instanceof Line) {
-      return this.finish.shape.checkEnter(c1, c2);
+      return this.finish.shape.checkTransition(c1, c2);
     } else if (this.finish.shape instanceof Cylinder) {
       return this.finish.shape.checkEnter(c1, c2);
     }

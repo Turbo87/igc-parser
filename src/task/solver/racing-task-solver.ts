@@ -12,12 +12,57 @@ interface TaskFix {
   point: Point;
 }
 
+interface Event {
+  type: string;
+  time: number;
+  point: Point;
+}
+
+class StartEvent implements Event {
+  type = 'start';
+
+  time: number;
+  point: Point;
+
+  constructor(fix: Fix) {
+    this.time = fix.time;
+    this.point = fix.coordinate;
+  }
+}
+
+class FinishEvent implements Event {
+  type = 'finish';
+
+  time: number;
+  point: Point;
+
+  constructor(fix: Fix) {
+    this.time = fix.time;
+    this.point = fix.coordinate;
+  }
+}
+
+class TurnEvent implements Event {
+  type = 'turn';
+
+  time: number;
+  point: Point;
+  num: number;
+
+  constructor(fix: Fix, num: number) {
+    this.time = fix.time;
+    this.point = fix.coordinate;
+    this.num = num;
+  }
+}
+
 export default class RacingTaskSolver {
   task: Task;
 
   validStarts: TaskFix[] = [];
   turns: TaskFix[] = [];
   finish: TaskFix | undefined;
+  events: Event[] = [];
 
   private _lastFix: Fix | undefined = undefined;
   private _nextTP = 0;
@@ -64,6 +109,7 @@ export default class RacingTaskSolver {
         this._nextTP = 1;
         this.validStarts.push({ time: fix.time, point: fix.coordinate }); // TODO interpolate between fixes
         this._legDistance = 0;
+        this.events.push(new StartEvent(fix));
         this._emitter.emit('start', fix);
       }
     }
@@ -73,6 +119,7 @@ export default class RacingTaskSolver {
       if (point) {
         this._nextTP += 1;
         this.finish = { time: fix.time, point: fix.coordinate }; // TODO interpolate between fixes
+        this.events.push(new FinishEvent(fix));
         this._emitter.emit('finish', fix);
         return;
       }
@@ -92,6 +139,7 @@ export default class RacingTaskSolver {
       this._nextTP += 1;
       this.turns.push({ time: fix.time, point: fix.coordinate });
       this._legDistance = 0;
+      this.events.push(new TurnEvent(fix, this._nextTP - 1));
       this._emitter.emit('turn', fix, this._nextTP - 1);
     }
 

@@ -12,13 +12,13 @@ interface TaskFix {
   point: Point;
 }
 
-interface Event {
+export interface Event {
   type: string;
   time: number;
   point: Point;
 }
 
-class StartEvent implements Event {
+export class StartEvent implements Event {
   type = 'start';
 
   time: number;
@@ -30,7 +30,7 @@ class StartEvent implements Event {
   }
 }
 
-class FinishEvent implements Event {
+export class FinishEvent implements Event {
   type = 'finish';
 
   time: number;
@@ -42,7 +42,7 @@ class FinishEvent implements Event {
   }
 }
 
-class TurnEvent implements Event {
+export class TurnEvent implements Event {
   type = 'turn';
 
   time: number;
@@ -109,8 +109,7 @@ export default class RacingTaskSolver {
         this._nextTP = 1;
         this.validStarts.push({ time: fix.time, point: fix.coordinate }); // TODO interpolate between fixes
         this._legDistance = 0;
-        this.events.push(new StartEvent(fix));
-        this._emitter.emit('start', fix);
+        this.emitEvent(new StartEvent(fix));
       }
     }
 
@@ -119,8 +118,7 @@ export default class RacingTaskSolver {
       if (point) {
         this._nextTP += 1;
         this.finish = { time: fix.time, point: fix.coordinate }; // TODO interpolate between fixes
-        this.events.push(new FinishEvent(fix));
-        this._emitter.emit('finish', fix);
+        this.emitEvent(new FinishEvent(fix));
         return;
       }
     }
@@ -139,8 +137,7 @@ export default class RacingTaskSolver {
       this._nextTP += 1;
       this.turns.push({ time: fix.time, point: fix.coordinate });
       this._legDistance = 0;
-      this.events.push(new TurnEvent(fix, this._nextTP - 1));
-      this._emitter.emit('turn', fix, this._nextTP - 1);
+      this.emitEvent(new TurnEvent(fix, this._nextTP - 1));
     }
 
     let nextTP = this.task.points[this._nextTP];
@@ -216,7 +213,12 @@ export default class RacingTaskSolver {
     return (reachedPointsDistance + this._legDistance) * 1000;
   }
 
-  on(event: string, handler: Function) {
+  emitEvent(event: Event) {
+    this.events.push(event);
+    this._emitter.emit(event.type, event);
+  }
+
+  on(event: string, handler: (event: Event) => any) {
     return this._emitter.on(event, handler);
   }
 }

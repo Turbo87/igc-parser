@@ -1,5 +1,5 @@
 import {readTask} from "../src/read-task";
-import RacingTaskSolver from "../src/task/solver/racing-task-solver";
+import RacingTaskSolver, {Event} from "../src/task/solver/racing-task-solver";
 import Task from "../src/task/task";
 import {Fix, readFlight} from "../src/read-flight";
 
@@ -16,24 +16,24 @@ describe('RacingTaskSolver', () => {
     });
 
     it('emits multiple start events', () => {
-      let fixes: Fix[] = [];
-      solver.on('start', fix => fixes.push(fix));
+      let events: Event[] = [];
+      solver.on('start', event => events.push(event));
       solver.consume(flight);
-      expect(fixes).toMatchSnapshot();
+      expect(events).toMatchSnapshot();
     });
 
     it('emits multiple turn events', () => {
-      let fixes = [];
-      solver.on('turn', (fix, i) => fixes.push([fix, i]));
+      let events: Event[] = [];
+      solver.on('turn', (event) => events.push(event));
       solver.consume(flight);
-      expect(fixes).toMatchSnapshot();
+      expect(events).toMatchSnapshot();
     });
 
     it('emits single finish event', () => {
-      let fixes: Fix[] = [];
-      solver.on('finish', fix => fixes.push(fix));
+      let events: Event[] = [];
+      solver.on('finish', event => events.push(event));
       solver.consume(flight);
-      expect(fixes).toMatchSnapshot();
+      expect(events).toMatchSnapshot();
     });
 
     it('returns a result', () => {

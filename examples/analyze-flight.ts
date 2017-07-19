@@ -1,6 +1,6 @@
 import {readTask} from "../src/read-task";
 import {Fix, readFlight} from "../src/read-flight";
-import RacingTaskSolver from "../src/task/solver/racing-task-solver";
+import RacingTaskSolver, {FinishEvent, StartEvent, TurnEvent} from "../src/task/solver/racing-task-solver";
 import {formatTime} from "../src/format-result";
 
 if (process.argv.length < 4) {
@@ -21,8 +21,8 @@ if (task.options.isAAT) {
 
 let solver = new RacingTaskSolver(task);
 
-solver.on('start', (fix: Fix) => console.log(`Start at ${formatTime(fix.time)}`));
-solver.on('turn', (fix: Fix, i: number) => console.log(`Reached TP${i} at ${formatTime(fix.time)}`));
-solver.on('finish', (fix: Fix) => console.log(`Finish at ${formatTime(fix.time)}`));
+solver.on('start', event => console.log(`Start at ${formatTime(event.time)}`));
+solver.on('turn', (event: TurnEvent) => console.log(`Reached TP${event.num} at ${formatTime(event.time)}`));
+solver.on('finish', event => console.log(`Finish at ${formatTime(event.time)}`));
 
 solver.consume(flight);

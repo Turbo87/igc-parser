@@ -142,88 +142,82 @@ Object {
 
 exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" emits multiple start events 1`] = `
 Array [
-  Object {
-    "coordinate": Array [
+  StartEvent {
+    "point": Array [
       6.914216666666667,
       51.13826666666667,
     ],
-    "secOfDay": 51431,
     "time": 1500301031000,
+    "type": "start",
   },
-  Object {
-    "coordinate": Array [
+  StartEvent {
+    "point": Array [
       6.92305,
       51.10805,
     ],
-    "secOfDay": 52011,
     "time": 1500301611000,
+    "type": "start",
   },
-  Object {
-    "coordinate": Array [
+  StartEvent {
+    "point": Array [
       6.92745,
       51.096900000000005,
     ],
-    "secOfDay": 53015,
     "time": 1500302615000,
+    "type": "start",
   },
-  Object {
-    "coordinate": Array [
+  StartEvent {
+    "point": Array [
       6.930316666666667,
       51.08435,
     ],
-    "secOfDay": 53459,
     "time": 1500303059000,
+    "type": "start",
   },
 ]
 `;
 
 exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" emits multiple turn events 1`] = `
 Array [
-  Array [
-    Object {
-      "coordinate": Array [
-        6.2829,
-        50.996633333333335,
-      ],
-      "secOfDay": 55467,
-      "time": 1500305067000,
-    },
-    1,
-  ],
-  Array [
-    Object {
-      "coordinate": Array [
-        6.194816666666667,
-        51.173249999999996,
-      ],
-      "secOfDay": 57115,
-      "time": 1500306715000,
-    },
-    2,
-  ],
-  Array [
-    Object {
-      "coordinate": Array [
-        6.6080499999999995,
-        50.96866666666667,
-      ],
-      "secOfDay": 58807,
-      "time": 1500308407000,
-    },
-    3,
-  ],
+  TurnEvent {
+    "num": 1,
+    "point": Array [
+      6.2829,
+      50.996633333333335,
+    ],
+    "time": 1500305067000,
+    "type": "turn",
+  },
+  TurnEvent {
+    "num": 2,
+    "point": Array [
+      6.194816666666667,
+      51.173249999999996,
+    ],
+    "time": 1500306715000,
+    "type": "turn",
+  },
+  TurnEvent {
+    "num": 3,
+    "point": Array [
+      6.6080499999999995,
+      50.96866666666667,
+    ],
+    "time": 1500308407000,
+    "type": "turn",
+  },
 ]
 `;
 
 exports[`RacingTaskSolver with task "2017-07-17-lev.tsk" emits single finish event 1`] = `
 Array [
-  Object {
-    "coordinate": Array [
+  FinishEvent {
+    "point": Array [
       7.008533333333333,
       51.09851666666667,
     ],
-    "secOfDay": 59951,
     "time": 1500309551000,
+    "type": "finish",
   },
 ]
 `;

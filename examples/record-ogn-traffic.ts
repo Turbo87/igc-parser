@@ -31,7 +31,7 @@ function scheduleSave() {
   setTimeout(() => {
     saveToFile();
     scheduleSave();
-  }, 5000);
+  }, 30000);
 }
 
 function saveToFile() {

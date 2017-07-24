@@ -1,5 +1,5 @@
 import {Fix} from "../read-flight";
-import Point from "../geo/point";
+import {interpolatePoint} from "../geo/interpolate-point";
 
 export function interpolateFix(fix1: Fix, fix2: Fix, fraction: number): Fix {
   let fraction2 = 1 - fraction;
@@ -13,10 +13,7 @@ export function interpolateFix(fix1: Fix, fix2: Fix, fraction: number): Fix {
 
   let valid = fix1.valid && fix2.valid;
 
-  let coordinate = [
-    fix1.coordinate[0] * fraction + fix2.coordinate[0] * fraction2,
-    fix1.coordinate[1] * fraction + fix2.coordinate[1] * fraction2,
-  ] as Point;
+  let coordinate = interpolatePoint(fix1.coordinate, fix2.coordinate, fraction);
 
   return {time, coordinate, altitude, valid};
 }

@@ -4,6 +4,7 @@ import * as cheapRuler from "cheap-ruler";
 import Point from "../../geo/point";
 import Shape from "./base";
 import {Fix} from "../../read-flight";
+import {findIntersection} from "../../geo/find-intersections";
 
 export default class Line implements Shape {
   readonly center: Point;
@@ -34,8 +35,8 @@ export default class Line implements Shape {
    * crossed or `undefined` otherwise.
    */
   checkTransition(p1: Point, p2: Point): number | undefined {
-    let split = turf.lineSplit(turf.lineString([p1, p2]), this._lineString);
-    if (split.features.length === 0)
+    let intersection = findIntersection([p1, p2], this.coordinates as [Point, Point]);
+    if (intersection === null)
       return;
 
     let bearing = this._ruler.bearing(p1, p2);
@@ -43,8 +44,6 @@ export default class Line implements Shape {
     if (bearingDiff > 90 && bearingDiff < 270)
       return;
 
-    let d1 = turf.lineDistance(split.features[0]);
-    let d2 = turf.lineDistance(split.features[1]);
-    return d1 / (d1 + d2);
+    return intersection;
   }
 }

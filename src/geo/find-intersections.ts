@@ -9,7 +9,7 @@ export function findIntersections(line1: [Point, Point], line2: Point[]): number
       intersections.push(intersection);
     }
   }
-  return intersections;
+  return intersections.sort();
 }
 
 export function findIntersection(line1: [Point, Point], line2: [Point, Point]): number | null {

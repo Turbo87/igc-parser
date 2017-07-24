@@ -13,7 +13,6 @@ export default class Line implements Shape {
   readonly coordinates: cheapRuler.Line;
 
   private readonly _ruler: cheapRuler.CheapRuler;
-  private readonly _lineString: GeoJSON.Feature<GeoJSON.LineString>;
 
   constructor(center: Point, length: number, direction: number) {
     this.center = center;
@@ -26,7 +25,6 @@ export default class Line implements Shape {
     let p2 = this._ruler.destination(this.center, this.length / 2000, this.direction - 90);
 
     this.coordinates = [p1, p2];
-    this._lineString = turf.lineString(this.coordinates);
   }
 
   /**

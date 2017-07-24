@@ -1,3 +1,5 @@
+import {Feature, Polygon} from "geojson";
+
 import * as cheapRuler from "cheap-ruler";
 import * as turf from "@turf/turf";
 
@@ -35,5 +37,9 @@ export default class Cylinder extends AreaShape {
   isInside(coordinate: Point): boolean {
     let distance = this._ruler.distance(coordinate, this.center);
     return distance <= this.radius / 1000;
+  }
+
+  toGeoJSON(): Feature<Polygon> {
+    return turf.polygon([this._polygon]);
   }
 }

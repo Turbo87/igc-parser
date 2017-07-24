@@ -1,3 +1,4 @@
+import {Feature, Polygon} from "geojson";
 import * as turf from "@turf/turf";
 
 import Cylinder from "./cylinder";
@@ -18,19 +19,10 @@ export default class Keyhole extends AreaShape {
     let outerRadius = 10000;
     let outerAngle = 90;
 
-    let circle = turf.circle(center, innerRadius / 1000, 360);
-    let sector = turf.sector(
-      turf.point(center),
-      outerRadius / 1000,
-      direction - outerAngle / 2,
-      direction + outerAngle / 2,
-      Math.max(Math.round(outerAngle), 64)
-    );
-
-    this._polygon = turf.union(circle, sector).geometry.coordinates[0] as Point[];
-
     this._cylinder = new Cylinder(center, innerRadius);
     this._sector = new Sector(center, outerRadius, outerAngle, direction);
+
+    this._polygon = turf.union(this._cylinder.toGeoJSON(), this._sector.toGeoJSON()).geometry.coordinates[0] as Point[];
   }
 
   get center(): Point {
@@ -55,5 +47,9 @@ export default class Keyhole extends AreaShape {
 
   isInside(coordinate: Point): boolean {
     return this._cylinder.isInside(coordinate) || this._sector.isInside(coordinate);
+  }
+
+  toGeoJSON(): Feature<Polygon> {
+    return turf.polygon([this._polygon]);
   }
 }

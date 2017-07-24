@@ -1,3 +1,4 @@
+import {Feature, Polygon} from "geojson";
 import * as turf from "@turf/turf";
 import * as cheapRuler from "cheap-ruler";
 
@@ -47,5 +48,9 @@ export default class Sector extends AreaShape {
     let bearing = this._ruler.bearing(this.center, coordinate);
     let bearingDiff = Math.abs(turf.bearingToAngle(this.direction - bearing)) * 2;
     return bearingDiff <= this.angle;
+  }
+
+  toGeoJSON(): Feature<Polygon> {
+    return turf.polygon([this._polygon]);
   }
 }

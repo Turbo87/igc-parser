@@ -1,3 +1,4 @@
+import {Feature, LineString} from "geojson";
 import * as turf from "@turf/turf";
 import * as cheapRuler from "cheap-ruler";
 
@@ -42,5 +43,9 @@ export default class Line implements Shape {
       return;
 
     return intersection;
+  }
+
+  toGeoJSON(): Feature<LineString> {
+    return turf.lineString(this.coordinates);
   }
 }

@@ -27,11 +27,11 @@ export default class RacingTaskSolver {
   }
 
   get taskStarted(): boolean {
-    return this._tracker.starts.length > 0;
+    return this._tracker.hasStart;
   }
 
   get taskFinished(): boolean {
-    return this._tracker.finish !== null;
+    return this._tracker.hasFinish;
   }
 
   consume(fixes: Fix[]) {

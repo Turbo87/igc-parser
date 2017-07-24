@@ -23,6 +23,14 @@ export default class TaskPointTracker {
     this._areas = this.task.points.slice(1, task.points.length - 1).map(p => p.shape as AreaShape);
   }
 
+  get hasStart() {
+    return this.starts.length > 0;
+  }
+
+  get hasFinish() {
+    return this.finish !== null;
+  }
+
   consume(fixes: Fix[]) {
     fixes.forEach(fix => this.update(fix));
   }
@@ -44,7 +52,7 @@ export default class TaskPointTracker {
 
     for (let i = 0; i < this._areas.length; i++) {
       let prevTPReached = (i === 0) ?
-        (this.starts.length > 0) :
+        this.hasStart :
         this.events.some(event => event instanceof TurnEvent && event.num === i);
 
       if (!prevTPReached)

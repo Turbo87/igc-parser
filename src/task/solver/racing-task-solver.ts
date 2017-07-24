@@ -1,9 +1,7 @@
 import {Fix} from "../../read-flight";
 import Task from "../task";
 import Point from "../../geo/point";
-import AreaShape from "../shapes/area";
 import {Event, FinishEvent, StartEvent, TurnEvent} from "../events";
-import {interpolateFix} from "../../utils/interpolate-fix";
 import TaskPointTracker from "../task-point-tracker";
 
 export interface TaskFix {

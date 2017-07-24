@@ -45,9 +45,15 @@ export default class TaskPointTracker {
         //
         // A Turn Point is achieved by entering that Turn Point's Observation Zone.
 
-        let tp = this.task.points[i];
-        if (tp.shape instanceof AreaShape && !tp.shape.isInside(lastFix.coordinate) && tp.shape.isInside(fix.coordinate)) {
-          this.events.push(new TurnEvent(fix, i));
+        let shape = this.task.points[i].shape;
+        if (shape instanceof AreaShape) {
+          let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
+
+          for (let j = (shape.isInside(lastFix.coordinate) ? 1 : 0); j < fractions.length; j += 2) {
+            let fraction = fractions[j];
+            let entryFix = interpolateFix(lastFix, fix, fraction);
+            this.events.push(new TurnEvent(entryFix, i));
+          }
         }
       }
     }

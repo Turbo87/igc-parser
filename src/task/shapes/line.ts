@@ -3,7 +3,6 @@ import * as cheapRuler from "cheap-ruler";
 
 import Point from "../../geo/point";
 import Shape from "./base";
-import {Fix} from "../../read-flight";
 import {findIntersection} from "../../geo/find-intersections";
 
 export default class Line implements Shape {

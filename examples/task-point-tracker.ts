@@ -28,7 +28,15 @@ json.features.push(turf.multiPoint(tracker.starts.map(fix => fix.coordinate)));
 
 tracker.areaVisits.forEach(areaVisits => {
   json.features.push(turf.multiPoint(areaVisits.map(visit => visit.enter.coordinate)));
-  json.features.push(turf.multiPoint(areaVisits.map(visit => visit.exit && visit.exit.coordinate).filter(Boolean) as Point[]));
+
+  if (task.options.isAAT) {
+    areaVisits.forEach(visit => {
+      let coords = visit.fixes.concat(visit.fixes[0]).filter(Boolean).map(it => it.coordinate);
+      if (coords.length >= 2) {
+        json.features.push(turf.lineString(coords, {color: '#00FF00', opacity: 0.85}));
+      }
+    });
+  }
 });
 
 if (tracker.finish)

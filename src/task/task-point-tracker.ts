@@ -7,16 +7,32 @@ import TurnEvent from "./events/turn";
 import {interpolateFix} from "../utils/interpolate-fix";
 import AreaShape from "./shapes/area";
 
+const convexHull = require('convex-hull');
+
 class AreaVisit {
   enter: Fix;
   exit: Fix | null;
 
+  fixes: Fix[] = [];
+
   constructor(enter: Fix) {
     this.enter = enter;
+    this.addFix(enter);
   }
 
   close(exit: Fix) {
     this.exit = exit;
+    this.addFix(exit);
+  }
+
+  addFix(fix: Fix) {
+    this.fixes.push(fix);
+
+    if (this.fixes.length > 3) {
+      let coords = this.fixes.map(fix => fix.coordinate);
+      let hull = convexHull(coords);
+      this.fixes = hull.map((indices: [number, number]) => this.fixes[indices[0]]);
+    }
   }
 }
 
@@ -95,22 +111,25 @@ export default class TaskPointTracker {
       // A Turn Point is achieved by entering that Turn Point's Observation Zone.
 
       let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
-      if (fractions.length === 0)
-        continue;
+      if (fractions.length !== 0) {
+        let isInside = shape.isInside(lastFix.coordinate);
+        for (let j = 0; j < fractions.length; j++) {
+          isInside = !isInside;
 
-      let isInside = shape.isInside(lastFix.coordinate);
-      for (let j = 0; j < fractions.length; j++) {
-        isInside = !isInside;
+          let fraction = fractions[j];
+          let intersectionFix = interpolateFix(lastFix, fix, fraction);
 
-        let fraction = fractions[j];
-        let intersectionFix = interpolateFix(lastFix, fix, fraction);
-
-        if (isInside) {
-          this.events.push(new TurnEvent(intersectionFix, i + 1));
-          areaVisits.push(new AreaVisit(intersectionFix));
-        } else {
-          areaVisits[areaVisits.length - 1].close(intersectionFix);
+          if (isInside) {
+            this.events.push(new TurnEvent(intersectionFix, i + 1));
+            areaVisits.push(new AreaVisit(intersectionFix));
+          } else {
+            areaVisits[areaVisits.length - 1].close(intersectionFix);
+          }
         }
+      }
+
+      if (shape.isInside(fix.coordinate)) {
+        areaVisits[areaVisits.length - 1].addFix(fix);
       }
     }
 

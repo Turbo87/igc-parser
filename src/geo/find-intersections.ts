@@ -23,22 +23,26 @@ export function findIntersection(line1: [Point, Point], line2: [Point, Point]): 
   let y3 = line2[0][1];
   let x4 = line2[1][0];
   let y4 = line2[1][1];
-  let denom = ((y4 - y3) * (x2 - x1)) - ((x4 - x3) * (y2 - y1));
-  let numeA = ((x4 - x3) * (y1 - y3)) - ((y4 - y3) * (x1 - x3));
-  let numeB = ((x2 - x1) * (y1 - y3)) - ((y2 - y1) * (x1 - x3));
 
-  if (denom === 0) {
-    if (numeA === 0 && numeB === 0) {
-      return null;
-    }
+  let x21 = x2 - x1;
+  let x43 = x4 - x3;
+  let y21 = y2 - y1;
+  let y43 = y4 - y3;
+
+  let denom = (y43 * x21) - (x43 * y21);
+  if (denom === 0)
     return null;
-  }
 
-  let uA = numeA / denom;
-  let uB = numeB / denom;
+  let y13 = y1 - y3;
+  let x13 = x1 - x3;
 
-  if (uA >= 0 && uA <= 1 && uB >= 0 && uB <= 1) {
-    return uA;
-  }
-  return null;
+  let uA = ((x43 * y13) - (y43 * x13)) / denom;
+  if (uA < 0 || uA > 1)
+    return null;
+
+  let uB = ((x21 * y13) - (y21 * x13)) / denom;
+  if (uB < 0 || uB > 1)
+    return null;
+
+  return uA;
 }

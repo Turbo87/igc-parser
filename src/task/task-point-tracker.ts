@@ -48,6 +48,8 @@ export default class TaskPointTracker {
         let shape = this.task.points[i].shape;
         if (shape instanceof AreaShape) {
           let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
+          if (fractions.length === 0)
+            continue;
 
           for (let j = (shape.isInside(lastFix.coordinate) ? 1 : 0); j < fractions.length; j += 2) {
             let fraction = fractions[j];

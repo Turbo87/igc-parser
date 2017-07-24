@@ -43,9 +43,9 @@ export default class TaskPointTracker {
     }
 
     for (let i = 0; i < this._areas.length; i++) {
-      let prevTPReached = this.events.some(i === 0 ?
-        (event => event instanceof StartEvent) :
-        (event => event instanceof TurnEvent && event.num === i));
+      let prevTPReached = (i === 0) ?
+        (this.starts.length > 0) :
+        this.events.some(event => event instanceof TurnEvent && event.num === i);
 
       if (!prevTPReached)
         continue;

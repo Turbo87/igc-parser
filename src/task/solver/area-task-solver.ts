@@ -3,6 +3,7 @@ import * as turf from "@turf/turf";
 import {Fix} from "../../read-flight";
 import Task from "../task";
 import AreaShape from "../shapes/area";
+import {interpolateFix} from "../../utils/interpolate-fix";
 
 const convexHull = require('convex-hull');
 
@@ -34,8 +35,13 @@ export default class AreaTaskSolver {
   _update(fix: Fix, lastFix: Fix) {
     for (let i = 1; i < this.task.points.length - 1; i++) {
       let tp = this.task.points[i];
-      if (tp.shape instanceof AreaShape && tp.shape.isInside(fix.coordinate)) {
-        this._areas[i].push(fix);
+      if (tp.shape instanceof AreaShape) {
+        if (tp.shape.isInside(fix.coordinate)) {
+          this._areas[i].push(fix);
+        }
+
+        let intersections = tp.shape.findIntersections(lastFix.coordinate, fix.coordinate);
+        this._areas[i].push(...intersections.map(fraction => interpolateFix(lastFix, fix, fraction)));
       }
     }
   }

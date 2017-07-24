@@ -27,6 +27,10 @@ export default class TaskPointTracker {
     return this.starts.length > 0;
   }
 
+  hasVisitedArea(num: number) {
+    return this.events.some(event => event instanceof TurnEvent && event.num === num);
+  }
+
   get hasFinish() {
     return this.finish !== null;
   }
@@ -51,10 +55,7 @@ export default class TaskPointTracker {
     }
 
     for (let i = 0; i < this._areas.length; i++) {
-      let prevTPReached = (i === 0) ?
-        this.hasStart :
-        this.events.some(event => event instanceof TurnEvent && event.num === i);
-
+      let prevTPReached = (i === 0) ? this.hasStart : this.hasVisitedArea(i);
       if (!prevTPReached)
         continue;
 
@@ -74,7 +75,7 @@ export default class TaskPointTracker {
       }
     }
 
-    let lastTPReached = this.events.some(event => event instanceof TurnEvent && event.num === this._areas.length);
+    let lastTPReached = this.hasVisitedArea(this._areas.length);
     if (lastTPReached) {
       let finish = this.task.checkFinish(lastFix, fix);
       if (finish !== undefined) {

@@ -29,11 +29,11 @@ export default class RacingTaskSolver {
   }
 
   get taskStarted(): boolean {
-    return this.events.some(event => event instanceof StartEvent);
+    return this._tracker.starts.length > 0;
   }
 
   get taskFinished(): boolean {
-    return this.events.some(event => event instanceof FinishEvent);
+    return this._tracker.finish !== null;
   }
 
   consume(fixes: Fix[]) {
@@ -86,7 +86,7 @@ export default class RacingTaskSolver {
     // each Turn Point in the designated sequence, and makes a valid Finish.
 
     // FinishEvent is only added when last TP has been reached which simplifies the check here
-    let completed = this.events.some(event => event instanceof FinishEvent);
+    let completed = this.taskFinished;
 
     // SC3a §6.3.1d (i)
     //

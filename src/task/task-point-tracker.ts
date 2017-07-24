@@ -10,7 +10,9 @@ import AreaShape from "./shapes/area";
 export default class TaskPointTracker {
   task: Task;
 
+  starts: Fix[] = [];
   events: Event[] = [];
+  finish: Fix | null = null;
 
   private _lastFix: Fix | undefined = undefined;
 
@@ -32,7 +34,9 @@ export default class TaskPointTracker {
   _update(fix: Fix, lastFix: Fix) {
     let start = this.task.checkStart(lastFix, fix);
     if (start !== undefined) {
-      this.events.push(new StartEvent(interpolateFix(lastFix, fix, start)));
+      let startFix = interpolateFix(lastFix, fix, start);
+      this.events.push(new StartEvent(startFix));
+      this.starts.push(startFix);
     }
 
     for (let i = 1; i < this.task.points.length - 1; i++) {
@@ -64,7 +68,9 @@ export default class TaskPointTracker {
     if (lastTPReached) {
       let finish = this.task.checkFinish(lastFix, fix);
       if (finish !== undefined) {
-        this.events.push(new FinishEvent(interpolateFix(lastFix, fix, finish)));
+        let finishFix = interpolateFix(lastFix, fix, finish);
+        this.events.push(new FinishEvent(finishFix));
+        this.finish = finishFix;
       }
     }
   }

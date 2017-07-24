@@ -15,9 +15,12 @@ export default class TaskPointTracker {
   finish: Fix | null = null;
 
   private _lastFix: Fix | undefined = undefined;
+  private readonly _areas: AreaShape[];
 
   constructor(task: Task) {
     this.task = task;
+
+    this._areas = this.task.points.slice(1, task.points.length - 1).map(p => p.shape as AreaShape);
   }
 
   consume(fixes: Fix[]) {
@@ -39,32 +42,30 @@ export default class TaskPointTracker {
       this.starts.push(startFix);
     }
 
-    for (let i = 1; i < this.task.points.length - 1; i++) {
-      let prevTPReached = this.events.some(i === 1 ?
+    for (let i = 0; i < this._areas.length; i++) {
+      let prevTPReached = this.events.some(i === 0 ?
         (event => event instanceof StartEvent) :
-        (event => event instanceof TurnEvent && event.num === i - 1));
+        (event => event instanceof TurnEvent && event.num === i));
 
       if (prevTPReached) {
         // SC3a §6.3.1b
         //
         // A Turn Point is achieved by entering that Turn Point's Observation Zone.
 
-        let shape = this.task.points[i].shape;
-        if (shape instanceof AreaShape) {
-          let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
-          if (fractions.length === 0)
-            continue;
+        let shape = this._areas[i];
+        let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
+        if (fractions.length === 0)
+          continue;
 
-          for (let j = (shape.isInside(lastFix.coordinate) ? 1 : 0); j < fractions.length; j += 2) {
-            let fraction = fractions[j];
-            let entryFix = interpolateFix(lastFix, fix, fraction);
-            this.events.push(new TurnEvent(entryFix, i));
-          }
+        for (let j = (shape.isInside(lastFix.coordinate) ? 1 : 0); j < fractions.length; j += 2) {
+          let fraction = fractions[j];
+          let entryFix = interpolateFix(lastFix, fix, fraction);
+          this.events.push(new TurnEvent(entryFix, i + 1));
         }
       }
     }
 
-    let lastTPReached = this.events.some(event => event instanceof TurnEvent && event.num === this.task.points.length - 2);
+    let lastTPReached = this.events.some(event => event instanceof TurnEvent && event.num === this._areas.length);
     if (lastTPReached) {
       let finish = this.task.checkFinish(lastFix, fix);
       if (finish !== undefined) {

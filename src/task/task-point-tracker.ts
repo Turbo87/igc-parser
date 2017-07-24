@@ -7,11 +7,17 @@ import TurnEvent from "./events/turn";
 import {interpolateFix} from "../utils/interpolate-fix";
 import AreaShape from "./shapes/area";
 
+interface AreaVisit {
+  enter: Fix;
+  exit: Fix | null;
+}
+
 export default class TaskPointTracker {
   task: Task;
 
   starts: Fix[] = [];
   events: Event[] = [];
+  areaVisits: AreaVisit[][];
   finish: Fix | null = null;
 
   private _lastFix: Fix | undefined = undefined;
@@ -21,6 +27,7 @@ export default class TaskPointTracker {
     this.task = task;
 
     this._areas = this.task.points.slice(1, task.points.length - 1).map(p => p.shape as AreaShape);
+    this.areaVisits = this._areas.map(() => []);
   }
 
   get hasStart() {
@@ -59,11 +66,13 @@ export default class TaskPointTracker {
       if (!prevTPReached)
         continue;
 
+      let shape = this._areas[i];
+      let areaVisits = this.areaVisits[i];
+
       // SC3a §6.3.1b
       //
       // A Turn Point is achieved by entering that Turn Point's Observation Zone.
 
-      let shape = this._areas[i];
       let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
       if (fractions.length === 0)
         continue;
@@ -72,10 +81,14 @@ export default class TaskPointTracker {
       for (let j = 0; j < fractions.length; j++) {
         isInside = !isInside;
 
+        let fraction = fractions[j];
+        let intersectionFix = interpolateFix(lastFix, fix, fraction);
+
         if (isInside) {
-          let fraction = fractions[j];
-          let entryFix = interpolateFix(lastFix, fix, fraction);
-          this.events.push(new TurnEvent(entryFix, i + 1));
+          this.events.push(new TurnEvent(intersectionFix, i + 1));
+          areaVisits.push({ enter: intersectionFix, exit: null });
+        } else {
+          areaVisits[areaVisits.length - 1].exit = intersectionFix;
         }
       }
     }

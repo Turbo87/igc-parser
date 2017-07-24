@@ -1,6 +1,10 @@
+import * as turf from "@turf/turf";
+
 import {Fix} from "../../read-flight";
 import Task from "../task";
 import AreaShape from "../shapes/area";
+
+const convexHull = require('convex-hull');
 
 export default class AreaTaskSolver {
   task: Task;
@@ -36,7 +40,15 @@ export default class AreaTaskSolver {
     }
   }
 
+  get thinnedAreas(): Array<Fix[]> {
+    return this._areas.map(fixes => {
+      let coords = fixes.map(fix => fix.coordinate);
+      let hull = convexHull(coords);
+      return hull.map((indices: any) => fixes[indices[0]]);
+    });
+  }
+
   get result() {
-    return this._areas.map(it => it.length);
+    return this.thinnedAreas.map(it => it.length);
   }
 }

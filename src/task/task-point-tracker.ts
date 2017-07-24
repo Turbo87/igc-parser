@@ -36,8 +36,13 @@ class AreaVisit {
   }
 }
 
+interface TaskPointTrackerOptions {
+  trackConvexHull: boolean;
+}
+
 export default class TaskPointTracker {
   task: Task;
+  options: TaskPointTrackerOptions;
 
   starts: Fix[] = [];
   events: Event[] = [];
@@ -47,8 +52,9 @@ export default class TaskPointTracker {
   private _lastFix: Fix | undefined = undefined;
   private readonly _areas: AreaShape[];
 
-  constructor(task: Task) {
+  constructor(task: Task, options: TaskPointTrackerOptions) {
     this.task = task;
+    this.options = options;
 
     this._areas = this.task.points.slice(1, task.points.length - 1).map(p => p.shape as AreaShape);
     this.areaVisits = this._areas.map(() => []);
@@ -128,7 +134,7 @@ export default class TaskPointTracker {
         }
       }
 
-      if (shape.isInside(fix.coordinate)) {
+      if (this.options.trackConvexHull && shape.isInside(fix.coordinate)) {
         areaVisits[areaVisits.length - 1].addFix(fix);
       }
     }

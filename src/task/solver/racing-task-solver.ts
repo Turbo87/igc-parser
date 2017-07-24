@@ -19,7 +19,7 @@ export default class RacingTaskSolver {
 
   constructor(task: Task) {
     this.task = task;
-    this._tracker = new TaskPointTracker(task);
+    this._tracker = new TaskPointTracker(task, { trackConvexHull: false });
   }
 
   get events() {

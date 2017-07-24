@@ -18,7 +18,7 @@ let task = readTask(taskPath);
 let flightPath = process.argv[3];
 let flight = readFlight(flightPath);
 
-let tracker = new TaskPointTracker(task);
+let tracker = new TaskPointTracker(task, { trackConvexHull: task.options.isAAT });
 tracker.consume(flight);
 
 let json = taskToGeoJSON(task);

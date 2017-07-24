@@ -21,6 +21,8 @@ if (task.options.isAAT) {
 
   solver.consume(flight);
 
+  console.log(solver.result);
+
 } else {
   let solver = new RacingTaskSolver(task);
 

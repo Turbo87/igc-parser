@@ -41,11 +41,10 @@ export default class RacingTaskSolver {
   update(fix: Fix) {
     this._tracker.update(fix);
 
-    if (this.taskFinished || !this.taskStarted) {
+    let legIndex = this._tracker.currentLegIndex;
+    if (legIndex === null) {
       return;
     }
-
-    let legIndex = Math.max(0, ...this.events.map(event => (event instanceof TurnEvent) ? event.num : 0));
 
     let nextTP = this.task.points[legIndex + 1];
 

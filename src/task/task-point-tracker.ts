@@ -35,7 +35,20 @@ export default class TaskPointTracker {
   }
 
   hasVisitedArea(num: number) {
-    return this.events.some(event => event instanceof TurnEvent && event.num === num);
+    return this.areaVisits[num - 1].length > 0;
+  }
+
+  get currentLegIndex(): number | null {
+    if (!this.hasStart || this.hasFinish)
+      return null;
+
+    for (let i = this._areas.length - 1; i >= 0; i--) {
+      if (this.hasVisitedArea(i + 1)) {
+        return i + 1;
+      }
+    }
+
+    return 0;
   }
 
   get hasFinish() {

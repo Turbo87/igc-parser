@@ -47,21 +47,22 @@ export default class TaskPointTracker {
         (event => event instanceof StartEvent) :
         (event => event instanceof TurnEvent && event.num === i));
 
-      if (prevTPReached) {
-        // SC3a §6.3.1b
-        //
-        // A Turn Point is achieved by entering that Turn Point's Observation Zone.
+      if (!prevTPReached)
+        continue;
 
-        let shape = this._areas[i];
-        let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
-        if (fractions.length === 0)
-          continue;
+      // SC3a §6.3.1b
+      //
+      // A Turn Point is achieved by entering that Turn Point's Observation Zone.
 
-        for (let j = (shape.isInside(lastFix.coordinate) ? 1 : 0); j < fractions.length; j += 2) {
-          let fraction = fractions[j];
-          let entryFix = interpolateFix(lastFix, fix, fraction);
-          this.events.push(new TurnEvent(entryFix, i + 1));
-        }
+      let shape = this._areas[i];
+      let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
+      if (fractions.length === 0)
+        continue;
+
+      for (let j = (shape.isInside(lastFix.coordinate) ? 1 : 0); j < fractions.length; j += 2) {
+        let fraction = fractions[j];
+        let entryFix = interpolateFix(lastFix, fix, fraction);
+        this.events.push(new TurnEvent(entryFix, i + 1));
       }
     }
 

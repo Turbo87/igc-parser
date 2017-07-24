@@ -68,10 +68,15 @@ export default class TaskPointTracker {
       if (fractions.length === 0)
         continue;
 
-      for (let j = (shape.isInside(lastFix.coordinate) ? 1 : 0); j < fractions.length; j += 2) {
-        let fraction = fractions[j];
-        let entryFix = interpolateFix(lastFix, fix, fraction);
-        this.events.push(new TurnEvent(entryFix, i + 1));
+      let isInside = shape.isInside(lastFix.coordinate);
+      for (let j = 0; j < fractions.length; j++) {
+        isInside = !isInside;
+
+        if (isInside) {
+          let fraction = fractions[j];
+          let entryFix = interpolateFix(lastFix, fix, fraction);
+          this.events.push(new TurnEvent(entryFix, i + 1));
+        }
       }
     }
 

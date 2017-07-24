@@ -33,11 +33,6 @@ export default class Cylinder extends AreaShape {
     }
   }
 
-  isInside(coordinate: Point): boolean {
-    let distance = this._ruler.distance(coordinate, this.center);
-    return distance <= this.radius / 1000;
-  }
-
   toGeoJSON(): Feature<Polygon> {
     return this._polygon;
   }

@@ -41,15 +41,6 @@ export default class Sector extends AreaShape {
     return this._cylinder.radius;
   }
 
-  isInside(coordinate: Point): boolean {
-    if (!this._cylinder.isInside(coordinate))
-      return false;
-
-    let bearing = this._ruler.bearing(this.center, coordinate);
-    let bearingDiff = Math.abs(turf.bearingToAngle(this.direction - bearing)) * 2;
-    return bearingDiff <= this.angle;
-  }
-
   toGeoJSON(): Feature<Polygon> {
     return this._polygon;
   }

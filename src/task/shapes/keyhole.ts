@@ -45,10 +45,6 @@ export default class Keyhole extends AreaShape {
     return this._sector.angle;
   }
 
-  isInside(coordinate: Point): boolean {
-    return this._cylinder.isInside(coordinate) || this._sector.isInside(coordinate);
-  }
-
   toGeoJSON(): Feature<Polygon> {
     return this._polygon;
   }

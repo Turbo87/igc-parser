@@ -10,7 +10,7 @@ export default class Sector extends AreaShape {
   readonly direction: number; // direction in which the sector is pointing
   readonly angle: number; // "width" of the sector in degrees
 
-  protected _polygon: Point[];
+  protected _polygon: Feature<Polygon>;
 
   private readonly _cylinder: Cylinder;
   private readonly _ruler: cheapRuler.CheapRuler;
@@ -27,7 +27,7 @@ export default class Sector extends AreaShape {
       direction - angle / 2,
       direction + angle / 2,
       Math.max(Math.round(angle), 64)
-    ).geometry.coordinates[0] as Point[];
+    );
 
     this._cylinder = new Cylinder(center, radius);
     this._ruler = cheapRuler(center[1]);
@@ -51,6 +51,6 @@ export default class Sector extends AreaShape {
   }
 
   toGeoJSON(): Feature<Polygon> {
-    return turf.polygon([this._polygon]);
+    return this._polygon;
   }
 }

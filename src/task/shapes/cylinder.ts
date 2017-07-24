@@ -10,7 +10,7 @@ export default class Cylinder extends AreaShape {
   center: Point;
   radius: number;
 
-  protected _polygon: Point[];
+  protected _polygon: Feature<Polygon>;
 
   private readonly _ruler: cheapRuler.CheapRuler;
 
@@ -20,8 +20,7 @@ export default class Cylinder extends AreaShape {
     this.center = center;
     this.radius = radius;
 
-    let circle = turf.circle(center, radius / 1000, 360);
-    this._polygon = circle.geometry.coordinates[0] as Point[];
+    this._polygon = turf.circle(center, radius / 1000, 360);
 
     this._ruler = cheapRuler(center[1]);
   }
@@ -40,6 +39,6 @@ export default class Cylinder extends AreaShape {
   }
 
   toGeoJSON(): Feature<Polygon> {
-    return turf.polygon([this._polygon]);
+    return this._polygon;
   }
 }

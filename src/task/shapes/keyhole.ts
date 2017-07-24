@@ -7,7 +7,7 @@ import Point from "../../geo/point";
 import AreaShape from "./area";
 
 export default class Keyhole extends AreaShape {
-  protected _polygon: Point[];
+  protected _polygon: Feature<Polygon>;
 
   private readonly _cylinder: Cylinder;
   private readonly _sector: Sector;
@@ -22,7 +22,7 @@ export default class Keyhole extends AreaShape {
     this._cylinder = new Cylinder(center, innerRadius);
     this._sector = new Sector(center, outerRadius, outerAngle, direction);
 
-    this._polygon = turf.union(this._cylinder.toGeoJSON(), this._sector.toGeoJSON()).geometry.coordinates[0] as Point[];
+    this._polygon = turf.union(this._cylinder.toGeoJSON(), this._sector.toGeoJSON()) as Feature<Polygon>;
   }
 
   get center(): Point {
@@ -50,6 +50,6 @@ export default class Keyhole extends AreaShape {
   }
 
   toGeoJSON(): Feature<Polygon> {
-    return turf.polygon([this._polygon]);
+    return this._polygon;
   }
 }

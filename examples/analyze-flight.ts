@@ -1,5 +1,6 @@
 import {readTask} from "../src/read-task";
 import {readFlight} from "../src/read-flight";
+import AreaTaskSolver from "../src/task/solver/area-task-solver";
 import RacingTaskSolver from "../src/task/solver/racing-task-solver";
 import {formatTime} from "../src/format-result";
 import {FinishEvent, StartEvent, TurnEvent} from "../src/task/events";
@@ -16,21 +17,23 @@ let flightPath = process.argv[3];
 let flight = readFlight(flightPath);
 
 if (task.options.isAAT) {
-  console.log('AAT tasks are not supported yet');
-  process.exit(1);
+  let solver = new AreaTaskSolver(task);
+
+  solver.consume(flight);
+
+} else {
+  let solver = new RacingTaskSolver(task);
+
+  solver.consume(flight);
+
+  solver.events.forEach(event => {
+    if (event instanceof StartEvent)
+      console.log(`Start at ${formatTime(event.time)}`);
+
+    if (event instanceof TurnEvent)
+      console.log(`Reached TP${event.num} at ${formatTime(event.time)}`);
+
+    if (event instanceof FinishEvent)
+      console.log(`Finish at ${formatTime(event.time)}`);
+  });
 }
-
-let solver = new RacingTaskSolver(task);
-
-solver.consume(flight);
-
-solver.events.forEach(event => {
-  if (event instanceof StartEvent)
-    console.log(`Start at ${formatTime(event.time)}`);
-
-  if (event instanceof TurnEvent)
-    console.log(`Reached TP${event.num} at ${formatTime(event.time)}`);
-
-  if (event instanceof FinishEvent)
-    console.log(`Finish at ${formatTime(event.time)}`);
-});

@@ -7,9 +7,17 @@ import TurnEvent from "./events/turn";
 import {interpolateFix} from "../utils/interpolate-fix";
 import AreaShape from "./shapes/area";
 
-interface AreaVisit {
+class AreaVisit {
   enter: Fix;
   exit: Fix | null;
+
+  constructor(enter: Fix) {
+    this.enter = enter;
+  }
+
+  close(exit: Fix) {
+    this.exit = exit;
+  }
 }
 
 export default class TaskPointTracker {
@@ -99,9 +107,9 @@ export default class TaskPointTracker {
 
         if (isInside) {
           this.events.push(new TurnEvent(intersectionFix, i + 1));
-          areaVisits.push({ enter: intersectionFix, exit: null });
+          areaVisits.push(new AreaVisit(intersectionFix));
         } else {
-          areaVisits[areaVisits.length - 1].exit = intersectionFix;
+          areaVisits[areaVisits.length - 1].close(intersectionFix);
         }
       }
     }

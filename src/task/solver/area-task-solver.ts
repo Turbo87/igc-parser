@@ -39,7 +39,7 @@ export default class AreaTaskSolver {
       let edges: any = {};
       areaFixes[0].forEach((fix, j) => {
         let areaKey = `0-${j}`;
-        edges[areaKey] = 10000-this.task.measureDistance(start.coordinate, fix.coordinate);
+        edges[areaKey] = 10000-this.task.measureDistance(this.task.start.shape.center, fix.coordinate);
       });
 
       graph.addNode(`s-${i}`, edges);
@@ -50,7 +50,7 @@ export default class AreaTaskSolver {
       if (i === areaFixes.length - 1) {
         fixes.forEach((fix, j) => {
           graph.addNode(`${i}-${j}`, {
-            f: 10000-this.task.measureDistance(fix.coordinate, this._tracker.finish!.coordinate),
+            f: 10000-this.task.measureDistance(fix.coordinate, this.task.finish.shape.center),
           });
           fixMap[`${i}-${j}`] = fix;
         });

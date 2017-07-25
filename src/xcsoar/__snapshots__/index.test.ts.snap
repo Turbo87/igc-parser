@@ -81,8 +81,8 @@ Object {
     },
     Object {
       "observation_zone": Object {
-        "length": 5000,
-        "type": "Line",
+        "radius": 2000,
+        "type": "Cylinder",
       },
       "type": "Finish",
       "waypoint": Object {

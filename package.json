@@ -15,6 +15,7 @@
     "aprs-parser": "^1.0.4",
     "cheap-ruler": "^2.5.0",
     "monotone-convex-hull-2d": "^1.0.1",
+    "node-dijkstra": "^2.5.0",
     "tiny-emitter": "^2.0.1",
     "xml-js": "^1.3.2"
   },

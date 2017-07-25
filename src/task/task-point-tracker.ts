@@ -7,7 +7,7 @@ import TurnEvent from "./events/turn";
 import {interpolateFix} from "../utils/interpolate-fix";
 import AreaShape from "./shapes/area";
 
-const convexHull = require('convex-hull');
+const convexHull = require('monotone-convex-hull-2d');
 
 class AreaVisit {
   enter: Fix;
@@ -31,7 +31,7 @@ class AreaVisit {
     if (this.fixes.length > 3) {
       let coords = this.fixes.map(fix => fix.coordinate);
       let hull = convexHull(coords);
-      this.fixes = hull.map((indices: [number, number]) => this.fixes[indices[0]]);
+      this.fixes = hull.map((i: number) => this.fixes[i]);
     }
   }
 }

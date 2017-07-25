@@ -31,6 +31,9 @@ export default class AreaTaskSolver {
     });
 
     let graph = new Graph();
+    let fixMap = Object.create(null);
+
+    fixMap['f'] = this._tracker.finish;
 
     this._tracker.starts.forEach((start, i) => {
       let edges: any = {};
@@ -40,6 +43,7 @@ export default class AreaTaskSolver {
       });
 
       graph.addNode(`s-${i}`, edges);
+      fixMap[`s-${i}`] = start;
     });
 
     areaFixes.forEach((fixes, i) => {
@@ -48,6 +52,7 @@ export default class AreaTaskSolver {
           graph.addNode(`${i}-${j}`, {
             f: 10000-this.task.measureDistance(fix.coordinate, this._tracker.finish!.coordinate),
           });
+          fixMap[`${i}-${j}`] = fix;
         });
       } else {
         let nextAreaFixes = areaFixes[i + 1];
@@ -59,12 +64,15 @@ export default class AreaTaskSolver {
           });
 
           graph.addNode(`${i}-${j}`, edges);
+          fixMap[`${i}-${j}`] = fix1;
         })
       }
     });
 
     let result = graph.path('s-0', 'f', { cost: true });
 
-    return { path: result.path, distance: (areaFixes.length + 1) * 10000 - result.cost };
+    let path = result.path.map((key: string) => fixMap[key]!) as Fix[];
+
+    return { path, distance: (areaFixes.length + 1) * 10000 - result.cost };
   }
 }

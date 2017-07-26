@@ -119,10 +119,9 @@ export default class TaskPointTracker {
       let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
       if (fractions.length !== 0) {
         let isInside = shape.isInside(lastFix.coordinate);
-        for (let j = 0; j < fractions.length; j++) {
+        for (let fraction of fractions) {
           isInside = !isInside;
 
-          let fraction = fractions[j];
           let intersectionFix = interpolateFix(lastFix, fix, fraction);
 
           if (isInside) {

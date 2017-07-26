@@ -8,6 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "lint": "tslint --project . --format stylish",
     "test": "jest"
   },
   "dependencies": {
@@ -28,6 +29,7 @@
     "opn": "^5.1.0",
     "temp-write": "^3.3.0",
     "ts-jest": "^20.0.7",
+    "tslint": "^5.5.0",
     "typescript": "^2.4.1"
   },
   "jest": {

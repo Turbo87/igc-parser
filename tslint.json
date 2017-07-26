@@ -1,0 +1,20 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "arrow-parens": false,
+    "ban-types": false,
+    "curly": false,
+    "interface-name": false,
+    "max-classes-per-file": [false],
+    "member-access": false,
+    "no-console": false,
+    "no-conditional-assignment": false,
+    "no-shadowed-variable": false,
+    "no-var-requires": false,
+    "object-literal-sort-keys": false,
+    "one-variable-per-declaration": false,
+    "prefer-const": false,
+    "quotemark": [true, "single"],
+    "variable-name": false
+  }
+}

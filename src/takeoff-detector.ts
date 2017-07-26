@@ -5,10 +5,9 @@ import {Fix} from './read-flight';
 const Emitter = require('tiny-emitter');
 
 export class TakeoffDetector {
-  private _lastFix: Fix | undefined = undefined;
-
   flying: boolean = false;
 
+  private _lastFix: Fix | undefined = undefined;
   private readonly _emitter = new Emitter();
 
   update(fix: Fix) {

@@ -114,7 +114,7 @@ function readCSV(path: string) {
   let handicaps = Object.create(null);
   lines.map(line => line.trim().split(',')).forEach(([id, _, cn, type, handicap]) => {
     if (id) {
-      handicaps[cn] = parseInt(handicap);
+      handicaps[cn] = parseInt(handicap, 10);
     }
   });
   return handicaps;

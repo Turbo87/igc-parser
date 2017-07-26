@@ -24,17 +24,17 @@ export class BRecord implements Fix {
     if (!match)
       throw new Error(`Invalid B record: ${line}`);
 
-    let secOfDay = parseInt(match[1]) * 3600 + parseInt(match[2]) * 60 + parseInt(match[3]);
+    let secOfDay = parseInt(match[1], 10) * 3600 + parseInt(match[2], 10) * 60 + parseInt(match[3], 10);
     this.time = date + secOfDay * 1000;
 
-    let lat = parseInt(match[4]) + parseInt(match[5]) / 60 + parseInt(match[6]) / 60000;
-    let lon = parseInt(match[8]) + parseInt(match[9]) / 60 + parseInt(match[10]) / 60000;
+    let lat = parseInt(match[4], 10) + parseInt(match[5], 10) / 60 + parseInt(match[6], 10) / 60000;
+    let lon = parseInt(match[8], 10) + parseInt(match[9], 10) / 60 + parseInt(match[10], 10) / 60000;
     this.coordinate = [lon, lat] as Point;
 
     this.valid = match[12] === 'A';
 
-    this.pressureAltitude = match[13] === '00000' ? undefined : parseInt(match[13]);
-    this.gpsAltitude = match[14] === '00000' ? undefined : parseInt(match[14]);
+    this.pressureAltitude = match[13] === '00000' ? undefined : parseInt(match[13], 10);
+    this.gpsAltitude = match[14] === '00000' ? undefined : parseInt(match[14], 10);
   }
 
   get altitude() {
@@ -68,9 +68,9 @@ export function readFlight(path: string): Fix[] {
 function findDate(line: string): number | undefined {
   let match = line.match(RE_HFDTE);
   if (match) {
-    let year = parseInt(match[3]) + 2000;
-    let month = parseInt(match[2]) - 1;
-    let day = parseInt(match[1]);
+    let year = parseInt(match[3], 10) + 2000;
+    let month = parseInt(match[2], 10) - 1;
+    let day = parseInt(match[1], 10);
     return Date.UTC(year, month, day);
   }
 }

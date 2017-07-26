@@ -37,7 +37,7 @@ export function read(xml: string): XCSoarTask {
 
 function convertTask(xml: any): XCSoarTask {
   let type = xml.attributes.type;
-  let aat_min_time = parseInt(xml.attributes.aat_min_time);
+  let aat_min_time = parseInt(xml.attributes.aat_min_time, 10);
   let points = xml.elements.filter((it: any) => it.name === 'Point').map(convertPoint);
   return { type, aat_min_time, points };
 }

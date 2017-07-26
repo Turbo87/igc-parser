@@ -4,7 +4,9 @@ import {formatTime} from '../src/format-result';
 import {Fix, readFlight} from '../src/read-flight';
 import {TakeoffDetector} from '../src/takeoff-detector';
 
-fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`).filter(filename => (/\.igc$/i).test(filename)).forEach(filename => {
+let files = fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`);
+
+files.filter(filename => (/\.igc$/i).test(filename)).forEach(filename => {
   let callsign = filename.match(/^(.{1,3})_/)![1];
   let flight = readFlight(`${__dirname}/../fixtures/2017-07-15-lev/${filename}`);
 

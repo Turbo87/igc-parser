@@ -60,7 +60,10 @@ export default class RacingTaskSolver {
 
     let finishedLegs = this.task.legs.slice(0, legIndex);
     let finishedLegsDistance = finishedLegs.reduce((sum, leg) => sum + leg.distance, 0);
-    let currentLegDistance = this.task.legs[legIndex].distance - this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
+
+    let currentLegDistance = this.task.legs[legIndex].distance -
+      this.task.measureDistance(fix.coordinate, nextTP.shape.center) * 1000;
+
     let maxDistance = finishedLegsDistance + currentLegDistance;
     if (maxDistance > this._maxDistance) {
       this._maxDistance = maxDistance;

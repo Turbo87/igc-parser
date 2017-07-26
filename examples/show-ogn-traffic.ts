@@ -14,7 +14,8 @@ client.on('record', (record: any) => {
   let sender = senders[record.from.call];
   let data = record.data;
 
-  console.log(data.timestamp, sender.cn, data.longitude, data.latitude, Math.round(data.extension.speedMPerS * 3.6) + 'km/h', Math.round(data.altitude) + 'm');
+  console.log(data.timestamp, sender.cn, data.longitude, data.latitude,
+    Math.round(data.extension.speedMPerS * 3.6) + 'km/h', Math.round(data.altitude) + 'm');
 });
 
 client.on('close', () => {

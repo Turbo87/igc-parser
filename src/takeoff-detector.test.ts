@@ -5,7 +5,9 @@ import {Fix, readFlight} from './read-flight';
 import {TakeoffDetector} from './takeoff-detector';
 
 describe('TakeoffDetector', () => {
-  fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`).filter(filename => (/\.igc$/i).test(filename)).forEach(filename => {
+  let files = fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`);
+
+  files.filter(filename => (/\.igc$/i).test(filename)).forEach(filename => {
     let callsign = filename.match(/^(.{1,3})_/)![1];
 
     it(`detects takeoff and landing for "${callsign}"`, () => {

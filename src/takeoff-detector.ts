@@ -1,4 +1,4 @@
-import * as cheapRuler from 'cheap-ruler';
+import cheapRuler = require('cheap-ruler');
 
 import {Fix} from './read-flight';
 

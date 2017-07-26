@@ -1,5 +1,5 @@
 import {Socket} from 'net';
-import * as readline from 'readline';
+import readline = require('readline');
 import {ReadLine} from 'readline';
 
 const aprs = require('aprs-parser');

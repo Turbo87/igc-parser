@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import fs = require('fs');
 
 export function readCSV(path: string) {
   let lines = fs.readFileSync(path, 'utf8').split('\n');

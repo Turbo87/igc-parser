@@ -1,4 +1,4 @@
-import * as turf from '@turf/turf';
+import turf = require('@turf/turf');
 import {Feature, Polygon} from 'geojson';
 
 import {findIntersections} from '../../geo/find-intersections';

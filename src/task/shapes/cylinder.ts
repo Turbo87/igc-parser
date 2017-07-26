@@ -1,7 +1,7 @@
 import {Feature, Polygon} from 'geojson';
 
-import * as turf from '@turf/turf';
-import * as cheapRuler from 'cheap-ruler';
+import turf = require('@turf/turf');
+import cheapRuler = require('cheap-ruler');
 
 import Point from '../../geo/point';
 import AreaShape from './area';

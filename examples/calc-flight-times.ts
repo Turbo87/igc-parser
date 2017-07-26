@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import fs = require('fs');
 
 import {formatTime} from '../src/format-result';
 import {Fix, readFlight} from '../src/read-flight';

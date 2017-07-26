@@ -1,5 +1,5 @@
-import * as turf from '@turf/turf';
-import * as fs from 'fs';
+import turf = require('@turf/turf');
+import fs = require('fs');
 
 import Point from './geo/point';
 import {Cylinder, Keyhole, Line} from './task/shapes';

@@ -1,4 +1,4 @@
-import * as fs from 'fs';
+import fs = require('fs');
 
 import OGNClient from '../src/ogn';
 import {readCSV} from './utils/read-csv';

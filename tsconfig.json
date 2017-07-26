@@ -4,7 +4,8 @@
     "sourceMap": true,
     "strict": true,
     "target": "es5",
-    "allowJs": true
+    "allowJs": true,
+    "lib": ["es2015"]
   },
   "include": [
     "examples",

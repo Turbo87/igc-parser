@@ -1,4 +1,4 @@
-import turf = require('@turf/turf');
+import bearing = require('@turf/bearing');
 import fs = require('fs');
 
 import Point from './geo/point';
@@ -22,18 +22,18 @@ export function readTask(path: string): Task {
     let direction;
     if (i === 0) {
       let locNext = convertLocation(task.points[i + 1].waypoint.location);
-      direction = turf.bearing(location, locNext);
+      direction = bearing(location, locNext);
 
     } else if (i === task.points.length - 1) {
       let locPrev = convertLocation(task.points[i - 1].waypoint.location);
-      direction = turf.bearing(locPrev, location);
+      direction = bearing(locPrev, location);
 
     } else {
       let locPrev = convertLocation(task.points[i - 1].waypoint.location);
       let locNext = convertLocation(task.points[i + 1].waypoint.location);
 
-      let bearingtoPrev = turf.bearing(location, locPrev);
-      let bearingToNext = turf.bearing(location, locNext);
+      let bearingtoPrev = bearing(location, locPrev);
+      let bearingToNext = bearing(location, locNext);
 
       let bisector = fraction(bearingtoPrev, bearingToNext);
 

@@ -12,7 +12,13 @@
     "test": "jest"
   },
   "dependencies": {
-    "@turf/turf": "^4.5.2",
+    "@turf/bearing": "^4.5.2",
+    "@turf/center": "^4.5.2",
+    "@turf/circle": "^4.5.2",
+    "@turf/helpers": "^4.5.2",
+    "@turf/inside": "^4.5.2",
+    "@turf/sector": "^4.5.2",
+    "@turf/union": "^4.5.2",
     "aprs-parser": "^1.0.4",
     "cheap-ruler": "^2.5.0",
     "monotone-convex-hull-2d": "^1.0.1",

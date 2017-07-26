@@ -1,6 +1,6 @@
 import {Feature, Polygon} from 'geojson';
 
-import turf = require('@turf/turf');
+import circle = require('@turf/circle');
 import cheapRuler = require('cheap-ruler');
 
 import Point from '../../geo/point';
@@ -20,7 +20,7 @@ export default class Cylinder extends AreaShape {
     this.center = center;
     this.radius = radius;
 
-    this._polygon = turf.circle(center, radius / 1000, 360);
+    this._polygon = circle(center, radius / 1000, 360);
 
     this._ruler = cheapRuler(center[1]);
   }

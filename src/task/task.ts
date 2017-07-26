@@ -1,4 +1,5 @@
-import turf = require('@turf/turf');
+import turf = require('@turf/helpers');
+import turfCenter = require('@turf/center');
 import cheapRuler = require('cheap-ruler');
 
 import Point from '../geo/point';
@@ -27,7 +28,7 @@ export default class Task {
     this.start = new StartPoint(points[0].shape);
     this.finish = new FinishPoint(points[points.length - 1].shape);
 
-    let center = turf.center(turf.multiPoint(points.map(point => point.shape.center)));
+    let center = turfCenter(turf.multiPoint(points.map(point => point.shape.center)));
     this._ruler = cheapRuler(center.geometry.coordinates[1]);
 
     this.legs = [];

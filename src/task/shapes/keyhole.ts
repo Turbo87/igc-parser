@@ -1,4 +1,4 @@
-import turf = require('@turf/turf');
+import union = require('@turf/union');
 import {Feature, Polygon} from 'geojson';
 
 import Point from '../../geo/point';
@@ -22,7 +22,7 @@ export default class Keyhole extends AreaShape {
     this._cylinder = new Cylinder(center, innerRadius);
     this._sector = new Sector(center, outerRadius, outerAngle, direction);
 
-    this._polygon = turf.union(this._cylinder.toGeoJSON(), this._sector.toGeoJSON()) as Feature<Polygon>;
+    this._polygon = union(this._cylinder.toGeoJSON(), this._sector.toGeoJSON()) as Feature<Polygon>;
   }
 
   get center(): Point {

@@ -1,4 +1,5 @@
-import turf = require('@turf/turf');
+import turf = require('@turf/helpers');
+import sector = require('@turf/sector');
 import cheapRuler = require('cheap-ruler');
 import {Feature, Polygon} from 'geojson';
 
@@ -21,7 +22,7 @@ export default class Sector extends AreaShape {
     this.angle = angle;
     this.direction = direction;
 
-    this._polygon = turf.sector(
+    this._polygon = sector(
       turf.point(center),
       radius / 1000,
       direction - angle / 2,

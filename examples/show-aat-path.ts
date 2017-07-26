@@ -1,4 +1,4 @@
-import turf = require('@turf/turf');
+import turf = require('@turf/helpers');
 
 import {readFlight} from '../src/read-flight';
 import {readTask} from '../src/read-task';

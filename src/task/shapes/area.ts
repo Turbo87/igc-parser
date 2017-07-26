@@ -1,4 +1,4 @@
-import turf = require('@turf/turf');
+import inside = require('@turf/inside');
 import {Feature, Polygon} from 'geojson';
 
 import {findIntersections} from '../../geo/find-intersections';
@@ -9,7 +9,7 @@ abstract class AreaShape implements Shape {
   abstract center: Point;
 
   isInside(coordinate: Point): boolean {
-    return turf.inside(coordinate, this.toGeoJSON());
+    return inside(coordinate, this.toGeoJSON());
   }
 
   findIntersections(p1: Point, p2: Point): number[] {

@@ -1,9 +1,10 @@
-import turf = require('@turf/turf');
+import turf = require('@turf/helpers');
 import cheapRuler = require('cheap-ruler');
 import {Feature, LineString} from 'geojson';
 
 import {findIntersection} from '../../geo/find-intersections';
 import Point from '../../geo/point';
+import {to360} from '../../utils/angles';
 import Shape from './base';
 
 export default class Line implements Shape {
@@ -38,7 +39,7 @@ export default class Line implements Shape {
       return;
 
     let bearing = this._ruler.bearing(p1, p2);
-    let bearingDiff = turf.bearingToAngle(this.direction - bearing);
+    let bearingDiff = to360(this.direction - bearing);
     if (bearingDiff > 90 && bearingDiff < 270)
       return;
 

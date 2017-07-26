@@ -13,7 +13,7 @@ The current status of the project is: **work in progress**
 
 This project contains code and algorithms to score gliding competition
 flights using the [TypeScript](https://www.typescriptlang.org/) programming
-language. The reason for using TypeScript is being able to compiled to
+language. The reason for using TypeScript is being able to compile to
 JavaScript and run the code in the browser to ultimately allow live scoring
 using either [SkyLines](https://skylines.aero) or
 [OGN](http://wiki.glidernet.org/) live tracking data.

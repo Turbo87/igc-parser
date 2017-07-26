@@ -1,10 +1,10 @@
-import * as turf from "@turf/turf";
+import * as turf from '@turf/turf';
 
-import {readTask} from "../src/read-task";
-import {readFlight} from "../src/read-flight";
-import AreaTaskSolver from "../src/task/solver/area-task-solver";
-import {viewGeoJSON} from "./utils/view-geojson";
-import {taskToGeoJSON} from "../src/task-to-geojson";
+import {readFlight} from '../src/read-flight';
+import {readTask} from '../src/read-task';
+import {taskToGeoJSON} from '../src/task-to-geojson';
+import AreaTaskSolver from '../src/task/solver/area-task-solver';
+import {viewGeoJSON} from './utils/view-geojson';
 
 if (process.argv.length < 4) {
   console.log('Usage: ts-node examples/show-aat-path.ts TASK_PATH IGC_PATH');

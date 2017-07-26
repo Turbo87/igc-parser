@@ -1,6 +1,6 @@
-import Event from "./event";
-import Point from "../../geo/point";
-import {Fix} from "../../read-flight";
+import Point from '../../geo/point';
+import {Fix} from '../../read-flight';
+import Event from './event';
 
 export default class StartEvent implements Event {
   type = 'start';

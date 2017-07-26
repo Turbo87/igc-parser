@@ -1,5 +1,5 @@
 import {findIntersection, findIntersections} from './find-intersections';
-import Point from "./point";
+import Point from './point';
 
 const POLYGON = [
   [6.2127685546875, 50.9151558824997],

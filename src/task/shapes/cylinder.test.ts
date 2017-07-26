@@ -1,4 +1,4 @@
-import Cylinder from "./cylinder";
+import Cylinder from './cylinder';
 
 describe('Cylinder', () => {
   describe('checkTransition()', () => {

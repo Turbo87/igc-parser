@@ -1,6 +1,6 @@
-import * as cheapRuler from "cheap-ruler";
+import * as cheapRuler from 'cheap-ruler';
 
-import {Fix} from "./read-flight";
+import {Fix} from './read-flight';
 
 const Emitter = require('tiny-emitter');
 
@@ -16,10 +16,10 @@ export class TakeoffDetector {
     let flying = this._isFlightSpeed(speed);
 
     if (flying && !this.flying) {
-      this._emitter.emit('takeoff', fix)
+      this._emitter.emit('takeoff', fix);
     }
     if (!flying && this.flying) {
-      this._emitter.emit('landing', fix)
+      this._emitter.emit('landing', fix);
     }
 
     this.flying = flying;

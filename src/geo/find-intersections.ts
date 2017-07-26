@@ -1,4 +1,4 @@
-import Point from "./point";
+import Point from './point';
 
 export function findIntersections(line1: [Point, Point], line2: Point[]): number[] {
   let intersections: number[] = [];

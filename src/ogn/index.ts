@@ -1,6 +1,6 @@
-import {Socket} from "net";
-import * as readline from "readline";
-import {ReadLine} from "readline";
+import {Socket} from 'net';
+import * as readline from 'readline';
+import {ReadLine} from 'readline';
 
 const aprs = require('aprs-parser');
 const Emitter = require('tiny-emitter');

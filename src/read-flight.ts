@@ -1,14 +1,14 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import Point from "./geo/point";
+import Point from './geo/point';
 
 const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 
 export interface Fix {
-  time: number,
-  coordinate: Point,
-  valid: boolean,
+  time: number;
+  coordinate: Point;
+  valid: boolean;
   altitude: number | undefined;
 }
 

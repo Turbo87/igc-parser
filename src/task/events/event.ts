@@ -1,4 +1,4 @@
-import Point from "../../geo/point";
+import Point from '../../geo/point';
 
 interface Event {
   type: string;

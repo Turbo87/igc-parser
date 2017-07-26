@@ -1,4 +1,4 @@
-import Point from "./point";
+import Point from './point';
 
 export function interpolatePoint(p1: Point, p2: Point, fraction: number): Point {
   let fraction1 = 1 - fraction;

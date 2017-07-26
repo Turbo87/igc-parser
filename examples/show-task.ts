@@ -1,6 +1,6 @@
-import {readTask} from "../src/read-task";
-import {taskToGeoJSON} from "../src/task-to-geojson";
-import {viewGeoJSON} from "./utils/view-geojson";
+import {readTask} from '../src/read-task';
+import {taskToGeoJSON} from '../src/task-to-geojson';
+import {viewGeoJSON} from './utils/view-geojson';
 
 if (process.argv.length < 3) {
   console.log('Usage: ts-node examples/show-task.ts TASK_PATH');

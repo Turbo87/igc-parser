@@ -1,8 +1,8 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import {Fix, readFlight} from "./read-flight";
-import {TakeoffDetector} from "./takeoff-detector";
-import {formatTime} from "./format-result";
+import {formatTime} from './format-result';
+import {Fix, readFlight} from './read-flight';
+import {TakeoffDetector} from './takeoff-detector';
 
 describe('TakeoffDetector', () => {
   fs.readdirSync(`${__dirname}/../fixtures/2017-07-15-lev`).filter(filename => (/\.igc$/i).test(filename)).forEach(filename => {
@@ -23,6 +23,3 @@ describe('TakeoffDetector', () => {
     });
   });
 });
-
-
-

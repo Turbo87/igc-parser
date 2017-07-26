@@ -1,10 +1,10 @@
-import {Feature, Polygon} from "geojson";
-import * as turf from "@turf/turf";
+import * as turf from '@turf/turf';
+import {Feature, Polygon} from 'geojson';
 
-import Cylinder from "./cylinder";
-import Sector from "./sector";
-import Point from "../../geo/point";
-import AreaShape from "./area";
+import Point from '../../geo/point';
+import AreaShape from './area';
+import Cylinder from './cylinder';
+import Sector from './sector';
 
 export default class Keyhole extends AreaShape {
   protected _polygon: Feature<Polygon>;

@@ -1,15 +1,15 @@
-import {Feature, Polygon} from "geojson";
-import * as turf from "@turf/turf";
+import * as turf from '@turf/turf';
+import {Feature, Polygon} from 'geojson';
 
-import Point from "../../geo/point";
-import Shape from "./base";
-import {findIntersections} from "../../geo/find-intersections";
+import {findIntersections} from '../../geo/find-intersections';
+import Point from '../../geo/point';
+import Shape from './base';
 
 abstract class AreaShape implements Shape {
   abstract center: Point;
 
   isInside(coordinate: Point): boolean {
-    return turf.inside(coordinate, this.toGeoJSON())
+    return turf.inside(coordinate, this.toGeoJSON());
   }
 
   findIntersections(p1: Point, p2: Point): number[] {

@@ -1,12 +1,12 @@
 import * as turf from '@turf/turf';
-import * as cheapRuler from "cheap-ruler";
+import * as cheapRuler from 'cheap-ruler';
 
-import {Turnpoint} from "../turnpoint";
-import {FinishPoint, StartPoint} from "./task-points";
-import Cylinder from "./shapes/cylinder";
-import Point from "../geo/point";
-import Line from "./shapes/line";
-import {Fix} from "../read-flight";
+import Point from '../geo/point';
+import {Fix} from '../read-flight';
+import {Turnpoint} from '../turnpoint';
+import Cylinder from './shapes/cylinder';
+import Line from './shapes/line';
+import {FinishPoint, StartPoint} from './task-points';
 
 export default class Task {
   points: Turnpoint[];
@@ -93,8 +93,8 @@ export default class Task {
 }
 
 export interface TaskOptions {
-  isAAT: boolean,
-  aatMinTime: number,
+  isAAT: boolean;
+  aatMinTime: number;
 }
 
 export interface TaskLeg {

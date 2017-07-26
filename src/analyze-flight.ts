@@ -1,7 +1,7 @@
-import {Fix} from "./read-flight";
-import Task from "./task/task";
-import RacingTaskSolver from "./task/solver/racing-task-solver";
-import AreaTaskSolver from "./task/solver/area-task-solver";
+import {Fix} from './read-flight';
+import AreaTaskSolver from './task/solver/area-task-solver';
+import RacingTaskSolver from './task/solver/racing-task-solver';
+import Task from './task/task';
 
 export function analyzeFlight(flight: Fix[], task: Task) {
   if (task.options.isAAT) {

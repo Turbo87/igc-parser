@@ -1,4 +1,4 @@
-import {Shape} from "./task/shapes";
+import {Shape} from './task/shapes';
 
 export class Turnpoint {
     shape: Shape;

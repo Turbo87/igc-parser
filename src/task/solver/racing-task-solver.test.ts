@@ -1,7 +1,7 @@
-import {readTask} from "../../read-task";
-import RacingTaskSolver from "./racing-task-solver";
-import Task from "../task";
-import {readFlight} from "../../read-flight";
+import {readFlight} from '../../read-flight';
+import {readTask} from '../../read-task';
+import Task from '../task';
+import RacingTaskSolver from './racing-task-solver';
 
 const FIXTURES_PATH = `${__dirname}/../../../fixtures`;
 
@@ -35,6 +35,6 @@ describe('RacingTaskSolver', () => {
       let flight = readFlight(`${FIXTURES_PATH}/2017-07-17-lev/ZG_77hv6ci1.igc`);
       solver.consume(flight);
       expect(solver.result).toMatchSnapshot();
-    })
+    });
   });
 });

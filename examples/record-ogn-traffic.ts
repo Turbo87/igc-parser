@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 
 import OGNClient from '../src/ogn';
-import {readCSV} from "./utils/read-csv";
+import {readCSV} from './utils/read-csv';
 
 let senders = readCSV(`${__dirname}/../fixtures/2017-lev.csv`);
 

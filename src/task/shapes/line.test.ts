@@ -1,4 +1,4 @@
-import Line from "./line";
+import Line from './line';
 
 describe('Line', () => {
   describe('checkTransition()', () => {

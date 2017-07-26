@@ -1,12 +1,12 @@
-import * as fs from "fs";
-import * as turf from "@turf/turf";
+import * as turf from '@turf/turf';
+import * as fs from 'fs';
 
-import {Turnpoint} from "./turnpoint";
-import {Cylinder, Keyhole, Line} from "./task/shapes";
-import {read, XCSoarLocation} from "./xcsoar";
-import Task from "./task/task";
-import Point from "./geo/point";
-import {fraction} from "./utils/angles";
+import Point from './geo/point';
+import {Cylinder, Keyhole, Line} from './task/shapes';
+import Task from './task/task';
+import {Turnpoint} from './turnpoint';
+import {fraction} from './utils/angles';
+import {read, XCSoarLocation} from './xcsoar';
 
 export function readTask(path: string): Task {
   let file = fs.readFileSync(path, 'utf8');

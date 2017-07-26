@@ -1,10 +1,10 @@
-import {Feature, Polygon} from "geojson";
+import {Feature, Polygon} from 'geojson';
 
-import * as cheapRuler from "cheap-ruler";
-import * as turf from "@turf/turf";
+import * as turf from '@turf/turf';
+import * as cheapRuler from 'cheap-ruler';
 
-import Point from "../../geo/point";
-import AreaShape from "./area";
+import Point from '../../geo/point';
+import AreaShape from './area';
 
 export default class Cylinder extends AreaShape {
   center: Point;

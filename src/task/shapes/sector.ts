@@ -1,10 +1,10 @@
-import {Feature, Polygon} from "geojson";
-import * as turf from "@turf/turf";
-import * as cheapRuler from "cheap-ruler";
+import * as turf from '@turf/turf';
+import * as cheapRuler from 'cheap-ruler';
+import {Feature, Polygon} from 'geojson';
 
-import Cylinder from "./cylinder";
-import Point from "../../geo/point";
-import AreaShape from "./area";
+import Point from '../../geo/point';
+import AreaShape from './area';
+import Cylinder from './cylinder';
 
 export default class Sector extends AreaShape {
   readonly direction: number; // direction in which the sector is pointing
@@ -26,7 +26,7 @@ export default class Sector extends AreaShape {
       radius / 1000,
       direction - angle / 2,
       direction + angle / 2,
-      Math.max(Math.round(angle), 64)
+      Math.max(Math.round(angle), 64),
     );
 
     this._cylinder = new Cylinder(center, radius);

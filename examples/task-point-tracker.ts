@@ -1,10 +1,10 @@
-import * as turf from "@turf/turf";
+import * as turf from '@turf/turf';
 
-import {readTask} from "../src/read-task";
-import {readFlight} from "../src/read-flight";
-import {taskToGeoJSON} from "../src/task-to-geojson";
-import {viewGeoJSON} from "./utils/view-geojson";
-import TaskPointTracker from "../src/task/task-point-tracker";
+import {readFlight} from '../src/read-flight';
+import {readTask} from '../src/read-task';
+import {taskToGeoJSON} from '../src/task-to-geojson';
+import TaskPointTracker from '../src/task/task-point-tracker';
+import {viewGeoJSON} from './utils/view-geojson';
 
 if (process.argv.length < 4) {
   console.log('Usage: ts-node examples/task-point-tracker.ts TASK_PATH IGC_PATH');

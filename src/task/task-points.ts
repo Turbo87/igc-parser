@@ -1,5 +1,5 @@
-import {Cylinder, Line, Shape} from "./shapes";
-import {Fix} from "../read-flight";
+import {Fix} from '../read-flight';
+import {Cylinder, Line, Shape} from './shapes';
 
 export class StartPoint {
   shape: Shape;

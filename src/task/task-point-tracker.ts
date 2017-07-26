@@ -1,11 +1,11 @@
-import Task from "./task";
-import {Fix} from "../read-flight";
-import Event from "./events/event";
-import StartEvent from "./events/start";
-import FinishEvent from "./events/finish";
-import TurnEvent from "./events/turn";
-import {interpolateFix} from "../utils/interpolate-fix";
-import AreaShape from "./shapes/area";
+import {Fix} from '../read-flight';
+import {interpolateFix} from '../utils/interpolate-fix';
+import Event from './events/event';
+import FinishEvent from './events/finish';
+import StartEvent from './events/start';
+import TurnEvent from './events/turn';
+import AreaShape from './shapes/area';
+import Task from './task';
 
 const convexHull = require('monotone-convex-hull-2d');
 

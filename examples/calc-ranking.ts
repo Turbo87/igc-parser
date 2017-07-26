@@ -1,10 +1,10 @@
-import * as fs from "fs";
+import * as fs from 'fs';
 
-import {readTask} from "../src/read-task";
-import {readFlight} from "../src/read-flight";
-import {analyzeFlight} from "../src/analyze-flight";
-import RacingTaskSolver from "../src/task/solver/racing-task-solver";
-import {formatTime} from "../src/format-result";
+import {analyzeFlight} from '../src/analyze-flight';
+import {formatTime} from '../src/format-result';
+import {readFlight} from '../src/read-flight';
+import {readTask} from '../src/read-task';
+import RacingTaskSolver from '../src/task/solver/racing-task-solver';
 
 const logUpdate = require('log-update');
 

@@ -1,4 +1,4 @@
-import {readFlight} from "./read-flight";
+import {readFlight} from './read-flight';
 
 describe('readFlight()', () => {
   it(`reads "SW_77flqgg1" flight log correctly`, () => {
@@ -6,5 +6,5 @@ describe('readFlight()', () => {
     expect(flight[0]).toMatchSnapshot();
     expect(flight[1234]).toMatchSnapshot();
     expect(flight[3333]).toMatchSnapshot();
-  })
+  });
 });

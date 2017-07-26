@@ -1,8 +1,8 @@
-import {Fix} from "../../read-flight";
-import Task from "../task";
-import Point from "../../geo/point";
-import {Event, FinishEvent, StartEvent, TurnEvent} from "../events";
-import TaskPointTracker from "../task-point-tracker";
+import Point from '../../geo/point';
+import {Fix} from '../../read-flight';
+import {Event, FinishEvent, StartEvent, TurnEvent} from '../events';
+import Task from '../task';
+import TaskPointTracker from '../task-point-tracker';
 
 export interface TaskFix {
   time: number;
@@ -110,7 +110,7 @@ export default class RacingTaskSolver {
       time,
       distance,
       speed,
-    }
+    };
   }
 }
 

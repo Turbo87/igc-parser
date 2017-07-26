@@ -1,13 +1,13 @@
-import * as turf from "@turf/turf";
+import * as turf from '@turf/turf';
 
-import {readTask} from "../src/read-task";
-import {readFlight} from "../src/read-flight";
-import {taskToGeoJSON} from "../src/task-to-geojson";
-import {viewGeoJSON} from "./utils/view-geojson";
-import Point from "../src/geo/point";
-import AreaShape from "../src/task/shapes/area";
-import Line from "../src/task/shapes/line";
-import {interpolatePoint} from "../src/geo/interpolate-point";
+import {interpolatePoint} from '../src/geo/interpolate-point';
+import Point from '../src/geo/point';
+import {readFlight} from '../src/read-flight';
+import {readTask} from '../src/read-task';
+import {taskToGeoJSON} from '../src/task-to-geojson';
+import AreaShape from '../src/task/shapes/area';
+import Line from '../src/task/shapes/line';
+import {viewGeoJSON} from './utils/view-geojson';
 
 if (process.argv.length < 4) {
   console.log('Usage: ts-node examples/show-area-intersections.ts TASK_PATH IGC_PATH');
@@ -35,7 +35,7 @@ for (let i = 1; i < flight.length; i++) {
     } else if (shape instanceof AreaShape) {
       let fractions = shape.findIntersections(lastFix.coordinate, fix.coordinate);
       let areaPoints = fractions.map(fraction => interpolatePoint(lastFix.coordinate, fix.coordinate, fraction));
-      points = points.concat(areaPoints)
+      points = points.concat(areaPoints);
     }
   });
 }

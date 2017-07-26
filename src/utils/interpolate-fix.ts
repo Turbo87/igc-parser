@@ -1,5 +1,5 @@
-import {Fix} from "../read-flight";
-import {interpolatePoint} from "../geo/interpolate-point";
+import {interpolatePoint} from '../geo/interpolate-point';
+import {Fix} from '../read-flight';
 
 export function interpolateFix(fix1: Fix, fix2: Fix, fraction: number): Fix {
   let fraction1 = 1 - fraction;

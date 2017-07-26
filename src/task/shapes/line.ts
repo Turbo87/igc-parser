@@ -1,10 +1,10 @@
-import {Feature, LineString} from "geojson";
-import * as turf from "@turf/turf";
-import * as cheapRuler from "cheap-ruler";
+import * as turf from '@turf/turf';
+import * as cheapRuler from 'cheap-ruler';
+import {Feature, LineString} from 'geojson';
 
-import Point from "../../geo/point";
-import Shape from "./base";
-import {findIntersection} from "../../geo/find-intersections";
+import {findIntersection} from '../../geo/find-intersections';
+import Point from '../../geo/point';
+import Shape from './base';
 
 export default class Line implements Shape {
   readonly center: Point;

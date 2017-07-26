@@ -1,3 +1,3 @@
-type Point = [number, number]
+type Point = [number, number];
 
 export default Point;

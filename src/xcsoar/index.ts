@@ -1,4 +1,4 @@
-import {xml2js} from "xml-js";
+import {xml2js} from 'xml-js';
 
 export interface XCSoarTask {
   type: string;

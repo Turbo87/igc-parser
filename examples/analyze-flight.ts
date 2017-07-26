@@ -1,9 +1,9 @@
-import {readTask} from "../src/read-task";
-import {readFlight} from "../src/read-flight";
-import AreaTaskSolver from "../src/task/solver/area-task-solver";
-import RacingTaskSolver from "../src/task/solver/racing-task-solver";
-import {formatTime} from "../src/format-result";
-import {FinishEvent, StartEvent, TurnEvent} from "../src/task/events";
+import {formatTime} from '../src/format-result';
+import {readFlight} from '../src/read-flight';
+import {readTask} from '../src/read-task';
+import {FinishEvent, StartEvent, TurnEvent} from '../src/task/events';
+import AreaTaskSolver from '../src/task/solver/area-task-solver';
+import RacingTaskSolver from '../src/task/solver/racing-task-solver';
 
 if (process.argv.length < 4) {
   console.log('Usage: ts-node examples/analyze-flight.ts TASK_PATH IGC_PATH');

@@ -1,6 +1,8 @@
 import GliderTrackerClient from '../src/glidertracker/client';
 
-const client = new GliderTrackerClient();
+const WebSocket = require('ws');
+
+const client = new GliderTrackerClient({ WebSocket });
 
 function connect() {
   client.connect().then(() => {

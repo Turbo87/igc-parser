@@ -7,7 +7,7 @@ const client = new GliderTrackerClient({ WebSocket });
 function connect() {
   client.connect().then(() => {
     client.setView([3.22407, 48.49193, 9.9, 53.86296]);
-    client.requestTrack('06DDA3B3', 1501244359, Date.now());
+    client.requestTrack('06DDA3B3', 1501244359000, Date.now());
   });
 }
 

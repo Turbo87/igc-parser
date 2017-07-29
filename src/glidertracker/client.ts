@@ -56,7 +56,7 @@ export default class GliderTrackerClient {
   }
 
   requestTrack(id: string, from: number, to: number) {
-    this.send(`TRACK?${id}|${from}|${to}`);
+    this.send(`TRACK?${id}|${Math.round(from / 1000)}|${Math.round(to / 1000)}`);
   }
 
   private handleMessage(message: string) {

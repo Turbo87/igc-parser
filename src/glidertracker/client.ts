@@ -2,6 +2,10 @@ import {BBox} from 'cheap-ruler';
 
 const aprs = require('aprs-parser');
 
+export interface GliderTrackerClientOptions {
+  WebSocket: any;
+}
+
 export default class GliderTrackerClient {
   onClose: () => void;
   onTrack: (id: string, fixes: any[]) => void;
@@ -9,14 +13,14 @@ export default class GliderTrackerClient {
 
   private ws: any;
   private readonly parser = new aprs.APRSParser();
-  private readonly WebSocket: any;
+  private readonly options: GliderTrackerClientOptions;
 
-  constructor(options: { WebSocket: any }) {
-    this.WebSocket = options.WebSocket;
+  constructor(options: GliderTrackerClientOptions) {
+    this.options = options;
   }
 
   connect() {
-    this.ws = new this.WebSocket('ws://glidertracker.de:3389/');
+    this.ws = new this.options.WebSocket('ws://glidertracker.de:3389/');
 
     this.ws.onclose = () => {
       this.ws = null;

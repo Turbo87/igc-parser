@@ -12,6 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@turf/bbox": "^4.5.2",
     "@turf/bearing": "^4.5.2",
     "@turf/center": "^4.5.2",
     "@turf/circle": "^4.5.2",

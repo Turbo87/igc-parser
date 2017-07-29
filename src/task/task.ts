@@ -1,5 +1,6 @@
 import turf = require('@turf/helpers');
 import turfCenter = require('@turf/center');
+import turfBBox = require('@turf/bbox');
 import cheapRuler = require('cheap-ruler');
 
 import Point from '../geo/point';
@@ -18,6 +19,7 @@ export default class Task {
 
   readonly legs: TaskLeg[];
   readonly distance: number;
+  readonly bbox: turf.BBox;
 
   private readonly _ruler: cheapRuler.CheapRuler;
 
@@ -28,8 +30,13 @@ export default class Task {
     this.start = new StartPoint(points[0].shape);
     this.finish = new FinishPoint(points[points.length - 1].shape);
 
-    let center = turfCenter(turf.multiPoint(points.map(point => point.shape.center)));
+    let feature = turf.multiPoint(points.map(point => point.shape.center));
+
+    let center = turfCenter(feature);
     this._ruler = cheapRuler(center.geometry.coordinates[1]);
+
+    // bounding box of the turnpoint coordinates with 100km buffer
+    this.bbox = this._ruler.bufferBBox(turfBBox(feature), 100);
 
     this.legs = [];
     for (let i = 1; i < points.length; i++) {

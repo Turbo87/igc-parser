@@ -8,9 +8,8 @@ import {Turnpoint} from './turnpoint';
 import {fraction} from './utils/angles';
 import {read, XCSoarLocation} from './xcsoar';
 
-export function readTask(path: string): Task {
-  let file = fs.readFileSync(path, 'utf8');
-  let task = read(file);
+export function readTaskFromString(str: string): Task {
+  let task = read(str);
 
   let points = task.points.map((point, i) => {
     let location = convertLocation(point.waypoint.location);
@@ -55,6 +54,11 @@ export function readTask(path: string): Task {
     isAAT: task.type === 'AAT',
     aatMinTime: task.aat_min_time,
   });
+}
+
+export function readTask(path: string): Task {
+  let file = fs.readFileSync(path, 'utf8');
+  return readTaskFromString(file);
 }
 
 function convertLocation(loc: XCSoarLocation): Point {

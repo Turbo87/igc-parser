@@ -44,7 +44,7 @@ export class BRecord implements Fix {
   }
 }
 
-function readFlightFromString(str: string) {
+export function readFlightFromString(str: string) {
   let lines = str.split('\n');
 
   let date: number | undefined;

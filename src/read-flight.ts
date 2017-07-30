@@ -44,8 +44,8 @@ export class BRecord implements Fix {
   }
 }
 
-export function readFlight(path: string): Fix[] {
-  let lines = fs.readFileSync(path, 'utf8').split('\n');
+function readFlightFromString(str: string) {
+  let lines = str.split('\n');
 
   let date: number | undefined;
   let fixes: Fix[] = [];
@@ -65,6 +65,10 @@ export function readFlight(path: string): Fix[] {
   });
 
   return fixes;
+}
+
+export function readFlight(path: string): Fix[] {
+  return readFlightFromString(fs.readFileSync(path, 'utf8'));
 }
 
 function findDate(line: string): number | undefined {

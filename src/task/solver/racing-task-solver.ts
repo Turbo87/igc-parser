@@ -134,7 +134,7 @@ export function pathForStart(start: StartEvent, events: Event[]): EventPath {
   return { path, time };
 }
 
-interface EventPath {
+export interface EventPath {
   path: Event[];
   time: number | undefined;
 }

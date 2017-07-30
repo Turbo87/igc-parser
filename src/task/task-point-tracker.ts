@@ -9,7 +9,7 @@ import Task from './task';
 
 const convexHull = require('monotone-convex-hull-2d');
 
-class AreaVisit {
+export class AreaVisit {
   enter: Fix;
   exit: Fix | null;
 
@@ -36,7 +36,7 @@ class AreaVisit {
   }
 }
 
-interface TaskPointTrackerOptions {
+export interface TaskPointTrackerOptions {
   trackConvexHull: boolean;
 }
 

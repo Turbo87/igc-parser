@@ -1,11 +1,16 @@
 {
   "compilerOptions": {
+    "alwaysStrict": true,
+    "declaration": true,
+    "lib": ["ES6"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "newLine": "LF",
+    "noEmitOnError": true,
     "outDir": "dist",
     "sourceMap": true,
     "strict": true,
-    "target": "es5",
-    "allowJs": true,
-    "lib": ["es2015"]
+    "target": "ES6"
   },
   "include": [
     "examples",

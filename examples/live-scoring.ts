@@ -102,5 +102,5 @@ setInterval(() => {
     return `${flarmMapping.cn}\t${distance}\t${speed}`;
   });
 
-  logUpdate(lines.join('\n'));
+  logUpdate(`${new Date().toISOString()}\n\n${lines.join('\n')}`);
 }, 100);

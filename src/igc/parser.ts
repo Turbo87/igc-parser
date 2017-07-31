@@ -112,16 +112,24 @@ export default class IGCParser {
 
       this.fixes.push(fix);
 
-    } else if (line.startsWith('HFDTE')) {
+    } else if (line.startsWith('H')) {
+      this.parseHeader(line);
+
+    } else if (line.startsWith('A')) {
+      this.aRecord = this.parseARecord(line);
+
+    } else if (line.startsWith('I')) {
+      this.fixExtensions = this.parseIRecord(line);
+    }
+  }
+
+  private parseHeader(line: string) {
+    if (line.startsWith('HFDTE')) {
       this.dateHeader = this.parseDateHeader(line);
     } else if (line.startsWith('HFPLT')) {
       this.pilot = this.parsePilot(line);
     } else if (line.startsWith('HFCM2')) {
       this.copilot = this.parseCopilot(line);
-    } else if (line.startsWith('A')) {
-      this.aRecord = this.parseARecord(line);
-    } else if (line.startsWith('I')) {
-      this.fixExtensions = this.parseIRecord(line);
     }
   }
 

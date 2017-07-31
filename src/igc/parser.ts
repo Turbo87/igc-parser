@@ -44,6 +44,8 @@ export interface BRecord {
   gpsAltitude: number | null;
 
   extensions: BRecordExtensions;
+
+  enl: number | null;
 }
 
 export interface BRecordExtensions {
@@ -168,7 +170,9 @@ export default class IGCParser {
       }
     }
 
-    return { timestamp, time, latitude, longitude, valid, pressureAltitude, gpsAltitude, extensions };
+    let enl = extensions['ENL'] ? parseInt(extensions['ENL'], 10) : null;
+
+    return { timestamp, time, latitude, longitude, valid, pressureAltitude, gpsAltitude, extensions, enl };
   }
 
   private parseIRecord(line: string): BRecordExtension[] {

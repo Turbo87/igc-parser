@@ -134,6 +134,7 @@ describe('IGCParser', () => {
         pressureAltitude: 657,
         gpsAltitude: 751,
         extensions: {},
+        enl: null,
       });
 
       expect(parser['parseBRecord']('B0000005103888N00703115EV0000000000')).toEqual({
@@ -145,6 +146,7 @@ describe('IGCParser', () => {
         pressureAltitude: null,
         gpsAltitude: null,
         extensions: {},
+        enl: null,
       });
     });
 

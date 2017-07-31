@@ -2,6 +2,7 @@
 
 exports[`IGCParser parse() parses valid IGC files 1`] = `
 Object {
+  "enl": 40,
   "extensions": Object {
     "ACZ": "100",
     "ENL": "040",
@@ -24,6 +25,7 @@ Object {
 
 exports[`IGCParser parse() parses valid IGC files 2`] = `
 Object {
+  "enl": 41,
   "extensions": Object {
     "ACZ": "090",
     "ENL": "041",
@@ -46,6 +48,7 @@ Object {
 
 exports[`IGCParser parse() parses valid IGC files 3`] = `
 Object {
+  "enl": 40,
   "extensions": Object {
     "ACZ": "120",
     "ENL": "040",
@@ -68,6 +71,7 @@ Object {
 
 exports[`IGCParser parse() parses valid IGC files 4`] = `
 Object {
+  "enl": 40,
   "extensions": Object {
     "ACZ": "090",
     "ENL": "040",

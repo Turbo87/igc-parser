@@ -1,5 +1,5 @@
-import IGCParser, {IGCFile} from '../src/igc/parser';
-import * as IGCFilenameParser from "../src/igc/filename-parser";
+import * as IGCFilenameParser from '../src/igc/filename-parser';
+import IGCParser, {ARecord, IGCFile} from '../src/igc/parser';
 
 import fs = require('fs');
 
@@ -14,40 +14,56 @@ let flightsPath = process.argv[2];
 let filenames = fs.readdirSync(flightsPath).filter(filename => (/\.igc$/i).test(filename));
 
 for (let filename of filenames) {
-  let filenameResult = IGCFilenameParser.parse(filename);
-
-  let path = `${flightsPath}/${filename}`;
-  let content = fs.readFileSync(path, 'utf8');
-  let result = IGCParser.parse(content);
-
-  print(filename, filenameResult, result);
-}
-
-if (filenames.length > 0) {
-  console.log(SEPARATOR);
-}
-
-function print(filename: string, filenameResult: IGCFilenameParser.IGCFilenameData | null, result: IGCFile) {
   console.log(SEPARATOR);
   console.log();
 
   printLine('Filename', filename);
   console.log();
 
-  if (filenameResult) {
-    printLine('> Callsign', filenameResult.callsign);
-    printLine('> Date', filenameResult.date);
-    printLine('> Manufacturer', filenameResult.manufacturer);
-    printLine('> Logger ID', filenameResult.loggerId);
-    printLine('> Flight #', filenameResult.numFlight);
+  let filenameData = IGCFilenameParser.parse(filename);
+  if (filenameData) {
+    printFilenameData(filenameData);
     console.log();
   }
 
-  printLine('Date', result.date);
-  printLine('GPS fixes', result.fixes.length);
-  printLine('GPS times', `${result.fixes[0].time} - ${result.fixes[result.fixes.length - 1].time}`);
+  let path = `${flightsPath}/${filename}`;
+  let content = fs.readFileSync(path, 'utf8');
+
+  try {
+    let data = IGCParser.parse(content);
+    printData(data);
+  } catch (error) {
+    console.log(error);
+  }
 
   console.log();
+}
+
+if (filenames.length > 0) {
+  console.log(SEPARATOR);
+}
+
+function printFilenameData(data: IGCFilenameParser.IGCFilenameData) {
+  printLine('> Callsign', data.callsign);
+  printLine('> Date', data.date);
+  printLine('> Manufacturer', data.manufacturer);
+  printLine('> Logger ID', data.loggerId);
+  printLine('> Flight #', data.numFlight);
+}
+
+function printData(data: IGCFile) {
+  printARecord(data.aRecord);
+  console.log();
+
+  printLine('Date', data.date);
+  printLine('GPS fixes', data.fixes.length);
+  printLine('GPS times', `${data.fixes[0].time} - ${data.fixes[data.fixes.length - 1].time}`);
+}
+
+function printARecord(record: ARecord) {
+  printLine('Manufacturer', record.manufacturer);
+  printLine('Logger ID', record.loggerId);
+  printLine('> Flight #', record.numFlight);
 }
 
 function printLine(title: string, value: any) {

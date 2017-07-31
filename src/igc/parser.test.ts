@@ -15,6 +15,13 @@ describe('IGCParser', () => {
       let content = fs.readFileSync(filename, 'utf8');
       let result = IGCParser.parse(content);
 
+      expect(result.aRecord).toEqual({
+        manufacturer: 'LXNAV',
+        loggerId: '6M7',
+        numFlight: 1,
+        additionalData: null,
+      });
+
       expect(result.date).toEqual('2017-07-15');
       expect(result.fixes.length).toEqual(4047);
       expect(result.fixes[0]).toMatchSnapshot();
@@ -34,6 +41,7 @@ describe('IGCParser', () => {
 
     it('handles UTC midnight correctly', () => {
       let result = IGCParser.parse([
+        'ALXV6M7',
         'HFDTE150717',
         'B1926130000000N00000000EA0000000000',
         'B2300210000000N00000000EA0000000000',
@@ -56,6 +64,45 @@ describe('IGCParser', () => {
         '2017-07-16T22:00:00.000Z',
         '2017-07-17T01:00:00.000Z',
       ]);
+    });
+  });
+
+  describe('parseARecord()', () => {
+    it('parses valid HFDTE headers', () => {
+      expect(parser['parseARecord']('AFLA1BG')).toEqual({
+        manufacturer: 'Flarm',
+        loggerId: '1BG',
+        numFlight: null,
+        additionalData: null,
+      });
+
+      expect(parser['parseARecord']('AMMMNNN:TEXT STRING')).toEqual({
+        manufacturer: 'MMM',
+        loggerId: 'NNN',
+        numFlight: null,
+        additionalData: 'TEXT STRING',
+      });
+
+      expect(parser['parseARecord']('ALXV6M7FLIGHT:1')).toEqual({
+        manufacturer: 'LXNAV',
+        loggerId: '6M7',
+        numFlight: 1,
+        additionalData: null,
+      });
+
+      expect(parser['parseARecord']('ALXNNE2FLIGHT:42')).toEqual({
+        manufacturer: 'LX Navigation',
+        loggerId: 'NE2',
+        numFlight: 42,
+        additionalData: null,
+      });
+    });
+
+    it('throws for invalid records', () => {
+      expect(() => parser['parseARecord']('')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parseARecord']('HFDTE')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parseARecord']('HFDTEXXXXXX')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parseARecord']('HFDTE1234?6')).toThrowErrorMatchingSnapshot();
     });
   });
 

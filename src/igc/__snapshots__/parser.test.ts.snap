@@ -50,6 +50,14 @@ Object {
 
 exports[`IGCParser parse() throws if HFDTE is missing 1`] = `"Missing HFDTE record"`;
 
+exports[`IGCParser parseARecord() throws for invalid records 1`] = `"Invalid A record: "`;
+
+exports[`IGCParser parseARecord() throws for invalid records 2`] = `"Invalid A record: HFDTE"`;
+
+exports[`IGCParser parseARecord() throws for invalid records 3`] = `"Invalid A record: HFDTEXXXXXX"`;
+
+exports[`IGCParser parseARecord() throws for invalid records 4`] = `"Invalid A record: HFDTE1234?6"`;
+
 exports[`IGCParser parseBRecord() throws for invalid records 1`] = `"Invalid B record: "`;
 
 exports[`IGCParser parseBRecord() throws for invalid records 2`] = `"Invalid B record: B10a6555103888N00703115EA0065700751"`;

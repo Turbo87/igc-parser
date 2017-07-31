@@ -1,16 +1,28 @@
+import MANUFACTURERS from './manufacturers';
+
 const ONE_HOUR = 60 * 60 * 1000;
 const ONE_DAY = 24 * 60 * 60 * 1000;
 
 /* tslint:disable:max-line-length */
+const RE_A = /^A(\w{3})(\w{3,}?)(?:FLIGHT:(\d+)|\:(.+))?/;
 const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 /* tslint:enable:max-line-length */
 
 export interface IGCFile {
+  aRecord: ARecord;
+
   /** UTC date of the flight in ISO 8601 format */
   date: string;
 
   fixes: BRecord[];
+}
+
+export interface ARecord {
+  manufacturer: string;
+  loggerId: string;
+  numFlight: number | null;
+  additionalData: string | null;
 }
 
 export interface HFDTEHeader {
@@ -32,6 +44,7 @@ export interface BRecord {
 }
 
 export default class IGCParser {
+  private aRecord: ARecord | null;
   private dateHeader: HFDTEHeader | null;
   private fixes: BRecord[] = [];
 
@@ -48,11 +61,16 @@ export default class IGCParser {
   }
 
   get result(): IGCFile {
+    if (!this.aRecord) {
+      throw new Error(`Missing A record`);
+    }
+
     if (!this.dateHeader) {
       throw new Error(`Missing HFDTE record`);
     }
 
     return {
+      aRecord: this.aRecord,
       date: this.dateHeader.date,
       fixes: this.fixes,
     };
@@ -68,7 +86,31 @@ export default class IGCParser {
 
     } else if (line.startsWith('HFDTE')) {
       this.dateHeader = this.parseDateHeader(line);
+    } else if (line.startsWith('A')) {
+      this.aRecord = this.parseARecord(line);
     }
+  }
+
+  private parseARecord(line: string): ARecord {
+    let match = line.match(RE_A);
+    if (!match) {
+      throw new Error(`Invalid A record: ${line}`);
+    }
+
+    let manufacturerId = match[1];
+    let manufacturer = manufacturerId;
+    if (manufacturerId) {
+      let manufacturers = MANUFACTURERS.filter(it => it.long === manufacturerId);
+      if (manufacturers.length !== 0) {
+        manufacturer = manufacturers[0].name;
+      }
+    }
+
+    let loggerId = match[2];
+    let numFlight = match[3] ? parseInt(match[3], 10) : null;
+    let additionalData = match[4] || null;
+
+    return { manufacturer, loggerId, numFlight, additionalData };
   }
 
   private parseDateHeader(line: string): HFDTEHeader {

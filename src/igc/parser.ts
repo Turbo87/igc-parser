@@ -46,6 +46,8 @@ export interface BRecord {
   extensions: BRecordExtensions;
 
   fixAccuracy: number | null;
+
+  /** Engine Noise Level from 0.0 to 1.0 */
   enl: number | null;
 }
 
@@ -171,7 +173,14 @@ export default class IGCParser {
       }
     }
 
-    let enl = extensions['ENL'] ? parseInt(extensions['ENL'], 10) : null;
+    let enl = null;
+    if (extensions['ENL']) {
+      let enlLength = this.fixExtensions.filter(it => it.code === 'ENL')[0].length;
+      let enlMax = Math.pow(10, enlLength);
+
+      enl = parseInt(extensions['ENL'], 10) / enlMax;
+    }
+
     let fixAccuracy = extensions['FXA'] ? parseInt(extensions['FXA'], 10) : null;
 
     return {

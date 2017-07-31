@@ -61,7 +61,9 @@ function printData(data: IGCFile) {
 
   let enlValues = data.fixes.map(fix => fix.enl).filter(enl => enl !== null) as number[];
   if (enlValues.length !== 0) {
-    printLine('ENL range', Math.min(...enlValues) + ' - ' + Math.max(...enlValues));
+    let min = Math.min(...enlValues);
+    let max = Math.max(...enlValues);
+    printLine('ENL range', `${(min * 100).toFixed(1)} - ${(max * 100).toFixed(1)}%`);
   }
 }
 

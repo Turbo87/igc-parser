@@ -160,4 +160,36 @@ describe('IGCParser', () => {
       expect(() => parser['parseBRecord']('B1026555103888N00703115NA0065700751')).toThrowErrorMatchingSnapshot();
     });
   });
+
+  describe('parseIRecord()', () => {
+    it('parses valid I records', () => {
+      expect(parser['parseIRecord']('I013638FXA')).toEqual([
+        { code: 'FXA', start: 36, length: 3 },
+      ]);
+
+      expect(parser['parseIRecord']('I043638FXA3940SIU4143ENL4446MOP')).toEqual([
+        { code: 'FXA', start: 36, length: 3 },
+        { code: 'SIU', start: 39, length: 2 },
+        { code: 'ENL', start: 41, length: 3 },
+        { code: 'MOP', start: 44, length: 3 },
+      ]);
+
+      expect(parser['parseIRecord']('I083638FXA3941ENL4246TAS4751GSP5254TRT5559VAT6063OAT6467ACZ')).toEqual([
+        { code: 'FXA', start: 36, length: 3 },
+        { code: 'ENL', start: 39, length: 3 },
+        { code: 'TAS', start: 42, length: 5 },
+        { code: 'GSP', start: 47, length: 5 },
+        { code: 'TRT', start: 52, length: 3 },
+        { code: 'VAT', start: 55, length: 5 },
+        { code: 'OAT', start: 60, length: 4 },
+        { code: 'ACZ', start: 64, length: 4 },
+      ]);
+    });
+
+    it('throws for invalid records', () => {
+      expect(() => parser['parseIRecord']('')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parseIRecord']('I023638FXA')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parseIRecord']('I0136FXA38')).toThrowErrorMatchingSnapshot();
+    });
+  });
 });

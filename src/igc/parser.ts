@@ -7,6 +7,7 @@ const ONE_DAY = 24 * 60 * 60 * 1000;
 const RE_A = /^A(\w{3})(\w{3,}?)(?:FLIGHT:(\d+)|\:(.+))?/;
 const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
+const RE_I = /^I(\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 /* tslint:enable:max-line-length */
 
 export interface IGCFile {
@@ -43,9 +44,16 @@ export interface BRecord {
   gpsAltitude: number | null;
 }
 
+export interface BRecordExtension {
+  code: string;
+  start: number;
+  length: number;
+}
+
 export default class IGCParser {
   private aRecord: ARecord | null;
   private dateHeader: HFDTEHeader | null;
+  private fixExtensions: BRecordExtension[];
   private fixes: BRecord[] = [];
 
   private prevTimestamp: number | null;
@@ -88,6 +96,8 @@ export default class IGCParser {
       this.dateHeader = this.parseDateHeader(line);
     } else if (line.startsWith('A')) {
       this.aRecord = this.parseARecord(line);
+    } else if (line.startsWith('I')) {
+      this.fixExtensions = this.parseIRecord(line);
     }
   }
 
@@ -146,6 +156,32 @@ export default class IGCParser {
     let gpsAltitude = match[14] === '00000' ? null : parseInt(match[14], 10);
 
     return { timestamp, time, latitude, longitude, valid, pressureAltitude, gpsAltitude };
+  }
+
+  private parseIRecord(line: string): BRecordExtension[] {
+    let match = line.match(RE_I);
+    if (!match) {
+      throw new Error(`Invalid I record: ${line}`);
+    }
+
+    let num = parseInt(match[1], 10);
+    if (line.length < 3 + num * 7) {
+      throw new Error(`Invalid I record: ${line}`);
+    }
+
+    let extensions = new Array<BRecordExtension>(num);
+
+    for (let i = 0; i < num; i++) {
+      let offset = 3 + i * 7;
+      let start = parseInt(line.slice(offset, offset + 2), 10);
+      let end = parseInt(line.slice(offset + 2, offset + 4), 10);
+      let length = end - start + 1;
+      let code = line.slice(offset + 4, offset + 7);
+
+      extensions[i] = { start, length, code };
+    }
+
+    return extensions;
   }
 
   private static parseLatitude(dd: string, mm: string, mmm: string, ns: string): number {

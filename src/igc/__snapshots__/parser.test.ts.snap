@@ -77,3 +77,9 @@ exports[`IGCParser parseDateHeader() throws for invalid records 2`] = `"Invalid 
 exports[`IGCParser parseDateHeader() throws for invalid records 3`] = `"Invalid HFDTE record: HFDTEXXXXXX"`;
 
 exports[`IGCParser parseDateHeader() throws for invalid records 4`] = `"Invalid HFDTE record: HFDTE1234?6"`;
+
+exports[`IGCParser parseIRecord() throws for invalid records 1`] = `"Invalid I record: "`;
+
+exports[`IGCParser parseIRecord() throws for invalid records 2`] = `"Invalid I record: I023638FXA"`;
+
+exports[`IGCParser parseIRecord() throws for invalid records 3`] = `"Invalid I record: I0136FXA38"`;

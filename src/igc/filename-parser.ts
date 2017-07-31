@@ -26,13 +26,13 @@ const MONTHS = {
 };
 
 const PARSERS = [
+  parseShort,
+  parseLong,
   parseSeeyou,
   parseStrepla,
-  parseIGCDroid,
-  parseLong,
-  parseShort,
-  parseFullDate,
   parseShortDate,
+  parseFullDate,
+  parseIGCDroid,
 ] as Array<(filename: string, maxYear?: number) => IGCFilenameData | null>;
 
 export interface IGCFilenameData {

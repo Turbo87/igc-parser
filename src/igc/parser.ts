@@ -163,22 +163,21 @@ export default class IGCParser {
     return { date };
   }
 
-  private parsePilot(line: string): string {
-    let match = line.match(RE_PLT_HEADER);
+  private parseTextHeader(headerType: string, regex: RegExp, line: string): string {
+    let match = line.match(regex);
     if (!match) {
-      throw new Error(`Invalid PLT header at line ${this.lineNumber}: ${line}`);
+      throw new Error(`Invalid ${headerType} header at line ${this.lineNumber}: ${line}`);
     }
 
     return (match[1] || match[2] || '').replace(/_/g, ' ').trim();
   }
 
-  private parseCopilot(line: string): string {
-    let match = line.match(RE_CM2_HEADER);
-    if (!match) {
-      throw new Error(`Invalid CM2 header at line ${this.lineNumber}: ${line}`);
-    }
+  private parsePilot(line: string): string {
+    return this.parseTextHeader('PLT', RE_PLT_HEADER, line);
+  }
 
-    return (match[1] || match[2] || '').replace(/_/g, ' ').trim();
+  private parseCopilot(line: string): string {
+    return this.parseTextHeader('CM2', RE_CM2_HEADER, line);
   }
 
   private parseBRecord(line: string): BRecord {

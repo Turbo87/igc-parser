@@ -6,6 +6,8 @@ const ONE_DAY = 24 * 60 * 60 * 1000;
 /* tslint:disable:max-line-length */
 const RE_A = /^A(\w{3})(\w{3,}?)(?:FLIGHT:(\d+)|\:(.+))?/;
 const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
+const RE_PLT_HEADER = /^H[FO]PLT(?:.{0,}?:(.*)|(.*))$/;
+const RE_CM2_HEADER = /^H[FO]CM2(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_I = /^I(\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 /* tslint:enable:max-line-length */
@@ -15,6 +17,9 @@ export interface IGCFile {
 
   /** UTC date of the flight in ISO 8601 format */
   date: string;
+
+  pilot: string | null;
+  copilot: string | null;
 
   fixes: BRecord[];
 }
@@ -66,6 +71,8 @@ export default class IGCParser {
   private dateHeader: HFDTEHeader | null;
   private fixExtensions: BRecordExtension[];
   private fixes: BRecord[] = [];
+  private pilot: string | null;
+  private copilot: string | null;
 
   private prevTimestamp: number | null;
 
@@ -91,6 +98,8 @@ export default class IGCParser {
     return {
       aRecord: this.aRecord,
       date: this.dateHeader.date,
+      pilot: this.pilot,
+      copilot: this.copilot,
       fixes: this.fixes,
     };
   }
@@ -105,6 +114,10 @@ export default class IGCParser {
 
     } else if (line.startsWith('HFDTE')) {
       this.dateHeader = this.parseDateHeader(line);
+    } else if (line.startsWith('HFPLT')) {
+      this.pilot = this.parsePilot(line);
+    } else if (line.startsWith('HFCM2')) {
+      this.copilot = this.parseCopilot(line);
     } else if (line.startsWith('A')) {
       this.aRecord = this.parseARecord(line);
     } else if (line.startsWith('I')) {
@@ -136,6 +149,24 @@ export default class IGCParser {
     let date = `${lastCentury ? '19' : '20'}${match[3]}-${match[2]}-${match[1]}`;
 
     return { date };
+  }
+
+  private parsePilot(line: string): string {
+    let match = line.match(RE_PLT_HEADER);
+    if (!match) {
+      throw new Error(`Invalid PLT header: ${line}`);
+    }
+
+    return (match[1] || match[2] || '').replace(/_/g, ' ').trim();
+  }
+
+  private parseCopilot(line: string): string {
+    let match = line.match(RE_CM2_HEADER);
+    if (!match) {
+      throw new Error(`Invalid CM2 header: ${line}`);
+    }
+
+    return (match[1] || match[2] || '').replace(/_/g, ' ').trim();
   }
 
   private parseBRecord(line: string): BRecord {

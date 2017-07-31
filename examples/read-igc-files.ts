@@ -55,7 +55,14 @@ function printData(data: IGCFile) {
   printARecord(data.aRecord);
   console.log();
 
+  if (data.pilot || data.copilot) {
+    printLine('Pilot', data.pilot);
+    printLine('Copilot', data.copilot);
+    console.log();
+  }
+
   printLine('Date', data.date);
+
   printLine('GPS fixes', data.fixes.length);
   if (data.fixes.length !== 0) {
     printLine('GPS times', `${data.fixes[0].time} - ${data.fixes[data.fixes.length - 1].time}`);
@@ -88,7 +95,7 @@ function printLine(title: string, value: any) {
     title += ' ';
   }
 
-  if (value !== undefined && value !== null) {
+  if (value !== undefined && value !== null && value !== '') {
     console.log(`${title}${value}`);
   }
 }

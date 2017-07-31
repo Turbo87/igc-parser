@@ -118,6 +118,12 @@ exports[`IGCParser parseBRecord() throws for invalid records 5`] = `"Invalid B r
 
 exports[`IGCParser parseBRecord() throws for missing "dateHeader" 1`] = `"Missing HFDTE record before first B record"`;
 
+exports[`IGCParser parseCopilot() throws for invalid records 1`] = `"Invalid CM2 header: "`;
+
+exports[`IGCParser parseCopilot() throws for invalid records 2`] = `"Invalid CM2 header: HXCM2:John Doe"`;
+
+exports[`IGCParser parseCopilot() throws for invalid records 3`] = `"Invalid CM2 header: HFCM1:John Doe"`;
+
 exports[`IGCParser parseDateHeader() throws for invalid records 1`] = `"Invalid HFDTE record: "`;
 
 exports[`IGCParser parseDateHeader() throws for invalid records 2`] = `"Invalid HFDTE record: HFDTE"`;
@@ -131,3 +137,9 @@ exports[`IGCParser parseIRecord() throws for invalid records 1`] = `"Invalid I r
 exports[`IGCParser parseIRecord() throws for invalid records 2`] = `"Invalid I record: I023638FXA"`;
 
 exports[`IGCParser parseIRecord() throws for invalid records 3`] = `"Invalid I record: I0136FXA38"`;
+
+exports[`IGCParser parsePilot() throws for invalid records 1`] = `"Invalid PLT header: "`;
+
+exports[`IGCParser parsePilot() throws for invalid records 2`] = `"Invalid PLT header: HXPLT:John Doe"`;
+
+exports[`IGCParser parsePilot() throws for invalid records 3`] = `"Invalid PLT header: HFPLX:John Doe"`;

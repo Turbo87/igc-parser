@@ -121,6 +121,44 @@ describe('IGCParser', () => {
     });
   });
 
+  describe('parsePilot()', () => {
+    it('parses valid PLT headers', () => {
+      expect(parser['parsePilot']('HFPLTPILOT:')).toEqual('');
+      expect(parser['parsePilot']('HFPLTPilotincharge:Mike Havener')).toEqual('Mike Havener');
+      expect(parser['parsePilot']('HFPLTPILOT:BEN BRAND')).toEqual('BEN BRAND');
+      expect(parser['parsePilot']('HFPLTPILOT:foo:bar')).toEqual('foo:bar');
+      expect(parser['parsePilot']('HFPLTPILOTINCHARGE:YUTA_ISHIGURO')).toEqual('YUTA ISHIGURO');
+      expect(parser['parsePilot']('HFPLT Pilot             :Gisela Weinreich  ')).toEqual('Gisela Weinreich');
+      expect(parser['parsePilot']('HFPLT:John Doe')).toEqual('John Doe');
+      expect(parser['parsePilot']('HOPLTJohn Doe')).toEqual('John Doe');
+    });
+
+    it('throws for invalid records', () => {
+      expect(() => parser['parsePilot']('')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parsePilot']('HXPLT:John Doe')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parsePilot']('HFPLX:John Doe')).toThrowErrorMatchingSnapshot();
+    });
+  });
+
+  describe('parseCopilot()', () => {
+    it('parses valid CM2 headers', () => {
+      expect(parser['parseCopilot']('HFCM2CREW2:')).toEqual('');
+      expect(parser['parseCopilot']('HFCM2Crew 2:Mike Havener')).toEqual('Mike Havener');
+      expect(parser['parseCopilot']('HFCM2CREW2:BEN BRAND')).toEqual('BEN BRAND');
+      expect(parser['parseCopilot']('HFCM2CREW2:foo:bar')).toEqual('foo:bar');
+      expect(parser['parseCopilot']('HFCM2CREW2:YUTA_ISHIGURO')).toEqual('YUTA ISHIGURO');
+      expect(parser['parseCopilot']('HFCM2 Copilot           :Gisela Weinreich  ')).toEqual('Gisela Weinreich');
+      expect(parser['parseCopilot']('HFCM2:John Doe')).toEqual('John Doe');
+      expect(parser['parseCopilot']('HOCM2John Doe')).toEqual('John Doe');
+    });
+
+    it('throws for invalid records', () => {
+      expect(() => parser['parseCopilot']('')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parseCopilot']('HXCM2:John Doe')).toThrowErrorMatchingSnapshot();
+      expect(() => parser['parseCopilot']('HFCM1:John Doe')).toThrowErrorMatchingSnapshot();
+    });
+  });
+
   describe('parseBRecord()', () => {
     it('parses valid B records', () => {
       parser['dateHeader'] = { date: '2017-02-03' };

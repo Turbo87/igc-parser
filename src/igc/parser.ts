@@ -1,4 +1,4 @@
-import MANUFACTURERS from './manufacturers';
+import {lookup as lookupManufacturer} from './manufacturers';
 
 const ONE_HOUR = 60 * 60 * 1000;
 const ONE_DAY = 24 * 60 * 60 * 1000;
@@ -97,15 +97,7 @@ export default class IGCParser {
       throw new Error(`Invalid A record: ${line}`);
     }
 
-    let manufacturerId = match[1];
-    let manufacturer = manufacturerId;
-    if (manufacturerId) {
-      let manufacturers = MANUFACTURERS.filter(it => it.long === manufacturerId);
-      if (manufacturers.length !== 0) {
-        manufacturer = manufacturers[0].name;
-      }
-    }
-
+    let manufacturer = lookupManufacturer(match[1]);
     let loggerId = match[2];
     let numFlight = match[3] ? parseInt(match[3], 10) : null;
     let additionalData = match[4] || null;

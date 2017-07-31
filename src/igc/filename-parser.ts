@@ -1,4 +1,4 @@
-import MANUFACTURERS from './manufacturers';
+import {lookup as lookupManufacturer} from './manufacturers';
 
 const RE_SEEYOU = /^(\d)([1-9a-c])([1-9a-v])_([\da-z]{1,3})\.igc$/i;
 const RE_STREPLA_PREFIX = /^([\da-z]{1,3})_(.*)$/i;
@@ -62,15 +62,7 @@ function parseShort(filename: string, maxYear: number): IGCFilenameData | null {
 
   let callsign = null;
   let date = charsToDate(match[1], match[2], match[3], maxYear);
-
-  let manufacturerId = match[4].toUpperCase();
-  let manufacturer = manufacturerId;
-  if (manufacturerId) {
-    let manufacturers = MANUFACTURERS.filter(it => it.short === manufacturerId);
-    if (manufacturers.length !== 0) {
-      manufacturer = manufacturers[0].name;
-    }
-  }
+  let manufacturer = lookupManufacturer(match[4], true);
 
   let loggerId = match[5].toUpperCase();
   let numFlight = charToNumber(match[6]);
@@ -136,16 +128,7 @@ function parseLong(filename: string): IGCFilenameData | null {
 
   let callsign = null;
   let date = match[1];
-
-  let manufacturerId = match[2] ? match[2].toUpperCase() : null;
-  let manufacturer = manufacturerId;
-  if (manufacturerId) {
-    let manufacturers = MANUFACTURERS.filter(it => it.long === manufacturerId);
-    if (manufacturers.length !== 0) {
-      manufacturer = manufacturers[0].name;
-    }
-  }
-
+  let manufacturer = match[2] ? lookupManufacturer(match[2]) : null;
   let loggerId = match[3] ? match[3].toUpperCase() : null;
 
   let numFlight = null;

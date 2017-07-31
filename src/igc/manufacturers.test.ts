@@ -8,7 +8,7 @@ describe('flight recorder manufacturers', () => {
     expect(lookup('LXV')).toEqual('LXNAV');
     expect(lookup('LXN')).toEqual('LX Navigation');
     expect(lookup('FLA')).toEqual('Flarm');
-    expect(lookup('XCS')).toEqual('XCS');
+    expect(lookup('XCS')).toEqual('XCSoar');
     expect(lookup('XXX')).toEqual('XXX');
   });
 });

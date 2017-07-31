@@ -22,6 +22,9 @@ const MANUFACTURERS = [
   { name: 'Streamline Data Instruments', long: 'SDI', short: 'S' },
   { name: 'Triadis Engineering GmbH', long: 'TRI', short: 'T' },
   { name: 'Zander', long: 'ZAN', short: 'Z' },
+  { name: 'XCSoar', long: 'XCS', short: null },
+  { name: 'LK8000', long: 'XLK', short: null },
+  { name: 'SeeYou Recorder', long: 'XCM', short: null },
 ];
 
 export default MANUFACTURERS;

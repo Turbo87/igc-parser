@@ -45,6 +45,7 @@ function print(filename: string, filenameResult: IGCFilenameParser.IGCFilenameDa
 
   printLine('Date', result.date);
   printLine('GPS fixes', result.fixes.length);
+  printLine('GPS times', `${result.fixes[0].time} - ${result.fixes[result.fixes.length - 1].time}`);
 
   console.log();
 }

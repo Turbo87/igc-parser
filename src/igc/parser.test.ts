@@ -23,6 +23,13 @@ describe('IGCParser', () => {
       });
 
       expect(result.date).toEqual('2017-07-15');
+      expect(result.pilot).toEqual('Florian Graf');
+      expect(result.copilot).toBeUndefined();
+      expect(result.gliderType).toEqual('ASW 19');
+      expect(result.registration).toEqual('D-2019');
+      expect(result.callsign).toEqual('1G');
+      expect(result.competitionClass).toEqual('Club');
+
       expect(result.fixes.length).toEqual(4047);
       expect(result.fixes[0]).toMatchSnapshot();
       expect(result.fixes[1234]).toMatchSnapshot();

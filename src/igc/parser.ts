@@ -8,6 +8,10 @@ const RE_A = /^A(\w{3})(\w{3,}?)(?:FLIGHT:(\d+)|\:(.+))?/;
 const RE_HFDTE = /^HFDTE(\d{2})(\d{2})(\d{2})/;
 const RE_PLT_HEADER = /^H[FO]PLT(?:.{0,}?:(.*)|(.*))$/;
 const RE_CM2_HEADER = /^H[FO]CM2(?:.{0,}?:(.*)|(.*))$/;
+const RE_GTY_HEADER = /^H[FO]GTY(?:.{0,}?:(.*)|(.*))$/;
+const RE_GID_HEADER = /^H[FO]GID(?:.{0,}?:(.*)|(.*))$/;
+const RE_CID_HEADER = /^H[FO]CID(?:.{0,}?:(.*)|(.*))$/;
+const RE_CCL_HEADER = /^H[FO]CCL(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_I = /^I(\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 /* tslint:enable:max-line-length */
@@ -20,6 +24,11 @@ export interface IGCFile {
 
   pilot: string | null;
   copilot: string | null;
+
+  gliderType: string | null;
+  registration: string | null;
+  callsign: string | null;
+  competitionClass: string | null;
 
   fixes: BRecord[];
 }
@@ -71,8 +80,14 @@ export default class IGCParser {
   private dateHeader: HFDTEHeader | null;
   private fixExtensions: BRecordExtension[];
   private fixes: BRecord[] = [];
+
   private pilot: string | null;
   private copilot: string | null;
+
+  private gliderType: string | null;
+  private registration: string | null;
+  private callsign: string | null;
+  private competitionClass: string | null;
 
   private lineNumber = 0;
   private prevTimestamp: number | null;
@@ -101,6 +116,10 @@ export default class IGCParser {
       date: this.dateHeader.date,
       pilot: this.pilot,
       copilot: this.copilot,
+      gliderType: this.gliderType,
+      registration: this.registration,
+      callsign: this.callsign,
+      competitionClass: this.competitionClass,
       fixes: this.fixes,
     };
   }
@@ -134,6 +153,14 @@ export default class IGCParser {
       this.pilot = this.parsePilot(line);
     } else if (headerType === 'CM2') {
       this.copilot = this.parseCopilot(line);
+    } else if (headerType === 'GTY') {
+      this.gliderType = this.parseGliderType(line);
+    } else if (headerType === 'GID') {
+      this.registration = this.parseRegistration(line);
+    } else if (headerType === 'CID') {
+      this.callsign = this.parseCallsign(line);
+    } else if (headerType === 'CCL') {
+      this.competitionClass = this.parseCompetitionClass(line);
     }
   }
 
@@ -163,13 +190,13 @@ export default class IGCParser {
     return { date };
   }
 
-  private parseTextHeader(headerType: string, regex: RegExp, line: string): string {
+  private parseTextHeader(headerType: string, regex: RegExp, line: string, underscoreReplacement = ' '): string {
     let match = line.match(regex);
     if (!match) {
       throw new Error(`Invalid ${headerType} header at line ${this.lineNumber}: ${line}`);
     }
 
-    return (match[1] || match[2] || '').replace(/_/g, ' ').trim();
+    return (match[1] || match[2] || '').replace(/_/g, underscoreReplacement).trim();
   }
 
   private parsePilot(line: string): string {
@@ -178,6 +205,22 @@ export default class IGCParser {
 
   private parseCopilot(line: string): string {
     return this.parseTextHeader('CM2', RE_CM2_HEADER, line);
+  }
+
+  private parseGliderType(line: string): string {
+    return this.parseTextHeader('GTY', RE_GTY_HEADER, line);
+  }
+
+  private parseRegistration(line: string): string {
+    return this.parseTextHeader('GID', RE_GID_HEADER, line, '-');
+  }
+
+  private parseCallsign(line: string): string {
+    return this.parseTextHeader('GTY', RE_CID_HEADER, line);
+  }
+
+  private parseCompetitionClass(line: string): string {
+    return this.parseTextHeader('GID', RE_CCL_HEADER, line);
   }
 
   private parseBRecord(line: string): BRecord {

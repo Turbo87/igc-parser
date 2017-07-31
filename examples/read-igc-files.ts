@@ -61,6 +61,14 @@ function printData(data: IGCFile) {
     console.log();
   }
 
+  if (data.gliderType || data.registration || data.callsign || data.competitionClass) {
+    printLine('Registration', data.registration);
+    printLine('Callsign', data.callsign);
+    printLine('Glider Type', data.gliderType);
+    printLine('Comp. Class', data.competitionClass);
+    console.log();
+  }
+
   printLine('Date', data.date);
 
   printLine('GPS fixes', data.fixes.length);

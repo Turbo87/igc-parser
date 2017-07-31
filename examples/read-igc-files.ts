@@ -58,6 +58,11 @@ function printData(data: IGCFile) {
   printLine('Date', data.date);
   printLine('GPS fixes', data.fixes.length);
   printLine('GPS times', `${data.fixes[0].time} - ${data.fixes[data.fixes.length - 1].time}`);
+
+  let enlValues = data.fixes.map(fix => fix.enl).filter(enl => enl !== null) as number[];
+  if (enlValues.length !== 0) {
+    printLine('ENL range', Math.min(...enlValues) + ' - ' + Math.max(...enlValues));
+  }
 }
 
 function printARecord(record: ARecord) {

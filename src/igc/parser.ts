@@ -74,6 +74,7 @@ export default class IGCParser {
   private pilot: string | null;
   private copilot: string | null;
 
+  private lineNumber = 0;
   private prevTimestamp: number | null;
 
   static parse(str: string): IGCFile {
@@ -105,6 +106,8 @@ export default class IGCParser {
   }
 
   private parseLine(line: string) {
+    this.lineNumber += 1;
+
     if (line.startsWith('B')) {
       let fix = this.parseBRecord(line);
 
@@ -137,7 +140,7 @@ export default class IGCParser {
   private parseARecord(line: string): ARecord {
     let match = line.match(RE_A);
     if (!match) {
-      throw new Error(`Invalid A record: ${line}`);
+      throw new Error(`Invalid A record at line ${this.lineNumber}: ${line}`);
     }
 
     let manufacturer = lookupManufacturer(match[1]);
@@ -151,7 +154,7 @@ export default class IGCParser {
   private parseDateHeader(line: string): HFDTEHeader {
     let match = line.match(RE_HFDTE);
     if (!match) {
-      throw new Error(`Invalid HFDTE record: ${line}`);
+      throw new Error(`Invalid DTE header at line ${this.lineNumber}: ${line}`);
     }
 
     let lastCentury = match[3][0] === '8' || match[3][0] === '9';
@@ -163,7 +166,7 @@ export default class IGCParser {
   private parsePilot(line: string): string {
     let match = line.match(RE_PLT_HEADER);
     if (!match) {
-      throw new Error(`Invalid PLT header: ${line}`);
+      throw new Error(`Invalid PLT header at line ${this.lineNumber}: ${line}`);
     }
 
     return (match[1] || match[2] || '').replace(/_/g, ' ').trim();
@@ -172,7 +175,7 @@ export default class IGCParser {
   private parseCopilot(line: string): string {
     let match = line.match(RE_CM2_HEADER);
     if (!match) {
-      throw new Error(`Invalid CM2 header: ${line}`);
+      throw new Error(`Invalid CM2 header at line ${this.lineNumber}: ${line}`);
     }
 
     return (match[1] || match[2] || '').replace(/_/g, ' ').trim();
@@ -185,7 +188,7 @@ export default class IGCParser {
 
     let match = line.match(RE_B);
     if (!match) {
-      throw new Error(`Invalid B record: ${line}`);
+      throw new Error(`Invalid B record at line ${this.lineNumber}: ${line}`);
     }
 
     let time = `${match[1]}:${match[2]}:${match[3]}`;
@@ -240,12 +243,12 @@ export default class IGCParser {
   private parseIRecord(line: string): BRecordExtension[] {
     let match = line.match(RE_I);
     if (!match) {
-      throw new Error(`Invalid I record: ${line}`);
+      throw new Error(`Invalid I record at line ${this.lineNumber}: ${line}`);
     }
 
     let num = parseInt(match[1], 10);
     if (line.length < 3 + num * 7) {
-      throw new Error(`Invalid I record: ${line}`);
+      throw new Error(`Invalid I record at line ${this.lineNumber}: ${line}`);
     }
 
     let extensions = new Array<BRecordExtension>(num);

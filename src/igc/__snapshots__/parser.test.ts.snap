@@ -98,48 +98,48 @@ Object {
 
 exports[`IGCParser parse() throws if HFDTE is missing 1`] = `"Missing HFDTE record"`;
 
-exports[`IGCParser parseARecord() throws for invalid records 1`] = `"Invalid A record: "`;
+exports[`IGCParser parseARecord() throws for invalid records 1`] = `"Invalid A record at line 0: "`;
 
-exports[`IGCParser parseARecord() throws for invalid records 2`] = `"Invalid A record: HFDTE"`;
+exports[`IGCParser parseARecord() throws for invalid records 2`] = `"Invalid A record at line 0: HFDTE"`;
 
-exports[`IGCParser parseARecord() throws for invalid records 3`] = `"Invalid A record: HFDTEXXXXXX"`;
+exports[`IGCParser parseARecord() throws for invalid records 3`] = `"Invalid A record at line 0: HFDTEXXXXXX"`;
 
-exports[`IGCParser parseARecord() throws for invalid records 4`] = `"Invalid A record: HFDTE1234?6"`;
+exports[`IGCParser parseARecord() throws for invalid records 4`] = `"Invalid A record at line 0: HFDTE1234?6"`;
 
-exports[`IGCParser parseBRecord() throws for invalid records 1`] = `"Invalid B record: "`;
+exports[`IGCParser parseBRecord() throws for invalid records 1`] = `"Invalid B record at line 0: "`;
 
-exports[`IGCParser parseBRecord() throws for invalid records 2`] = `"Invalid B record: B10a6555103888N00703115EA0065700751"`;
+exports[`IGCParser parseBRecord() throws for invalid records 2`] = `"Invalid B record at line 0: B10a6555103888N00703115EA0065700751"`;
 
-exports[`IGCParser parseBRecord() throws for invalid records 3`] = `"Invalid B record: B1026555103888X00703115EA0065700751"`;
+exports[`IGCParser parseBRecord() throws for invalid records 3`] = `"Invalid B record at line 0: B1026555103888X00703115EA0065700751"`;
 
-exports[`IGCParser parseBRecord() throws for invalid records 4`] = `"Invalid B record: B102655510Z888N00703115EA0065700751"`;
+exports[`IGCParser parseBRecord() throws for invalid records 4`] = `"Invalid B record at line 0: B102655510Z888N00703115EA0065700751"`;
 
-exports[`IGCParser parseBRecord() throws for invalid records 5`] = `"Invalid B record: B1026555103888N00703115NA0065700751"`;
+exports[`IGCParser parseBRecord() throws for invalid records 5`] = `"Invalid B record at line 0: B1026555103888N00703115NA0065700751"`;
 
 exports[`IGCParser parseBRecord() throws for missing "dateHeader" 1`] = `"Missing HFDTE record before first B record"`;
 
-exports[`IGCParser parseCopilot() throws for invalid records 1`] = `"Invalid CM2 header: "`;
+exports[`IGCParser parseCopilot() throws for invalid records 1`] = `"Invalid CM2 header at line 0: "`;
 
-exports[`IGCParser parseCopilot() throws for invalid records 2`] = `"Invalid CM2 header: HXCM2:John Doe"`;
+exports[`IGCParser parseCopilot() throws for invalid records 2`] = `"Invalid CM2 header at line 0: HXCM2:John Doe"`;
 
-exports[`IGCParser parseCopilot() throws for invalid records 3`] = `"Invalid CM2 header: HFCM1:John Doe"`;
+exports[`IGCParser parseCopilot() throws for invalid records 3`] = `"Invalid CM2 header at line 0: HFCM1:John Doe"`;
 
-exports[`IGCParser parseDateHeader() throws for invalid records 1`] = `"Invalid HFDTE record: "`;
+exports[`IGCParser parseDateHeader() throws for invalid records 1`] = `"Invalid DTE header at line 0: "`;
 
-exports[`IGCParser parseDateHeader() throws for invalid records 2`] = `"Invalid HFDTE record: HFDTE"`;
+exports[`IGCParser parseDateHeader() throws for invalid records 2`] = `"Invalid DTE header at line 0: HFDTE"`;
 
-exports[`IGCParser parseDateHeader() throws for invalid records 3`] = `"Invalid HFDTE record: HFDTEXXXXXX"`;
+exports[`IGCParser parseDateHeader() throws for invalid records 3`] = `"Invalid DTE header at line 0: HFDTEXXXXXX"`;
 
-exports[`IGCParser parseDateHeader() throws for invalid records 4`] = `"Invalid HFDTE record: HFDTE1234?6"`;
+exports[`IGCParser parseDateHeader() throws for invalid records 4`] = `"Invalid DTE header at line 0: HFDTE1234?6"`;
 
-exports[`IGCParser parseIRecord() throws for invalid records 1`] = `"Invalid I record: "`;
+exports[`IGCParser parseIRecord() throws for invalid records 1`] = `"Invalid I record at line 0: "`;
 
-exports[`IGCParser parseIRecord() throws for invalid records 2`] = `"Invalid I record: I023638FXA"`;
+exports[`IGCParser parseIRecord() throws for invalid records 2`] = `"Invalid I record at line 0: I023638FXA"`;
 
-exports[`IGCParser parseIRecord() throws for invalid records 3`] = `"Invalid I record: I0136FXA38"`;
+exports[`IGCParser parseIRecord() throws for invalid records 3`] = `"Invalid I record at line 0: I0136FXA38"`;
 
-exports[`IGCParser parsePilot() throws for invalid records 1`] = `"Invalid PLT header: "`;
+exports[`IGCParser parsePilot() throws for invalid records 1`] = `"Invalid PLT header at line 0: "`;
 
-exports[`IGCParser parsePilot() throws for invalid records 2`] = `"Invalid PLT header: HXPLT:John Doe"`;
+exports[`IGCParser parsePilot() throws for invalid records 2`] = `"Invalid PLT header at line 0: HXPLT:John Doe"`;
 
-exports[`IGCParser parsePilot() throws for invalid records 3`] = `"Invalid PLT header: HFPLX:John Doe"`;
+exports[`IGCParser parsePilot() throws for invalid records 3`] = `"Invalid PLT header at line 0: HFPLX:John Doe"`;

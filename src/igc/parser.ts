@@ -42,6 +42,12 @@ export interface BRecord {
   valid: boolean;
   pressureAltitude: number | null;
   gpsAltitude: number | null;
+
+  extensions: BRecordExtensions;
+}
+
+export interface BRecordExtensions {
+  [code: string]: string;
 }
 
 export interface BRecordExtension {
@@ -155,7 +161,14 @@ export default class IGCParser {
     let pressureAltitude = match[13] === '00000' ? null : parseInt(match[13], 10);
     let gpsAltitude = match[14] === '00000' ? null : parseInt(match[14], 10);
 
-    return { timestamp, time, latitude, longitude, valid, pressureAltitude, gpsAltitude };
+    let extensions: BRecordExtensions = {};
+    if (this.fixExtensions) {
+      for (let { code, start, length } of this.fixExtensions) {
+        extensions[code] = line.slice(start, start + length);
+      }
+    }
+
+    return { timestamp, time, latitude, longitude, valid, pressureAltitude, gpsAltitude, extensions };
   }
 
   private parseIRecord(line: string): BRecordExtension[] {

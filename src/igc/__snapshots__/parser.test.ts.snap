@@ -2,6 +2,16 @@
 
 exports[`IGCParser parse() parses valid IGC files 1`] = `
 Object {
+  "extensions": Object {
+    "ACZ": "100",
+    "ENL": "040",
+    "FXA": "060",
+    "GSP": "00051",
+    "OAT": "2400",
+    "TAS": "00000",
+    "TRT": "650",
+    "VAT": "00010",
+  },
   "gpsAltitude": 49,
   "latitude": 51.0107,
   "longitude": 7.010066666666667,
@@ -14,6 +24,16 @@ Object {
 
 exports[`IGCParser parse() parses valid IGC files 2`] = `
 Object {
+  "extensions": Object {
+    "ACZ": "090",
+    "ENL": "041",
+    "FXA": "070",
+    "GSP": "06662",
+    "OAT": "2010",
+    "TAS": "24341",
+    "TRT": "60-",
+    "VAT": "01290",
+  },
   "gpsAltitude": 873,
   "latitude": 50.84336666666667,
   "longitude": 6.4120333333333335,
@@ -26,6 +46,16 @@ Object {
 
 exports[`IGCParser parse() parses valid IGC files 3`] = `
 Object {
+  "extensions": Object {
+    "ACZ": "120",
+    "ENL": "040",
+    "FXA": "070",
+    "GSP": "90033",
+    "OAT": "2190",
+    "TAS": "89120",
+    "TRT": "54-",
+    "VAT": "00740",
+  },
   "gpsAltitude": 478,
   "latitude": 50.60658333333333,
   "longitude": 6.79495,
@@ -38,6 +68,16 @@ Object {
 
 exports[`IGCParser parse() parses valid IGC files 4`] = `
 Object {
+  "extensions": Object {
+    "ACZ": "090",
+    "ENL": "040",
+    "FXA": "060",
+    "GSP": "00153",
+    "OAT": "2610",
+    "TAS": "00000",
+    "TRT": "30-",
+    "VAT": "00010",
+  },
   "gpsAltitude": 50,
   "latitude": 51.0137,
   "longitude": 7.007866666666667,

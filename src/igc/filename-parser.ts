@@ -63,7 +63,7 @@ function parseShort(filename: string, maxYear: number): IGCFilenameData | null {
   let callsign = null;
   let date = charsToDate(match[1], match[2], match[3], maxYear);
 
-  let manufacturerId = match[4] ? match[4].toUpperCase() : null;
+  let manufacturerId = match[4].toUpperCase();
   let manufacturer = manufacturerId;
   if (manufacturerId) {
     let manufacturers = MANUFACTURERS.filter(it => it.short === manufacturerId);
@@ -72,8 +72,8 @@ function parseShort(filename: string, maxYear: number): IGCFilenameData | null {
     }
   }
 
-  let loggerId = match[5] ? match[5].toUpperCase() : null;
-  let numFlight = match[6] ? charToNumber(match[6]) : null;
+  let loggerId = match[5].toUpperCase();
+  let numFlight = charToNumber(match[6]);
 
   return { callsign, date, manufacturer, loggerId, numFlight };
 }

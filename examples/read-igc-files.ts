@@ -61,11 +61,12 @@ function printData(data: IGCFile) {
     console.log();
   }
 
-  if (data.gliderType || data.registration || data.callsign || data.competitionClass) {
+  if (data.gliderType || data.registration || data.callsign || data.competitionClass || data.loggerType) {
     printLine('Registration', data.registration);
     printLine('Callsign', data.callsign);
     printLine('Glider Type', data.gliderType);
     printLine('Comp. Class', data.competitionClass);
+    printLine('Logger Type', data.loggerType);
     console.log();
   }
 

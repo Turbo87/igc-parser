@@ -12,6 +12,7 @@ const RE_GTY_HEADER = /^H[FO]GTY(?:.{0,}?:(.*)|(.*))$/;
 const RE_GID_HEADER = /^H[FO]GID(?:.{0,}?:(.*)|(.*))$/;
 const RE_CID_HEADER = /^H[FO]CID(?:.{0,}?:(.*)|(.*))$/;
 const RE_CCL_HEADER = /^H[FO]CCL(?:.{0,}?:(.*)|(.*))$/;
+const RE_FTY_HEADER = /^H[FO]FTY(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_I = /^I(\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 /* tslint:enable:max-line-length */
@@ -29,6 +30,7 @@ export interface IGCFile {
   registration: string | null;
   callsign: string | null;
   competitionClass: string | null;
+  loggerType: string | null;
 
   fixes: BRecord[];
 }
@@ -88,6 +90,7 @@ export default class IGCParser {
   private registration: string | null;
   private callsign: string | null;
   private competitionClass: string | null;
+  private loggerType: string | null;
 
   private lineNumber = 0;
   private prevTimestamp: number | null;
@@ -121,6 +124,7 @@ export default class IGCParser {
       callsign: this.callsign,
       competitionClass: this.competitionClass,
       fixes: this.fixes,
+      loggerType: this.loggerType,
     };
   }
 
@@ -161,6 +165,8 @@ export default class IGCParser {
       this.callsign = this.parseCallsign(line);
     } else if (headerType === 'CCL') {
       this.competitionClass = this.parseCompetitionClass(line);
+    } else if (headerType === 'FTY') {
+      this.loggerType = this.parseLoggerType(line);
     }
   }
 
@@ -221,6 +227,10 @@ export default class IGCParser {
 
   private parseCompetitionClass(line: string): string {
     return this.parseTextHeader('GID', RE_CCL_HEADER, line);
+  }
+
+  private parseLoggerType(line: string): string {
+    return this.parseTextHeader('FTY', RE_FTY_HEADER, line);
   }
 
   private parseBRecord(line: string): BRecord {

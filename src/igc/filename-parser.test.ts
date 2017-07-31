@@ -1,5 +1,7 @@
 import {IGCFilenameData, parse} from './filename-parser';
 
+import fs = require('fs');
+
 const tests = [
   ['', null],
   ['xaaga071.igc', null],
@@ -45,6 +47,13 @@ describe('IGC filename parser', () => {
       expect(parse(filename, currentYear)).toEqual(expected);
     });
   }
+
+  it('does not crash', () => {
+    let filesname = fs.readFileSync(`${__dirname}/../../fixtures/igc-filenames.txt`, 'utf8').split('\n');
+    for (let filename of filesname) {
+      expect(() => parse(filename)).not.toThrow();
+    }
+  });
 });
 
 function data(date: string, manufacturer: string | null = null, loggerId: string | null = null,

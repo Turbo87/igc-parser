@@ -35,15 +35,15 @@ export interface IGCFile {
   fixes: BRecord[];
 }
 
+interface PartialIGCFile extends Partial<IGCFile> {
+  fixes: BRecord[];
+}
+
 export interface ARecord {
   manufacturer: string;
   loggerId: string;
   numFlight: number | null;
   additionalData: string | null;
-}
-
-export interface HFDTEHeader {
-  date: string;
 }
 
 export interface BRecord {
@@ -78,19 +78,18 @@ export interface BRecordExtension {
 }
 
 export default class IGCParser {
-  private aRecord: ARecord | null;
-  private dateHeader: HFDTEHeader | null;
+  private _result: PartialIGCFile = {
+    pilot: null,
+    copilot: null,
+    gliderType: null,
+    registration: null,
+    callsign: null,
+    competitionClass: null,
+    loggerType: null,
+    fixes: [],
+  };
+
   private fixExtensions: BRecordExtension[];
-  private fixes: BRecord[] = [];
-
-  private pilot: string | null;
-  private copilot: string | null;
-
-  private gliderType: string | null;
-  private registration: string | null;
-  private callsign: string | null;
-  private competitionClass: string | null;
-  private loggerType: string | null;
 
   private lineNumber = 0;
   private prevTimestamp: number | null;
@@ -106,26 +105,15 @@ export default class IGCParser {
   }
 
   get result(): IGCFile {
-    if (!this.aRecord) {
+    if (!this._result.aRecord) {
       throw new Error(`Missing A record`);
     }
 
-    if (!this.dateHeader) {
+    if (!this._result.date) {
       throw new Error(`Missing HFDTE record`);
     }
 
-    return {
-      aRecord: this.aRecord,
-      date: this.dateHeader.date,
-      pilot: this.pilot,
-      copilot: this.copilot,
-      gliderType: this.gliderType,
-      registration: this.registration,
-      callsign: this.callsign,
-      competitionClass: this.competitionClass,
-      fixes: this.fixes,
-      loggerType: this.loggerType,
-    };
+    return this._result as IGCFile;
   }
 
   private parseLine(line: string) {
@@ -136,13 +124,13 @@ export default class IGCParser {
 
       this.prevTimestamp = fix.timestamp;
 
-      this.fixes.push(fix);
+      this._result.fixes.push(fix);
 
     } else if (line.startsWith('H')) {
       this.parseHeader(line);
 
     } else if (line.startsWith('A')) {
-      this.aRecord = this.parseARecord(line);
+      this._result.aRecord = this.parseARecord(line);
 
     } else if (line.startsWith('I')) {
       this.fixExtensions = this.parseIRecord(line);
@@ -152,21 +140,21 @@ export default class IGCParser {
   private parseHeader(line: string) {
     let headerType = line.slice(2, 5);
     if (headerType === 'DTE') {
-      this.dateHeader = this.parseDateHeader(line);
+      this._result.date = this.parseDateHeader(line);
     } else if (headerType === 'PLT') {
-      this.pilot = this.parsePilot(line);
+      this._result.pilot = this.parsePilot(line);
     } else if (headerType === 'CM2') {
-      this.copilot = this.parseCopilot(line);
+      this._result.copilot = this.parseCopilot(line);
     } else if (headerType === 'GTY') {
-      this.gliderType = this.parseGliderType(line);
+      this._result.gliderType = this.parseGliderType(line);
     } else if (headerType === 'GID') {
-      this.registration = this.parseRegistration(line);
+      this._result.registration = this.parseRegistration(line);
     } else if (headerType === 'CID') {
-      this.callsign = this.parseCallsign(line);
+      this._result.callsign = this.parseCallsign(line);
     } else if (headerType === 'CCL') {
-      this.competitionClass = this.parseCompetitionClass(line);
+      this._result.competitionClass = this.parseCompetitionClass(line);
     } else if (headerType === 'FTY') {
-      this.loggerType = this.parseLoggerType(line);
+      this._result.loggerType = this.parseLoggerType(line);
     }
   }
 
@@ -184,7 +172,7 @@ export default class IGCParser {
     return { manufacturer, loggerId, numFlight, additionalData };
   }
 
-  private parseDateHeader(line: string): HFDTEHeader {
+  private parseDateHeader(line: string): string {
     let match = line.match(RE_HFDTE);
     if (!match) {
       throw new Error(`Invalid DTE header at line ${this.lineNumber}: ${line}`);
@@ -193,7 +181,7 @@ export default class IGCParser {
     let lastCentury = match[3][0] === '8' || match[3][0] === '9';
     let date = `${lastCentury ? '19' : '20'}${match[3]}-${match[2]}-${match[1]}`;
 
-    return { date };
+    return date;
   }
 
   private parseTextHeader(headerType: string, regex: RegExp, line: string, underscoreReplacement = ' '): string {
@@ -234,7 +222,7 @@ export default class IGCParser {
   }
 
   private parseBRecord(line: string): BRecord {
-    if (!this.dateHeader) {
+    if (!this._result.date) {
       throw new Error(`Missing HFDTE record before first B record`);
     }
 
@@ -245,7 +233,7 @@ export default class IGCParser {
 
     let time = `${match[1]}:${match[2]}:${match[3]}`;
 
-    let timestamp = Date.parse(`${this.dateHeader.date}T${time}Z`);
+    let timestamp = Date.parse(`${this._result.date}T${time}Z`);
 
     // allow timestamps one hour before the previous timestamp,
     // otherwise we assume the next day is meant

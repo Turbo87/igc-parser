@@ -24,7 +24,7 @@ describe('IGCParser', () => {
 
       expect(result.date).toEqual('2017-07-15');
       expect(result.pilot).toEqual('Florian Graf');
-      expect(result.copilot).toBeUndefined();
+      expect(result.copilot).toBeNull();
       expect(result.gliderType).toEqual('ASW 19');
       expect(result.registration).toEqual('D-2019');
       expect(result.callsign).toEqual('1G');
@@ -116,9 +116,9 @@ describe('IGCParser', () => {
 
   describe('parseDateHeader()', () => {
     it('parses valid HFDTE headers', () => {
-      expect(parser['parseDateHeader']('HFDTE010180')).toEqual({ date: '1980-01-01' });
-      expect(parser['parseDateHeader']('HFDTE150717')).toEqual({ date: '2017-07-15' });
-      expect(parser['parseDateHeader']('HFDTE311279')).toEqual({ date: '2079-12-31' });
+      expect(parser['parseDateHeader']('HFDTE010180')).toEqual('1980-01-01');
+      expect(parser['parseDateHeader']('HFDTE150717')).toEqual('2017-07-15');
+      expect(parser['parseDateHeader']('HFDTE311279')).toEqual('2079-12-31');
     });
 
     it('throws for invalid records', () => {
@@ -169,7 +169,7 @@ describe('IGCParser', () => {
 
   describe('parseBRecord()', () => {
     it('parses valid B records', () => {
-      parser['dateHeader'] = { date: '2017-02-03' };
+      parser['_result'].date = '2017-02-03';
 
       expect(parser['parseBRecord']('B1026555103888N00703115EA0065700751')).toEqual({
         timestamp: 1486117615000,
@@ -203,7 +203,7 @@ describe('IGCParser', () => {
     });
 
     it('throws for invalid records', () => {
-      parser['dateHeader'] = { date: '2017-02-03' };
+      parser['_result'].date = '2017-02-03';
 
       expect(() => parser['parseBRecord']('')).toThrowErrorMatchingSnapshot();
       expect(() => parser['parseBRecord']('B10a6555103888N00703115EA0065700751')).toThrowErrorMatchingSnapshot();

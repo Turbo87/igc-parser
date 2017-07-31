@@ -45,6 +45,7 @@ export interface BRecord {
 
   extensions: BRecordExtensions;
 
+  fixAccuracy: number | null;
   enl: number | null;
 }
 
@@ -171,8 +172,20 @@ export default class IGCParser {
     }
 
     let enl = extensions['ENL'] ? parseInt(extensions['ENL'], 10) : null;
+    let fixAccuracy = extensions['FXA'] ? parseInt(extensions['FXA'], 10) : null;
 
-    return { timestamp, time, latitude, longitude, valid, pressureAltitude, gpsAltitude, extensions, enl };
+    return {
+      timestamp,
+      time,
+      latitude,
+      longitude,
+      valid,
+      pressureAltitude,
+      gpsAltitude,
+      extensions,
+      enl,
+      fixAccuracy,
+    };
   }
 
   private parseIRecord(line: string): BRecordExtension[] {

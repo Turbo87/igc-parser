@@ -134,6 +134,7 @@ describe('IGCParser', () => {
         pressureAltitude: 657,
         gpsAltitude: 751,
         extensions: {},
+        fixAccuracy: null,
         enl: null,
       });
 
@@ -146,6 +147,7 @@ describe('IGCParser', () => {
         pressureAltitude: null,
         gpsAltitude: null,
         extensions: {},
+        fixAccuracy: null,
         enl: null,
       });
     });

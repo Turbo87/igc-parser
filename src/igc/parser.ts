@@ -124,11 +124,12 @@ export default class IGCParser {
   }
 
   private parseHeader(line: string) {
-    if (line.startsWith('HFDTE')) {
+    let headerType = line.slice(2, 5);
+    if (headerType === 'DTE') {
       this.dateHeader = this.parseDateHeader(line);
-    } else if (line.startsWith('HFPLT')) {
+    } else if (headerType === 'PLT') {
       this.pilot = this.parsePilot(line);
-    } else if (line.startsWith('HFCM2')) {
+    } else if (headerType === 'CM2') {
       this.copilot = this.parseCopilot(line);
     }
   }

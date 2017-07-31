@@ -99,6 +99,10 @@ describe('IGCParser', () => {
       });
     });
 
+    it('throws for missing "dateHeader"', () => {
+      expect(() => parser['parseBRecord']('B1026555103888N00703115EA0065700751')).toThrowErrorMatchingSnapshot();
+    });
+
     it('throws for invalid records', () => {
       parser['dateHeader'] = { date: '2017-02-03' };
 

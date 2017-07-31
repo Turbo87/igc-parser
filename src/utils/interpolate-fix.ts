@@ -7,8 +7,8 @@ export function interpolateFix(fix1: Fix, fix2: Fix, fraction: number): Fix {
 
   let time = fix1.time * fraction1 + fix2.time * fraction2;
 
-  let altitude;
-  if (fix1.altitude !== undefined && fix2.altitude !== undefined) {
+  let altitude = null;
+  if (fix1.altitude !== null && fix2.altitude !== null) {
     altitude = fix1.altitude * fraction1 + fix2.altitude * fraction2;
   }
 

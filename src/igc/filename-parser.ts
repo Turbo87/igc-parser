@@ -1,9 +1,9 @@
 import MANUFACTURERS from './manufacturers';
 
-const RE_SHORT = /^(?:(\w+)_)?(\d)([\da-c])([\da-v])(?:(\w)(\w{3})(\w))?.*\.igc$/i;
-const RE_LONG = /^(?:(\w+)_)?(\d{4}-\d{2}-\d{2})-(\w{3})-(\w{3})-(\d{2}).*\.igc$/i;
+const RE_SHORT = /^(?:([\da-z]+)_)?(\d)([1-9a-c])([1-9a-v])(?:([\da-z])([\da-z]{3})([\da-z]))?.*\.igc$/i;
+const RE_LONG = /^(?:([\da-z]+)_)?(\d{4}-\d{2}-\d{2})-([\da-z]{3})-([\da-z]{3})-(\d{2}).*\.igc$/i;
 
-const CHARS = '0123456789abcdefghijklmnopqrstuvxyz'.split('');
+const CHARS = '0123456789abcdefghijklmnopqrstuvwxyz'.split('');
 
 export interface IGCFilenameData {
   callsign: string | null;

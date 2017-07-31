@@ -4,7 +4,7 @@ const tests = [
   ['', null],
   ['xaaga071.igc', null],
   ['4aaga071.igc', data('2014-10-10', 'Flarm', 'A07', 1)],
-  ['4aaga07x.igc', data('2014-10-10', 'Flarm', 'A07', 32)],
+  ['4aaga07x.igc', data('2014-10-10', 'Flarm', 'A07', 33)],
   ['811ga071.igc', data('2008-01-01', 'Flarm', 'A07', 1)],
   ['711ga071.igc', data('2017-01-01', 'Flarm', 'A07', 1)],
   ['649V6B31.igc', data('2016-04-09', 'LXNAV', '6B3', 1)],
@@ -23,6 +23,8 @@ const tests = [
   ['2013-10-19-xcs-aaa-05_1.igc', data('2013-10-19', 'XCS', 'AAA', 5)],
   ['2015-01-21-xxx-asc-47.igc', data('2015-01-21', 'XXX', 'ASC', 47)],
   ['TH_2015-01-21-xxx-asc-47.igc', data('2015-01-21', 'XXX', 'ASC', 47, 'TH')],
+  ['05l_hs__1_.igc', data('2010-05-21', null, null)],
+  ['110911sw-welle_seyne.igc', null],
 ] as Array<[string, IGCFilenameData | null]>;
 
 describe('IGC filename parser', () => {

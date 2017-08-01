@@ -131,6 +131,57 @@ Object {
   "pilot": "Florian Graf",
   "registration": "D-2019",
   "security": "440FA49446EB4CDA7E1CB4B7D1F33A33F421E7A92656F2AEAE0A18356531A5B1E7C45C72F5C819E94A5DB32640019DC09BAB2EE64BE9FD1B558B9538308598C71F34C38E008D1AB9B859C762747F6B862B52D377C1D1C4D2BFDE801B63B9013AB53F4DF1A5DA6B1D8BCEF04ECF0D54D5895FF1C00DF131F7030241CB7E9C3FAEC1B8D",
+  "task": Object {
+    "comment": null,
+    "declarationDate": "2017-07-15",
+    "declarationTime": "08:57:20",
+    "declarationTimestamp": 1500109040000,
+    "flightDate": null,
+    "numTurnpoints": 4,
+    "points": Array [
+      Object {
+        "latitude": 0,
+        "longitude": 0,
+        "name": null,
+      },
+      Object {
+        "latitude": 51.14138333333333,
+        "longitude": 6.985283333333333,
+        "name": "006Langenfeld-Wiescheid",
+      },
+      Object {
+        "latitude": 50.82416666666667,
+        "longitude": 6.18695,
+        "name": "009Aachen-Merzbrueck",
+      },
+      Object {
+        "latitude": 50.55971666666667,
+        "longitude": 7.1375,
+        "name": "019Bad Neuenahr",
+      },
+      Object {
+        "latitude": 50.88888333333333,
+        "longitude": 6.491666666666666,
+        "name": "058Hambach Sud",
+      },
+      Object {
+        "latitude": 51.17695,
+        "longitude": 7.2,
+        "name": "110Remscheid Bhf",
+      },
+      Object {
+        "latitude": 51.09778333333333,
+        "longitude": 7.03695,
+        "name": "002Zielkreis",
+      },
+      Object {
+        "latitude": 0,
+        "longitude": 0,
+        "name": null,
+      },
+    ],
+    "taskNumber": 2,
+  },
 }
 `;
 
@@ -231,6 +282,47 @@ Object {
   "pilot": "",
   "registration": "D-KCSS",
   "security": "60DC059E2D2F6CAD2E889224E355DBDDB805CAB100000639B49FC5F280A292C990F554789F12381380720000",
+  "task": Object {
+    "comment": "Task",
+    "declarationDate": "2016-05-04",
+    "declarationTime": "07:29:24",
+    "declarationTimestamp": 1462346964000,
+    "flightDate": null,
+    "numTurnpoints": 2,
+    "points": Array [
+      Object {
+        "latitude": 0,
+        "longitude": 0,
+        "name": "T",
+      },
+      Object {
+        "latitude": 50.82305,
+        "longitude": 6.186383333333334,
+        "name": "1",
+      },
+      Object {
+        "latitude": 49.052216666666666,
+        "longitude": 7.956383333333333,
+        "name": "2",
+      },
+      Object {
+        "latitude": 50.63028333333333,
+        "longitude": 10.158616666666667,
+        "name": "3",
+      },
+      Object {
+        "latitude": 50.82305,
+        "longitude": 6.186383333333334,
+        "name": "4",
+      },
+      Object {
+        "latitude": 0,
+        "longitude": 0,
+        "name": "L",
+      },
+    ],
+    "taskNumber": null,
+  },
 }
 `;
 

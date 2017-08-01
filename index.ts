@@ -18,6 +18,8 @@ const RE_RHW_HEADER = /^H[FO]RHW(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_K = /^K(\d{2})(\d{2})(\d{2})/;
 const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
+const RE_TASK = /^C(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{4})(\d{2})(.*)/;
+const RE_TASKPOINT = /^C(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])(.*)/;
 /* tslint:enable:max-line-length */
 
 declare namespace IGCParser {
@@ -38,6 +40,8 @@ declare namespace IGCParser {
     loggerType: string | null;
     firmwareVersion: string | null;
     hardwareVersion: string | null;
+
+    task: Task | null;
 
     fixes: BRecord[];
     dataRecords: KRecord[];
@@ -97,6 +101,26 @@ declare namespace IGCParser {
     start: number;
     length: number;
   }
+
+  export interface Task {
+    declarationDate: string;
+    declarationTime: string;
+    declarationTimestamp: number;
+
+    flightDate: string | null;
+    taskNumber: number | null;
+
+    numTurnpoints: number;
+    comment: string | null;
+
+    points: TaskPoint[];
+  }
+
+  export interface TaskPoint {
+    latitude: number;
+    longitude: number;
+    name: string | null;
+  }
 }
 
 class IGCParser {
@@ -110,6 +134,7 @@ class IGCParser {
     loggerType: null,
     firmwareVersion: null,
     hardwareVersion: null,
+    task: null,
     fixes: [],
     dataRecords: [],
     security: null,
@@ -164,6 +189,9 @@ class IGCParser {
 
     } else if (recordType === 'H') {
       this.processHeader(line);
+
+    } else if (recordType === 'C') {
+      this.processTaskLine(line);
 
     } else if (recordType === 'A') {
       this._result.aRecord = this.parseARecord(line);
@@ -271,6 +299,60 @@ class IGCParser {
 
   private parseHardwareVersion(line: string): string {
     return this.parseTextHeader('RHW', RE_RHW_HEADER, line);
+  }
+
+  private processTaskLine(line: string) {
+    if (!this._result.task) {
+      this._result.task = this.parseTask(line);
+    } else {
+      this._result.task.points.push(this.parseTaskPoint(line));
+    }
+  }
+
+  private parseTask(line: string): IGCParser.Task {
+    let match = line.match(RE_TASK);
+    if (!match) {
+      throw new Error(`Invalid task declaration at line ${this.lineNumber}: ${line}`);
+    }
+
+    let lastCentury = match[3][0] === '8' || match[3][0] === '9';
+    let declarationDate = `${lastCentury ? '19' : '20'}${match[3]}-${match[2]}-${match[1]}`;
+    let declarationTime = `${match[4]}:${match[5]}:${match[6]}`;
+    let declarationTimestamp = Date.parse(`${declarationDate}T${declarationTime}Z`);
+
+    let flightDate = null;
+    if (match[7] !== '00' || match[8] !== '00' || match[9] !== '00') {
+      lastCentury = match[9][0] === '8' || match[9][0] === '9';
+      flightDate = `${lastCentury ? '19' : '20'}${match[9]}-${match[8]}-${match[7]}`;
+    }
+
+    let taskNumber = (match[10] !== '0000') ? parseInt(match[10], 10) : null;
+    let numTurnpoints = parseInt(match[11], 10);
+    let comment = match[12] || null;
+
+    return {
+      declarationDate,
+      declarationTime,
+      declarationTimestamp,
+      flightDate,
+      taskNumber,
+      numTurnpoints,
+      comment,
+      points: [],
+    };
+  }
+
+  private parseTaskPoint(line: string): IGCParser.TaskPoint {
+    let match = line.match(RE_TASKPOINT);
+    if (!match) {
+      throw new Error(`Invalid task point declaration at line ${this.lineNumber}: ${line}`);
+    }
+
+    let latitude = IGCParser.parseLatitude(match[1], match[2], match[3], match[4]);
+    let longitude = IGCParser.parseLongitude(match[5], match[6], match[7], match[8]);
+    let name = match[9] || null;
+
+    return { latitude, longitude, name };
   }
 
   private parseBRecord(line: string): IGCParser.BRecord {

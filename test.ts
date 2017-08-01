@@ -1,6 +1,5 @@
-import IGCParser from './parser';
-
 import fs = require('fs');
+import IGCParser = require('.');
 
 describe('IGCParser', () => {
   let parser: IGCParser;
@@ -11,7 +10,7 @@ describe('IGCParser', () => {
 
   describe('parse()', () => {
     it('parses valid IGC files', () => {
-      let filename = `${__dirname}/../../fixtures/2017-07-15-lev/1G_77fv6m71.igc`;
+      let filename = `${__dirname}/fixtures/1G_77fv6m71.igc`;
       let content = fs.readFileSync(filename, 'utf8');
       let result = IGCParser.parse(content);
 

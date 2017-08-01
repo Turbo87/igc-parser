@@ -1,12 +1,12 @@
 import {IGCFilenameData} from 'igc-filename-parser';
-
-import IGCParser, {ARecord, IGCFile} from '../src/igc/parser';
+import {ARecord, IGCFile} from '..';
 
 import fs = require('fs');
 import parseFilename = require('igc-filename-parser');
+import IGCParser = require('..');
 
 if (process.argv.length < 3) {
-  console.log('Usage: ts-node examples/read-igc-files.ts FOLDER');
+  console.log('Usage: ts-node examples/read-files.ts FOLDER');
   process.exit(1);
 }
 

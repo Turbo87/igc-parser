@@ -10,6 +10,7 @@
     "member-ordering": false,
     "no-console": false,
     "no-conditional-assignment": false,
+    "no-namespace": false,
     "no-shadowed-variable": false,
     "no-string-literal": false,
     "no-var-requires": false,

@@ -17,68 +17,70 @@ const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\
 const RE_I = /^I(\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 /* tslint:enable:max-line-length */
 
-export interface IGCFile {
-  aRecord: ARecord;
+declare namespace IGCParser {
+  export interface IGCFile {
+    aRecord: ARecord;
 
-  /** UTC date of the flight in ISO 8601 format */
-  date: string;
+    /** UTC date of the flight in ISO 8601 format */
+    date: string;
 
-  pilot: string | null;
-  copilot: string | null;
+    pilot: string | null;
+    copilot: string | null;
 
-  gliderType: string | null;
-  registration: string | null;
-  callsign: string | null;
-  competitionClass: string | null;
-  loggerType: string | null;
+    gliderType: string | null;
+    registration: string | null;
+    callsign: string | null;
+    competitionClass: string | null;
+    loggerType: string | null;
 
-  fixes: BRecord[];
+    fixes: BRecord[];
+  }
+
+  interface PartialIGCFile extends Partial<IGCFile> {
+    fixes: BRecord[];
+  }
+
+  export interface ARecord {
+    manufacturer: string;
+    loggerId: string;
+    numFlight: number | null;
+    additionalData: string | null;
+  }
+
+  export interface BRecord {
+    /** Unix timestamp of the GPF fix in milliseconds */
+    timestamp: number;
+
+    /** UTC time of the GPF fix in ISO 8601 format */
+    time: string;
+
+    latitude: number;
+    longitude: number;
+    valid: boolean;
+    pressureAltitude: number | null;
+    gpsAltitude: number | null;
+
+    extensions: BRecordExtensions;
+
+    fixAccuracy: number | null;
+
+    /** Engine Noise Level from 0.0 to 1.0 */
+    enl: number | null;
+  }
+
+  export interface BRecordExtensions {
+    [code: string]: string;
+  }
+
+  export interface BRecordExtension {
+    code: string;
+    start: number;
+    length: number;
+  }
 }
 
-interface PartialIGCFile extends Partial<IGCFile> {
-  fixes: BRecord[];
-}
-
-export interface ARecord {
-  manufacturer: string;
-  loggerId: string;
-  numFlight: number | null;
-  additionalData: string | null;
-}
-
-export interface BRecord {
-  /** Unix timestamp of the GPF fix in milliseconds */
-  timestamp: number;
-
-  /** UTC time of the GPF fix in ISO 8601 format */
-  time: string;
-
-  latitude: number;
-  longitude: number;
-  valid: boolean;
-  pressureAltitude: number | null;
-  gpsAltitude: number | null;
-
-  extensions: BRecordExtensions;
-
-  fixAccuracy: number | null;
-
-  /** Engine Noise Level from 0.0 to 1.0 */
-  enl: number | null;
-}
-
-export interface BRecordExtensions {
-  [code: string]: string;
-}
-
-export interface BRecordExtension {
-  code: string;
-  start: number;
-  length: number;
-}
-
-export default class IGCParser {
-  private _result: PartialIGCFile = {
+class IGCParser {
+  private _result: IGCParser.PartialIGCFile = {
     pilot: null,
     copilot: null,
     gliderType: null,
@@ -89,12 +91,12 @@ export default class IGCParser {
     fixes: [],
   };
 
-  private fixExtensions: BRecordExtension[];
+  private fixExtensions: IGCParser.BRecordExtension[];
 
   private lineNumber = 0;
   private prevTimestamp: number | null;
 
-  static parse(str: string): IGCFile {
+  static parse(str: string): IGCParser.IGCFile {
     let parser = new IGCParser();
 
     for (let line of str.split('\n')) {
@@ -104,7 +106,7 @@ export default class IGCParser {
     return parser.result;
   }
 
-  get result(): IGCFile {
+  get result(): IGCParser.IGCFile {
     if (!this._result.aRecord) {
       throw new Error(`Missing A record`);
     }
@@ -113,26 +115,28 @@ export default class IGCParser {
       throw new Error(`Missing HFDTE record`);
     }
 
-    return this._result as IGCFile;
+    return this._result as IGCParser.IGCFile;
   }
 
   private parseLine(line: string) {
     this.lineNumber += 1;
 
-    if (line.startsWith('B')) {
+    let recordType = line[0];
+
+    if (recordType === 'B') {
       let fix = this.parseBRecord(line);
 
       this.prevTimestamp = fix.timestamp;
 
       this._result.fixes.push(fix);
 
-    } else if (line.startsWith('H')) {
+    } else if (recordType === 'H') {
       this.parseHeader(line);
 
-    } else if (line.startsWith('A')) {
+    } else if (recordType === 'A') {
       this._result.aRecord = this.parseARecord(line);
 
-    } else if (line.startsWith('I')) {
+    } else if (recordType === 'I') {
       this.fixExtensions = this.parseIRecord(line);
     }
   }
@@ -158,7 +162,7 @@ export default class IGCParser {
     }
   }
 
-  private parseARecord(line: string): ARecord {
+  private parseARecord(line: string): IGCParser.ARecord {
     let match = line.match(RE_A);
     if (!match) {
       throw new Error(`Invalid A record at line ${this.lineNumber}: ${line}`);
@@ -221,7 +225,7 @@ export default class IGCParser {
     return this.parseTextHeader('FTY', RE_FTY_HEADER, line);
   }
 
-  private parseBRecord(line: string): BRecord {
+  private parseBRecord(line: string): IGCParser.BRecord {
     if (!this._result.date) {
       throw new Error(`Missing HFDTE record before first B record`);
     }
@@ -249,7 +253,7 @@ export default class IGCParser {
     let pressureAltitude = match[13] === '00000' ? null : parseInt(match[13], 10);
     let gpsAltitude = match[14] === '00000' ? null : parseInt(match[14], 10);
 
-    let extensions: BRecordExtensions = {};
+    let extensions: IGCParser.BRecordExtensions = {};
     if (this.fixExtensions) {
       for (let { code, start, length } of this.fixExtensions) {
         extensions[code] = line.slice(start, start + length);
@@ -280,7 +284,7 @@ export default class IGCParser {
     };
   }
 
-  private parseIRecord(line: string): BRecordExtension[] {
+  private parseIRecord(line: string): IGCParser.BRecordExtension[] {
     let match = line.match(RE_I);
     if (!match) {
       throw new Error(`Invalid I record at line ${this.lineNumber}: ${line}`);
@@ -291,7 +295,7 @@ export default class IGCParser {
       throw new Error(`Invalid I record at line ${this.lineNumber}: ${line}`);
     }
 
-    let extensions = new Array<BRecordExtension>(num);
+    let extensions = new Array<IGCParser.BRecordExtension>(num);
 
     for (let i = 0; i < num; i++) {
       let offset = 3 + i * 7;
@@ -316,3 +320,5 @@ export default class IGCParser {
     return (ew === 'W') ? -degrees : degrees;
   }
 }
+
+export = IGCParser;

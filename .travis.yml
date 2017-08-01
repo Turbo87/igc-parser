@@ -4,7 +4,7 @@ node_js:
 
 script:
   - yarn run lint
-  - yarn test
+  - yarn test -- --coverage
 
 before_deploy:
   - yarn global add auto-dist-tag

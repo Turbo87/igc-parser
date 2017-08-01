@@ -100,7 +100,7 @@ class IGCParser {
     let parser = new IGCParser();
 
     for (let line of str.split('\n')) {
-      parser.parseLine(line.trim());
+      parser.processLine(line.trim());
     }
 
     return parser.result;
@@ -118,7 +118,7 @@ class IGCParser {
     return this._result as IGCParser.IGCFile;
   }
 
-  private parseLine(line: string) {
+  private processLine(line: string) {
     this.lineNumber += 1;
 
     let recordType = line[0];
@@ -131,7 +131,7 @@ class IGCParser {
       this._result.fixes.push(fix);
 
     } else if (recordType === 'H') {
-      this.parseHeader(line);
+      this.processHeader(line);
 
     } else if (recordType === 'A') {
       this._result.aRecord = this.parseARecord(line);
@@ -141,7 +141,7 @@ class IGCParser {
     }
   }
 
-  private parseHeader(line: string) {
+  private processHeader(line: string) {
     let headerType = line.slice(2, 5);
     if (headerType === 'DTE') {
       this._result.date = this.parseDateHeader(line);

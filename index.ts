@@ -41,6 +41,8 @@ declare namespace IGCParser {
 
     fixes: BRecord[];
     dataRecords: KRecord[];
+
+    security: string | null;
   }
 
   interface PartialIGCFile extends Partial<IGCFile> {
@@ -110,6 +112,7 @@ class IGCParser {
     hardwareVersion: null,
     fixes: [],
     dataRecords: [],
+    security: null,
   };
 
   private fixExtensions: IGCParser.RecordExtension[];
@@ -170,6 +173,9 @@ class IGCParser {
 
     } else if (recordType === 'J') {
       this.dataExtensions = this.parseIJRecord(line);
+
+    } else if (recordType === 'G') {
+      this._result.security = (this._result.security || '') + line.slice(1);
     }
   }
 

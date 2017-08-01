@@ -1,7 +1,9 @@
-import * as IGCFilenameParser from '../src/igc/filename-parser';
+import {IGCFilenameData} from 'igc-filename-parser';
+
 import IGCParser, {ARecord, IGCFile} from '../src/igc/parser';
 
 import fs = require('fs');
+import parseFilename = require('igc-filename-parser');
 
 if (process.argv.length < 3) {
   console.log('Usage: ts-node examples/read-igc-files.ts FOLDER');
@@ -20,7 +22,7 @@ for (let filename of filenames) {
   printLine('Filename', filename);
   console.log();
 
-  let filenameData = IGCFilenameParser.parse(filename);
+  let filenameData = parseFilename(filename);
   if (filenameData) {
     printFilenameData(filenameData);
     console.log();
@@ -43,7 +45,7 @@ if (filenames.length > 0) {
   console.log(SEPARATOR);
 }
 
-function printFilenameData(data: IGCFilenameParser.IGCFilenameData) {
+function printFilenameData(data: IGCFilenameData) {
   printLine('> Callsign', data.callsign);
   printLine('> Date', data.date);
   printLine('> Manufacturer', data.manufacturer);

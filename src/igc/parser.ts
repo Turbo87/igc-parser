@@ -1,4 +1,4 @@
-import {lookup as lookupManufacturer} from './manufacturers';
+const lookupManufacturer = require('flight-recorder-manufacturers/lookup');
 
 const ONE_HOUR = 60 * 60 * 1000;
 const ONE_DAY = 24 * 60 * 60 * 1000;

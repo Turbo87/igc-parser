@@ -183,9 +183,7 @@ class IGCParser {
     }
 
     let lastCentury = match[3][0] === '8' || match[3][0] === '9';
-    let date = `${lastCentury ? '19' : '20'}${match[3]}-${match[2]}-${match[1]}`;
-
-    return date;
+    return `${lastCentury ? '19' : '20'}${match[3]}-${match[2]}-${match[1]}`;
   }
 
   private parseTextHeader(headerType: string, regex: RegExp, line: string, underscoreReplacement = ' '): string {

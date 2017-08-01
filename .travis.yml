@@ -5,3 +5,16 @@ node_js:
 script:
   - yarn run lint
   - yarn test
+
+before_deploy:
+  - yarn global add auto-dist-tag
+  - auto-dist-tag --write
+
+deploy:
+  provider: npm
+  email: tobias.bieniek@gmx.de
+  api_key:
+    secure: ReXa+Q5u7JeVAbxKy/V15jNl/GQwdfsG6bURvZTzlaVNOc/Z9nfnb/UUJS5cd403CpvzU4STslbNg8hH6QfUZVARlTKvV3mbjL06yvhRNHdknhk2jpShTEG3rz2hEJn7TuwBbLbEB7RqlNqlHocXR1UaWqsPuUzSB1eny5xRSYHhD9bVZ9uvj19Vf/HyFEb52+f3W0g+XLr7sv4UIP0j4vBMDZz/A/jJYVJMbzaCLXqpiGqzvAVcNQLReakW14nclvVVgNG8c7bweKSdl2lmdQPlvX3fZDgDNvyMdaGU2u/R7p4zuGjlsqHOoB2roBPj5XPDTQ868C592rcHr5+SjiCYRj+SD1BhIUOo6j071k1i4y6xd+riV8YCqMEWX2mP2XcyHNVD+4ESYIzD87cql53j3OWOJW0DKmTOieYx6tVfvVyJ9fX5+wgScwEOs7vZgw4lZY4rtL8t/0C/Ji09Vj5ut2EnocpGXOvzYYK+Kf+nnmTjYi5vEhwgKNGU0XFYPnWzpjnizLzEXqu+nMZaKaX+/hx/bWZYtiZhlpQMP3XEraurHQLPPJiFoNJcwkeNo0PQTtcpZ7vprM6yWq/mWfzQgeRPtznbtlDp3aFzbjJLbhMeyv3poFIcJ5Fx9CwE7XXhn5GfZGaBOFZckYQiCVj1bR++7NSzD0DcnPuTlUg=
+  on:
+    tags: true
+    repo: Turbo87/igc-parser

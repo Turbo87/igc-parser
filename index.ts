@@ -16,7 +16,7 @@ const RE_FTY_HEADER = /^H[FO]FTY(?:.{0,}?:(.*)|(.*))$/;
 const RE_RFW_HEADER = /^H[FO]RFW(?:.{0,}?:(.*)|(.*))$/;
 const RE_RHW_HEADER = /^H[FO]RHW(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
-const RE_I = /^I(\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
+const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 /* tslint:enable:max-line-length */
 
 declare namespace IGCParser {
@@ -65,7 +65,7 @@ declare namespace IGCParser {
     pressureAltitude: number | null;
     gpsAltitude: number | null;
 
-    extensions: BRecordExtensions;
+    extensions: RecordExtensions;
 
     fixAccuracy: number | null;
 
@@ -73,11 +73,11 @@ declare namespace IGCParser {
     enl: number | null;
   }
 
-  export interface BRecordExtensions {
+  export interface RecordExtensions {
     [code: string]: string;
   }
 
-  export interface BRecordExtension {
+  export interface RecordExtension {
     code: string;
     start: number;
     length: number;
@@ -98,7 +98,8 @@ class IGCParser {
     fixes: [],
   };
 
-  private fixExtensions: IGCParser.BRecordExtension[];
+  private fixExtensions: IGCParser.RecordExtension[];
+  private dataExtensions: IGCParser.RecordExtension[];
 
   private lineNumber = 0;
   private prevTimestamp: number | null;
@@ -144,7 +145,10 @@ class IGCParser {
       this._result.aRecord = this.parseARecord(line);
 
     } else if (recordType === 'I') {
-      this.fixExtensions = this.parseIRecord(line);
+      this.fixExtensions = this.parseIJRecord(line);
+
+    } else if (recordType === 'J') {
+      this.dataExtensions = this.parseIJRecord(line);
     }
   }
 
@@ -270,7 +274,7 @@ class IGCParser {
     let pressureAltitude = match[13] === '00000' ? null : parseInt(match[13], 10);
     let gpsAltitude = match[14] === '00000' ? null : parseInt(match[14], 10);
 
-    let extensions: IGCParser.BRecordExtensions = {};
+    let extensions: IGCParser.RecordExtensions = {};
     if (this.fixExtensions) {
       for (let { code, start, length } of this.fixExtensions) {
         extensions[code] = line.slice(start, start + length);
@@ -301,18 +305,18 @@ class IGCParser {
     };
   }
 
-  private parseIRecord(line: string): IGCParser.BRecordExtension[] {
-    let match = line.match(RE_I);
+  private parseIJRecord(line: string): IGCParser.RecordExtension[] {
+    let match = line.match(RE_IJ);
     if (!match) {
-      throw new Error(`Invalid I record at line ${this.lineNumber}: ${line}`);
+      throw new Error(`Invalid ${line[0]} record at line ${this.lineNumber}: ${line}`);
     }
 
     let num = parseInt(match[1], 10);
     if (line.length < 3 + num * 7) {
-      throw new Error(`Invalid I record at line ${this.lineNumber}: ${line}`);
+      throw new Error(`Invalid ${line[0]} record at line ${this.lineNumber}: ${line}`);
     }
 
-    let extensions = new Array<IGCParser.BRecordExtension>(num);
+    let extensions = new Array<IGCParser.RecordExtension>(num);
 
     for (let i = 0; i < num; i++) {
       let offset = 3 + i * 7;

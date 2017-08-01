@@ -200,12 +200,12 @@ describe('IGCParser', () => {
     });
   });
 
-  describeMethod('parseIRecord', (test) => {
+  describeMethod('parseIJRecord', (test) => {
     test.pass('I013638FXA', [
       { code: 'FXA', start: 36, length: 3 },
     ]);
 
-    test.pass('I043638FXA3940SIU4143ENL4446MOP', [
+    test.pass('J043638FXA3940SIU4143ENL4446MOP', [
       { code: 'FXA', start: 36, length: 3 },
       { code: 'SIU', start: 39, length: 2 },
       { code: 'ENL', start: 41, length: 3 },

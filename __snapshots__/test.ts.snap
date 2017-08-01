@@ -241,11 +241,11 @@ exports[`IGCParser parseDateHeader() HFDTE1234?6 -> 💥  1`] = `"Invalid DTE he
 
 exports[`IGCParser parseDateHeader() HFDTEXXXXXX -> 💥  1`] = `"Invalid DTE header at line 0: HFDTEXXXXXX"`;
 
-exports[`IGCParser parseIRecord() [empty] -> 💥  1`] = `"Invalid I record at line 0: "`;
+exports[`IGCParser parseIJRecord() [empty] -> 💥  1`] = `"Invalid undefined record at line 0: "`;
 
-exports[`IGCParser parseIRecord() I0136FXA38 -> 💥  1`] = `"Invalid I record at line 0: I0136FXA38"`;
+exports[`IGCParser parseIJRecord() I0136FXA38 -> 💥  1`] = `"Invalid I record at line 0: I0136FXA38"`;
 
-exports[`IGCParser parseIRecord() I023638FXA -> 💥  1`] = `"Invalid I record at line 0: I023638FXA"`;
+exports[`IGCParser parseIJRecord() I023638FXA -> 💥  1`] = `"Invalid I record at line 0: I023638FXA"`;
 
 exports[`IGCParser parsePilot() [empty] -> 💥  1`] = `"Invalid PLT header at line 0: "`;
 

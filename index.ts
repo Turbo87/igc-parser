@@ -278,14 +278,7 @@ class IGCParser {
     }
 
     let time = `${match[1]}:${match[2]}:${match[3]}`;
-
-    let timestamp = Date.parse(`${this._result.date}T${time}Z`);
-
-    // allow timestamps one hour before the previous timestamp,
-    // otherwise we assume the next day is meant
-    while (this.prevTimestamp && timestamp < this.prevTimestamp - ONE_HOUR) {
-      timestamp += ONE_DAY;
-    }
+    let timestamp = this.calcTimestamp(time);
 
     let latitude = IGCParser.parseLatitude(match[4], match[5], match[6], match[7]);
     let longitude = IGCParser.parseLongitude(match[8], match[9], match[10], match[11]);
@@ -341,14 +334,7 @@ class IGCParser {
     }
 
     let time = `${match[1]}:${match[2]}:${match[3]}`;
-
-    let timestamp = Date.parse(`${this._result.date}T${time}Z`);
-
-    // allow timestamps one hour before the previous timestamp,
-    // otherwise we assume the next day is meant
-    while (this.prevTimestamp && timestamp < this.prevTimestamp - ONE_HOUR) {
-      timestamp += ONE_DAY;
-    }
+    let timestamp = this.calcTimestamp(time);
 
     let extensions: IGCParser.RecordExtensions = {};
     if (this.dataExtensions) {
@@ -394,6 +380,23 @@ class IGCParser {
   private static parseLongitude(ddd: string, mm: string, mmm: string, ew: string): number {
     let degrees = parseInt(ddd, 10) + parseFloat(`${mm}.${mmm}`) / 60;
     return (ew === 'W') ? -degrees : degrees;
+  }
+
+  /**
+   * Figures out a Unix timestamp in milliseconds based on the
+   * date header value, the time field in the current record and
+   * the previous timestamp.
+   */
+  private calcTimestamp(time: string): number {
+    let timestamp = Date.parse(`${this._result.date}T${time}Z`);
+
+    // allow timestamps one hour before the previous timestamp,
+    // otherwise we assume the next day is meant
+    while (this.prevTimestamp && timestamp < this.prevTimestamp - ONE_HOUR) {
+      timestamp += ONE_DAY;
+    }
+
+    return timestamp;
   }
 }
 

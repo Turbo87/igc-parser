@@ -13,6 +13,8 @@ const RE_GID_HEADER = /^H[FO]GID(?:.{0,}?:(.*)|(.*))$/;
 const RE_CID_HEADER = /^H[FO]CID(?:.{0,}?:(.*)|(.*))$/;
 const RE_CCL_HEADER = /^H[FO]CCL(?:.{0,}?:(.*)|(.*))$/;
 const RE_FTY_HEADER = /^H[FO]FTY(?:.{0,}?:(.*)|(.*))$/;
+const RE_RFW_HEADER = /^H[FO]RFW(?:.{0,}?:(.*)|(.*))$/;
+const RE_RHW_HEADER = /^H[FO]RHW(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_I = /^I(\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 /* tslint:enable:max-line-length */
@@ -31,7 +33,10 @@ declare namespace IGCParser {
     registration: string | null;
     callsign: string | null;
     competitionClass: string | null;
+
     loggerType: string | null;
+    firmwareVersion: string | null;
+    hardwareVersion: string | null;
 
     fixes: BRecord[];
   }
@@ -88,6 +93,8 @@ class IGCParser {
     callsign: null,
     competitionClass: null,
     loggerType: null,
+    firmwareVersion: null,
+    hardwareVersion: null,
     fixes: [],
   };
 
@@ -159,6 +166,10 @@ class IGCParser {
       this._result.competitionClass = this.parseCompetitionClass(line);
     } else if (headerType === 'FTY') {
       this._result.loggerType = this.parseLoggerType(line);
+    } else if (headerType === 'RFW') {
+      this._result.firmwareVersion = this.parseFirmwareVersion(line);
+    } else if (headerType === 'RHW') {
+      this._result.hardwareVersion = this.parseHardwareVersion(line);
     }
   }
 
@@ -221,6 +232,14 @@ class IGCParser {
 
   private parseLoggerType(line: string): string {
     return this.parseTextHeader('FTY', RE_FTY_HEADER, line);
+  }
+
+  private parseFirmwareVersion(line: string): string {
+    return this.parseTextHeader('RFW', RE_RFW_HEADER, line);
+  }
+
+  private parseHardwareVersion(line: string): string {
+    return this.parseTextHeader('RHW', RE_RHW_HEADER, line);
   }
 
   private parseBRecord(line: string): IGCParser.BRecord {

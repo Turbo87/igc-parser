@@ -63,12 +63,18 @@ function printData(data: IGCFile) {
     console.log();
   }
 
-  if (data.gliderType || data.registration || data.callsign || data.competitionClass || data.loggerType) {
+  if (data.gliderType || data.registration || data.callsign || data.competitionClass) {
     printLine('Registration', data.registration);
     printLine('Callsign', data.callsign);
     printLine('Glider Type', data.gliderType);
     printLine('Comp. Class', data.competitionClass);
+    console.log();
+  }
+
+  if (data.loggerType || data.hardwareVersion || data.firmwareVersion) {
     printLine('Logger Type', data.loggerType);
+    printLine('Hardware Version', data.hardwareVersion);
+    printLine('Firmware Version', data.firmwareVersion);
     console.log();
   }
 

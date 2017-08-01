@@ -28,7 +28,10 @@ describe('IGCParser', () => {
       expect(result.registration).toEqual('D-2019');
       expect(result.callsign).toEqual('1G');
       expect(result.competitionClass).toEqual('Club');
+
       expect(result.loggerType).toEqual('LXNAV,LX8080');
+      expect(result.hardwareVersion).toEqual('23');
+      expect(result.firmwareVersion).toEqual('6.0rc6');
 
       expect(result.fixes.length).toEqual(4047);
       expect(result.fixes[0]).toMatchSnapshot();

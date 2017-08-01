@@ -326,6 +326,132 @@ Object {
 }
 `;
 
+exports[`IGCParser parse() 2016-11-08-xcs-aaa-02.igc 1`] = `
+Object {
+  "aRecord": Object {
+    "additionalData": null,
+    "loggerId": "AAA",
+    "manufacturer": "XCSoar",
+    "numFlight": null,
+  },
+  "callsign": "",
+  "competitionClass": null,
+  "copilot": null,
+  "dataRecords": Array [],
+  "date": "2016-11-08",
+  "firmwareVersion": null,
+  "fixes": Array [
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "000",
+        "SIU": "0",
+      },
+      "fixAccuracy": 0,
+      "gpsAltitude": 423,
+      "latitude": -44.48753333333333,
+      "longitude": 169.98871666666668,
+      "pressureAltitude": 468,
+      "time": "22:43:17",
+      "timestamp": 1478644997000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "000",
+        "SIU": "0",
+      },
+      "fixAccuracy": 0,
+      "gpsAltitude": 3608,
+      "latitude": -44.60811666666667,
+      "longitude": 169.91131666666666,
+      "pressureAltitude": 3609,
+      "time": "23:40:21",
+      "timestamp": 1478648421000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "000",
+        "SIU": "0",
+      },
+      "fixAccuracy": 0,
+      "gpsAltitude": 2936,
+      "latitude": -43.92655,
+      "longitude": 169.8921,
+      "pressureAltitude": 2935,
+      "time": "00:45:32",
+      "timestamp": 1478652332000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "000",
+        "SIU": "0",
+      },
+      "fixAccuracy": 0,
+      "gpsAltitude": 426,
+      "latitude": -44.48518333333333,
+      "longitude": 169.98096666666666,
+      "pressureAltitude": 474,
+      "time": "04:43:01",
+      "timestamp": 1478666581000,
+      "valid": true,
+    },
+  ],
+  "gliderType": "DUO DISCUS",
+  "hardwareVersion": null,
+  "loggerType": "XCSOAR,XCSOAR Android 6.8.6 Jul 22 2016",
+  "pilot": "ARNE MARTIN GUETTLER",
+  "registration": "DUO",
+  "security": "34201ec0e3908467ce7fe0fb31f9fe7556578b568a7474e300f763e6afa607f5cdd21b4e2a65ff9f23a64632e2ae11d1d3c5f443c78addd3da2a0e286ad79cee",
+  "task": Object {
+    "comment": null,
+    "declarationDate": "2016-11-08",
+    "declarationTime": "22:43:17",
+    "declarationTimestamp": 1478644997000,
+    "flightDate": null,
+    "numTurnpoints": 2,
+    "points": Array [
+      Object {
+        "latitude": 0,
+        "longitude": 0,
+        "name": "TAKEOFF",
+      },
+      Object {
+        "latitude": -43.766666666666666,
+        "longitude": 170.12833333333333,
+        "name": "L235-MT COOK",
+      },
+      Object {
+        "latitude": -45.51166666666666,
+        "longitude": 169.31666666666666,
+        "name": "L530 ROXBURGH",
+      },
+      Object {
+        "latitude": -43.766666666666666,
+        "longitude": 170.12833333333333,
+        "name": "L235-MT COOK",
+      },
+      Object {
+        "latitude": -44.48383333333334,
+        "longitude": 169.97833333333332,
+        "name": "001-OMARAMA",
+      },
+      Object {
+        "latitude": 0,
+        "longitude": 0,
+        "name": "LANDING",
+      },
+    ],
+    "taskNumber": null,
+  },
+}
+`;
+
 exports[`IGCParser parse() throws if HFDTE is missing 1`] = `"Missing HFDTE record"`;
 
 exports[`IGCParser parseARecord() [empty] -> 💥  1`] = `"Invalid A record at line 0: "`;

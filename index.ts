@@ -16,6 +16,7 @@ const RE_FTY_HEADER = /^H[FO]FTY(?:.{0,}?:(.*)|(.*))$/;
 const RE_RFW_HEADER = /^H[FO]RFW(?:.{0,}?:(.*)|(.*))$/;
 const RE_RHW_HEADER = /^H[FO]RHW(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
+const RE_K = /^K(\d{2})(\d{2})(\d{2})/;
 const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 /* tslint:enable:max-line-length */
 
@@ -39,10 +40,12 @@ declare namespace IGCParser {
     hardwareVersion: string | null;
 
     fixes: BRecord[];
+    dataRecords: KRecord[];
   }
 
   interface PartialIGCFile extends Partial<IGCFile> {
     fixes: BRecord[];
+    dataRecords: KRecord[];
   }
 
   export interface ARecord {
@@ -73,6 +76,16 @@ declare namespace IGCParser {
     enl: number | null;
   }
 
+  export interface KRecord {
+    /** Unix timestamp of the data record in milliseconds */
+    timestamp: number;
+
+    /** UTC time of the data record in ISO 8601 format */
+    time: string;
+
+    extensions: RecordExtensions;
+  }
+
   export interface RecordExtensions {
     [code: string]: string;
   }
@@ -96,6 +109,7 @@ class IGCParser {
     firmwareVersion: null,
     hardwareVersion: null,
     fixes: [],
+    dataRecords: [],
   };
 
   private fixExtensions: IGCParser.RecordExtension[];
@@ -137,6 +151,13 @@ class IGCParser {
       this.prevTimestamp = fix.timestamp;
 
       this._result.fixes.push(fix);
+
+    } else if (recordType === 'K') {
+      let data = this.parseKRecord(line);
+
+      this.prevTimestamp = data.timestamp;
+
+      this._result.dataRecords.push(data);
 
     } else if (recordType === 'H') {
       this.processHeader(line);
@@ -303,6 +324,40 @@ class IGCParser {
       enl,
       fixAccuracy,
     };
+  }
+
+  private parseKRecord(line: string): IGCParser.KRecord {
+    if (!this._result.date) {
+      throw new Error(`Missing HFDTE record before first K record`);
+    }
+
+    if (!this.dataExtensions) {
+      throw new Error(`Missing J record before first K record`);
+    }
+
+    let match = line.match(RE_K);
+    if (!match) {
+      throw new Error(`Invalid K record at line ${this.lineNumber}: ${line}`);
+    }
+
+    let time = `${match[1]}:${match[2]}:${match[3]}`;
+
+    let timestamp = Date.parse(`${this._result.date}T${time}Z`);
+
+    // allow timestamps one hour before the previous timestamp,
+    // otherwise we assume the next day is meant
+    while (this.prevTimestamp && timestamp < this.prevTimestamp - ONE_HOUR) {
+      timestamp += ONE_DAY;
+    }
+
+    let extensions: IGCParser.RecordExtensions = {};
+    if (this.dataExtensions) {
+      for (let { code, start, length } of this.dataExtensions) {
+        extensions[code] = line.slice(start, start + length);
+      }
+    }
+
+    return { timestamp, time, extensions };
   }
 
   private parseIJRecord(line: string): IGCParser.RecordExtension[] {

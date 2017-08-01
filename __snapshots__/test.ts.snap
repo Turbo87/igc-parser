@@ -11,6 +11,32 @@ Object {
   "callsign": "1G",
   "competitionClass": "Club",
   "copilot": null,
+  "dataRecords": Array [
+    Object {
+      "extensions": Object {
+        "WDI": "320",
+        "WVE": "0071",
+      },
+      "time": "10:18:59",
+      "timestamp": 1500113939000,
+    },
+    Object {
+      "extensions": Object {
+        "WDI": "880",
+        "WVE": "1117",
+      },
+      "time": "12:37:02",
+      "timestamp": 1500122222000,
+    },
+    Object {
+      "extensions": Object {
+        "WDI": "840",
+        "WVE": "1002",
+      },
+      "time": "14:36:18",
+      "timestamp": 1500129378000,
+    },
+  ],
   "date": "2017-07-15",
   "firmwareVersion": "6.0rc6",
   "fixes": Array [
@@ -118,6 +144,7 @@ Object {
   "callsign": "TH",
   "competitionClass": "Club",
   "copilot": "",
+  "dataRecords": Array [],
   "date": "2016-05-04",
   "firmwareVersion": "Flarm-IGC06.01",
   "fixes": Array [

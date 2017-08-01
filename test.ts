@@ -14,6 +14,7 @@ describe('IGCParser', () => {
       let result = IGCParser.parse(content);
 
       expect(result.fixes.length).toEqual(4047);
+      expect(result.dataRecords.length).toEqual(80);
 
       // reduce number of fixes to assert
       result.fixes = [
@@ -21,6 +22,13 @@ describe('IGCParser', () => {
         result.fixes[1234],
         result.fixes[2042],
         result.fixes[4046],
+      ];
+
+      // reduce number of data records to assert
+      result.dataRecords = [
+        result.dataRecords[0],
+        result.dataRecords[42],
+        result.dataRecords[result.dataRecords.length - 1],
       ];
 
       expect(result).toMatchSnapshot();

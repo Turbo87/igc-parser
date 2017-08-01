@@ -149,6 +149,7 @@ describe('IGCParser', () => {
     test.pass('HFCM2 Copilot           :Gisela Weinreich  ', 'Gisela Weinreich');
     test.pass('HFCM2:John Doe', 'John Doe');
     test.pass('HOCM2John Doe', 'John Doe');
+    test.pass('HPCM2:John Doe', 'John Doe');
 
     test.fail('');
     test.fail('HXCM2:John Doe');

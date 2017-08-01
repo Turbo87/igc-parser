@@ -53,10 +53,10 @@ declare namespace IGCParser {
   }
 
   export interface BRecord {
-    /** Unix timestamp of the GPF fix in milliseconds */
+    /** Unix timestamp of the GPS fix in milliseconds */
     timestamp: number;
 
-    /** UTC time of the GPF fix in ISO 8601 format */
+    /** UTC time of the GPS fix in ISO 8601 format */
     time: string;
 
     latitude: number;

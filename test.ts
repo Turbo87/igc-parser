@@ -40,6 +40,22 @@ describe('IGCParser', () => {
       expect(result.fixes[4046]).toMatchSnapshot();
     });
 
+    test('654G6NG1.IGC', () => {
+      let content = fs.readFileSync(`${__dirname}/fixtures/654G6NG1.IGC`, 'utf8');
+      let result = IGCParser.parse(content);
+
+      // reduce number of fixes to assert
+      result.fixes = [
+        result.fixes[0],
+        result.fixes[123],
+        result.fixes[420],
+        result.fixes[3000],
+        result.fixes[result.fixes.length - 1],
+      ];
+
+      expect(result).toMatchSnapshot();
+    });
+
     it('throws if HFDTE is missing', () => {
       let lines = [
         'ALXV6M7FLIGHT:1',

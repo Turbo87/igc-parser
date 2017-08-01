@@ -1,5 +1,103 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`IGCParser parse() 654G6NG1.IGC 1`] = `
+Object {
+  "aRecord": Object {
+    "additionalData": null,
+    "loggerId": "6NG",
+    "manufacturer": "Flarm",
+    "numFlight": null,
+  },
+  "callsign": "TH",
+  "competitionClass": "Club",
+  "copilot": "",
+  "date": "2016-05-04",
+  "firmwareVersion": "Flarm-IGC06.01",
+  "fixes": Array [
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "020",
+        "SIU": "8",
+      },
+      "fixAccuracy": 20,
+      "gpsAltitude": 230,
+      "latitude": 50.82191666666667,
+      "longitude": 6.18165,
+      "pressureAltitude": 48,
+      "time": "08:10:42",
+      "timestamp": 1462349442000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "030",
+        "SIU": "9",
+      },
+      "fixAccuracy": 30,
+      "gpsAltitude": 1223,
+      "latitude": 50.803333333333335,
+      "longitude": 6.216966666666667,
+      "pressureAltitude": 1067,
+      "time": "08:19:54",
+      "timestamp": 1462349994000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "021",
+        "SIU": "0",
+      },
+      "fixAccuracy": 21,
+      "gpsAltitude": 1013,
+      "latitude": 50.6964,
+      "longitude": 6.4348,
+      "pressureAltitude": 846,
+      "time": "08:39:42",
+      "timestamp": 1462351182000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "030",
+        "SIU": "9",
+      },
+      "fixAccuracy": 30,
+      "gpsAltitude": 1857,
+      "latitude": 49.21015,
+      "longitude": 7.758483333333333,
+      "pressureAltitude": 1718,
+      "time": "11:31:42",
+      "timestamp": 1462361502000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {
+        "FXA": "031",
+        "SIU": "0",
+      },
+      "fixAccuracy": 31,
+      "gpsAltitude": 238,
+      "latitude": 50.82215,
+      "longitude": 6.189266666666667,
+      "pressureAltitude": 72,
+      "time": "19:04:54",
+      "timestamp": 1462388694000,
+      "valid": true,
+    },
+  ],
+  "gliderType": "ASG-29E (18m)",
+  "hardwareVersion": "Flarm-IGC06",
+  "loggerType": "Flarm-IGC",
+  "pilot": "",
+  "registration": "D-KCSS",
+}
+`;
+
 exports[`IGCParser parse() parses valid IGC files 1`] = `
 Object {
   "enl": 0.04,

@@ -54,7 +54,8 @@ function printFilenameData(data: IGCFilenameData) {
 }
 
 function printData(data: IGCFile) {
-  printARecord(data.aRecord);
+  printLine('Date', data.date);
+  printLine('> Flight #', data.numFlight);
   console.log();
 
   if (data.pilot || data.copilot) {
@@ -71,14 +72,14 @@ function printData(data: IGCFile) {
     console.log();
   }
 
-  if (data.loggerType || data.hardwareVersion || data.firmwareVersion) {
+  if (data.loggerId || data.loggerManufacturer || data.loggerType || data.hardwareVersion || data.firmwareVersion) {
+    printLine('Logger ID', data.loggerId);
+    printLine('Manufacturer', data.loggerManufacturer);
     printLine('Logger Type', data.loggerType);
     printLine('Hardware Version', data.hardwareVersion);
     printLine('Firmware Version', data.firmwareVersion);
     console.log();
   }
-
-  printLine('Date', data.date);
 
   printLine('GPS fixes', data.fixes.length);
   if (data.fixes.length !== 0) {
@@ -99,9 +100,6 @@ function printData(data: IGCFile) {
 }
 
 function printARecord(record: ARecord) {
-  printLine('Manufacturer', record.manufacturer);
-  printLine('Logger ID', record.loggerId);
-  printLine('> Flight #', record.numFlight);
 }
 
 function printLine(title: string, value: any) {

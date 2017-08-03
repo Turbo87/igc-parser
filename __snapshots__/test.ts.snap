@@ -2,12 +2,6 @@
 
 exports[`IGCParser parse() 1G_77fv6m71.igc 1`] = `
 Object {
-  "aRecord": Object {
-    "additionalData": null,
-    "loggerId": "6M7",
-    "manufacturer": "LXNAV",
-    "numFlight": 1,
-  },
   "callsign": "1G",
   "competitionClass": "Club",
   "copilot": null,
@@ -127,7 +121,10 @@ Object {
   ],
   "gliderType": "ASW 19",
   "hardwareVersion": "23",
+  "loggerId": "6M7",
+  "loggerManufacturer": "LXNAV",
   "loggerType": "LXNAV,LX8080",
+  "numFlight": 1,
   "pilot": "Florian Graf",
   "registration": "D-2019",
   "security": "440FA49446EB4CDA7E1CB4B7D1F33A33F421E7A92656F2AEAE0A18356531A5B1E7C45C72F5C819E94A5DB32640019DC09BAB2EE64BE9FD1B558B9538308598C71F34C38E008D1AB9B859C762747F6B862B52D377C1D1C4D2BFDE801B63B9013AB53F4DF1A5DA6B1D8BCEF04ECF0D54D5895FF1C00DF131F7030241CB7E9C3FAEC1B8D",
@@ -187,12 +184,6 @@ Object {
 
 exports[`IGCParser parse() 654G6NG1.IGC 1`] = `
 Object {
-  "aRecord": Object {
-    "additionalData": null,
-    "loggerId": "6NG",
-    "manufacturer": "Flarm",
-    "numFlight": null,
-  },
   "callsign": "TH",
   "competitionClass": "Club",
   "copilot": "",
@@ -278,7 +269,10 @@ Object {
   ],
   "gliderType": "ASG-29E (18m)",
   "hardwareVersion": "Flarm-IGC06",
+  "loggerId": "6NG",
+  "loggerManufacturer": "Flarm",
   "loggerType": "Flarm-IGC",
+  "numFlight": null,
   "pilot": "",
   "registration": "D-KCSS",
   "security": "60DC059E2D2F6CAD2E889224E355DBDDB805CAB100000639B49FC5F280A292C990F554789F12381380720000",
@@ -328,12 +322,6 @@ Object {
 
 exports[`IGCParser parse() 2016-11-08-xcs-aaa-02.igc 1`] = `
 Object {
-  "aRecord": Object {
-    "additionalData": null,
-    "loggerId": "AAA",
-    "manufacturer": "XCSoar",
-    "numFlight": null,
-  },
   "callsign": "",
   "competitionClass": null,
   "copilot": null,
@@ -404,7 +392,10 @@ Object {
   ],
   "gliderType": "DUO DISCUS",
   "hardwareVersion": null,
+  "loggerId": "AAA",
+  "loggerManufacturer": "XCSoar",
   "loggerType": "XCSOAR,XCSOAR Android 6.8.6 Jul 22 2016",
+  "numFlight": null,
   "pilot": "ARNE MARTIN GUETTLER",
   "registration": "DUO",
   "security": "34201ec0e3908467ce7fe0fb31f9fe7556578b568a7474e300f763e6afa607f5cdd21b4e2a65ff9f23a64632e2ae11d1d3c5f443c78addd3da2a0e286ad79cee",

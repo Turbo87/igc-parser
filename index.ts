@@ -24,10 +24,9 @@ const RE_TASKPOINT = /^C(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])(.
 
 declare namespace IGCParser {
   export interface IGCFile {
-    aRecord: ARecord;
-
     /** UTC date of the flight in ISO 8601 format */
     date: string;
+    numFlight: number | null;
 
     pilot: string | null;
     copilot: string | null;
@@ -37,6 +36,8 @@ declare namespace IGCParser {
     callsign: string | null;
     competitionClass: string | null;
 
+    loggerId: string;
+    loggerManufacturer: string;
     loggerType: string | null;
     firmwareVersion: string | null;
     hardwareVersion: string | null;
@@ -125,6 +126,7 @@ declare namespace IGCParser {
 
 class IGCParser {
   private _result: IGCParser.PartialIGCFile = {
+    numFlight: null,
     pilot: null,
     copilot: null,
     gliderType: null,
@@ -157,7 +159,7 @@ class IGCParser {
   }
 
   get result(): IGCParser.IGCFile {
-    if (!this._result.aRecord) {
+    if (!this._result.loggerId) {
       throw new Error(`Missing A record`);
     }
 
@@ -194,7 +196,11 @@ class IGCParser {
       this.processTaskLine(line);
 
     } else if (recordType === 'A') {
-      this._result.aRecord = this.parseARecord(line);
+      let record = this.parseARecord(line);
+
+      this._result.loggerId = record.loggerId;
+      this._result.loggerManufacturer = record.manufacturer;
+      this._result.numFlight = record.numFlight;
 
     } else if (recordType === 'I') {
       this.fixExtensions = this.parseIJRecord(line);

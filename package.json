@@ -16,7 +16,8 @@
     "build": "tsc",
     "prepublish": "tsc",
     "lint": "tslint --project . --format stylish",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watchAll --notify"
   },
   "dependencies": {
     "flight-recorder-manufacturers": "^1.0.1"

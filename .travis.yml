@@ -11,6 +11,7 @@ before_deploy:
   - auto-dist-tag --write
 
 deploy:
+  skip_cleanup: true
   provider: npm
   email: tobias.bieniek@gmx.de
   api_key:

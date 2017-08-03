@@ -50,7 +50,7 @@ let result = IGCParser.parse(fs.readFileSync('1G_77fv6m71.igc', 'utf8'));
   
   fixes: [{
     enl: 0.04,
-    extensions: Object {
+    extensions: {
       "ACZ": "100",
       "ENL": "040",
       "FXA": "060",

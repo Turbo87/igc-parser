@@ -200,7 +200,10 @@ class IGCParser {
 
       this._result.loggerId = record.loggerId;
       this._result.loggerManufacturer = record.manufacturer;
-      this._result.numFlight = record.numFlight;
+
+      if (record.numFlight !== null) {
+        this._result.numFlight = record.numFlight;
+      }
 
     } else if (recordType === 'I') {
       this.fixExtensions = this.parseIJRecord(line);

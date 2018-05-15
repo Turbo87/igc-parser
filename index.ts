@@ -219,7 +219,7 @@ class IGCParser {
   private processHeader(line: string) {
     let headerType = line.slice(2, 5);
     if (headerType === 'DTE') {
-      this._result.date = this.parseDateHeader(line);
+      this._result.date = this.parseDateHeader(line).date;
     } else if (headerType === 'PLT') {
       this._result.pilot = this.parsePilot(line);
     } else if (headerType === 'CM2') {
@@ -255,14 +255,15 @@ class IGCParser {
     return { manufacturer, loggerId, numFlight, additionalData };
   }
 
-  private parseDateHeader(line: string): string {
+  private parseDateHeader(line: string): { date: string } {
     let match = line.match(RE_HFDTE);
     if (!match) {
       throw new Error(`Invalid DTE header at line ${this.lineNumber}: ${line}`);
     }
 
     let lastCentury = match[3][0] === '8' || match[3][0] === '9';
-    return `${lastCentury ? '19' : '20'}${match[3]}-${match[2]}-${match[1]}`;
+    let date = `${lastCentury ? '19' : '20'}${match[3]}-${match[2]}-${match[1]}`;
+    return { date };
   }
 
   private parseTextHeader(headerType: string, regex: RegExp, line: string, underscoreReplacement = ' '): string {

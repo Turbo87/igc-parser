@@ -67,6 +67,23 @@ describe('IGCParser', () => {
       expect(result).toMatchSnapshot();
     });
 
+    test('20180427.igc', () => {
+      let content = fs.readFileSync(`${__dirname}/fixtures/20180427.igc`, 'utf8');
+      let result = IGCParser.parse(content);
+
+      expect(result.fixes.length).toEqual(1831);
+
+      // reduce number of fixes to assert
+      result.fixes = [
+        result.fixes[0],
+        result.fixes[234],
+        result.fixes[1777],
+        result.fixes[result.fixes.length - 1],
+      ];
+
+      expect(result).toMatchSnapshot();
+    });
+
     it('throws if HFDTE is missing', () => {
       let lines = [
         'ALXV6M7FLIGHT:1',
@@ -140,9 +157,13 @@ describe('IGCParser', () => {
   });
 
   describeMethod('parseDateHeader', (test) => {
-    test.pass('HFDTE010180', '1980-01-01');
-    test.pass('HFDTE150717', '2017-07-15');
-    test.pass('HFDTE311279', '2079-12-31');
+    test.pass('HFDTE010180', { date: '1980-01-01', numFlight: null });
+    test.pass('HFDTE150717', { date: '2017-07-15', numFlight: null });
+    test.pass('HFDTE15071799', { date: '2017-07-15', numFlight: 99 });
+    test.pass('HFDTE311279', { date: '2079-12-31', numFlight: null });
+    test.pass('HFDTEDATE:150717', { date: '2017-07-15', numFlight: null });
+    test.pass('HFDTEDATE:15071702', { date: '2017-07-15', numFlight: 2 });
+    test.pass('HFDTEDATE:150717,01', { date: '2017-07-15', numFlight: 1 });
 
     test.fail('');
     test.fail('HFDTE');

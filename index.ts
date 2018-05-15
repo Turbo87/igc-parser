@@ -142,11 +142,11 @@ class IGCParser {
     security: null,
   };
 
-  private fixExtensions: IGCParser.RecordExtension[];
-  private dataExtensions: IGCParser.RecordExtension[];
+  private fixExtensions: IGCParser.RecordExtension[] = [];
+  private dataExtensions: IGCParser.RecordExtension[] = [];
 
   private lineNumber = 0;
-  private prevTimestamp: number | null;
+  private prevTimestamp: number | null = null;
 
   static parse(str: string): IGCParser.IGCFile {
     let parser = new IGCParser();

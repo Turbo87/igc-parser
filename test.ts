@@ -140,10 +140,13 @@ describe('IGCParser', () => {
   });
 
   describeMethod('parseDateHeader', (test) => {
-    test.pass('HFDTE010180', { date: '1980-01-01' });
-    test.pass('HFDTE150717', { date: '2017-07-15' });
-    test.pass('HFDTE311279', { date: '2079-12-31' });
-    test.pass('HFDTEDATE:150717', { date: '2017-07-15' });
+    test.pass('HFDTE010180', { date: '1980-01-01', numFlight: null });
+    test.pass('HFDTE150717', { date: '2017-07-15', numFlight: null });
+    test.pass('HFDTE15071799', { date: '2017-07-15', numFlight: 99 });
+    test.pass('HFDTE311279', { date: '2079-12-31', numFlight: null });
+    test.pass('HFDTEDATE:150717', { date: '2017-07-15', numFlight: null });
+    test.pass('HFDTEDATE:15071702', { date: '2017-07-15', numFlight: 2 });
+    test.pass('HFDTEDATE:150717,01', { date: '2017-07-15', numFlight: 1 });
 
     test.fail('');
     test.fail('HFDTE');

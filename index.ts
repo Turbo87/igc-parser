@@ -5,7 +5,7 @@ const ONE_DAY = 24 * 60 * 60 * 1000;
 
 /* tslint:disable:max-line-length */
 const RE_A = /^A(\w{3})(\w{3,}?)(?:FLIGHT:(\d+)|\:(.+))?/;
-const RE_HFDTE = /^HFDTE(?:DATE:)?(\d{2})(\d{2})(\d{2})/;
+const RE_HFDTE = /^HFDTE(?:DATE:)?(\d{2})(\d{2})(\d{2})(?:,?(\d{2}))?/;
 const RE_PLT_HEADER = /^H[FO]PLT(?:.{0,}?:(.*)|(.*))$/;
 const RE_CM2_HEADER = /^H[FOP]CM2(?:.{0,}?:(.*)|(.*))$/; // P is used by some broken Flarms
 const RE_GTY_HEADER = /^H[FO]GTY(?:.{0,}?:(.*)|(.*))$/;
@@ -219,7 +219,14 @@ class IGCParser {
   private processHeader(line: string) {
     let headerType = line.slice(2, 5);
     if (headerType === 'DTE') {
-      this._result.date = this.parseDateHeader(line).date;
+      let record = this.parseDateHeader(line);
+
+      this._result.date = record.date;
+
+      if (record.numFlight !== null) {
+        this._result.numFlight = record.numFlight;
+      }
+
     } else if (headerType === 'PLT') {
       this._result.pilot = this.parsePilot(line);
     } else if (headerType === 'CM2') {
@@ -255,7 +262,7 @@ class IGCParser {
     return { manufacturer, loggerId, numFlight, additionalData };
   }
 
-  private parseDateHeader(line: string): { date: string } {
+  private parseDateHeader(line: string): { date: string, numFlight: number | null } {
     let match = line.match(RE_HFDTE);
     if (!match) {
       throw new Error(`Invalid DTE header at line ${this.lineNumber}: ${line}`);
@@ -263,7 +270,10 @@ class IGCParser {
 
     let lastCentury = match[3][0] === '8' || match[3][0] === '9';
     let date = `${lastCentury ? '19' : '20'}${match[3]}-${match[2]}-${match[1]}`;
-    return { date };
+
+    let numFlight = match[4] ? parseInt(match[4], 10) : null;
+
+    return { date, numFlight };
   }
 
   private parseTextHeader(headerType: string, regex: RegExp, line: string, underscoreReplacement = ' '): string {

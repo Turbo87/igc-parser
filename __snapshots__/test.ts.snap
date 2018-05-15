@@ -443,6 +443,77 @@ Object {
 }
 `;
 
+exports[`IGCParser parse() 20180427.igc 1`] = `
+Object {
+  "callsign": "86",
+  "competitionClass": "",
+  "copilot": null,
+  "dataRecords": Array [],
+  "date": "2018-04-27",
+  "firmwareVersion": null,
+  "fixes": Array [
+    Object {
+      "enl": null,
+      "extensions": Object {},
+      "fixAccuracy": null,
+      "gpsAltitude": 583,
+      "latitude": 45.9636,
+      "longitude": 13.723516666666667,
+      "pressureAltitude": 596,
+      "time": "13:35:15",
+      "timestamp": 1524836115000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {},
+      "fixAccuracy": null,
+      "gpsAltitude": 570,
+      "latitude": 45.93281666666667,
+      "longitude": 13.739566666666667,
+      "pressureAltitude": 582,
+      "time": "13:54:01",
+      "timestamp": 1524837241000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {},
+      "fixAccuracy": null,
+      "gpsAltitude": 261,
+      "latitude": 45.95603333333333,
+      "longitude": 13.699766666666667,
+      "pressureAltitude": 289,
+      "time": "15:59:56",
+      "timestamp": 1524844796000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {},
+      "fixAccuracy": null,
+      "gpsAltitude": 57,
+      "latitude": 45.94753333333333,
+      "longitude": 13.712033333333334,
+      "pressureAltitude": 97,
+      "time": "16:03:25",
+      "timestamp": 1524845005000,
+      "valid": true,
+    },
+  ],
+  "gliderType": "",
+  "hardwareVersion": null,
+  "loggerId": "000",
+  "loggerManufacturer": "XGD",
+  "loggerType": null,
+  "numFlight": 1,
+  "pilot": "Stefan Vyparina",
+  "registration": "",
+  "security": null,
+  "task": null,
+}
+`;
+
 exports[`IGCParser parse() throws if HFDTE is missing 1`] = `"Missing HFDTE record"`;
 
 exports[`IGCParser parseARecord() [empty] -> 💥  1`] = `"Invalid A record at line 0: "`;

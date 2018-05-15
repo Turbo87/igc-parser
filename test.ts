@@ -67,6 +67,23 @@ describe('IGCParser', () => {
       expect(result).toMatchSnapshot();
     });
 
+    test('20180427.igc', () => {
+      let content = fs.readFileSync(`${__dirname}/fixtures/20180427.igc`, 'utf8');
+      let result = IGCParser.parse(content);
+
+      expect(result.fixes.length).toEqual(1831);
+
+      // reduce number of fixes to assert
+      result.fixes = [
+        result.fixes[0],
+        result.fixes[234],
+        result.fixes[1777],
+        result.fixes[result.fixes.length - 1],
+      ];
+
+      expect(result).toMatchSnapshot();
+    });
+
     it('throws if HFDTE is missing', () => {
       let lines = [
         'ALXV6M7FLIGHT:1',

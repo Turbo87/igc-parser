@@ -202,6 +202,33 @@ describe('IGCParser', () => {
     test.fail('HFCM1:John Doe');
   });
 
+  describeMethod('parseTask', (test) => {
+    test.pass('C150717085720000000000204', {
+      comment: null,
+      declarationDate: '2017-07-15',
+      declarationTime: '08:57:20',
+      declarationTimestamp: 1500109040000,
+      flightDate: null,
+      numTurnpoints: 4,
+      points: [],
+      taskNumber: 2,
+    });
+
+    test.pass('C1707171703131707170001-2', {
+      comment: null,
+      declarationDate: '2017-07-17',
+      declarationTime: '17:03:13',
+      declarationTimestamp: 1500310993000,
+      flightDate: '2017-07-17',
+      numTurnpoints: -2,
+      points: [],
+      taskNumber: 1,
+    });
+
+    test.fail('');
+    test.fail('C17071717031317');
+  });
+
   describeMethod('parseBRecord', (test) => {
     beforeEach(() => {
       parser['_result'].date = '2017-02-03';

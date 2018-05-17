@@ -703,8 +703,8 @@ find-up@^2.0.0, find-up@^2.1.0:
     locate-path "^2.0.0"
 
 flight-recorder-manufacturers@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/flight-recorder-manufacturers/-/flight-recorder-manufacturers-1.0.1.tgz#a1ad2feb3510b796550b42cc4eaae4222260e95f"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/flight-recorder-manufacturers/-/flight-recorder-manufacturers-1.1.0.tgz#66639d5d3f33cdac147e3fe35a7011a899b505f9"
 
 for-in@^1.0.1:
   version "1.0.2"

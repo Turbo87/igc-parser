@@ -31,6 +31,9 @@
     "tslint": "^5.5.0",
     "typescript": "^2.4.1"
   },
+  "engines": {
+    "node": ">=6"
+  },
   "jest": {
     "mapCoverage": true,
     "moduleFileExtensions": [

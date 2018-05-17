@@ -504,7 +504,7 @@ Object {
   "gliderType": "",
   "hardwareVersion": null,
   "loggerId": "000",
-  "loggerManufacturer": "XGD",
+  "loggerManufacturer": "GpsDump",
   "loggerType": null,
   "numFlight": 1,
   "pilot": "Stefan Vyparina",

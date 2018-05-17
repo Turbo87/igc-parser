@@ -33,9 +33,9 @@
   dependencies:
     "@types/babel-types" "*"
 
-"@types/jest@^20.0.3":
-  version "20.0.5"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-20.0.5.tgz#f463e58b2de6e801f40e33b05db894babdbad98c"
+"@types/jest@^22.2.3":
+  version "22.2.3"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-22.2.3.tgz#0157c0316dc3722c43a7b71de3fdf3acbccef10d"
 
 "@types/node@^6.0.83":
   version "6.0.85"

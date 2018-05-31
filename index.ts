@@ -23,6 +23,10 @@ const RE_TASKPOINT = /^C(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])(.
 /* tslint:enable:max-line-length */
 
 declare namespace IGCParser {
+  export interface Options {
+    lenient?: boolean;
+  }
+
   export interface IGCFile {
     /** UTC date of the flight in ISO 8601 format */
     date: string;
@@ -48,6 +52,8 @@ declare namespace IGCParser {
     dataRecords: KRecord[];
 
     security: string | null;
+
+    errors: Error[];
   }
 
   interface PartialIGCFile extends Partial<IGCFile> {
@@ -140,6 +146,7 @@ class IGCParser {
     fixes: [],
     dataRecords: [],
     security: null,
+    errors: [],
   };
 
   private fixExtensions: IGCParser.RecordExtension[] = [];
@@ -148,14 +155,26 @@ class IGCParser {
   private lineNumber = 0;
   private prevTimestamp: number | null = null;
 
-  static parse(str: string): IGCParser.IGCFile {
+  static parse(str: string, options: IGCParser.Options = {}): IGCParser.IGCFile {
     let parser = new IGCParser();
 
+    let errors = [];
     for (let line of str.split('\n')) {
-      parser.processLine(line.trim());
+      try {
+        parser.processLine(line.trim());
+      } catch (error) {
+        if (options.lenient) {
+          errors.push(error);
+        } else {
+          throw error;
+        }
+      }
     }
 
-    return parser.result;
+    let result = parser.result;
+    result.errors = errors;
+
+    return result;
   }
 
   get result(): IGCParser.IGCFile {

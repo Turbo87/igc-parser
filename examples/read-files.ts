@@ -32,7 +32,7 @@ for (let filename of filenames) {
   let content = fs.readFileSync(path, 'utf8');
 
   try {
-    let data = IGCParser.parse(content);
+    let data = IGCParser.parse(content, { lenient: true });
     printData(data);
   } catch (error) {
     console.log(error);
@@ -96,6 +96,16 @@ function printData(data: IGCFile) {
     let min = Math.min(...enlValues);
     let max = Math.max(...enlValues);
     printLine('ENL range', `${(min * 100).toFixed(1)} - ${(max * 100).toFixed(1)}%`);
+  }
+
+  let errors = data.errors;
+  if (errors.length !== 0) {
+    console.log();
+    console.log('Errors:');
+    for (let error of errors) {
+      console.log();
+      console.log(error);
+    }
   }
 }
 

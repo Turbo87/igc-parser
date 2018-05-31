@@ -84,6 +84,14 @@ describe('IGCParser', () => {
       expect(result).toMatchSnapshot();
     });
 
+    test('MD_85ugkjj1.IGC', () => {
+      let content = fs.readFileSync(`${__dirname}/fixtures/MD_85ugkjj1.IGC`, 'utf8');
+      let result = IGCParser.parse(content, { lenient: true });
+
+      expect(result.fixes.length).toEqual(8924);
+      expect(result.errors).toMatchSnapshot();
+    });
+
     it('throws if HFDTE is missing', () => {
       let lines = [
         'ALXV6M7FLIGHT:1',

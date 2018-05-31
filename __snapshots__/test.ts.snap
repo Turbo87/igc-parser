@@ -32,6 +32,7 @@ Object {
     },
   ],
   "date": "2017-07-15",
+  "errors": Array [],
   "firmwareVersion": "6.0rc6",
   "fixes": Array [
     Object {
@@ -189,6 +190,7 @@ Object {
   "copilot": "",
   "dataRecords": Array [],
   "date": "2016-05-04",
+  "errors": Array [],
   "firmwareVersion": "Flarm-IGC06.01",
   "fixes": Array [
     Object {
@@ -327,6 +329,7 @@ Object {
   "copilot": null,
   "dataRecords": Array [],
   "date": "2016-11-08",
+  "errors": Array [],
   "firmwareVersion": null,
   "fixes": Array [
     Object {
@@ -450,6 +453,7 @@ Object {
   "copilot": null,
   "dataRecords": Array [],
   "date": "2018-04-27",
+  "errors": Array [],
   "firmwareVersion": null,
   "fixes": Array [
     Object {
@@ -512,6 +516,12 @@ Object {
   "security": null,
   "task": null,
 }
+`;
+
+exports[`IGCParser parse() MD_85ugkjj1.IGC 1`] = `
+Array [
+  [Error: Invalid task point declaration at line 18: C07FRW 6.42Flight2Flight],
+]
 `;
 
 exports[`IGCParser parse() throws if HFDTE is missing 1`] = `"Missing HFDTE record"`;

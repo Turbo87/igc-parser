@@ -17,8 +17,8 @@
     js-tokens "^3.0.0"
 
 "@types/jest@^23.0.0":
-  version "23.0.0"
-  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.0.0.tgz#760cac74f00bb9c3075587716d2b3b4435663bc0"
+  version "23.0.2"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.0.2.tgz#f03f9e6dd2206cc2a2e8fd033161b0b7cf905db6"
 
 "@types/node@^6.0.83":
   version "6.0.85"

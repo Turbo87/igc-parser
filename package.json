@@ -27,7 +27,7 @@
     "@types/node": "^6.0.83",
     "igc-filename-parser": "^0.1.1",
     "jest": "^23.0.0",
-    "ts-jest": "^22.4.6",
+    "ts-jest": "^23.0.0",
     "tslint": "^5.5.0",
     "typescript": "^2.4.1"
   },

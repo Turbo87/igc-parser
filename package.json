@@ -29,7 +29,7 @@
     "jest": "^23.0.0",
     "ts-jest": "^23.0.0",
     "tslint": "^5.5.0",
-    "typescript": "^2.4.1"
+    "typescript": "^3.0.1"
   },
   "engines": {
     "node": ">=6"

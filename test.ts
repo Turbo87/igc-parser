@@ -321,13 +321,13 @@ describe('IGCParser', () => {
           }
 
           test(testName, () => {
-            expect(parser[methodName](input)).toEqual(expected);
+            expect((parser as any)[methodName](input)).toEqual(expected);
           });
         },
 
         fail(input: string) {
           test(`${input ? input : '[empty]'} -> 💥 `, () => {
-            expect(() => parser[methodName](input)).toThrowErrorMatchingSnapshot();
+            expect(() => (parser as any)[methodName](input)).toThrowErrorMatchingSnapshot();
           });
         },
       });

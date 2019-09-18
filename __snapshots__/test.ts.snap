@@ -524,6 +524,78 @@ Array [
 ]
 `;
 
+exports[`IGCParser parse() invalid_a_field.igc 1`] = `
+Object {
+  "callsign": "",
+  "competitionClass": "",
+  "copilot": null,
+  "dataRecords": Array [],
+  "date": "2019-09-16",
+  "errors": Array [
+    [Error: Invalid A record at line 1: AXGD Flymaster F1, V1.21, S/N 3556],
+  ],
+  "firmwareVersion": null,
+  "fixes": Array [
+    Object {
+      "enl": null,
+      "extensions": Object {},
+      "fixAccuracy": null,
+      "gpsAltitude": 1548,
+      "latitude": 43.9752,
+      "longitude": 6.480933333333334,
+      "pressureAltitude": 1484,
+      "time": "10:41:06",
+      "timestamp": 1568630466000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {},
+      "fixAccuracy": null,
+      "gpsAltitude": 1919,
+      "latitude": 44.0215,
+      "longitude": 6.452566666666667,
+      "pressureAltitude": 1846,
+      "time": "11:02:17",
+      "timestamp": 1568631737000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {},
+      "fixAccuracy": null,
+      "gpsAltitude": 1588,
+      "latitude": 44.07973333333333,
+      "longitude": 6.4386833333333335,
+      "pressureAltitude": 1535,
+      "time": "11:16:11",
+      "timestamp": 1568632571000,
+      "valid": true,
+    },
+    Object {
+      "enl": null,
+      "extensions": Object {},
+      "fixAccuracy": null,
+      "gpsAltitude": 1609,
+      "latitude": 44.13955,
+      "longitude": 6.390533333333333,
+      "pressureAltitude": 1553,
+      "time": "11:50:21",
+      "timestamp": 1568634621000,
+      "valid": true,
+    },
+  ],
+  "gliderType": "Cure",
+  "hardwareVersion": null,
+  "loggerType": null,
+  "numFlight": null,
+  "pilot": "Coco",
+  "registration": "",
+  "security": "A2FAA632997A385C",
+  "task": null,
+}
+`;
+
 exports[`IGCParser parse() throws if HFDTE is missing 1`] = `"Missing HFDTE record"`;
 
 exports[`IGCParser parseARecord() [empty] -> 💥  1`] = `"Invalid A record at line 0: "`;

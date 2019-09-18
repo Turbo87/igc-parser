@@ -155,9 +155,11 @@ class IGCParser {
   private lineNumber = 0;
   private prevTimestamp: number | null = null;
 
+  private lenient = false;
+
   static parse(str: string, options: IGCParser.Options = {}): IGCParser.IGCFile {
     let parser = new IGCParser();
-
+    parser.lenient = !!options.lenient;
     let errors = [];
     for (let line of str.split('\n')) {
       try {
@@ -178,7 +180,7 @@ class IGCParser {
   }
 
   get result(): IGCParser.IGCFile {
-    if (!this._result.loggerId) {
+    if (!this._result.loggerId && !this.lenient) {
       throw new Error(`Missing A record`);
     }
 

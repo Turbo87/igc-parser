@@ -9,6 +9,24 @@ describe('IGCParser', () => {
   });
 
   describe('parse()', () => {
+    test('invalid_a_field.igc', () => {
+      let content = fs.readFileSync(`${__dirname}/fixtures/invalid_a_field.igc`, 'utf8');
+      let result = IGCParser.parse(content, {lenient: true});
+
+      expect(result.fixes.length).toEqual(10476);
+      expect(result.dataRecords.length).toEqual(0);
+
+      // reduce number of fixes to assert
+      result.fixes = [
+        result.fixes[0],
+        result.fixes[1234],
+        result.fixes[2042],
+        result.fixes[4046],
+      ];
+
+      expect(result).toMatchSnapshot();
+    });
+
     test('1G_77fv6m71.igc', () => {
       let content = fs.readFileSync(`${__dirname}/fixtures/1G_77fv6m71.igc`, 'utf8');
       let result = IGCParser.parse(content);

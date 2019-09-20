@@ -158,6 +158,34 @@ describe('IGCParser', () => {
       additionalData: null,
     });
 
+    test.pass('AXYZ123456:foo', {
+      manufacturer: 'XYZ',
+      loggerId: '123456',
+      numFlight: null,
+      additionalData: 'foo',
+    });
+
+    test.pass('AXCT XCTrack 0.6.0 on samsung GT-S6500 2.3.6', {
+      manufacturer: 'XCT',
+      loggerId: null,
+      numFlight: null,
+      additionalData: 'XCTrack 0.6.0 on samsung GT-S6500 2.3.6',
+    });
+
+    test.pass('AXGD Flymaster F1, V1.21, S/N 3556', {
+      manufacturer: 'GpsDump',
+      loggerId: null,
+      numFlight: null,
+      additionalData: 'Flymaster F1, V1.21, S/N 3556',
+    });
+
+    test.pass('AXSR', {
+      manufacturer: 'XSR',
+      loggerId: null,
+      numFlight: null,
+      additionalData: null,
+    });
+
     test.fail('');
     test.fail('HFDTE');
     test.fail('HFDTEXXXXXX');

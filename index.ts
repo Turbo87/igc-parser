@@ -4,7 +4,7 @@ const ONE_HOUR = 60 * 60 * 1000;
 const ONE_DAY = 24 * 60 * 60 * 1000;
 
 /* tslint:disable:max-line-length */
-const RE_A = /^A(\w{3})(\w{3,}?)(?:FLIGHT:(\d+)|\:(.+))?/;
+const RE_A = /^A(\w{3})(\w{3,}?)(?:FLIGHT:(\d+)|\:(.+))?$/;
 const RE_HFDTE = /^HFDTE(?:DATE:)?(\d{2})(\d{2})(\d{2})(?:,?(\d{2}))?/;
 const RE_PLT_HEADER = /^H[FO]PLT(?:.{0,}?:(.*)|(.*))$/;
 const RE_CM2_HEADER = /^H[FOP]CM2(?:.{0,}?:(.*)|(.*))$/; // P is used by some broken Flarms
@@ -40,7 +40,7 @@ declare namespace IGCParser {
     callsign: string | null;
     competitionClass: string | null;
 
-    loggerId: string;
+    loggerId: string | null;
     loggerManufacturer: string;
     loggerType: string | null;
     firmwareVersion: string | null;
@@ -63,7 +63,7 @@ declare namespace IGCParser {
 
   export interface ARecord {
     manufacturer: string;
-    loggerId: string;
+    loggerId: string | null;
     numFlight: number | null;
     additionalData: string | null;
   }
@@ -178,7 +178,7 @@ class IGCParser {
   }
 
   get result(): IGCParser.IGCFile {
-    if (!this._result.loggerId) {
+    if (!this._result.loggerManufacturer) {
       throw new Error(`Missing A record`);
     }
 
@@ -269,16 +269,22 @@ class IGCParser {
 
   private parseARecord(line: string): IGCParser.ARecord {
     let match = line.match(RE_A);
-    if (!match) {
-      throw new Error(`Invalid A record at line ${this.lineNumber}: ${line}`);
+    if (match) {
+      let manufacturer = lookupManufacturer(match[1]);
+      let loggerId = match[2];
+      let numFlight = match[3] ? parseInt(match[3], 10) : null;
+      let additionalData = match[4] || null;
+      return {manufacturer, loggerId, numFlight, additionalData};
     }
 
-    let manufacturer = lookupManufacturer(match[1]);
-    let loggerId = match[2];
-    let numFlight = match[3] ? parseInt(match[3], 10) : null;
-    let additionalData = match[4] || null;
+    match = line.match(/^A(\w{3})(.+)?$/);
+    if (match) {
+      let manufacturer = lookupManufacturer(match[1]);
+      let additionalData = match[2] ? match[2].trim() : null;
+      return { manufacturer, loggerId: null, numFlight: null, additionalData };
+    }
 
-    return { manufacturer, loggerId, numFlight, additionalData };
+    throw new Error(`Invalid A record at line ${this.lineNumber}: ${line}`);
   }
 
   private parseDateHeader(line: string): { date: string, numFlight: number | null } {

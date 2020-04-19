@@ -6,15 +6,15 @@ const ONE_DAY = 24 * 60 * 60 * 1000;
 /* tslint:disable:max-line-length */
 const RE_A = /^A(\w{3})(\w{3,}?)(?:FLIGHT:(\d+)|\:(.+))?$/;
 const RE_HFDTE = /^HFDTE(?:DATE:)?(\d{2})(\d{2})(\d{2})(?:,?(\d{2}))?/;
-const RE_PLT_HEADER = /^H[FO]PLT(?:.{0,}?:(.*)|(.*))$/;
+const RE_PLT_HEADER = /^H[FOP]PLT(?:.{0,}?:(.*)|(.*))$/;
 const RE_CM2_HEADER = /^H[FOP]CM2(?:.{0,}?:(.*)|(.*))$/; // P is used by some broken Flarms
-const RE_GTY_HEADER = /^H[FO]GTY(?:.{0,}?:(.*)|(.*))$/;
-const RE_GID_HEADER = /^H[FO]GID(?:.{0,}?:(.*)|(.*))$/;
-const RE_CID_HEADER = /^H[FO]CID(?:.{0,}?:(.*)|(.*))$/;
-const RE_CCL_HEADER = /^H[FO]CCL(?:.{0,}?:(.*)|(.*))$/;
-const RE_FTY_HEADER = /^H[FO]FTY(?:.{0,}?:(.*)|(.*))$/;
-const RE_RFW_HEADER = /^H[FO]RFW(?:.{0,}?:(.*)|(.*))$/;
-const RE_RHW_HEADER = /^H[FO]RHW(?:.{0,}?:(.*)|(.*))$/;
+const RE_GTY_HEADER = /^H[FOP]GTY(?:.{0,}?:(.*)|(.*))$/;
+const RE_GID_HEADER = /^H[FOP]GID(?:.{0,}?:(.*)|(.*))$/;
+const RE_CID_HEADER = /^H[FOP]CID(?:.{0,}?:(.*)|(.*))$/;
+const RE_CCL_HEADER = /^H[FOP]CCL(?:.{0,}?:(.*)|(.*))$/;
+const RE_FTY_HEADER = /^H[FOP]FTY(?:.{0,}?:(.*)|(.*))$/;
+const RE_RFW_HEADER = /^H[FOP]RFW(?:.{0,}?:(.*)|(.*))$/;
+const RE_RHW_HEADER = /^H[FOP]RHW(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_K = /^K(\d{2})(\d{2})(\d{2})/;
 const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
@@ -327,7 +327,7 @@ class IGCParser {
   }
 
   private parseCallsign(line: string): string {
-    return this.parseTextHeader('GTY', RE_CID_HEADER, line);
+    return this.parseTextHeader('CID', RE_CID_HEADER, line);
   }
 
   private parseCompetitionClass(line: string): string {

@@ -327,7 +327,7 @@ class IGCParser {
   }
 
   private parseCallsign(line: string): string {
-    return this.parseTextHeader('CID', RE_CID_HEADER, line);
+    return this.parseTextHeader('GTY', RE_CID_HEADER, line);
   }
 
   private parseCompetitionClass(line: string): string {

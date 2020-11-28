@@ -494,8 +494,8 @@ class IGCParser {
 
     for (let i = 0; i < num; i++) {
       let offset = 3 + i * 7;
-      let start = parseInt(line.slice(offset, offset + 2), 10);
-      let end = parseInt(line.slice(offset + 2, offset + 4), 10);
+      let start = parseInt(line.slice(offset, offset + 2), 10) - 1;
+      let end = parseInt(line.slice(offset + 2, offset + 4), 10) - 1;
       let length = end - start + 1;
       let code = line.slice(offset + 4, offset + 7);
 

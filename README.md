@@ -105,6 +105,12 @@ var x = {
 For more examples have a look at our [test suite](test.ts).
 
 
+Similar work
+------------------------------------------------------------------------------
+
+[**skyhop/Igc**](https://github.com/skyhop/igc) - A C# adaption of this IGC parser.
+
+
 License
 ------------------------------------------------------------------------------
 

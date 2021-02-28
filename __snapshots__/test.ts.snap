@@ -550,7 +550,7 @@ exports[`IGCParser parseCopilot() [empty] -> 💥  1`] = `"Invalid CM2 header at
 
 exports[`IGCParser parseCopilot() HFCM1:John Doe -> 💥  1`] = `"Invalid CM2 header at line 0: HFCM1:John Doe"`;
 
-exports[`IGCParser parseCopilot() HXCM2:John Doe -> 💥  1`] = `"Invalid CM2 header at line 0: HXCM2:John Doe"`;
+exports[`IGCParser parseCopilot() HXCM2:John Doe -> 💥  1`] = `"Invalid data source at line 0: X"`;
 
 exports[`IGCParser parseDateHeader() [empty] -> 💥  1`] = `"Invalid DTE header at line 0: "`;
 
@@ -570,7 +570,7 @@ exports[`IGCParser parsePilot() [empty] -> 💥  1`] = `"Invalid PLT header at l
 
 exports[`IGCParser parsePilot() HFPLX:John Doe -> 💥  1`] = `"Invalid PLT header at line 0: HFPLX:John Doe"`;
 
-exports[`IGCParser parsePilot() HXPLT:John Doe -> 💥  1`] = `"Invalid PLT header at line 0: HXPLT:John Doe"`;
+exports[`IGCParser parsePilot() HXPLT:John Doe -> 💥  1`] = `"Invalid data source at line 0: X"`;
 
 exports[`IGCParser parseTask() [empty] -> 💥  1`] = `"Invalid task declaration at line 0: "`;
 

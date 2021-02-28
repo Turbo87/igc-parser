@@ -3,9 +3,11 @@ import IGCParser = require('.');
 
 describe('IGCParser', () => {
   let parser: IGCParser;
+  let lenientParser: IGCParser;
 
   beforeEach(() => {
     parser = new IGCParser();
+    lenientParser = new IGCParser({ lenient: true });
   });
 
   describe('parse()', () => {
@@ -236,6 +238,8 @@ describe('IGCParser', () => {
     test.fail('');
     test.fail('HXCM2:John Doe');
     test.fail('HFCM1:John Doe');
+
+    test.pass('HXCM2:John Doe', 'John Doe', { lenient: true });
   });
 
   describeMethod('parseTask', (test) => {
@@ -342,20 +346,22 @@ describe('IGCParser', () => {
   function describeMethod(methodName: string, cb: (test: any) => void) {
     describe(`${methodName}()`, () => {
       cb({
-        pass(input: string, expected: any) {
+        pass(input: string, expected: any, options: { lenient?: boolean } = {}) {
           let testName = input ? input : '[empty]';
           if (typeof expected === 'string') {
             testName += ` -> ${expected ? `'${expected}'` : '[empty]'}`;
           }
 
           test(testName, () => {
-            expect((parser as any)[methodName](input)).toEqual(expected);
+            let _parser = options.lenient ? lenientParser : parser as any;
+            expect(_parser[methodName](input)).toEqual(expected);
           });
         },
 
-        fail(input: string) {
+        fail(input: string, options: { lenient?: boolean } = {}) {
           test(`${input ? input : '[empty]'} -> 💥 `, () => {
-            expect(() => (parser as any)[methodName](input)).toThrowErrorMatchingSnapshot();
+            let _parser = options.lenient ? lenientParser : parser as any;
+            expect(() => _parser[methodName](input)).toThrowErrorMatchingSnapshot();
           });
         },
       });

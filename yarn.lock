@@ -339,10 +339,10 @@
   dependencies:
     jest-diff "^24.3.0"
 
-"@types/node@6.0.85":
-  version "6.0.85"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.85.tgz#ec02bfe54a61044f2be44f13b389c6a0e8ee05ae"
-  integrity sha512-6qLZpfQFO/g5Ns2e7RsW6brk0Q6Xzwiw7kVVU/XiQNOiJXSojhX76GP457PBYIsNMH2WfcGgcnZB4awFDHrwpA==
+"@types/node@6.0.118":
+  version "6.0.118"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-6.0.118.tgz#8014a9b1dee0b72b4d7cd142563f1af21241c3a2"
+  integrity sha512-N33cKXGSqhOYaPiT4xUGsYlPPDwFtQM/6QxJxuMXA/7BcySW+lkn2yigWP7vfs4daiL/7NJNU6DMCqg5N4B+xQ==
 
 "@types/stack-utils@^1.0.1":
   version "1.0.1"

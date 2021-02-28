@@ -29,7 +29,7 @@ jobs:
   tests:
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x]
+        node-version: [12.x, 14.x]
 
     name: Tests (Node.js ${{ matrix.node-version }})
     runs-on: ubuntu-latest

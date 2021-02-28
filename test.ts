@@ -311,25 +311,25 @@ describe('IGCParser', () => {
 
   describeMethod('parseIJRecord', (test) => {
     test.pass('I013638FXA', [
-      { code: 'FXA', start: 36, length: 3 },
+      { code: 'FXA', start: 35, length: 3 },
     ]);
 
     test.pass('J043638FXA3940SIU4143ENL4446MOP', [
-      { code: 'FXA', start: 36, length: 3 },
-      { code: 'SIU', start: 39, length: 2 },
-      { code: 'ENL', start: 41, length: 3 },
-      { code: 'MOP', start: 44, length: 3 },
+      { code: 'FXA', start: 35, length: 3 },
+      { code: 'SIU', start: 38, length: 2 },
+      { code: 'ENL', start: 40, length: 3 },
+      { code: 'MOP', start: 43, length: 3 },
     ]);
 
     test.pass('I083638FXA3941ENL4246TAS4751GSP5254TRT5559VAT6063OAT6467ACZ', [
-      { code: 'FXA', start: 36, length: 3 },
-      { code: 'ENL', start: 39, length: 3 },
-      { code: 'TAS', start: 42, length: 5 },
-      { code: 'GSP', start: 47, length: 5 },
-      { code: 'TRT', start: 52, length: 3 },
-      { code: 'VAT', start: 55, length: 5 },
-      { code: 'OAT', start: 60, length: 4 },
-      { code: 'ACZ', start: 64, length: 4 },
+      { code: 'FXA', start: 35, length: 3 },
+      { code: 'ENL', start: 38, length: 3 },
+      { code: 'TAS', start: 41, length: 5 },
+      { code: 'GSP', start: 46, length: 5 },
+      { code: 'TRT', start: 51, length: 3 },
+      { code: 'VAT', start: 54, length: 5 },
+      { code: 'OAT', start: 59, length: 4 },
+      { code: 'ACZ', start: 63, length: 4 },
     ]);
 
     test.fail('');

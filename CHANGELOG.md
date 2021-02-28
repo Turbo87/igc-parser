@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.0.0 (2021-02-28)
+
+#### :boom: Breaking Change
+* [#204](https://github.com/Turbo87/igc-parser/pull/204) Drop support for Node v10 and below ([@Turbo87](https://github.com/Turbo87))
+
+#### :rocket: Enhancement
+* [#215](https://github.com/Turbo87/igc-parser/pull/215) Ignore invalid header data sources in lenient mode ([@Turbo87](https://github.com/Turbo87))
+* [#162](https://github.com/Turbo87/igc-parser/pull/162) Add support for pilot-provided headers ([@mmomtchev](https://github.com/mmomtchev))
+
+#### :bug: Bug Fix
+* [#193](https://github.com/Turbo87/igc-parser/pull/193) Fix index values for B record extensions ([@tyddynonn](https://github.com/tyddynonn))
+
+#### :memo: Documentation
+* [#200](https://github.com/Turbo87/igc-parser/pull/200) Add a "similar work" section ([@corstian](https://github.com/corstian))
+
+#### :house: Internal
+* [#216](https://github.com/Turbo87/igc-parser/pull/216) Add `release-it` to simplify the release process ([@Turbo87](https://github.com/Turbo87))
+* [#203](https://github.com/Turbo87/igc-parser/pull/203) Add GitHub Actions config ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 5
+- Chris ([@tyddynonn](https://github.com/tyddynonn))
+- Corstian Boerman ([@corstian](https://github.com/corstian))
+- Momtchil Momtchev ([@mmomtchev](https://github.com/mmomtchev))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
 ## v0.5.0 (2019-12-07)
 
 #### :boom: Breaking Change

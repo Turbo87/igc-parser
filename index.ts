@@ -149,6 +149,7 @@ class IGCParser {
     errors: [],
   };
 
+  private options: IGCParser.Options;
   private fixExtensions: IGCParser.RecordExtension[] = [];
   private dataExtensions: IGCParser.RecordExtension[] = [];
 
@@ -156,7 +157,7 @@ class IGCParser {
   private prevTimestamp: number | null = null;
 
   static parse(str: string, options: IGCParser.Options = {}): IGCParser.IGCFile {
-    let parser = new IGCParser();
+    let parser = new IGCParser(options);
 
     let errors = [];
     for (let line of str.split('\n')) {
@@ -175,6 +176,10 @@ class IGCParser {
     result.errors = errors;
 
     return result;
+  }
+
+  constructor(options: IGCParser.Options = {}) {
+    this.options = options;
   }
 
   get result(): IGCParser.IGCFile {

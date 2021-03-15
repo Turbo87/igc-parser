@@ -22,7 +22,7 @@ const RE_TASK = /^C(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2
 const RE_TASKPOINT = /^C(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])(.*)/;
 /* tslint:enable:max-line-length */
 
-const VALID_DATA_SOURCES = ['F', 'O', 'P'];
+const VALID_DATA_SOURCES = ['F', 'O', 'P', 'S'];
 
 declare namespace IGCParser {
   export interface Options {

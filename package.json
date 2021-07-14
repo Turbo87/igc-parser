@@ -21,7 +21,7 @@
     "test:watch": "jest --watchAll --notify"
   },
   "dependencies": {
-    "flight-recorder-manufacturers": "^1.0.1"
+    "flight-recorder-manufacturers": "^2.0.0"
   },
   "devDependencies": {
     "@types/jest": "27.0.2",

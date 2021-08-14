@@ -28,7 +28,7 @@
     "@types/node": "6.14.13",
     "igc-filename-parser": "0.1.1",
     "jest": "27.0.6",
-    "release-it": "14.11.3",
+    "release-it": "14.11.4",
     "release-it-lerna-changelog": "3.1.0",
     "ts-jest": "27.0.4",
     "tslint": "5.20.1",

@@ -12,6 +12,7 @@ const RE_GTY_HEADER = /^H(\w)GTY(?:.{0,}?:(.*)|(.*))$/;
 const RE_GID_HEADER = /^H(\w)GID(?:.{0,}?:(.*)|(.*))$/;
 const RE_CID_HEADER = /^H(\w)CID(?:.{0,}?:(.*)|(.*))$/;
 const RE_CCL_HEADER = /^H(\w)CCL(?:.{0,}?:(.*)|(.*))$/;
+const RE_SIT_HEADER = /^H(\w)SIT(?:.{0,}?:(.*)|(.*))$/;
 const RE_FTY_HEADER = /^H(\w)FTY(?:.{0,}?:(.*)|(.*))$/;
 const RE_RFW_HEADER = /^H(\w)RFW(?:.{0,}?:(.*)|(.*))$/;
 const RE_RHW_HEADER = /^H(\w)RHW(?:.{0,}?:(.*)|(.*))$/;
@@ -41,6 +42,7 @@ declare namespace IGCParser {
     registration: string | null;
     callsign: string | null;
     competitionClass: string | null;
+    site: string | null;
 
     loggerId: string | null;
     loggerManufacturer: string;
@@ -265,6 +267,8 @@ class IGCParser {
       this._result.callsign = this.parseCallsign(line);
     } else if (headerType === 'CCL') {
       this._result.competitionClass = this.parseCompetitionClass(line);
+    } else if (headerType === 'SIT') {
+      this._result.site = this.parseSite(line);
     } else if (headerType === 'FTY') {
       this._result.loggerType = this.parseLoggerType(line);
     } else if (headerType === 'RFW') {
@@ -344,6 +348,10 @@ class IGCParser {
 
   private parseCompetitionClass(line: string): string {
     return this.parseTextHeader('GID', RE_CCL_HEADER, line);
+  }
+
+  private parseSite(line: string): string {
+    return this.parseTextHeader('SIT', RE_SIT_HEADER, line);
   }
 
   private parseLoggerType(line: string): string {

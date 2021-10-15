@@ -86,6 +86,24 @@ describe('IGCParser', () => {
       expect(result).toMatchSnapshot();
     });
 
+    test('20211015.igc', () => {
+      let content = fs.readFileSync(`${__dirname}/fixtures/20211015.igc`, 'utf8');
+      let result = IGCParser.parse(content);
+
+      expect(result.fixes.length).toEqual(4886);
+      expect(result.site).toEqual("Riederalp");
+
+      // reduce number of fixes to assert
+      result.fixes = [
+        result.fixes[0],
+        result.fixes[234],
+        result.fixes[1777],
+        result.fixes[result.fixes.length - 1],
+      ];
+
+      expect(result).toMatchSnapshot();
+    });
+
     test('MD_85ugkjj1.IGC', () => {
       let content = fs.readFileSync(`${__dirname}/fixtures/MD_85ugkjj1.IGC`, 'utf8');
       let result = IGCParser.parse(content, { lenient: true });

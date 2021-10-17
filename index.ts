@@ -169,7 +169,7 @@ class IGCParser {
         parser.processLine(line.trim());
       } catch (error) {
         if (options.lenient) {
-          errors.push(error);
+          errors.push(error as Error);
         } else {
           throw error;
         }

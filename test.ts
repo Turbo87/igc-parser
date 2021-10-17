@@ -186,7 +186,7 @@ describe('IGCParser', () => {
     });
 
     test.pass('AXCT XCTrack 0.6.0 on samsung GT-S6500 2.3.6', {
-      manufacturer: 'XCT',
+      manufacturer: 'XCTrack',
       loggerId: null,
       numFlight: null,
       additionalData: 'XCTrack 0.6.0 on samsung GT-S6500 2.3.6',

@@ -1,5 +1,18 @@
 # Changelog
 
+
+## 1.1.0 (2021-10-17)
+
+#### :rocket: Enhancement
+* [#303](https://github.com/Turbo87/igc-parser/pull/303) Parse `SIT` header ([@laggery](https://github.com/laggery))
+
+#### :house: Internal
+* [#306](https://github.com/Turbo87/igc-parser/pull/306) Replace yarn with pnpm ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 2
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+- Yannick Lagger ([@laggery](https://github.com/laggery))
+
 ## 1.0.0 (2021-02-28)
 
 #### :boom: Breaking Change

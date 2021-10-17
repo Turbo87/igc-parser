@@ -23,7 +23,11 @@ jobs:
         with:
           node-version: 12.x
 
-      - run: yarn install
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.17.2
+          run_install: true
+
       - run: yarn lint
 
   tests:
@@ -40,7 +44,11 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
-      - run: yarn install
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.17.2
+          run_install: true
+
       - run: yarn test --coverage
 
   release:
@@ -59,7 +67,11 @@ jobs:
           node-version: 14.x
           registry-url: 'https://registry.npmjs.org'
 
-      - run: yarn install
+      - uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 6.17.2
+          run_install: true
+
       - run: npx auto-dist-tag@1 --write
       - run: npm publish
         env:

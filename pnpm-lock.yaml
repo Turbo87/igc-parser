@@ -6,7 +6,7 @@ specifiers:
   flight-recorder-manufacturers: ^2.0.0
   igc-filename-parser: 0.1.1
   jest: 27.3.1
-  release-it: 14.11.6
+  release-it: 14.11.7
   release-it-lerna-changelog: 3.1.0
   ts-jest: 27.0.7
   tslint: 5.20.1
@@ -20,8 +20,8 @@ devDependencies:
   '@types/node': 14.17.33
   igc-filename-parser: 0.1.1
   jest: 27.3.1
-  release-it: 14.11.6
-  release-it-lerna-changelog: 3.1.0_release-it@14.11.6
+  release-it: 14.11.7
+  release-it-lerna-changelog: 3.1.0_release-it@14.11.7
   ts-jest: 27.0.7_2c4ca6574207836d1023f54689cc81ac
   tslint: 5.20.1_typescript@4.4.4
   typescript: 4.4.4
@@ -1922,7 +1922,7 @@ packages:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
-      mime-types: 2.1.32
+      mime-types: 2.1.33
     dev: true
 
   /fs-minipass/2.1.0:
@@ -3944,7 +3944,7 @@ packages:
       rc: 1.2.8
     dev: true
 
-  /release-it-lerna-changelog/3.1.0_release-it@14.11.6:
+  /release-it-lerna-changelog/3.1.0_release-it@14.11.7:
     resolution: {integrity: sha512-VehiRVpIB37XfggFcwMwDZ3ncXmD4npgM2tGGTfa3CN8MFCCJPPIRvaqHySDC/YV8mN7oLZeGSI/exrKXeybmA==}
     engines: {node: 10.* || 12.* || >= 14}
     peerDependencies:
@@ -3953,7 +3953,7 @@ packages:
       execa: 4.1.0
       lerna-changelog: 1.0.1
       mdast-util-from-markdown: 0.8.5
-      release-it: 14.11.6
+      release-it: 14.11.7
       tmp: 0.2.1
       validate-peer-dependencies: 1.2.0
       which: 2.0.2
@@ -3961,8 +3961,8 @@ packages:
       - supports-color
     dev: true
 
-  /release-it/14.11.6:
-    resolution: {integrity: sha512-6BNcuzFZHThBUBJ/xYw/bxZ+58CAwrwf1zgmjq2Ibl3nlDZbjphHG6iqxkJu7mZ8TIWs6NjloEAhqpjeXoN//Q==}
+  /release-it/14.11.7:
+    resolution: {integrity: sha512-m4p9+x6AEQPczc96Jyg6dGFeovpJVgRCtA1lxeIgTmQVt9dutYPkkjZeJngZgUJ17/Lb1bx6ZzW2qsKmopKnbQ==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:

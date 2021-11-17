@@ -10,7 +10,7 @@ specifiers:
   release-it-lerna-changelog: 3.1.0
   ts-jest: 27.0.7
   tslint: 5.20.1
-  typescript: 4.4.4
+  typescript: 4.5.2
 
 dependencies:
   flight-recorder-manufacturers: 2.0.0
@@ -22,9 +22,9 @@ devDependencies:
   jest: 27.3.1
   release-it: 14.11.7
   release-it-lerna-changelog: 3.1.0_release-it@14.11.7
-  ts-jest: 27.0.7_2c4ca6574207836d1023f54689cc81ac
-  tslint: 5.20.1_typescript@4.4.4
-  typescript: 4.4.4
+  ts-jest: 27.0.7_013ef332172517e974c4b270e59f55f5
+  tslint: 5.20.1_typescript@4.5.2
+  typescript: 4.5.2
 
 packages:
 
@@ -4505,7 +4505,7 @@ packages:
       punycode: 2.1.1
     dev: true
 
-  /ts-jest/27.0.7_2c4ca6574207836d1023f54689cc81ac:
+  /ts-jest/27.0.7_013ef332172517e974c4b270e59f55f5:
     resolution: {integrity: sha512-O41shibMqzdafpuP+CkrOL7ykbmLh+FqQrXEmV9CydQ5JBk0Sj0uAEF5TNNe94fZWKm3yYvWa/IbyV4Yg1zK2Q==}
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     hasBin: true
@@ -4532,7 +4532,7 @@ packages:
       lodash.memoize: 4.1.2
       make-error: 1.3.6
       semver: 7.3.5
-      typescript: 4.4.4
+      typescript: 4.5.2
       yargs-parser: 20.2.9
     dev: true
 
@@ -4544,7 +4544,7 @@ packages:
     resolution: {integrity: sha512-hcVC3wYEziELGGmEEXue7D75zbwIIVUMWAVbHItGPx0ziyXxrOMQx4rQEVEV45Ut/1IotuEvwqPopzIOkDMf0A==}
     dev: true
 
-  /tslint/5.20.1_typescript@4.4.4:
+  /tslint/5.20.1_typescript@4.5.2:
     resolution: {integrity: sha512-EcMxhzCFt8k+/UP5r8waCf/lzmeSyVlqxqMEDQE7rWYiQky8KpIBz1JAoYXfROHrPZ1XXd43q8yQnULOLiBRQg==}
     engines: {node: '>=4.8.0'}
     hasBin: true
@@ -4563,17 +4563,17 @@ packages:
       resolve: 1.20.0
       semver: 5.7.1
       tslib: 1.14.1
-      tsutils: 2.29.0_typescript@4.4.4
-      typescript: 4.4.4
+      tsutils: 2.29.0_typescript@4.5.2
+      typescript: 4.5.2
     dev: true
 
-  /tsutils/2.29.0_typescript@4.4.4:
+  /tsutils/2.29.0_typescript@4.5.2:
     resolution: {integrity: sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==}
     peerDependencies:
       typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.4.4
+      typescript: 4.5.2
     dev: true
 
   /type-check/0.3.2:
@@ -4609,8 +4609,8 @@ packages:
       is-typedarray: 1.0.0
     dev: true
 
-  /typescript/4.4.4:
-    resolution: {integrity: sha512-DqGhF5IKoBl8WNf8C1gu8q0xZSInh9j1kJJMqT3a94w1JzVaBU4EXOSMrz9yDqMT0xt3selp83fuFMQ0uzv6qA==}
+  /typescript/4.5.2:
+    resolution: {integrity: sha512-5BlMof9H1yGt0P8/WF+wPNw6GfctgGjXp5hkblpyT+8rkASSmkUKMXrxR0Xg8ThVCi/JnHQiKXeBaEwCeQwMFw==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

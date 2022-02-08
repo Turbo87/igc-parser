@@ -27,7 +27,7 @@
     "@types/jest": "27.4.0",
     "@types/node": "16.11.22",
     "igc-filename-parser": "0.1.1",
-    "jest": "27.5.0",
+    "jest": "27.5.1",
     "release-it": "14.12.4",
     "release-it-lerna-changelog": "3.1.0",
     "ts-jest": "27.1.3",

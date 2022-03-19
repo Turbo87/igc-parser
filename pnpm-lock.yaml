@@ -6,7 +6,7 @@ specifiers:
   flight-recorder-manufacturers: ^2.0.0
   igc-filename-parser: 0.1.1
   jest: 27.5.1
-  release-it: 14.12.5
+  release-it: 14.13.0
   release-it-lerna-changelog: 3.1.0
   ts-jest: 27.1.3
   tslint: 5.20.1
@@ -20,8 +20,8 @@ devDependencies:
   '@types/node': 16.11.26
   igc-filename-parser: 0.1.1
   jest: 27.5.1
-  release-it: 14.12.5
-  release-it-lerna-changelog: 3.1.0_release-it@14.12.5
+  release-it: 14.13.0
+  release-it-lerna-changelog: 3.1.0_release-it@14.13.0
   ts-jest: 27.1.3_60149d457e34ffba7d4e845dde6a1263
   tslint: 5.20.1_typescript@4.6.2
   typescript: 4.6.2
@@ -1920,7 +1920,7 @@ packages:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
-      mime-types: 2.1.34
+      mime-types: 2.1.35
     dev: true
 
   /fs-minipass/2.1.0:
@@ -3922,7 +3922,7 @@ packages:
       rc: 1.2.8
     dev: true
 
-  /release-it-lerna-changelog/3.1.0_release-it@14.12.5:
+  /release-it-lerna-changelog/3.1.0_release-it@14.13.0:
     resolution: {integrity: sha512-VehiRVpIB37XfggFcwMwDZ3ncXmD4npgM2tGGTfa3CN8MFCCJPPIRvaqHySDC/YV8mN7oLZeGSI/exrKXeybmA==}
     engines: {node: 10.* || 12.* || >= 14}
     peerDependencies:
@@ -3931,7 +3931,7 @@ packages:
       execa: 4.1.0
       lerna-changelog: 1.0.1
       mdast-util-from-markdown: 0.8.5
-      release-it: 14.12.5
+      release-it: 14.13.0
       tmp: 0.2.1
       validate-peer-dependencies: 1.2.0
       which: 2.0.2
@@ -3939,8 +3939,8 @@ packages:
       - supports-color
     dev: true
 
-  /release-it/14.12.5:
-    resolution: {integrity: sha512-mGFbbX8eEKMOhfjq5mZAgGppT8CME1T+vj6xA5tAPYSCuPpcNEDjqiG1tJfPy/XImZI4uS3U6pNP5KyDpy9etg==}
+  /release-it/14.13.0:
+    resolution: {integrity: sha512-tiVocA1QcAC0fgMBSIq8IBfRVmGCvLTkG5Mxdl2WmH91tLuzFmSsDUgpTJGhIBo+ly+oe+vsr7EZ+rkCDNuZoQ==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -3970,6 +3970,7 @@ packages:
       update-notifier: 5.1.0
       url-join: 4.0.1
       uuid: 8.3.2
+      wildcard-match: 5.1.2
       yaml: 1.10.2
       yargs-parser: 20.2.9
     transitivePeerDependencies:
@@ -4787,6 +4788,10 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       string-width: 4.2.3
+    dev: true
+
+  /wildcard-match/5.1.2:
+    resolution: {integrity: sha512-qNXwI591Z88c8bWxp+yjV60Ch4F8Riawe3iGxbzquhy8Xs9m+0+SLFBGb/0yCTIDElawtaImC37fYZ+dr32KqQ==}
     dev: true
 
   /windows-release/4.0.0:

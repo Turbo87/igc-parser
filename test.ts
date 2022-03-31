@@ -359,6 +359,15 @@ describe('IGCParser', () => {
     test.fail('I0136FXA38');
   });
 
+  describeMethod('parseLRecord', (test) => {
+    test.pass('LXMP 2 Trackpoints removed by user', 
+      { code: 'XMP', message: "2 Trackpoints removed by user" },
+    );
+
+    test.fail('');
+    test.fail('LXP code to short');
+  });
+
   // Test Suite Generator
 
   function describeMethod(methodName: string, cb: (test: any) => void) {

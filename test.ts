@@ -13,7 +13,7 @@ describe('IGCParser', () => {
   describe('parse()', () => {
     test('1G_77fv6m71.igc', () => {
       let content = fs.readFileSync(`${__dirname}/fixtures/1G_77fv6m71.igc`, 'utf8');
-      let result = IGCParser.parse(content);
+      let result = IGCParser.parse(content, { parseComments: true });
 
       expect(result.fixes.length).toEqual(4047);
       expect(result.dataRecords.length).toEqual(80);
@@ -432,6 +432,15 @@ describe('IGCParser', () => {
     test.pass('HFALPALTPRESSURE:ISA', 'ISA');
 
     test.fail('');
+  });
+
+  describeMethod('parseLRecord', (test) => {
+    test.pass('LXMP 2 Trackpoints removed by user',
+      { code: 'XMP', message: "2 Trackpoints removed by user" },
+    );
+
+    test.fail('');
+    test.fail('LXP code to short');
   });
 
   // Test Suite Generator

@@ -3,6 +3,200 @@
 exports[`IGCParser parse() 1G_77fv6m71.igc 1`] = `
 {
   "callsign": "1G",
+  "commentRecords": [
+    {
+      "code": "LXV",
+      "message": "OZ=-1,Style=2,R1=10000m,A1=180,R2=0m,A2=0,A12=238.1,Line=1,Autonext=0,Lat=5108.483N,Lon=00659.117E",
+    },
+    {
+      "code": "LXV",
+      "message": "OZ=0,Style=1,R1=10000m,A1=180,R2=0m,A2=0,A12=85.7,Autonext=0,AAT=1,Lat=5049.450N,Lon=00611.217E",
+    },
+    {
+      "code": "LXV",
+      "message": "OZ=1,Style=1,R1=30000m,A1=180,R2=0m,A2=0,A12=301.1,Autonext=1,AAT=1,Lat=5033.583N,Lon=00708.250E",
+    },
+    {
+      "code": "LXV",
+      "message": "OZ=2,Style=1,R1=10000m,A1=180,R2=0m,A2=0,A12=93.0,Autonext=0,AAT=1,Lat=5053.333N,Lon=00629.500E",
+    },
+    {
+      "code": "LXV",
+      "message": "OZ=3,Style=1,R1=10000m,A1=180,R2=0m,A2=0,A12=234.7,Autonext=1,AAT=1,Lat=5110.617N,Lon=00712.000E",
+    },
+    {
+      "code": "LXV",
+      "message": "OZ=4,Style=3,R1=2000m,A1=180,R2=0m,A2=0,A12=52.4,Elev=650m,Autonext=0,Lat=5105.867N,Lon=00702.217E",
+    },
+    {
+      "code": "LXV",
+      "message": "TSK,TaskTime=7200s",
+    },
+    {
+      "code": "LXV",
+      "message": "WAKE:5362",
+    },
+    {
+      "code": "LXV",
+      "message": "LXNAV V9:5.14,SN#04711",
+    },
+    {
+      "code": "LXV",
+      "message": "VIND,SN#03164,SW5.07,HW25",
+    },
+    {
+      "code": "LXV",
+      "message": "IASAUTOZERO:0",
+    },
+    {
+      "code": "LXV",
+      "message": "TAKEOFF,TAS,GSP",
+    },
+    {
+      "code": "LXV",
+      "message": "FINISH",
+    },
+    {
+      "code": "LXV",
+      "message": "::TKOFFLAND:1,20170715101855,20170715143911",
+    },
+    {
+      "code": "LXV",
+      "message": "::TKOFFLANDALT:1,45,-16384",
+    },
+    {
+      "code": "LXV",
+      "message": "::TKOFFLANDNAME:1,EDKL,EDKL",
+    },
+    {
+      "code": "LXV",
+      "message": "::TKOFFLANDLOC:1,0.890328,0.122328,0.890356,0.122310",
+    },
+    {
+      "code": "LXV",
+      "message": "::SOARINGBEGIN:1,20170715102348,-16384",
+    },
+    {
+      "code": "LXV",
+      "message": "::OPT:1,3,224560,5,262646,5,262646",
+    },
+    {
+      "code": "LXV",
+      "message": "::TRIANGLE:1,FAI_NO,212336",
+    },
+    {
+      "code": "LXV",
+      "message": "::FLTSTAT1:1,17.86,1.12,38.61,-16384,-16384,-16384.00",
+    },
+    {
+      "code": "LXV",
+      "message": "::FLTSTAT2:1,,",
+    },
+    {
+      "code": "LXV",
+      "message": "::FLTVARIO:1,-16384,-16384.00,,-16384.00,",
+    },
+    {
+      "code": "LXV",
+      "message": "::TASK:1,0,106580,7.89,0.156343",
+    },
+    {
+      "code": "LXV",
+      "message": "::ENGSTAT1:1,1,0",
+    },
+    {
+      "code": "LXV",
+      "message": "::ENDINFO",
+    },
+    {
+      "code": "SCS",
+      "message": "DCID:1G",
+    },
+    {
+      "code": "SCS",
+      "message": "DName:Graf, Florian",
+    },
+    {
+      "code": "SCS",
+      "message": "DGate open:10:49",
+    },
+    {
+      "code": "SCS",
+      "message": "DGate close:12:49",
+    },
+    {
+      "code": "SCS",
+      "message": "DTime window:03:30",
+    },
+    {
+      "code": "SCS",
+      "message": "Dmax Elevation start:0",
+    },
+    {
+      "code": "SCS",
+      "message": "Dmax Elevation:0",
+    },
+    {
+      "code": "SCS",
+      "message": "DQNH:1022",
+    },
+    {
+      "code": "SCS",
+      "message": "DElevation start:47",
+    },
+    {
+      "code": "SCS",
+      "message": "RSLINE:20000",
+    },
+    {
+      "code": "SCS",
+      "message": "RTKEYHOLE:500:10000:90",
+    },
+    {
+      "code": "SCS",
+      "message": "RFCYLINDER:2000",
+    },
+    {
+      "code": "SCS",
+      "message": "CS:006Langenfeld-Wiescheid:N5108483:E00659117",
+    },
+    {
+      "code": "SCS",
+      "message": "CT:009Aachen-Merzbrueck:N5049450:E00611217",
+    },
+    {
+      "code": "SCS",
+      "message": "A0:10000:0:0",
+    },
+    {
+      "code": "SCS",
+      "message": "CT:019Bad Neuenahr:N5033583:E00708250",
+    },
+    {
+      "code": "SCS",
+      "message": "A0:30000:0:0",
+    },
+    {
+      "code": "SCS",
+      "message": "CT:058Hambach S�d:N5053333:E00629500",
+    },
+    {
+      "code": "SCS",
+      "message": "A0:10000:0:0",
+    },
+    {
+      "code": "SCS",
+      "message": "CT:110Remscheid Bhf:N5110617:E00712000",
+    },
+    {
+      "code": "SCS",
+      "message": "A0:10000:0:0",
+    },
+    {
+      "code": "SCS",
+      "message": "CF:002Zielkreis:N5105867:E00702217",
+    },
+  ],
   "competitionClass": "Club",
   "copilot": null,
   "dataRecords": [
@@ -190,6 +384,7 @@ exports[`IGCParser parse() 1G_77fv6m71.igc 1`] = `
 exports[`IGCParser parse() 654G6NG1.IGC 1`] = `
 {
   "callsign": "TH",
+  "commentRecords": [],
   "competitionClass": "Club",
   "copilot": "",
   "dataRecords": [],
@@ -332,6 +527,7 @@ exports[`IGCParser parse() 654G6NG1.IGC 1`] = `
 exports[`IGCParser parse() 2016-11-08-xcs-aaa-02.igc 1`] = `
 {
   "callsign": "",
+  "commentRecords": [],
   "competitionClass": null,
   "copilot": null,
   "dataRecords": [],
@@ -459,6 +655,7 @@ exports[`IGCParser parse() 2016-11-08-xcs-aaa-02.igc 1`] = `
 exports[`IGCParser parse() 20180427.igc 1`] = `
 {
   "callsign": "86",
+  "commentRecords": [],
   "competitionClass": "",
   "copilot": null,
   "dataRecords": [],
@@ -535,6 +732,7 @@ exports[`IGCParser parse() 20180427.igc 1`] = `
 exports[`IGCParser parse() 20211015.igc 1`] = `
 {
   "callsign": "0000",
+  "commentRecords": [],
   "competitionClass": "Paraglider (Standard)",
   "copilot": null,
   "dataRecords": [],
@@ -661,6 +859,10 @@ exports[`IGCParser parseIJRecord() [empty] -> 💥  1`] = `"Invalid undefined re
 exports[`IGCParser parseIJRecord() I0136FXA38 -> 💥  1`] = `"Invalid I record at line 0: I0136FXA38"`;
 
 exports[`IGCParser parseIJRecord() I023638FXA -> 💥  1`] = `"Invalid I record at line 0: I023638FXA"`;
+
+exports[`IGCParser parseLRecord() [empty] -> 💥  1`] = `"Invalid L record at line 0: "`;
+
+exports[`IGCParser parseLRecord() LXP code to short -> 💥  1`] = `"Invalid L record at line 0: LXP code to short"`;
 
 exports[`IGCParser parsePilot() [empty] -> 💥  1`] = `"Invalid PLT header at line 0: "`;
 

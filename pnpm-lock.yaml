@@ -8,7 +8,7 @@ specifiers:
   jest: 28.0.3
   release-it: 14.14.3
   release-it-lerna-changelog: 3.1.0
-  ts-jest: 28.0.0
+  ts-jest: 28.0.1
   tslint: 5.20.1
   typescript: 4.6.4
 
@@ -22,7 +22,7 @@ devDependencies:
   jest: 28.0.3_@types+node@16.11.33
   release-it: 14.14.3
   release-it-lerna-changelog: 3.1.0_release-it@14.14.3
-  ts-jest: 28.0.0_jw4qpfj6m43htbnoqw2i363564
+  ts-jest: 28.0.1_jw4qpfj6m43htbnoqw2i363564
   tslint: 5.20.1_typescript@4.6.4
   typescript: 4.6.4
 
@@ -4656,9 +4656,9 @@ packages:
     resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
     dev: true
 
-  /ts-jest/28.0.0_jw4qpfj6m43htbnoqw2i363564:
-    resolution: {integrity: sha512-JOUGExRO4vNaQdc920/sJjFZxe9lBGa6WIuNWkvtZoORGI9dyHTBqhuaJUdBVWIfqj+vaK3TRt/B1T0hQ0ROaA==}
-    engines: {node: ^12.13.0 || ^14.15.0 || ^16.13.0 || >=17.0.0}
+  /ts-jest/28.0.1_jw4qpfj6m43htbnoqw2i363564:
+    resolution: {integrity: sha512-PbkbitaT/9ZYAqqzk3UYTvCq080Seo46T3m/AdwcZ0D8WH2uBhG6PvA8oOAWsZIknzPQU66fYobvFCL8IqIhmg==}
+    engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
     peerDependencies:
       '@babel/core': '>=7.0.0-beta.0 <8'

@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/jest': 27.5.0
+  '@types/jest': 27.5.1
   '@types/node': 16.11.34
   flight-recorder-manufacturers: ^2.0.0
   igc-filename-parser: 0.1.1
@@ -16,13 +16,13 @@ dependencies:
   flight-recorder-manufacturers: 2.0.0
 
 devDependencies:
-  '@types/jest': 27.5.0
+  '@types/jest': 27.5.1
   '@types/node': 16.11.34
   igc-filename-parser: 0.1.1
   jest: 28.1.0_@types+node@16.11.34
   release-it: 14.14.3
   release-it-lerna-changelog: 3.1.0_release-it@14.14.3
-  ts-jest: 28.0.2_z3fx76c5ksuwr36so7o5uc2kcy
+  ts-jest: 28.0.2_qy5m32hwmbz5mebulkdtchzcz4
   tslint: 5.20.1_typescript@4.6.4
   typescript: 4.6.4
 
@@ -827,8 +827,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/27.5.0:
-    resolution: {integrity: sha512-9RBFx7r4k+msyj/arpfaa0WOOEcaAZNmN+j80KFbFCoSqCJGHTz7YMAMGQW9Xmqm5w6l5c25vbSjMwlikJi5+g==}
+  /@types/jest/27.5.1:
+    resolution: {integrity: sha512-fUy7YRpT+rHXto1YlL+J9rs0uLGyiqVt3ZOTQR+4ROc47yNl8WLdVLgUloBRhOxP1PZvguHl44T3H0wAWxahYQ==}
     dependencies:
       jest-matcher-utils: 27.5.1
       pretty-format: 27.5.1
@@ -4683,7 +4683,7 @@ packages:
     resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
     dev: true
 
-  /ts-jest/28.0.2_z3fx76c5ksuwr36so7o5uc2kcy:
+  /ts-jest/28.0.2_qy5m32hwmbz5mebulkdtchzcz4:
     resolution: {integrity: sha512-IOZMb3D0gx6IHO9ywPgiQxJ3Zl4ECylEFwoVpENB55aTn5sdO0Ptyx/7noNBxAaUff708RqQL4XBNxxOVjY0vQ==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
@@ -4704,7 +4704,7 @@ packages:
       esbuild:
         optional: true
     dependencies:
-      '@types/jest': 27.5.0
+      '@types/jest': 27.5.1
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
       jest: 28.1.0_@types+node@16.11.34

@@ -10,7 +10,7 @@ specifiers:
   release-it-lerna-changelog: 3.1.0
   ts-jest: 28.0.3
   tslint: 5.20.1
-  typescript: 4.6.4
+  typescript: 4.7.2
 
 dependencies:
   flight-recorder-manufacturers: 2.0.0
@@ -22,9 +22,9 @@ devDependencies:
   jest: 28.1.0_@types+node@16.11.36
   release-it: 14.14.3
   release-it-lerna-changelog: 3.1.0_release-it@14.14.3
-  ts-jest: 28.0.3_qy5m32hwmbz5mebulkdtchzcz4
-  tslint: 5.20.1_typescript@4.6.4
-  typescript: 4.6.4
+  ts-jest: 28.0.3_7sa2e64agunq5kj4zcolhrnkbm
+  tslint: 5.20.1_typescript@4.7.2
+  typescript: 4.7.2
 
 packages:
 
@@ -4724,7 +4724,7 @@ packages:
     resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
     dev: true
 
-  /ts-jest/28.0.3_qy5m32hwmbz5mebulkdtchzcz4:
+  /ts-jest/28.0.3_7sa2e64agunq5kj4zcolhrnkbm:
     resolution: {integrity: sha512-HzgbEDQ2KgVtDmpXToqAcKTyGHdHsG23i/iUjfxji92G5eT09S1m9UHZd7csF0Bfgh9txM4JzwHnv7r1waFPlw==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
@@ -4754,7 +4754,7 @@ packages:
       lodash.memoize: 4.1.2
       make-error: 1.3.6
       semver: 7.3.7
-      typescript: 4.6.4
+      typescript: 4.7.2
       yargs-parser: 20.2.9
     dev: true
 
@@ -4766,7 +4766,7 @@ packages:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==}
     dev: true
 
-  /tslint/5.20.1_typescript@4.6.4:
+  /tslint/5.20.1_typescript@4.7.2:
     resolution: {integrity: sha512-EcMxhzCFt8k+/UP5r8waCf/lzmeSyVlqxqMEDQE7rWYiQky8KpIBz1JAoYXfROHrPZ1XXd43q8yQnULOLiBRQg==}
     engines: {node: '>=4.8.0'}
     hasBin: true
@@ -4785,17 +4785,17 @@ packages:
       resolve: 1.22.0
       semver: 5.7.1
       tslib: 1.14.1
-      tsutils: 2.29.0_typescript@4.6.4
-      typescript: 4.6.4
+      tsutils: 2.29.0_typescript@4.7.2
+      typescript: 4.7.2
     dev: true
 
-  /tsutils/2.29.0_typescript@4.6.4:
+  /tsutils/2.29.0_typescript@4.7.2:
     resolution: {integrity: sha512-g5JVHCIJwzfISaXpXE1qvNalca5Jwob6FjI4AoPlqMusJ6ftFE7IkkFoMhVLRgK+4Kx3gkzb8UZK5t5yTTvEmA==}
     peerDependencies:
       typescript: '>=2.1.0 || >=2.1.0-dev || >=2.2.0-dev || >=2.3.0-dev || >=2.4.0-dev || >=2.5.0-dev || >=2.6.0-dev || >=2.7.0-dev || >=2.8.0-dev || >=2.9.0-dev || >= 3.0.0-dev || >= 3.1.0-dev'
     dependencies:
       tslib: 1.14.1
-      typescript: 4.6.4
+      typescript: 4.7.2
     dev: true
 
   /type-check/0.3.2:
@@ -4831,8 +4831,8 @@ packages:
       is-typedarray: 1.0.0
     dev: true
 
-  /typescript/4.6.4:
-    resolution: {integrity: sha512-9ia/jWHIEbo49HfjrLGfKbZSuWo9iTMwXO+Ca3pRsSpbsMbc7/IU8NKdCZVRRBafVPGnoJeFL76ZOAA84I9fEg==}
+  /typescript/4.7.2:
+    resolution: {integrity: sha512-Mamb1iX2FDUpcTRzltPxgWMKy3fhg0TN378ylbktPGPK/99KbDtMQ4W1hwgsbPAsG3a0xKa1vmw4VKZQbkvz5A==}
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true

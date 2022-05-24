@@ -8,7 +8,7 @@ specifiers:
   jest: 28.1.0
   release-it: 14.14.3
   release-it-lerna-changelog: 3.1.0
-  ts-jest: 28.0.2
+  ts-jest: 28.0.3
   tslint: 5.20.1
   typescript: 4.6.4
 
@@ -22,7 +22,7 @@ devDependencies:
   jest: 28.1.0_@types+node@16.11.36
   release-it: 14.14.3
   release-it-lerna-changelog: 3.1.0_release-it@14.14.3
-  ts-jest: 28.0.2_qy5m32hwmbz5mebulkdtchzcz4
+  ts-jest: 28.0.3_qy5m32hwmbz5mebulkdtchzcz4
   tslint: 5.20.1_typescript@4.6.4
   typescript: 4.6.4
 
@@ -4724,8 +4724,8 @@ packages:
     resolution: {integrity: sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o=}
     dev: true
 
-  /ts-jest/28.0.2_qy5m32hwmbz5mebulkdtchzcz4:
-    resolution: {integrity: sha512-IOZMb3D0gx6IHO9ywPgiQxJ3Zl4ECylEFwoVpENB55aTn5sdO0Ptyx/7noNBxAaUff708RqQL4XBNxxOVjY0vQ==}
+  /ts-jest/28.0.3_qy5m32hwmbz5mebulkdtchzcz4:
+    resolution: {integrity: sha512-HzgbEDQ2KgVtDmpXToqAcKTyGHdHsG23i/iUjfxji92G5eT09S1m9UHZd7csF0Bfgh9txM4JzwHnv7r1waFPlw==}
     engines: {node: ^12.13.0 || ^14.15.0 || ^16.10.0 || >=17.0.0}
     hasBin: true
     peerDependencies:
@@ -4900,7 +4900,7 @@ packages:
       is-yarn-global: 0.3.0
       latest-version: 5.1.0
       pupa: 2.1.1
-      semver: 7.3.5
+      semver: 7.3.7
       semver-diff: 3.1.1
       xdg-basedir: 4.0.0
     dev: true

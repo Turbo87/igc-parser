@@ -24,7 +24,7 @@
     "flight-recorder-manufacturers": "^2.0.0"
   },
   "devDependencies": {
-    "@types/jest": "27.5.1",
+    "@types/jest": "27.5.2",
     "@types/node": "16.11.38",
     "igc-filename-parser": "0.1.1",
     "jest": "28.1.0",

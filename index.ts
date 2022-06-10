@@ -20,7 +20,7 @@ const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\
 const RE_K = /^K(\d{2})(\d{2})(\d{2})/;
 const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 const RE_TASK = /^C(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{4})([-\d]{2})(.*)/;
-const RE_TASKPOINT = /^C(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])(.*)/;
+const RE_TASKPOINT = /^C(\d{2})(\d{2})(\d{3,6})([NS])(\d{3})(\d{2})(\d{3,6})([EW])(.*)/;
 /* tslint:enable:max-line-length */
 
 const VALID_DATA_SOURCES = ['F', 'O', 'P'];

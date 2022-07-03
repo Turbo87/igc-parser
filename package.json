@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@types/jest": "28.1.4",
-    "@types/node": "16.11.42",
+    "@types/node": "16.11.43",
     "igc-filename-parser": "0.1.1",
     "jest": "28.1.2",
     "release-it": "14.14.3",

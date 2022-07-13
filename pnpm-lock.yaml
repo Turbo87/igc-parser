@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@types/jest': 28.1.4
+  '@types/jest': 28.1.5
   '@types/node': 16.11.43
   flight-recorder-manufacturers: ^2.0.0
   igc-filename-parser: 0.1.1
@@ -16,7 +16,7 @@ dependencies:
   flight-recorder-manufacturers: 2.0.0
 
 devDependencies:
-  '@types/jest': 28.1.4
+  '@types/jest': 28.1.5
   '@types/node': 16.11.43
   igc-filename-parser: 0.1.1
   jest: 28.1.2_@types+node@16.11.43
@@ -835,8 +835,8 @@ packages:
       '@types/istanbul-lib-report': 3.0.0
     dev: true
 
-  /@types/jest/28.1.4:
-    resolution: {integrity: sha512-telv6G5N7zRJiLcI3Rs3o+ipZ28EnE+7EvF0pSrt2pZOMnAVI/f+6/LucDxOvcBcTeTL3JMF744BbVQAVBUQRA==}
+  /@types/jest/28.1.5:
+    resolution: {integrity: sha512-TLAC2zXxGnohSP3GxgIyJn7yrTeRPDEyVFyCY1NE2wzg392auI+69uk5EPGjUXuhkq/K208J/TWpLG7J8ebIEQ==}
     dependencies:
       jest-matcher-utils: 28.1.1
       pretty-format: 28.1.1

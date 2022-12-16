@@ -120,6 +120,9 @@ exports[`IGCParser parse() 1G_77fv6m71.igc 1`] = `
       "valid": true,
     },
   ],
+  "geoDatum": "WGS-1984",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "ASW 19",
   "hardwareVersion": "23",
   "loggerId": "6M7",
@@ -270,6 +273,9 @@ exports[`IGCParser parse() 654G6NG1.IGC 1`] = `
       "valid": true,
     },
   ],
+  "geoDatum": "WGS84",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "ASG-29E (18m)",
   "hardwareVersion": "Flarm-IGC06",
   "loggerId": "6NG",
@@ -394,6 +400,9 @@ exports[`IGCParser parse() 2016-11-08-xcs-aaa-02.igc 1`] = `
       "valid": true,
     },
   ],
+  "geoDatum": "WGS-1984",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "DUO DISCUS",
   "hardwareVersion": null,
   "loggerId": "AAA",
@@ -506,6 +515,9 @@ exports[`IGCParser parse() 20180427.igc 1`] = `
       "valid": true,
     },
   ],
+  "geoDatum": "WGS-84",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "",
   "hardwareVersion": null,
   "loggerId": "000",
@@ -579,6 +591,9 @@ exports[`IGCParser parse() 20211015.igc 1`] = `
       "valid": true,
     },
   ],
+  "geoDatum": "WGS-84",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "Delta 2 S",
   "hardwareVersion": null,
   "loggerId": null,
@@ -634,6 +649,12 @@ exports[`IGCParser parseDateHeader() HFDTE -> 💥  1`] = `"Invalid DTE header a
 exports[`IGCParser parseDateHeader() HFDTE1234?6 -> 💥  1`] = `"Invalid DTE header at line 0: HFDTE1234?6"`;
 
 exports[`IGCParser parseDateHeader() HFDTEXXXXXX -> 💥  1`] = `"Invalid DTE header at line 0: HFDTEXXXXXX"`;
+
+exports[`IGCParser parseGeoDatum() [empty] -> 💥  1`] = `"Invalid FDT header at line 0: "`;
+
+exports[`IGCParser parseGeoDatumAlgorithm() [empty] -> 💥  1`] = `"Invalid ALG header at line 0: "`;
+
+exports[`IGCParser parseGeoPressureAlgorithm() [empty] -> 💥  1`] = `"Invalid ALP header at line 0: "`;
 
 exports[`IGCParser parseIJRecord() [empty] -> 💥  1`] = `"Invalid undefined record at line 0: "`;
 

@@ -104,6 +104,15 @@ var x = {
 
 For more examples have a look at our [test suite](test.ts).
 
+Options
+------------------------------------------------------------------------------
+
+A second options argument can be passed. The **lenient** option allows parsing to proceed even if some errors are found.
+
+```js
+let result = IGCParser.parse(fs.readFileSync('1G_77fv6m71.igc', 'utf8'), { lenient: true });
+```
+
 
 Similar work
 ------------------------------------------------------------------------------

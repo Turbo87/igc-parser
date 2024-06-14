@@ -21,6 +21,7 @@ const RE_K = /^K(\d{2})(\d{2})(\d{2})/;
 const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
 const RE_TASK = /^C(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{4})([-\d]{2})(.*)/;
 const RE_TASKPOINT = /^C(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])(.*)/;
+const RE_INT = /^\d*$/;
 /* tslint:enable:max-line-length */
 
 const VALID_DATA_SOURCES = ['F', 'O', 'P'];
@@ -430,23 +431,25 @@ class IGCParser {
       throw new Error(`Invalid B record at line ${this.lineNumber}: ${line}`);
     }
 
-    let time = `${match[1]}:${match[2]}:${match[3]}`;
-    let timestamp = this.calcTimestamp(time);
-
-    let latitude = IGCParser.parseLatitude(match[4], match[5], match[6], match[7]);
-    let longitude = IGCParser.parseLongitude(match[8], match[9], match[10], match[11]);
-
-    let valid = match[12] === 'A';
-
-    let pressureAltitude = match[13] === '00000' ? null : parseInt(match[13], 10);
-    let gpsAltitude = match[14] === '00000' ? null : parseInt(match[14], 10);
-
     let extensions: IGCParser.RecordExtensions = {};
     if (this.fixExtensions) {
       for (let { code, start, length } of this.fixExtensions) {
         extensions[code] = line.slice(start, start + length);
       }
     }
+
+    let time = `${match[1]}:${match[2]}:${match[3]}`;
+    let timestamp = this.calcTimestamp(time);
+
+    let mmmext = (RE_INT.test(extensions['LAD'])) ? extensions['LAD'] : '';
+    let latitude = IGCParser.parseLatitude(match[4], match[5], match[6] + mmmext, match[7]);
+    mmmext = (RE_INT.test(extensions['LOD'])) ? extensions['LOD'] : '';
+    let longitude = IGCParser.parseLongitude(match[8], match[9], match[10] + mmmext, match[11]);
+
+    let valid = match[12] === 'A';
+
+    let pressureAltitude = match[13] === '00000' ? null : parseInt(match[13], 10);
+    let gpsAltitude = match[14] === '00000' ? null : parseInt(match[14], 10);
 
     let enl = null;
     if (extensions['ENL']) {

@@ -598,6 +598,8 @@ Array [
 ]
 `;
 
+exports[`IGCParser parse() lad_lod_extensions.igc 1`] = `Array []`;
+
 exports[`IGCParser parse() throws if HFDTE is missing 1`] = `"Missing HFDTE record"`;
 
 exports[`IGCParser parseARecord() [empty] -> 💥  1`] = `"Invalid A record at line 0: "`;

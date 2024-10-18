@@ -91,7 +91,7 @@ describe('IGCParser', () => {
       let result = IGCParser.parse(content);
 
       expect(result.fixes.length).toEqual(4886);
-      expect(result.site).toEqual("Riederalp");
+      expect(result.site).toEqual('Riederalp');
 
       // reduce number of fixes to assert
       result.fixes = [
@@ -146,6 +146,38 @@ describe('IGCParser', () => {
         '2017-07-16T22:00:00.000Z',
         '2017-07-17T01:00:00.000Z',
       ]);
+    });
+
+    it('handles GPS Datum FAI Sporting Code 2021 0.9.0 - 3.2.3 & 3.4', () => {
+      /* tslint:disable:max-line-length */
+      // https://www.fai.org/sites/default/files/civl/documents/sporting_code_s7_h_-_civl_flight_recorder_specification_2021_v0.9.0.pdf
+      /* tslint:enable:max-line-length */
+      let result = IGCParser.parse([                       // Example data as in 3.4
+        'AVXX00026',
+        'HFDTEDATE:160816',
+        'HFPLTPILOTINCHARGE:Bloggs Bill',
+        'HFCM2CREW2:NIL',
+        'HFGTYGLIDERTYPE:NKN',
+        'HFGIDGLIDERID:NKN',
+        'HFDTMGPSDATUM:WGS84',
+        'HFRFWFIRMWAREVERSION:0.2-alpha',
+        'HFRHWHARDWAREVERSION:1.0',
+        'HFFTYFRTYPE:Zebra Instruments,Proto 1',
+        'HFGPSRECEIVER:UBLOX,NEO7,56,50000',
+        'HFPRSPRESSALTSENSOR:MEAS,MS5611,25907',
+        'HFALGALTGPS:GEO',
+        'HFALPALTPRESSURE:ISA',
+        'B1153555536248N00339528WA0050200475',
+        'B1154005536249N00339528WA0050300476',
+        'B1154105536249N00339528WA0050300477',
+        'B1154155536248N00339528WA0050300476',
+        'G5734B6437B7796F96460F5D8AAC8FD4F',
+        'G0B6401B0E19216179A25DAE23CD0487F',
+      ].join('\n'));
+
+      expect(result.geoDatum).toEqual('WGS84');
+      expect(result.geoDatumAlgorithm).toEqual('GEO');
+      expect(result.geoPressureAlgorithm).toEqual('ISA');
     });
   });
 
@@ -357,6 +389,26 @@ describe('IGCParser', () => {
     test.fail('');
     test.fail('I023638FXA');
     test.fail('I0136FXA38');
+  });
+
+  describeMethod('parseGeoDatum', (test) => {
+    test.pass('HFDTMGPSDATUM:WGS84', 'WGS84');
+    test.pass('HFDTM100GPSDATUM:WGS-1984', 'WGS-1984');
+    test.pass('HFDTM100GPSDATUM:WGS-84', 'WGS-84');
+
+    test.fail('');
+  });
+
+  describeMethod('parseGeoDatumAlgorithm', (test) => {
+    test.pass('HFALGALTGPS:GEO', 'GEO');
+
+    test.fail('');
+  });
+
+  describeMethod('parseGeoPressureAlgorithm', (test) => {
+    test.pass('HFALPALTPRESSURE:ISA', 'ISA');
+
+    test.fail('');
   });
 
   // Test Suite Generator

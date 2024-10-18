@@ -120,6 +120,9 @@ Object {
       "valid": true,
     },
   ],
+  "geoDatum": "WGS-1984",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "ASW 19",
   "hardwareVersion": "23",
   "loggerId": "6M7",
@@ -269,6 +272,9 @@ Object {
       "valid": true,
     },
   ],
+  "geoDatum": "WGS84",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "ASG-29E (18m)",
   "hardwareVersion": "Flarm-IGC06",
   "loggerId": "6NG",
@@ -393,6 +399,9 @@ Object {
       "valid": true,
     },
   ],
+  "geoDatum": "WGS-1984",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "DUO DISCUS",
   "hardwareVersion": null,
   "loggerId": "AAA",
@@ -505,6 +514,9 @@ Object {
       "valid": true,
     },
   ],
+  "geoDatum": "WGS-84",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "",
   "hardwareVersion": null,
   "loggerId": "000",
@@ -578,6 +590,9 @@ Object {
       "valid": true,
     },
   ],
+  "geoDatum": "WGS-84",
+  "geoDatumAlgorithm": null,
+  "geoPressureAlgorithm": null,
   "gliderType": "Delta 2 S",
   "hardwareVersion": null,
   "loggerId": null,
@@ -633,6 +648,14 @@ exports[`IGCParser parseDateHeader() HFDTE -> 💥  1`] = `"Invalid DTE header a
 exports[`IGCParser parseDateHeader() HFDTE1234?6 -> 💥  1`] = `"Invalid DTE header at line 0: HFDTE1234?6"`;
 
 exports[`IGCParser parseDateHeader() HFDTEXXXXXX -> 💥  1`] = `"Invalid DTE header at line 0: HFDTEXXXXXX"`;
+
+exports[`IGCParser parseGeoDatum() [empty] -> 💥  1`] = `"Invalid FDT header at line 0: "`;
+
+exports[`IGCParser parseGeoDatum() [empty] -> 💥  2`] = `"Invalid FDT header at line 0: "`;
+
+exports[`IGCParser parseGeoDatumAlgorithm() [empty] -> 💥  1`] = `"Invalid ALG header at line 0: "`;
+
+exports[`IGCParser parseGeoPressureAlgorithm() [empty] -> 💥  1`] = `"Invalid ALP header at line 0: "`;
 
 exports[`IGCParser parseIJRecord() [empty] -> 💥  1`] = `"Invalid undefined record at line 0: "`;
 

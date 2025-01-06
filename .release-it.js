@@ -1,6 +1,6 @@
 module.exports = {
   plugins: {
-    'release-it-lerna-changelog': {
+    '@release-it-plugins/lerna-changelog': {
       infile: 'CHANGELOG.md',
     },
   },

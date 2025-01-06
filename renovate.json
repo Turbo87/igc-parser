@@ -1,19 +1,13 @@
 {
   "extends": [
-    "config:js-lib",
+    "config:best-practices",
+    ":automergeStableNonMajor",
     ":automergePatch",
     ":automergeLinters",
     ":automergeTesters",
     ":dependencyDashboard",
     ":maintainLockFilesWeekly",
-    ":semanticCommitsDisabled"
-  ],
-
-  "packageRules": [
-    {
-      "matchCurrentVersion": ">= 1.0.0",
-      "updateTypes": ["minor"],
-      "automerge": true
-    }
+    ":semanticCommitsDisabled",
+    "customManagers:githubActionsVersions"
   ]
 }

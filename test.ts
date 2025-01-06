@@ -120,6 +120,18 @@ describe('IGCParser', () => {
       expect(result.errors).toMatchSnapshot();
     });
 
+    test('lad_lod_extensions.igc', () => {
+      let content = fs.readFileSync(`${__dirname}/fixtures/lad_lod_extensions.igc`, 'utf8');
+      let result = IGCParser.parse(content, { lenient: true });
+
+      expect(result.fixes.length).toEqual(424);
+
+      expect(result.fixes[0].latitude).toBeCloseTo(44.968046666666666, 10);
+      expect(result.fixes[0].longitude).toBeCloseTo(5.833138333333333, 10);
+
+      expect(result.errors).toEqual([]);
+    });
+
     it('throws if HFDTE is missing', () => {
       let lines = [
         'ALXV6M7FLIGHT:1',
@@ -360,6 +372,11 @@ describe('IGCParser', () => {
       { code: 'VAT', start: 54, length: 5 },
       { code: 'OAT', start: 59, length: 4 },
       { code: 'ACZ', start: 63, length: 4 },
+    ]);
+
+    test.pass('I023636LAD3737LOD', [
+      { code: 'LAD', start: 35, length: 1 },
+      { code: 'LOD', start: 36, length: 1 },
     ]);
 
     test.fail('');

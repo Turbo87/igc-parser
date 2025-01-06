@@ -77,7 +77,7 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
           run_install: true
 
-      - run: npx auto-dist-tag@${AUTO_DIST_TAG_VERSION} --write
+      - run: pnpx auto-dist-tag@${AUTO_DIST_TAG_VERSION} --write
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

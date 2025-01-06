@@ -16,6 +16,7 @@ const RE_SIT_HEADER = /^H(\w)SIT(?:.{0,}?:(.*)|(.*))$/;
 const RE_FTY_HEADER = /^H(\w)FTY(?:.{0,}?:(.*)|(.*))$/;
 const RE_RFW_HEADER = /^H(\w)RFW(?:.{0,}?:(.*)|(.*))$/;
 const RE_RHW_HEADER = /^H(\w)RHW(?:.{0,}?:(.*)|(.*))$/;
+const RE_TZN_HEADER = /^H(\w)TZN(?:.{0,}?:([-+]?[\d.]+))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_K = /^K(\d{2})(\d{2})(\d{2})/;
 const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
@@ -34,6 +35,7 @@ declare namespace IGCParser {
     /** UTC date of the flight in ISO 8601 format */
     date: string;
     numFlight: number | null;
+    timezone: number | null;
 
     pilot: string | null;
     copilot: string | null;
@@ -269,6 +271,8 @@ class IGCParser {
       this._result.competitionClass = this.parseCompetitionClass(line);
     } else if (headerType === 'SIT') {
       this._result.site = this.parseSite(line);
+    } else if (headerType === 'TZN') {
+      this._result.timezone = this.parseTimezone(line);
     } else if (headerType === 'FTY') {
       this._result.loggerType = this.parseLoggerType(line);
     } else if (headerType === 'RFW') {
@@ -352,6 +356,14 @@ class IGCParser {
 
   private parseSite(line: string): string {
     return this.parseTextHeader('SIT', RE_SIT_HEADER, line);
+  }
+
+  private parseTimezone(line: string): number {
+    let result = this.parseTextHeader('TZN', RE_TZN_HEADER, line);
+    let hours = parseFloat(result);
+    if (isNaN(hours))
+       throw new Error(`Invalid TZN header at line ${this.lineNumber}: ${line}`);
+    return hours;
   }
 
   private parseLoggerType(line: string): string {

@@ -180,6 +180,7 @@ Object {
     ],
     "taskNumber": 2,
   },
+  "timezone": 0,
 }
 `;
 

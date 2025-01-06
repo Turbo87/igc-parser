@@ -23,6 +23,7 @@ const RE_ALP_HEADER = /^H(\w)ALP(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_K = /^K(\d{2})(\d{2})(\d{2})/;
 const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
+const RE_L = /^[L]([A-Z]{3})(.+)/;
 const RE_TASK = /^C(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{4})([-\d]{2})(.*)/;
 const RE_TASKPOINT = /^C(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])(.*)/;
 const RE_INT = /^\d*$/;
@@ -33,6 +34,7 @@ const VALID_DATA_SOURCES = ['F', 'O', 'P'];
 declare namespace IGCParser {
   export interface Options {
     lenient?: boolean;
+    parseComments?: boolean;
   }
 
   export interface IGCFile {
@@ -63,6 +65,7 @@ declare namespace IGCParser {
 
     fixes: BRecord[];
     dataRecords: KRecord[];
+    commentRecords: LRecord[];
 
     security: string | null;
 
@@ -72,6 +75,7 @@ declare namespace IGCParser {
   interface PartialIGCFile extends Partial<IGCFile> {
     fixes: BRecord[];
     dataRecords: KRecord[];
+    commentRecords: LRecord[];
   }
 
   export interface ARecord {
@@ -110,6 +114,11 @@ declare namespace IGCParser {
     time: string;
 
     extensions: RecordExtensions;
+  }
+
+  export interface LRecord {
+    code: string;
+    message: string
   }
 
   export interface RecordExtensions {
@@ -161,6 +170,7 @@ class IGCParser {
     task: null,
     fixes: [],
     dataRecords: [],
+    commentRecords: [],
     security: null,
     errors: [],
   };
@@ -250,6 +260,9 @@ class IGCParser {
 
     } else if (recordType === 'J') {
       this.dataExtensions = this.parseIJRecord(line);
+
+    } else if (recordType === 'L' && this.options.parseComments) {
+      this._result.commentRecords.push(this.parseLRecord(line));
 
     } else if (recordType === 'G') {
       this._result.security = (this._result.security || '') + line.slice(1);
@@ -565,6 +578,18 @@ class IGCParser {
     }
 
     return extensions;
+  }
+
+  private parseLRecord(line: string): IGCParser.LRecord {
+    let match = line.match(RE_L);
+    if (!match) {
+      throw new Error(`Invalid L record at line ${this.lineNumber}: ${line}`);
+    }
+
+    return {
+      code: match[1],
+      message: match[2].trim()
+    };
   }
 
   private static parseLatitude(dd: string, mm: string, mmm: string, ns: string): number {

@@ -13,7 +13,7 @@ on:
 env:
   FORCE_COLOR: 1
   # renovate: datasource=npm depName=pnpm
-  PNPM_VERSION: 6.17.2
+  PNPM_VERSION: 6.35.1
 
 jobs:
   lint:

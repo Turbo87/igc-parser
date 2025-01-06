@@ -104,6 +104,14 @@ describe('IGCParser', () => {
       expect(result).toMatchSnapshot();
     });
 
+    /* Test timezone parsing */
+    test('20241007TZN.igc', () => {
+      let content = fs.readFileSync(`${__dirname}/fixtures/20241007TZN.igc`, 'utf8');
+      let result = IGCParser.parse(content);
+
+      expect(result.timezone).toEqual(5.5);
+    });
+
     test('MD_85ugkjj1.IGC', () => {
       let content = fs.readFileSync(`${__dirname}/fixtures/MD_85ugkjj1.IGC`, 'utf8');
       let result = IGCParser.parse(content, { lenient: true });

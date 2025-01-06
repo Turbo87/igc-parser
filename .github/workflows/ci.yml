@@ -33,7 +33,7 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
           run_install: true
 
-      - run: yarn lint
+      - run: pnpm lint
 
   tests:
     strategy:
@@ -54,7 +54,7 @@ jobs:
           version: ${{ env.PNPM_VERSION }}
           run_install: true
 
-      - run: yarn test --coverage
+      - run: pnpm test -- --coverage
 
   release:
     name: Release

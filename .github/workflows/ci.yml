@@ -12,6 +12,8 @@ on:
 
 env:
   FORCE_COLOR: 1
+  # renovate: datasource=npm depName=pnpm
+  PNPM_VERSION: 6.17.2
 
 jobs:
   lint:
@@ -26,7 +28,7 @@ jobs:
 
       - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
         with:
-          version: 6.17.2
+          version: ${{ env.PNPM_VERSION }}
           run_install: true
 
       - run: yarn lint
@@ -47,7 +49,7 @@ jobs:
 
       - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
         with:
-          version: 6.17.2
+          version: ${{ env.PNPM_VERSION }}
           run_install: true
 
       - run: yarn test --coverage
@@ -70,7 +72,7 @@ jobs:
 
       - uses: pnpm/action-setup@fe02b34f77f8bc703788d5817da081398fad5dd2 # v4.0.0
         with:
-          version: 6.17.2
+          version: ${{ env.PNPM_VERSION }}
           run_install: true
 
       - run: npx auto-dist-tag@1 --write

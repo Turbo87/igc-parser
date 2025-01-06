@@ -1,6 +1,30 @@
 # Changelog
 
 
+
+## 2.0.0 (2025-01-06)
+
+#### :rocket: Enhancement
+* [#671](https://github.com/Turbo87/igc-parser/pull/671) Add optional support for `L` records ([@Turbo87](https://github.com/Turbo87))
+* [#507](https://github.com/Turbo87/igc-parser/pull/507) GeoDatum handling ([@mreinart](https://github.com/mreinart))
+* [#521](https://github.com/Turbo87/igc-parser/pull/521) LAD / LOD extensions for B records ([@spasutto](https://github.com/spasutto))
+* [#657](https://github.com/Turbo87/igc-parser/pull/657) Parse TZN timezone headers ([@stefwalter](https://github.com/stefwalter))
+
+#### :memo: Documentation
+* [#428](https://github.com/Turbo87/igc-parser/pull/428) Document `options` parameter ([@JuanIrache](https://github.com/JuanIrache))
+
+#### :house: Internal
+* [#669](https://github.com/Turbo87/igc-parser/pull/669) Improve CI workflow config ([@Turbo87](https://github.com/Turbo87))
+* [#663](https://github.com/Turbo87/igc-parser/pull/663) CI: Extract `PNPM_VERSION` env var ([@Turbo87](https://github.com/Turbo87))
+* [#659](https://github.com/Turbo87/igc-parser/pull/659) Fix broken CI workflow ([@Turbo87](https://github.com/Turbo87))
+
+#### Committers: 5
+- Juan Irache ([@JuanIrache](https://github.com/JuanIrache))
+- MR ([@mreinart](https://github.com/mreinart))
+- Stef Walter ([@stefwalter](https://github.com/stefwalter))
+- Sylvain Pasutto ([@spasutto](https://github.com/spasutto))
+- Tobias Bieniek ([@Turbo87](https://github.com/Turbo87))
+
 ## 1.1.0 (2021-10-17)
 
 #### :rocket: Enhancement

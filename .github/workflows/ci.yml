@@ -15,7 +15,7 @@ env:
   # renovate: datasource=npm depName=pnpm
   PNPM_VERSION: 9.15.3
   # renovate: datasource=npm depName=auto-dist-tag
-  AUTO_DIST_TAG_VERSION: 1.0.0
+  AUTO_DIST_TAG_VERSION: 2.1.1
 
 jobs:
   lint:

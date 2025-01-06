@@ -17,6 +17,9 @@ const RE_FTY_HEADER = /^H(\w)FTY(?:.{0,}?:(.*)|(.*))$/;
 const RE_RFW_HEADER = /^H(\w)RFW(?:.{0,}?:(.*)|(.*))$/;
 const RE_RHW_HEADER = /^H(\w)RHW(?:.{0,}?:(.*)|(.*))$/;
 const RE_TZN_HEADER = /^H(\w)TZN(?:.{0,}?:([-+]?[\d.]+))$/;
+const RE_DTM_HEADER = /^H(\w)DTM(?:.{0,}?:(.*)|(.*))$/;
+const RE_ALG_HEADER = /^H(\w)ALG(?:.{0,}?:(.*)|(.*))$/;
+const RE_ALP_HEADER = /^H(\w)ALP(?:.{0,}?:(.*)|(.*))$/;
 const RE_B = /^B(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{3})([NS])(\d{3})(\d{2})(\d{3})([EW])([AV])(-\d{4}|\d{5})(-\d{4}|\d{5})/;
 const RE_K = /^K(\d{2})(\d{2})(\d{2})/;
 const RE_IJ = /^[IJ](\d{2})(?:\d{2}\d{2}[A-Z]{3})+/;
@@ -52,6 +55,9 @@ declare namespace IGCParser {
     loggerType: string | null;
     firmwareVersion: string | null;
     hardwareVersion: string | null;
+    geoDatum: string | null;
+    geoDatumAlgorithm: string | null;
+    geoPressureAlgorithm: string | null;
 
     task: Task | null;
 
@@ -149,6 +155,9 @@ class IGCParser {
     loggerType: null,
     firmwareVersion: null,
     hardwareVersion: null,
+    geoDatum: null,
+    geoDatumAlgorithm: null,
+    geoPressureAlgorithm: null,
     task: null,
     fixes: [],
     dataRecords: [],
@@ -280,6 +289,12 @@ class IGCParser {
       this._result.firmwareVersion = this.parseFirmwareVersion(line);
     } else if (headerType === 'RHW') {
       this._result.hardwareVersion = this.parseHardwareVersion(line);
+    } else if (headerType === 'DTM') {
+      this._result.geoDatum = this.parseGeoDatum(line);
+    } else if (headerType === 'ALG') {
+      this._result.geoDatumAlgorithm = this.parseGeoDatumAlgorithm(line);
+    } else if (headerType === 'ALP') {
+      this._result.geoPressureAlgorithm = this.parseGeoPressureAlgorithm(line);
     }
   }
 
@@ -377,6 +392,18 @@ class IGCParser {
 
   private parseHardwareVersion(line: string): string {
     return this.parseTextHeader('RHW', RE_RHW_HEADER, line);
+  }
+
+  private parseGeoDatum(line: string): string {
+    return this.parseTextHeader('FDT', RE_DTM_HEADER, line);
+  }
+
+  private parseGeoDatumAlgorithm(line: string): string {
+    return this.parseTextHeader('ALG', RE_ALG_HEADER, line);
+  }
+
+  private parseGeoPressureAlgorithm(line: string): string {
+    return this.parseTextHeader('ALP', RE_ALP_HEADER, line);
   }
 
   private processTaskLine(line: string) {

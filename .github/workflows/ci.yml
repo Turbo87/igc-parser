@@ -13,7 +13,7 @@ on:
 env:
   FORCE_COLOR: 1
   # renovate: datasource=npm depName=pnpm
-  PNPM_VERSION: 9.15.3
+  PNPM_VERSION: 9.15.4
   # renovate: datasource=npm depName=auto-dist-tag
   AUTO_DIST_TAG_VERSION: 2.1.1
 

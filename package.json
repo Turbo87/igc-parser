@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@release-it-plugins/lerna-changelog": "7.0.0",
-    "@types/jest": "29.5.14",
+    "@types/jest": "30.0.0",
     "@types/node": "22.15.32",
     "igc-filename-parser": "1.0.0",
     "jest": "30.0.0",

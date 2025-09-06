@@ -28,7 +28,7 @@
     "@types/jest": "30.0.0",
     "@types/node": "22.18.0",
     "igc-filename-parser": "1.0.0",
-    "jest": "30.0.5",
+    "jest": "30.1.3",
     "release-it": "17.11.0",
     "ts-jest": "29.4.1",
     "tslint": "6.1.3",

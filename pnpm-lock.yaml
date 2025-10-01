@@ -14,7 +14,7 @@ importers:
     devDependencies:
       '@release-it-plugins/lerna-changelog':
         specifier: 7.0.0
-        version: 7.0.0(release-it@17.11.0(typescript@5.9.2))
+        version: 7.0.0(release-it@17.11.0(typescript@5.9.3))
       '@types/jest':
         specifier: 30.0.0
         version: 30.0.0
@@ -29,16 +29,16 @@ importers:
         version: 30.0.5(@types/node@22.18.7)
       release-it:
         specifier: 17.11.0
-        version: 17.11.0(typescript@5.9.2)
+        version: 17.11.0(typescript@5.9.3)
       ts-jest:
         specifier: 29.4.4
-        version: 29.4.4(@babel/core@7.28.4)(@jest/transform@30.0.5)(@jest/types@30.2.0)(babel-jest@30.0.5(@babel/core@7.28.4))(jest-util@30.2.0)(jest@30.0.5(@types/node@22.18.7))(typescript@5.9.2)
+        version: 29.4.4(@babel/core@7.28.4)(@jest/transform@30.0.5)(@jest/types@30.2.0)(babel-jest@30.0.5(@babel/core@7.28.4))(jest-util@30.2.0)(jest@30.0.5(@types/node@22.18.7))(typescript@5.9.3)
       tslint:
         specifier: 6.1.3
-        version: 6.1.3(typescript@5.9.2)
+        version: 6.1.3(typescript@5.9.3)
       typescript:
-        specifier: 5.9.2
-        version: 5.9.2
+        specifier: 5.9.3
+        version: 5.9.3
 
 packages:
 
@@ -2450,8 +2450,8 @@ packages:
     resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
 
-  typescript@5.9.2:
-    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
     engines: {node: '>=14.17'}
     hasBin: true
 
@@ -3156,13 +3156,13 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  '@release-it-plugins/lerna-changelog@7.0.0(release-it@17.11.0(typescript@5.9.2))':
+  '@release-it-plugins/lerna-changelog@7.0.0(release-it@17.11.0(typescript@5.9.3))':
     dependencies:
       execa: 5.1.1
       lerna-changelog: 2.2.0
       lodash: 4.17.21
       mdast-util-from-markdown: 1.3.1
-      release-it: 17.11.0(typescript@5.9.2)
+      release-it: 17.11.0(typescript@5.9.3)
       tmp: 0.2.5
       validate-peer-dependencies: 2.2.0
       which: 2.0.2
@@ -3633,14 +3633,14 @@ snapshots:
 
   convert-source-map@2.0.0: {}
 
-  cosmiconfig@9.0.0(typescript@5.9.2):
+  cosmiconfig@9.0.0(typescript@5.9.3):
     dependencies:
       env-paths: 2.2.1
       import-fresh: 3.3.1
       js-yaml: 4.1.0
       parse-json: 5.2.0
     optionalDependencies:
-      typescript: 5.9.2
+      typescript: 5.9.3
 
   cross-spawn@7.0.6:
     dependencies:
@@ -5119,14 +5119,14 @@ snapshots:
     dependencies:
       rc: 1.2.8
 
-  release-it@17.11.0(typescript@5.9.2):
+  release-it@17.11.0(typescript@5.9.3):
     dependencies:
       '@iarna/toml': 2.2.5
       '@octokit/rest': 20.1.1
       async-retry: 1.3.3
       chalk: 5.4.1
       ci-info: 4.3.0
-      cosmiconfig: 9.0.0(typescript@5.9.2)
+      cosmiconfig: 9.0.0(typescript@5.9.3)
       execa: 8.0.0
       git-url-parse: 14.0.0
       globby: 14.0.2
@@ -5379,7 +5379,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  ts-jest@29.4.4(@babel/core@7.28.4)(@jest/transform@30.0.5)(@jest/types@30.2.0)(babel-jest@30.0.5(@babel/core@7.28.4))(jest-util@30.2.0)(jest@30.0.5(@types/node@22.18.7))(typescript@5.9.2):
+  ts-jest@29.4.4(@babel/core@7.28.4)(@jest/transform@30.0.5)(@jest/types@30.2.0)(babel-jest@30.0.5(@babel/core@7.28.4))(jest-util@30.2.0)(jest@30.0.5(@types/node@22.18.7))(typescript@5.9.3):
     dependencies:
       bs-logger: 0.2.6
       fast-json-stable-stringify: 2.1.0
@@ -5390,7 +5390,7 @@ snapshots:
       make-error: 1.3.6
       semver: 7.7.2
       type-fest: 4.41.0
-      typescript: 5.9.2
+      typescript: 5.9.3
       yargs-parser: 21.1.1
     optionalDependencies:
       '@babel/core': 7.28.4
@@ -5403,7 +5403,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  tslint@6.1.3(typescript@5.9.2):
+  tslint@6.1.3(typescript@5.9.3):
     dependencies:
       '@babel/code-frame': 7.27.1
       builtin-modules: 1.1.1
@@ -5417,13 +5417,13 @@ snapshots:
       resolve: 1.22.10
       semver: 5.7.2
       tslib: 1.14.1
-      tsutils: 2.29.0(typescript@5.9.2)
-      typescript: 5.9.2
+      tsutils: 2.29.0(typescript@5.9.3)
+      typescript: 5.9.3
 
-  tsutils@2.29.0(typescript@5.9.2):
+  tsutils@2.29.0(typescript@5.9.3):
     dependencies:
       tslib: 1.14.1
-      typescript: 5.9.2
+      typescript: 5.9.3
 
   type-detect@4.0.8: {}
 
@@ -5433,7 +5433,7 @@ snapshots:
 
   type-fest@4.41.0: {}
 
-  typescript@5.9.2: {}
+  typescript@5.9.3: {}
 
   uglify-js@3.19.3:
     optional: true

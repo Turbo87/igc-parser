@@ -24,7 +24,7 @@
     "flight-recorder-manufacturers": "^2.0.0"
   },
   "devDependencies": {
-    "@release-it-plugins/lerna-changelog": "7.0.0",
+    "@release-it-plugins/lerna-changelog": "8.0.1",
     "@types/jest": "30.0.0",
     "@types/node": "22.18.13",
     "igc-filename-parser": "1.0.0",
